@@ -39,6 +39,7 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .ddi:hover{background:rgba(255,255,255,.06);color:var(--tx);}
 .ddi.gold{color:var(--g);font-weight:600;}
 .ddi.gold:hover{background:rgba(240,180,41,.1);}
+.ddi_admin{color:#ef4444 !important;}
 .ddsep{height:1px;background:rgba(255,255,255,.06);margin:4px 8px;}
 
 /* TICKER */
@@ -156,14 +157,12 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 #flegal{font-size:10px;color:var(--mu);}
 
 /* FLOAT */
-
 .fbwrap{position:fixed;bottom:16px;right:14px;z-index:150;display:flex;gap:8px;align-items:center;}
 .fbtn-close{background:rgba(30,20,50,.9);color:#9090b0;border:1px solid #3a3a55;width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
 .fbtn-close:hover{background:#ef444420;color:#f87171;border-color:#ef444450;}
-
 .fbtn{background:var(--g);color:#000;border:none;padding:12px 20px;border-radius:24px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(240,180,41,.4);}
 
-/* OVERLAY LAYER - tüm modallar için */
+/* OVERLAY LAYER */
 .ov{display:none;position:fixed;inset:0;z-index:400;background:rgba(8,6,20,.88);backdrop-filter:blur(8px);align-items:flex-end;justify-content:center;}
 .ov.open{display:flex;}
 @media(min-width:560px){.ov{align-items:center;}}
@@ -201,28 +200,16 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 #rep-ov{display:none;position:fixed;inset:0;z-index:800;background:rgba(4,2,12,.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:12px;}
 #rep-ov.open{display:flex;}
 .rep-box{background:#0d0d18;border:1px solid #f0b42928;border-radius:14px;width:100%;max-width:720px;overflow:hidden;}
-.rep-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid #ffffff0a;}
-.rep-title{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;}
-.rep-mul{font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--g);}
-.rep-cls{background:transparent;border:none;color:#7070a0;font-size:22px;cursor:pointer;padding:4px 8px;line-height:1;}
-.rep-cls:hover{color:#fff;}
 .rep-fw{position:relative;width:100%;background:#000;padding-top:56.25%;}
 .rep-fw iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
-.rep-info{padding:10px 14px;font-size:11px;color:#7070a0;}
 
 /* POPUP OVERLAY */
 #pop-ov{display:none;position:fixed;inset:0;z-index:600;background:rgba(8,6,22,.88);backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:16px;}
 #pop-ov.open{display:flex;}
 .pop-box{background:linear-gradient(145deg,#18182a,#201c38);border:1px solid #f0b42945;border-radius:18px;width:100%;max-width:440px;position:relative;overflow:hidden;box-shadow:0 0 60px rgba(240,180,41,.2),0 30px 80px rgba(0,0,0,.9);}
 .pop-topbar{height:3px;background:linear-gradient(90deg,var(--g),#fff8,#7c3aed,var(--g));background-size:200%;animation:gmv 3s linear infinite;}
-.pop-cls{position:absolute;top:10px;right:12px;background:rgba(0,0,0,.5);border:1px solid #ffffff20;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:2;border:none;}
-#pop-slides .pop-slide{padding:24px 20px 16px;text-align:center;display:none;}
-#pop-slides .pop-slide.active{display:block;}
-.pop-dots{display:flex;justify-content:center;gap:6px;padding:8px 0;}
-.pop-dot{width:8px;height:8px;border-radius:50%;background:#3a3a55;cursor:pointer;transition:background .2s;border:none;padding:0;}
-.pop-dot.active{background:var(--g);}
 
-/* ADMIN */
+/* ADMIN VIEW */
 #adm-view{display:none;position:fixed;inset:0;background:#111120;z-index:500;overflow-y:auto;}
 #adm-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#181828;border-bottom:1px solid #f0b42930;position:sticky;top:0;z-index:200;}
 .adm-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--g);}
@@ -241,300 +228,136 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .ac{background:#1a1a2e;border:1px solid #2e2e48;border-radius:12px;padding:20px;margin-bottom:14px;}
 .ac-t{font-size:11px;color:var(--g);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px;font-weight:700;flex-wrap:wrap;}
 .ab{background:#f0b42920;border:1px solid #f0b42940;border-radius:8px;padding:2px 9px;font-size:10px;color:var(--g);font-weight:600;}
-.ab-gr{background:#22c55e15;border:1px solid #22c55e35;color:#4ade80;}
-.ab-re{background:#ef444415;border:1px solid #ef444435;color:#f87171;}
 .ai{width:100%;background:#1e1e30;border:1px solid #30304a;border-radius:8px;padding:10px 12px;color:#e0e0f0;font-size:13px;outline:none;}
-.ai:focus{border-color:var(--g);}
-.ai::placeholder{color:#404060;}
-select.ai{cursor:pointer;appearance:none;}
 .al{font-size:11px;color:#8080a0;margin-bottom:5px;display:block;font-weight:500;}
 .af{margin-bottom:12px;}
 .ag2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:767px){.ag2{grid-template-columns:1fr;}}
 .trow{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:9px;background:#1a1a28;border:1px solid #2a2a40;margin-bottom:8px;}
-.tgl{position:relative;width:40px;height:22px;flex-shrink:0;}
+
+/* TOGGLE CONFIG */
+.tgl{position:relative;width:40px;height:22px;flex-shrink:0;display:inline-block;}
 .tgl input{opacity:0;width:0;height:0;}
 .tsl{position:absolute;inset:0;background:#2a2a40;border-radius:11px;transition:.22s;cursor:pointer;border:1px solid #3a3a55;}
 .tsl::before{content:'';position:absolute;width:16px;height:16px;left:2px;top:2px;background:#606080;border-radius:50%;transition:.22s;}
 .tgl input:checked+.tsl{background:var(--g);border-color:var(--g);}
 .tgl input:checked+.tsl::before{transform:translateX(18px);background:#000;}
+
 .bp{background:var(--g);border:none;color:#000;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;}
-.bp:hover{opacity:.88;}
-.bd{background:#ef444415;border:1px solid #ef444440;color:#f87171;padding:7px 13px;border-radius:7px;font-size:11px;cursor:pointer;}
 .bs{background:transparent;border:1px solid #2a2a40;color:#b0b0d0;padding:9px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;}
-.bs:hover{border-color:var(--g);color:var(--g);}
-.bi{background:#1a1a28;border:1px solid #2a2a40;color:#c0c0e0;border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer;}
-.bi:hover{border-color:var(--g);color:var(--g);}
 .sp-row{background:#1e1e30;border:1px solid #30304a;border-radius:9px;padding:10px 13px;display:flex;align-items:center;gap:10px;margin-bottom:8px;}
-.sp-row.dragging{opacity:.3;border-color:var(--g)!important;}
-.sp-row.dragover{border-color:var(--g)!important;background:#f0b42910!important;}
-.sp-drag{color:#505070;cursor:grab;font-size:18px;flex-shrink:0;user-select:none;}
 .sp-ai{width:50px;height:50px;border-radius:7px;object-fit:cover;background:#2a2a40;flex-shrink:0;}
 .sp-inf{flex:1;min-width:0;}
 .sp-nm{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;}
 .sp-bn{font-size:11px;color:#7070a0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.sp-rk{background:#f0b42918;color:var(--g);border:1px solid #f0b42930;border-radius:6px;padding:3px 9px;font-size:13px;font-weight:700;flex-shrink:0;}
-.efsel{background:#1a1a28;border:1px solid #2a2a40;border-radius:6px;padding:5px 8px;color:#d0d0e8;font-size:11px;outline:none;cursor:pointer;max-width:82px;}
 .efgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px;}
 .efopt{background:#1a1a28;border:1px solid #2a2a40;border-radius:7px;padding:7px 4px;text-align:center;cursor:pointer;font-size:10px;color:#8080a0;}
-.efopt:hover,.efopt.on{border-color:var(--g);background:#f0b42915;color:var(--g);font-weight:600;}
-.efbar{height:4px;border-radius:2px;margin-bottom:5px;}
+.efopt.on{border-color:var(--g);background:#f0b42915;color:var(--g);font-weight:600;}
 .tgpick{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px;}
 .tgbtn{background:#1a1a28;border:1px solid #2a2a40;border-radius:8px;padding:5px 12px;font-size:11px;cursor:pointer;font-weight:600;color:#8080a0;}
 .tgbtn.on{border-color:var(--g);color:var(--g);}
-.prow{background:#1e1e30;border:1px solid #30304a;border-radius:10px;padding:14px;margin-bottom:10px;}
-.prow-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
-.prow-img{width:50px;height:50px;border-radius:8px;object-fit:cover;background:#2a2a40;flex-shrink:0;}
-.prow-gm{font-size:13px;color:#e0e0f0;font-weight:600;}
-.prow-ml{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--g);line-height:1;}
-.prow-det{background:#0f0f1e;border-radius:8px;padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:11px;margin-bottom:10px;}
-.prow-k{color:#6060a0;display:block;font-size:10px;margin-bottom:2px;}
-.prow-v{color:#d0d0e8;font-weight:500;word-break:break-all;}
-.prow-acts{display:flex;gap:7px;flex-wrap:wrap;}
-.bappr{background:#22c55e20;border:1px solid #22c55e45;color:#4ade80;border-radius:7px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;}
-.brej{background:#ef444415;border:1px solid #ef444440;color:#f87171;border-radius:7px;padding:8px 14px;font-size:12px;cursor:pointer;}
-.wadm-row{background:#1e1e30;border:1px solid #30304a;border-radius:9px;padding:10px 13px;display:flex;align-items:center;gap:10px;margin-bottom:8px;}
-.wadm-img{width:40px;height:40px;border-radius:6px;object-fit:cover;background:#2a2a40;flex-shrink:0;}
-.user-row{background:#1e1e30;border:1px solid #30304a;border-radius:9px;padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;}
-.u-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--g),#c8960f);color:#000;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.soc-row{background:#1e1e30;border:1px solid #30304a;border-radius:9px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:8px;}
-.th-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;}
-.th-card{background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:9px;}
-.th-card:hover,.th-card.on{border-color:var(--g);background:#f0b42912;}
-.th-prev{width:28px;height:28px;border-radius:6px;flex-shrink:0;}
-.empty{text-align:center;padding:30px;color:#505070;font-size:12px;}
-.adm-mtabs{display:none;background:#0a0a12;border-bottom:1px solid #1a1a28;overflow-x:auto;scrollbar-width:none;position:sticky;top:55px;z-index:190;}
-.adm-mtabs::-webkit-scrollbar{display:none;}
+.adm-mtabs{display:none;background:#0a0a12;border-bottom:1px solid #1a1a28;overflow-x:auto;position:sticky;top:55px;z-index:190;}
 .mtab{padding:11px 14px;font-size:12px;color:#7070a0;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;display:flex;align-items:center;gap:6px;}
 .mtab.on{color:var(--g);border-bottom-color:var(--g);}
-.mt-badge{background:var(--g);color:#000;border-radius:8px;padding:1px 6px;font-size:9px;font-weight:700;}
 @media(max-width:767px){.adm-side{display:none;}.adm-mtabs{display:flex;}.adm-cont{padding:12px;}.adm-body{flex-direction:column;}}
-
 #toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(14px);background:#22c55e;color:#000;padding:10px 22px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;z-index:900;pointer-events:none;white-space:nowrap;}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-
-/* THEMES */
-body.t-night{--g:#f0b429;--dk:#08080e;--dk2:#111118;--tx:#e8e8f0;--mu:#606070;}
-body.t-royal{--g:#e8333a;--dk:#0a0005;--dk2:#13000a;--tx:#f0e0e0;--mu:#885558;}
-body.t-emerald{--g:#00c878;--dk:#020d08;--dk2:#041510;--tx:#d8f0e8;--mu:#3a6858;}
-body.t-galaxy{--g:#9b59e8;--dk:#060310;--dk2:#0d0820;--tx:#e0d8f8;--mu:#6055a8;}
-body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880;}
-
-.login-tab{flex:1;padding:10px;border-radius:8px;border:1px solid #2a2a40;background:#1a1a28;color:#8080a0;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
-.login-tab.active{background:var(--g);color:#000;border-color:var(--g);}
-
-.nav-user-btn{display:flex;align-items:center;gap:7px;background:rgba(240,180,41,.08);border:1px solid rgba(240,180,41,.25);border-radius:20px;padding:5px 12px 5px 5px;cursor:pointer;transition:all .2s;}
-.nav-user-btn:hover{background:rgba(240,180,41,.15);border-color:rgba(240,180,41,.5);}
-.nav-user-av{width:26px;height:26px;border-radius:50%;background:var(--g);color:#000;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.nav-user-nm{font-size:12px;font-weight:600;color:var(--tx);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-.user-drop{position:fixed;top:64px;right:60px;background:linear-gradient(145deg,#0f0f1e,#161626);border:1px solid rgba(240,180,41,.2);border-radius:14px;padding:8px;min-width:200px;box-shadow:0 16px 48px rgba(0,0,0,.7);z-index:300;display:none;}
-.user-drop.open{display:block;animation:dropIn .18s cubic-bezier(.2,.8,.3,1) forwards;}
-.user-drop-hd{padding:10px 14px;font-size:13px;color:var(--g);font-weight:600;}
 </style>
 </head>
 <body class="t-night">
-<!-- SITE -->
+
 <div id="site-view">
-<div id="nav">
-  <div class="nav-row">
-    <div class="nav-jp"><div class="nav-jp-lbl">UYE KAZANCLARI</div><div class="nav-jp-val" id="jp-v">&#8378;0,00</div></div>
-    <div class="nav-logo"><img id="nlogo-img" src="" alt=""><span id="nlogo-txt">SLOTMASTER</span></div>
-    <div class="nav-right">
-      <div class="nav-socials" id="nav-socials"></div>
-      <button class="nav-user-btn" id="nav-user-btn" style="display:none;">
-        <span class="nav-user-av" id="nav-user-av">?</span>
-        <span class="nav-user-nm" id="nav-user-nm"></span>
-        <span style="font-size:10px;color:var(--mu);">&#9662;</span>
-      </button>
-      <button class="hbg" id="hbg-btn">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-</div>
-<div class="user-drop" id="user-drop">
-  <div class="user-drop-hd" id="ud-hd"></div>
-  <div class="ddsep"></div>
-  <button class="ddi" id="ud-pw">&#128274; Sifre Degistir</button>
-  <button class="ddi" id="ud-support">&#128172; Destek Talebi</button>
-  <div class="ddsep"></div>
-  <button class="ddi" style="color:#f87171;" id="ud-logout">&#128275; Cikis Yap</button>
-</div>
-<div class="ndrop" id="ndrop">
-  <button class="ddi" id="dd-login">&#128273; Giris Yap</button>
-  <button class="ddi" id="dd-register">&#128100; Kayit Ol</button>
-  <div class="ddsep"></div>
-  <button class="ddi gold" id="dd-submit">&#9650; Kazanc Gonder</button>
-</div>
-<div id="gif-banner"><img id="gif-img" src="" alt=""></div>
-<div id="site-main">
-  <div id="home-page">
-    <div id="sp-banner"><img id="sp-banner-img" src="" alt=""></div>
-    <div style="padding:14px 0 10px;">
-      <div class="sec-hdr"><div class="eyebrow">Sponsor Siteler</div></div>
-      <div id="sp-grid"></div>
-    </div>
-    <div id="ticker"><div class="tk-lbl">CANLI KAZANCLAR</div><div id="tk-track"></div></div>
-    <div style="padding:12px 0 16px;">
-      <div class="sec-hdr" style="padding:10px 0 0;">
-        <div class="eyebrow">Sizden Gelenler</div>
-        <button class="see-all-btn" id="btn-see-all">Tumunu Gor &#8594;</button>
+  <div id="nav">
+    <div class="nav-row">
+      <div class="nav-jp"><div class="nav-jp-lbl">UYE KAZANCLARI</div><div class="nav-jp-val" id="jp-v">&#8378;0,00</div></div>
+      <div class="nav-logo" id="main-logo-btn"><img id="nlogo-img" src="" alt=""><span id="nlogo-txt">SLOTMASTER</span></div>
+      <div class="nav-right">
+        <div class="nav-socials" id="nav-socials"></div>
+        <button class="hbg" id="hbg-btn"><span></span><span></span><span></span></button>
       </div>
-      <div id="wins-grid"></div>
     </div>
-    <div id="sfoot"><div class="flinks" id="flinks"></div><div id="flegal">18+ Eglence amaclidir &copy; 2026 SlotMaster</div></div>
   </div>
-  <div id="wins-page">
-    <div class="wp-hdr"><button class="wp-back" id="btn-wp-back">&#8592; Geri</button><div class="eyebrow" style="margin:0;">Tum Kazanclar</div><div style="margin-left:auto;font-size:11px;color:var(--mu);" id="wp-cnt"></div></div>
-    <div id="wp-grid"></div>
+  
+  <div class="ndrop" id="ndrop">
+    <button class="ddi" id="dd-login">&#128273; Giris Yap</button>
+    <button class="ddi" id="dd-register">&#128100; Kayit Ol</button>
+    <div class="ddsep"></div>
+    <button class="ddi gold" id="dd-submit">&#9650; Kazanc Gonder</button>
+  </div>
+
+  <div id="gif-banner"><img id="gif-img" src="" alt=""></div>
+  
+  <div id="site-main">
+    <div id="home-page">
+      <div id="sp-banner"><img id="sp-banner-img" src="" alt=""></div>
+      <div style="padding:14px 0 10px;">
+        <div class="sec-hdr"><div class="eyebrow">Sponsor Siteler</div></div>
+        <div id="sp-grid"></div>
+      </div>
+    </div>
   </div>
 </div>
-</div>
+
+<!-- FLOATING CTA -->
 <div class="fbwrap" id="fbwrap">
-  <button class="fbtn-close" id="btn-fb-close" style="display:none;" title="Kapat">&#10005;</button>
   <button class="fbtn" id="btn-sub-float">&#9650; Kazanc Gonder</button>
 </div>
 
-<!-- ADMIN -->
+<!-- ADMIN GATEWAY / VIEW -->
 <div id="adm-view">
   <div id="adm-nav"><span class="adm-logo">ADMIN <span>Paneli</span></span><button class="btn-back" id="btn-adm-back">&#8592; Siteye Don</button></div>
   <div class="adm-mtabs">
     <div class="mtab on" data-p="p-sp">&#128230; Sponsorlar</div>
-    <div class="mtab" data-p="p-pend">&#9203; Bekleyenler <span class="mt-badge" id="pb-m">0</span></div>
-    <div class="mtab" data-p="p-wins">&#127942; Kazanclar</div>
-    <div class="mtab" data-p="p-users">&#128101; Uyeler</div>
-    <div class="mtab" data-p="p-soc">&#128279; Sosyal</div>
-    <div class="mtab" data-p="p-banner">&#128444; Banner</div>
-    <div class="mtab" data-p="p-set">&#9881; Ayarlar</div>
-    <div class="mtab" data-p="p-msgs">&#128172; Mesajlar <span class="mt-badge" id="msgs-badge-m">0</span></div>
+    <div class="mtab" data-p="p-banner">&#128444; Banner & Logo</div>
   </div>
   <div class="adm-body">
     <div class="adm-side">
       <div class="s-sec">YONET</div>
       <button class="stab on" data-p="p-sp">&#128230; Sponsorlar</button>
-      <button class="stab" data-p="p-pend">&#9203; Bekleyenler <span class="s-badge" id="pb-s">0</span></button>
-      <button class="stab" data-p="p-wins">&#127942; Kazanclar</button>
-      <button class="stab" data-p="p-users">&#128101; Uyeler</button>
-      <div style="height:1px;background:#1a1a28;margin:8px 4px;"></div>
-      <div class="s-sec">SITE</div>
-      <button class="stab" data-p="p-soc">&#128279; Sosyal</button>
-      <button class="stab" data-p="p-banner">&#128444; Banner</button>
-      <button class="stab" data-p="p-set">&#9881; Ayarlar</button>
-      <button class="stab" data-p="p-msgs">&#128172; Mesajlar <span class="s-badge" id="msgs-badge">0</span></button>
+      <button class="stab" data-p="p-banner">&#128444; Banner & Logo</button>
     </div>
     <div class="adm-cont">
+      <!-- SPONSORS PANEL -->
       <div class="apnl on" id="p-sp">
-        <div class="ac"><div class="ac-t">Sponsorlar <span class="ab" id="sp-badge"></span><button class="bp" style="margin-left:auto;font-size:12px;padding:8px 16px;" id="btn-sp-add">+ Yeni</button></div>
-        <div id="sp-adm-list"></div></div>
-      </div>
-      <div class="apnl" id="p-pend">
-        <div class="ac"><div class="ac-t">Bekleyenler <span class="ab ab-re" id="pend-badge">0</span></div><div id="pend-list"></div></div>
-      </div>
-      <div class="apnl" id="p-wins">
-        <div class="ac"><div class="ac-t">Yayindaki Kazanclar <span class="ab ab-gr" id="wins-badge"></span></div><div id="wadm-list"></div></div>
-        <div class="ac"><div class="ac-t">Manuel Kazanc Ekle</div>
-          <div class="ag2" style="margin-bottom:10px;">
-            <div class="af"><label class="al">Kullanici</label><input class="ai" id="mw-u" placeholder="Ke***"></div>
-            <div class="af"><label class="al">Carpan</label><input class="ai" id="mw-m" placeholder="15.000x"></div>
-          </div>
-          <div class="ag2" style="margin-bottom:10px;">
-            <div class="af"><label class="al">Oyun</label><input class="ai" id="mw-g" placeholder="Gates of Olympus 1000"></div>
-            <div class="af"><label class="al">Gorsel URL</label><input class="ai" id="mw-i" placeholder="https://..."></div>
-          </div>
-          <div class="ag2" style="margin-bottom:10px;">
-            <div class="af"><label class="al">Replay Linki</label><input class="ai" id="mw-l" placeholder="https://www.ppreplaylink.net/..."></div>
-            <div class="af"><label class="al">Sponsor</label><select class="ai" id="mw-sp"><option value="">-- Sec --</option></select></div>
-          </div>
-          <button class="bp" id="btn-mw-add">Ekle</button>
+        <div class="ac">
+          <div class="ac-t">Sponsorlar <button class="bp" style="margin-left:auto;font-size:12px;padding:8px 16px;" id="btn-sp-add">+ Yeni Sponsor</button></div>
+          <div id="sp-adm-list"></div>
         </div>
       </div>
-      <div class="apnl" id="p-users">
-        <div class="ac"><div class="ac-t">Uyeler <span class="ab" id="users-badge">0</span></div>
-          <div class="af"><input class="ai" id="user-q" placeholder="Ara..."></div>
-          <div id="users-list"></div>
-        </div>
-      </div>
-      <div class="apnl" id="p-soc">
-        <div class="ac"><div class="ac-t">Sosyal Medya</div><div id="soc-list"></div>
-          <button class="bs" style="margin-top:10px;" id="btn-soc-add">+ Kanal Ekle</button>
-        </div>
-      </div>
+      
+      <!-- BANNER & LOGO PANEL -->
       <div class="apnl" id="p-banner">
-        <div class="ac"><div class="ac-t">Ust Banner / GIF</div>
-          <div class="trow"><div><div style="font-size:13px;color:#d0d0e8;font-weight:500;">Banner aktif</div></div><label class="tgl"><input type="checkbox" id="gif-tog"><span class="tsl"></span></label></div>
-          <div class="af"><label class="al">Gorsel / GIF URL</label>
-            <div style="display:flex;gap:8px;margin-bottom:8px;">
-              <input class="ai" id="gif-url" placeholder="https://...gif veya .jpg" style="flex:1;">
-              <button class="bs" id="btn-gif-file">&#128193; Yukle</button>
-            </div>
-            <input type="file" id="gif-file" accept="image/*,image/gif" style="display:none;">
+        <div class="ac">
+          <div class="ac-t">Ust Banner / GIF</div>
+          <div class="trow">
+            <div><div style="font-size:13px;color:#d0d0e8;font-weight:500;">Banner aktif</div></div>
+            <label class="tgl"><input type="checkbox" id="gif-tog"><span class="tsl"></span></label>
           </div>
-          <div id="gif-prev-wrap" style="display:none;margin-top:8px;border-radius:8px;overflow:hidden;"><img id="gif-prev-img" src="" style="width:100%;max-height:150px;object-fit:cover;" alt=""></div>
+          <div class="af">
+            <label class="al">Gorsel / GIF URL</label>
+            <input class="ai" id="gif-url" placeholder="https://...gif veya .jpg">
+          </div>
         </div>
-        <div class="ac"><div class="ac-t">Site Logosu (Nav)</div>
-          <div class="af"><label class="al">Logo Dosyasi</label>
+        
+        <div class="ac">
+          <div class="ac-t">Site Logosu (Nav)</div>
+          <div class="af">
+            <label class="al">Logo Tipi / Secimi</label>
             <div style="display:flex;gap:8px;margin-bottom:8px;">
-              <input class="ai" id="logo-url-inp" placeholder="https://.../logo.png" style="flex:1;">
-              <button class="bs" id="btn-logo-file">&#128193; Yukle</button>
+              <button class="bs" id="btn-logo-mode-txt">Yazi Modu</button>
+              <button class="bs" id="btn-logo-mode-img">Gorsel Modu</button>
             </div>
+            <input class="ai" id="logo-url-inp" placeholder="https://.../logo.png" style="margin-bottom:8px;">
             <input type="file" id="logo-file" accept="image/*" style="display:none;">
-            <div style="font-size:11px;color:#6060a0;margin-bottom:8px;">Onerilen: PNG seffaf, 280x72px</div>
-            <div id="logo-prev-wrap" style="display:none;margin-bottom:8px;background:#0a0a14;border-radius:8px;padding:10px;text-align:center;"><img id="logo-prev-img" src="" style="height:40px;max-width:160px;object-fit:contain;" alt=""></div>
-          </div>
-          <div style="display:flex;gap:8px;margin-top:4px;flex-wrap:wrap;">
-            <button class="bp" id="btn-logo-use-file">&#10003; Logoyu Uygula</button>
-            <button class="bs" id="btn-logo-use-txt">Yazi Moduna Don</button>
+            <button class="bs" id="btn-logo-file-trigger">&#128193; Bilgisayardan Logo Yukle</button>
+            <div id="logo-prev-wrap" style="margin-top:10px; background:#0a0a14; padding:10px; text-align:center; display:none;">
+              <img id="logo-prev-img" src="" style="height:40px;max-width:160px;object-fit:contain;">
+            </div>
           </div>
         </div>
-        <div class="ac"><div class="ac-t">Banner Kaydet</div>
-          <div style="font-size:12px;color:#7070a0;margin-bottom:12px;">GIF/banner ve logo ayarlarini kaydetmek icin asagidaki butonu kullanin.</div>
-          <button class="bp" id="btn-banner-save" style="width:100%;">&#128190; Banner & Logo Kaydet</button>
-          <div id="banner-save-ok" style="font-size:11px;color:#4ade80;text-align:center;margin-top:8px;display:none;">&#10003; Kaydedildi!</div>
-        </div>
-      </div>
-      <div class="apnl" id="p-set">
-        <div class="ag2" style="align-items:start;">
-          <div>
-            <div class="ac"><div class="ac-t">Site Kimligi</div>
-              <div class="af"><label class="al">Site Adi / Logo</label>
-                <div style="display:flex;gap:8px;margin-bottom:8px;"><button class="bs" id="btn-logo-txt">Yazi</button><button class="bs" id="btn-logo-img">Gorsel</button></div>
-                <div id="logo-txt-a"><input class="ai" id="set-name" placeholder="SLOTMASTER"></div>
-                <div id="logo-img-a" style="display:none;"><input class="ai" id="set-logo" placeholder="https://.../logo.png"></div>
-              </div>
-              <div class="af"><label class="al">Sayfa Basligi</label><input class="ai" id="set-title" placeholder="SlotMaster"></div>
-              <div class="af"><label class="al">Footer Yasal</label><input class="ai" id="set-legal" placeholder="18+ Eglence amaclidir"></div>
-            </div>
-            <div class="ac"><div class="ac-t">Sponsor Sutun (PC)</div>
-              <div style="display:flex;gap:8px;">
-                <button class="bs" data-col="3">3</button><button class="bs" data-col="4">4</button>
-                <button class="bs" data-col="5">5</button><button class="bs" data-col="6">6</button>
-              </div>
-            </div>
-            <div class="ac"><div class="ac-t">Cache Temizle</div><button class="bd" id="btn-cache">Temizle ve Yenile</button></div>
-            <div class="ac" style="border-color:#f0b42940;"><div class="ac-t" style="color:#ffe066;">Kaydet</div>
-              <button class="bp" style="width:100%;font-size:14px;padding:13px;" id="btn-save">&#128190; Kaydet</button>
-              <div id="save-ok" style="font-size:11px;color:#4ade80;text-align:center;margin-top:8px;display:none;">Kaydedildi!</div>
-            </div>
-          </div>
-          <div>
-            <div class="ac"><div class="ac-t">Tema</div><div class="th-grid" id="th-grid"></div></div>
-            <div class="ac"><div class="ac-t">Uye Kazanclari Sayaci</div>
-              <div class="af"><label class="al">Baslangic (TL)</label><input class="ai" id="jp-start" type="number" placeholder="500000"></div>
-              <div style="display:flex;align-items:center;gap:12px;"><button class="bp" id="btn-jp-reset">Sifirla</button><span style="font-size:12px;color:#7070a0;">Anlik: <span id="jp-curr" style="color:var(--g);">--</span></span></div>
-            </div>
-            <div class="ac"><div class="ac-t">Giris Popup</div>
-              <div class="trow" style="margin-bottom:10px;"><div><div style="font-size:13px;color:#d0d0e8;font-weight:500;">Popup aktif</div></div><label class="tgl"><input type="checkbox" id="pop-active"><span class="tsl"></span></label></div>
-              <div class="af"><label class="al">Baslik</label><input class="ai" id="pop-title" placeholder="OZEL FIRSAT"></div>
-              <div class="af"><label class="al">Alt Metin</label><input class="ai" id="pop-sub" placeholder="En iyi bonuslar!"></div>
-              <div style="font-size:11px;color:#7070a0;margin-bottom:8px;">Popup sponsorlari (max 3):</div>
-              <div id="pop-picks"></div>
-              <div style="display:flex;gap:8px;margin-top:10px;"><button class="bp" id="btn-pop-save">Kaydet</button><button class="bs" id="btn-pop-prev">Onizle</button></div>
-            </div>
-            <div class="ac"><div class="ac-t">Kazanc Gonder Mesaji</div>
-              <textarea class="ai" id="adm-msg" rows="3" style="resize:vertical;line-height:1.5;" placeholder="Onaylanan replaylar odullendirilir..."></textarea>
-              <button class="bp" style="margin-top:8px;" id="btn-msg-save">Kaydet</button>
-            </div>
-          </div>
+        
+        <div class="ac">
+          <button class="bp" id="btn-banner-save" style="width:100%;">&#128190; Ayarlari Sisteme Kaydet</button>
         </div>
       </div>
     </div>
@@ -542,1543 +365,316 @@ body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880
 </div>
 
 <!-- MODALS -->
-<!-- ÜYE GİRİŞ -->
-<div class="ov" id="ov-login"><div class="mbox">
-  <div class="mhdl"></div><button class="mcls" data-close="login">&#10005;</button>
-  <div class="mlogo" id="ml-logo">SLOTMASTER</div>
-  <div style="text-align:center;margin-bottom:16px;">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;">ÜYE GİRİŞİ</div>
-    <div style="font-size:11px;color:#7070a0;margin-top:3px;">Hesabına hoş geldin</div>
-  </div>
-  <div class="merr" id="login-err"></div>
-  <div class="mfg"><label>KULLANICI ADI</label><input type="text" class="minp" id="login-u" placeholder="kullaniciadı" autocomplete="username"></div>
-  <div class="mfg"><label>SIFRE</label><input type="password" class="minp" id="login-p" placeholder="••••••••" autocomplete="current-password"></div>
-  <button class="mbtn" id="btn-login">Giriş Yap</button>
-  <div class="mfoot"><button class="mlink" data-sw="login:forgot">Şifremi Unuttum</button> &nbsp;&#183;&nbsp; <button class="mlink" data-sw="login:register">Kayıt Ol</button></div>
-</div></div>
-
-<!-- ADMİN GİRİŞ - ayrı modal -->
-<div class="ov" id="ov-admin-login"><div class="mbox" style="border-color:#f0b42940;">
-  <div class="mhdl"></div><button class="mcls" data-close="admin-login">&#10005;</button>
-  <div style="text-align:center;margin-bottom:4px;">
-    <div style="font-size:32px;margin-bottom:8px;">&#128274;</div>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--g);letter-spacing:2px;">ADMİN PANELİ</div>
-    <div style="font-size:11px;color:#7070a0;margin-top:3px;">Yetkili giriş gerektirir</div>
-  </div>
-  <div style="height:1px;background:#f0b42920;margin:16px 0;"></div>
-  <div class="merr" id="admin-login-err"></div>
-  <div class="mfg"><label>ADMİN KULLANICI ADI</label><input type="text" class="minp" id="admin-login-u" placeholder="admin" autocomplete="off"></div>
-  <div class="mfg"><label>ADMİN ŞİFRESİ</label><input type="password" class="minp" id="admin-login-p" placeholder="••••••••" autocomplete="off"></div>
-  <button class="mbtn" id="btn-admin-login" style="background:linear-gradient(135deg,var(--g),#c8960f);">&#128274; Admin Girişi Yap</button>
-  <div style="text-align:center;margin-top:12px;font-size:11px;color:#505070;">Bu alan sadece site yöneticisi içindir</div>
-</div></div>
-
-<div class="ov" id="ov-register"><div class="mbox">
-  <div class="mhdl"></div><button class="mcls" data-close="register">&#10005;</button>
-  <div class="mlogo" id="mr-logo">SLOTMASTER</div>
-  <div style="text-align:center;margin-bottom:18px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;">KAYIT OL</div></div>
-  <div class="merr" id="reg-err"></div>
-  <div id="reg-form">
-    <div class="mfg"><label>KULLANICI ADI</label><input type="text" class="minp" id="reg-u" placeholder="kullaniciadı"></div>
-    <div class="mfg"><label>TELEFON</label><input type="tel" class="minp" id="reg-ph" placeholder="05XX XXX XX XX"></div>
-    <div class="mfg"><label>SIFRE</label><input type="password" class="minp" id="reg-p" placeholder="En az 6 karakter"></div>
-    <div class="mfg"><label>SIFRE TEKRAR</label><input type="password" class="minp" id="reg-p2" placeholder="Tekrar gir"></div>
-    <button class="mbtn" id="btn-register">Kayit Ol</button>
-  </div>
-  <div class="msuc" id="reg-ok"><div class="msuc-icon">&#127881;</div><div class="msuc-ttl" style="color:var(--gr);">KAYIT BASARILI!</div><button class="mbtn" style="margin-top:12px;" data-sw="register:login">Giris Yap</button></div>
-  <div class="mfoot">Hesabin var mi? <button class="mlink" data-sw="register:login">Giris Yap</button></div>
-</div></div>
-
-<div class="ov" id="ov-forgot"><div class="mbox">
-  <div class="mhdl"></div><button class="mcls" data-close="forgot">&#10005;</button>
-  <div class="mlogo">SLOTMASTER</div>
-  <div style="text-align:center;margin-bottom:18px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;">SIFREMI UNUTTUM</div></div>
-  <div class="merr" id="forg-err"></div>
-  <div id="forg-form">
-    <div class="mfg"><label>KULLANICI ADI</label><input type="text" class="minp" id="forg-u" placeholder="kullaniciadı"></div>
-    <div class="mfg"><label>TELEFON</label><input type="tel" class="minp" id="forg-ph" placeholder="05XX XXX XX XX"></div>
-    <button class="mbtn" id="btn-forgot">Sifirlama Talebi</button>
-  </div>
-  <div class="msuc" id="forg-ok"><div class="msuc-icon">&#128241;</div><div class="msuc-ttl" style="color:var(--gr);">TALEP GONDERILDI</div></div>
-  <div class="mfoot"><button class="mlink" data-sw="forgot:login">&#8592; Geri</button></div>
-</div></div>
-
-<div class="ov" id="ov-submit"><div class="mbox">
-  <div class="mhdl"></div><button class="mcls" data-close="submit">&#10005;</button>
-  <div class="mttl">KAZANCINI <span>GONDER</span></div>
-  <p class="msub">Replay linkini yapistir, bilgiler otomatik gelir.</p>
-  <div id="sub-form">
-    <div class="amsgbox" id="sub-amsg"></div>
-    <div class="mfg"><label>REPLAY LINKI</label>
-      <input type="text" class="minp" id="sub-url" placeholder="https://www.ppreplaylink.net/...">
-      <div id="sub-st" style="font-size:11px;color:#7070a0;margin-top:5px;min-height:18px;"></div>
+<!-- ADMIN LOGIN OVERLAY -->
+<div class="ov" id="ov-admin-login">
+  <div class="mbox" style="border-color:#f0b42940;">
+    <div class="mhdl"></div>
+    <div style="text-align:center;margin-bottom:4px;">
+      <div style="font-size:32px;margin-bottom:8px;">&#128274;</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--g);letter-spacing:2px;">ADMİN PANELİ</div>
     </div>
-    <div id="sub-prev" style="display:none;background:#0a0a14;border:1px solid #f0b42928;border-radius:8px;padding:11px;margin-bottom:12px;">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <img id="sub-prev-img" src="" style="width:44px;height:44px;border-radius:6px;object-fit:cover;background:#1a1a28;" alt="">
-        <div><div id="sub-prev-game" style="font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;"></div>
-        <div id="sub-prev-mul" style="display:inline-block;background:#f0b42915;color:var(--g);font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;margin-top:3px;"></div></div>
-        <div style="color:#22c55e;margin-left:auto;font-size:18px;">&#10003;</div>
-      </div>
-    </div>
-    <div class="mfg"><label>KULLANICI ADIN</label><input type="text" class="minp" id="sub-user" placeholder="SlotKral99"></div>
-    <div class="mfg"><label>HANGI SITEDE OYNADIM</label><select class="mselect" id="sub-sp"><option value="">-- Sponsor --</option></select></div>
-    <div class="merr" id="sub-err"></div>
-    <button class="mbtn" id="btn-sub-send">Gonder &#8594; Admin Onayina Yolla</button>
+    <div class="merr" id="admin-login-err"></div>
+    <div class="mfg"><label>ADMIN KULLANICI ADI</label><input type="text" class="minp" id="admin-login-u" value="admin"></div>
+    <div class="mfg"><label>ADMIN SIFRESI</label><input type="password" class="minp" id="admin-login-p" value="slotmaster2026"></div>
+    <button class="mbtn" id="btn-admin-login-submit">Giris Yap</button>
   </div>
-  <div class="msuc" id="sub-ok"><div class="msuc-icon">&#10003;</div><div class="msuc-ttl" style="color:#22c55e;">GONDERILDI!</div><div class="msuc-sub">Admin onayindan sonra yayinlanacak.</div><button class="mbtn" style="margin-top:16px;" data-close="submit">Kapat</button></div>
-</div></div>
+</div>
 
-<div class="ov" id="ov-sp-add"><div class="mbox" style="max-width:560px;">
-  <div class="mhdl"></div><button class="mcls" data-close="sp-add">&#10005;</button>
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:16px;">YENI SPONSOR</div>
-  <div class="ag2" style="margin-bottom:10px;">
+<!-- NEW SPONSOR MODAL -->
+<div class="ov" id="ov-sp-add">
+  <div class="mbox">
+    <div class="mhdl"></div><button class="mcls" data-close="sp-add">&#10005;</button>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:16px;">YENI SPONSOR EKLE</div>
     <div class="mfg"><label>SITE ADI</label><input type="text" class="minp" id="nsp-name" placeholder="CASIBOM"></div>
     <div class="mfg"><label>LINK</label><input type="text" class="minp" id="nsp-link" placeholder="https://..."></div>
-  </div>
-  <div class="mfg"><label>BONUS</label><input type="text" class="minp" id="nsp-bonus" placeholder="%100 Hosgeldin..."></div>
-  <div class="mfg"><label>LOGO URL</label>
-    <div style="display:flex;gap:8px;margin-bottom:8px;">
-      <input type="text" class="minp" id="nsp-img" placeholder="https://.../logo.jpg" style="flex:1;">
-      <button class="bs" id="btn-nsp-file">&#128193;</button>
+    <div class="mfg"><label>BONUS</label><input type="text" class="minp" id="nsp-bonus" placeholder="%100 Bonus"></div>
+    <div class="mfg">
+      <label>LOGO URL</label>
+      <input type="text" class="minp" id="nsp-img" placeholder="https://..." style="margin-bottom:6px;">
+      <input type="file" id="nsp-file" accept="image/*" style="display:none;">
+      <button class="bs" id="btn-nsp-file-trigger">&#128193; Dosya Sec</button>
+      <div style="margin-top:6px;"><img id="nsp-prev" src="" style="width:60px;height:60px;object-fit:cover;display:none;"></div>
     </div>
-    <input type="file" id="nsp-file" accept="image/*" style="display:none;">
-    <div style="display:flex;align-items:center;gap:12px;">
-      <div style="width:80px;height:80px;border-radius:8px;background:#1a1a28;border:2px dashed #3a3a55;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;">
-        <img id="nsp-prev" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt=""><span id="nsp-ph" style="font-size:24px;color:#303050;">&#128247;</span>
-      </div>
-      <div style="font-size:11px;color:#6060a0;">Kare gorsel onerilir (1:1)</div>
-    </div>
+    <button class="mbtn" id="btn-sp-add-save">Sisteme Ekle</button>
   </div>
-  <div class="mfg"><label>EFEKT</label><div class="efgrid" id="ef-pick"></div></div>
-  <div class="mfg"><label>ETIKET</label><div class="tgpick" id="tg-pick"></div></div>
-  <div style="display:flex;gap:8px;margin-top:16px;"><button class="mbtn" style="flex:1;" id="btn-sp-save">Ekle</button><button class="bs" data-close="sp-add" style="padding:14px 20px;">Iptal</button></div>
-</div></div>
+</div>
 
-<div class="ov" id="ov-sp-edit"><div class="mbox" style="max-width:560px;">
-  <div class="mhdl"></div><button class="mcls" data-close="sp-edit">&#10005;</button>
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:16px;">SPONSORU DUZENLE</div>
-  <input type="hidden" id="esp-id">
-  <div class="ag2" style="margin-bottom:10px;">
+<!-- EDIT SPONSOR MODAL -->
+<div class="ov" id="ov-sp-edit">
+  <div class="mbox">
+    <div class="mhdl"></div><button class="mcls" data-close="sp-edit">&#10005;</button>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:16px;">SPONSORU DUZENLE</div>
+    <input type="hidden" id="esp-id">
     <div class="mfg"><label>SITE ADI</label><input type="text" class="minp" id="esp-name"></div>
     <div class="mfg"><label>LINK</label><input type="text" class="minp" id="esp-link"></div>
-  </div>
-  <div class="mfg"><label>BONUS</label><input type="text" class="minp" id="esp-bonus"></div>
-  <div class="mfg"><label>LOGO URL</label>
-    <div style="display:flex;gap:8px;margin-bottom:8px;"><input type="text" class="minp" id="esp-img" style="flex:1;"><button class="bs" id="btn-esp-file">&#128193;</button></div>
-    <input type="file" id="esp-file" accept="image/*" style="display:none;">
-    <div style="width:80px;height:80px;border-radius:8px;background:#1a1a28;border:2px dashed #3a3a55;overflow:hidden;"><img id="esp-prev" src="" style="width:100%;height:100%;object-fit:cover;" alt=""></div>
-  </div>
-  <div class="mfg"><label>BANNER URL (Opsiyonel)</label><input type="text" class="minp" id="esp-banner" placeholder="https://.../banner.jpg"></div>
-  <div class="mfg"><label>EFEKT</label><div class="efgrid" id="ef-pick-e"></div></div>
-  <div class="mfg"><label>ETIKET</label><div class="tgpick" id="tg-pick-e"></div></div>
-  <div style="display:flex;gap:8px;margin-top:16px;"><button class="mbtn" style="flex:1;" id="btn-esp-save">Kaydet</button><button class="bs" data-close="sp-edit" style="padding:14px 20px;">Iptal</button></div>
-</div></div>
-
-<div class="ov" id="ov-soc-add"><div class="mbox" style="max-width:440px;">
-  <div class="mhdl"></div><button class="mcls" data-close="soc-add">&#10005;</button>
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:16px;">KANAL EKLE</div>
-  <div class="mfg"><label>PLATFORM</label><input type="text" class="minp" id="soc-name" placeholder="Telegram, Instagram..."></div>
-  <div class="mfg"><label>LINK</label><input type="text" class="minp" id="soc-url" placeholder="https://t.me/..."></div>
-  <div class="mfg"><label>IKON</label>
-    <div style="display:flex;gap:6px;flex-wrap:wrap;margin:6px 0;">
-      <button class="bi soc-icon-btn" data-icon="TG" style="font-weight:700;color:#229ED9;">TG</button>
-      <button class="bi soc-icon-btn" data-icon="IG" style="font-weight:700;color:#E1306C;">IG</button>
-      <button class="bi soc-icon-btn" data-icon="YT" style="font-weight:700;color:#FF0000;">YT</button>
-      <button class="bi soc-icon-btn" data-icon="TT" style="font-weight:700;color:#fff;">TT</button>
-      <button class="bi soc-icon-btn" data-icon="DC" style="font-weight:700;color:#5865F2;">DC</button>
+    <div class="mfg"><label>BONUS</label><input type="text" class="minp" id="esp-bonus"></div>
+    <div class="mfg">
+      <label>LOGO URL</label>
+      <input type="text" class="minp" id="esp-img" style="margin-bottom:6px;">
+      <input type="file" id="esp-file" accept="image/*" style="display:none;">
+      <button class="bs" id="btn-esp-file-trigger">&#128193; Yeni Dosya Sec</button>
+      <div style="margin-top:6px;"><img id="esp-prev" src="" style="width:60px;height:60px;object-fit:cover;"></div>
     </div>
-    <input type="text" class="minp" id="soc-icon" placeholder="Ikon yazi" style="margin-top:4px;">
-  </div>
-  <div style="display:flex;gap:8px;margin-top:14px;"><button class="mbtn" style="flex:1;" id="btn-soc-save">Ekle</button><button class="bs" data-close="soc-add" style="padding:14px 20px;">Iptal</button></div>
-</div></div>
-
-<!-- REPLAY -->
-<div id="rep-ov"><div class="rep-box">
-  <div class="rep-hd">
-    <div><div class="rep-title" id="rep-title"></div><div style="font-size:10px;color:#7070a0;margin-top:1px;" id="rep-info"></div></div>
-    <div style="display:flex;align-items:center;gap:12px;"><div class="rep-mul" id="rep-mul"></div><button class="rep-cls" id="rep-cls">&#10005;</button></div>
-  </div>
-  <div class="rep-fw"><div id="rep-load" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:#7070a0;font-size:12px;"><div class="spin" style="width:20px;height:20px;margin:0 auto 6px;display:block;"></div>Yukleniyor...</div><iframe id="rep-fr" src="" allowfullscreen></iframe></div>
-</div></div>
-
-<!-- POPUP -->
-<div id="pop-ov"><div class="pop-box">
-  <div class="pop-topbar"></div>
-  <button class="pop-cls" id="pop-cls">&#10005;</button>
-  <div id="pop-slides"></div>
-  <div class="pop-dots" id="pop-dots"></div>
-</div></div>
-
-
-<!-- SIFRE DEGİSTİR -->
-<div class="ov" id="ov-pw-change"><div class="mbox" style="max-width:420px;">
-  <div class="mhdl"></div><button class="mcls" data-close="pw-change">&#10005;</button>
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:16px;">SIFRE DEGISTIR</div>
-  <div class="merr" id="pw-err"></div>
-  <div class="mfg"><label>MEVCUT SIFRE</label><input type="password" class="minp" id="pw-old" placeholder="••••••••"></div>
-  <div class="mfg"><label>YENI SIFRE</label><input type="password" class="minp" id="pw-new" placeholder="En az 6 karakter"></div>
-  <div class="mfg"><label>YENI SIFRE TEKRAR</label><input type="password" class="minp" id="pw-new2" placeholder="Tekrar gir"></div>
-  <button class="mbtn" id="btn-pw-save">Sifreyi Degistir</button>
-</div></div>
-
-<!-- DESTEK -->
-<div class="ov" id="ov-support"><div class="mbox" style="max-width:460px;">
-  <div class="mhdl"></div><button class="mcls" data-close="support">&#10005;</button>
-  <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:4px;">DESTEK TALEBI</div>
-  <p class="msub">Admine mesaj gonder. En kisa surede donecektir.</p>
-  <div id="support-form">
-    <div class="mfg"><label>KONU</label>
-      <select class="mselect" id="sup-topic">
-        <option value="genel">Genel Soru</option>
-        <option value="odeme">Odeme / Bonus</option>
-        <option value="teknik">Teknik Sorun</option>
-        <option value="hesap">Hesap Sorunu</option>
-        <option value="diger">Diger</option>
-      </select>
+    <div class="mfg">
+      <label>DURUM (AKTIF / PASIF)</label>
+      <label class="tgl"><input type="checkbox" id="esp-active-tog"><span class="tsl"></span></label>
     </div>
-    <div class="mfg"><label>MESAJ</label><textarea class="minp" id="sup-msg" rows="4" placeholder="Sorununuzu yazin..." style="resize:vertical;line-height:1.5;"></textarea></div>
-    <button class="mbtn" id="btn-sup-send">Gonder</button>
+    <button class="mbtn" id="btn-esp-save-submit">Degisiklikleri Kaydet</button>
   </div>
-  <div class="msuc" id="support-ok"><div class="msuc-icon">&#128172;</div><div class="msuc-ttl" style="color:var(--g);">GONDERILDI!</div><div class="msuc-sub">Admin en kisa surede size donecektir.</div></div>
-</div></div>
+</div>
+
 <div id="toast"></div>
+
 <script>
 "use strict";
 
-function renderMsgs(){
-  var cnt=supportMsgs.length;
-  var unread=supportMsgs.filter(function(m){return !m.read;}).length;
-  var b=G('msgs-badge');if(b)b.textContent=unread||cnt;
-  var b2=G('msgs-badge-m');if(b2)b2.textContent=unread||cnt;
-  var c2=G('msgs-count');if(c2)c2.textContent=cnt+' mesaj';
-  var l=G('msgs-list');if(!l)return;
-  if(!cnt){l.innerHTML='<div class="empty">Henuz destek mesaji yok</div>';return;}
-  l.innerHTML='';
-  // Okunmayanlar önce
-  var sorted=supportMsgs.slice().sort(function(a,b){return a.read===b.read?0:(a.read?1:-1);});
-  sorted.forEach(function(m){
-    var topics={genel:'Genel Soru',odeme:'Odeme/Bonus',teknik:'Teknik Sorun',hesap:'Hesap Sorunu',diger:'Diger'};
-    var row=document.createElement('div');
-    row.style.cssText='background:#1e1e30;border:1px solid '+(m.read?'#2e2e48':'rgba(240,180,41,.3)')+';border-radius:10px;padding:14px;margin-bottom:10px;';
-    row.innerHTML=
-      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">'+
-        '<div style="display:flex;align-items:center;gap:8px;">'+
-          '<div style="width:34px;height:34px;border-radius:50%;background:var(--g);color:#000;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;">'+m.user[0].toUpperCase()+'</div>'+
-          '<div>'+
-            '<div style="font-size:13px;color:#e0e0f0;font-weight:600;">'+m.user+'</div>'+
-            '<div style="font-size:10px;color:#7070a0;">'+m.date+' · '+(topics[m.topic]||m.topic)+'</div>'+
-          '</div>'+
-        '</div>'+
-        (!m.read?'<div style="background:var(--g);color:#000;border-radius:10px;padding:2px 8px;font-size:9px;font-weight:700;">YENİ</div>':'')+
-      '</div>'+
-      '<div style="font-size:13px;color:#c0c0d8;line-height:1.6;margin-bottom:10px;background:#0a0a1a;border-radius:8px;padding:10px;">'+m.msg+'</div>'+
-      '<button class="bs msg-rd" style="font-size:11px;padding:6px 12px;">'+(m.read?'&#10003; Okundu':'Okundu İşaretle')+'</button>';
-    row.querySelector('.msg-rd').addEventListener('click',function(){
-      m.read=true;
-      renderMsgs();
-    });
-    l.appendChild(row);
-  });
-}
-
-
-var supportMsgs=[];
-function submitSupport(){
-  var topicEl=G('sup-topic'),msgEl=G('sup-msg');
-  var topic=topicEl?topicEl.value:'genel';
-  var msg=msgEl?msgEl.value.trim():'';
-  if(!msg){toast('Mesaj zorunlu');return;}
-  var entry={
-    id:nextId++,
-    user:currentUser?currentUser.u:'Anonim',
-    topic:topic,msg:msg,
-    date:new Date().toLocaleDateString('tr-TR'),
-    read:false
-  };
-  supportMsgs.push(entry);
-  // Mesaj sayacını güncelle
-  var mb=G('msgs-badge');if(mb)mb.textContent=supportMsgs.length;
-  var mb2=G('msgs-badge-m');if(mb2)mb2.textContent=supportMsgs.length;
-  var sf=G('support-form'),so=G('support-ok');
-  if(sf)sf.style.display='none';
-  if(so)so.style.display='block';
-  toast('Destek talebi gonderildi');
-}
-function changePw(){
-  if(!currentUser){toast('Giris yapmaniz gerekiyor');return;}
-  var old=G('pw-old').value,nw=G('pw-new').value,nw2=G('pw-new2').value;
-  var e=G('pw-err');
-  if(!old||!nw){e.textContent='Tum alanlari doldurun';e.style.display='block';return;}
-  if(nw.length<6){e.textContent='Sifre en az 6 karakter';e.style.display='block';return;}
-  if(nw!==nw2){e.textContent='Sifreler eslesmiyor';e.style.display='block';return;}
-  var u=null;for(var i=0;i<users.length;i++){if(users[i].id===currentUser.id){u=users[i];break;}}
-  if(!u||u.p!==old){e.textContent='Mevcut sifre yanlis';e.style.display='block';return;}
-  u.p=nw;e.style.display='none';closeOv('pw-change');toast('Sifre degistirildi');
-}
-
-
-function updateNavUser(){
-  var btn=G('nav-user-btn'),av=G('nav-user-av'),nm=G('nav-user-nm'),hd=G('ud-hd');
-  if(!btn)return;
-  if(currentUser){
-    btn.style.display='flex';
-    if(av)av.textContent=currentUser.u[0].toUpperCase();
-    if(nm)nm.textContent=currentUser.u;
-    if(hd)hd.textContent=currentUser.u;
-    // dropdown butonlarını gizle (misafir)
-    G('dd-login').style.display='none';
-    G('dd-register').style.display='none';
-  } else {
-    btn.style.display='none';
-    G('dd-login').style.display='';
-    G('dd-register').style.display='';
-  }
-}
-function logoutUser(){
-  currentUser=null;
-  try{localStorage.removeItem('sm_cu');}catch(e){}
-  updateNavUser();
-  G('user-drop').classList.remove('open');
-  toast('Cikis yapildi');
-}
-
-
-var _fbOpen=true;
-function toggleFb(){
-  _fbOpen=!_fbOpen;
-  var btn=G('btn-sub-float'),cls=G('btn-fb-close');
-  if(btn)btn.style.display=_fbOpen?'':'none';
-  if(cls)cls.style.display=_fbOpen?'':'';
-  if(!_fbOpen&&cls)cls.style.display='block';
-}
-
-
-// login tab removed - separate modals used
-function setLoginTab(tab){
-  _loginTab=tab;
-  var lu=G('lt-user'),la=G('lt-admin'),lf=G('login-foot');
-  if(lu)lu.classList.toggle('active',tab==='user');
-  if(la)la.classList.toggle('active',tab==='admin');
-  if(lf)lf.style.display=tab==='user'?'block':'none';
-  var ph=G('login-u');
-  if(ph)ph.placeholder=tab==='admin'?'admin':'kullaniciadı';
-}
-
-// ══ SABİTLER ══
-var AU="admin", AP="slotmaster2026";
-var EFS=[{id:'ef-none',l:'Yok',bg:'#fff3'},{id:'ef-glow',l:'Altin',bg:'#f0b429'},{id:'ef-purple',l:'Mor',bg:'#7c3aed'},{id:'ef-green',l:'Yesil',bg:'#22c55e'},{id:'ef-gradient',l:'Grad',bg:'linear-gradient(90deg,#f0b429,#f87171,#7c3aed)'}];
-var TAGS=[{id:'premium',l:'PREMIUM'},{id:'new',l:'YENI'},{id:'hot',l:'HOT'},{id:'vip',l:'VIP'},{id:'',l:'Yok'}];
-var THEMES=[{id:'t-night',l:'Gece',c:'#f0b429',bg:'#08080e'},{id:'t-royal',l:'Royal',c:'#e8333a',bg:'#0a0005'},{id:'t-emerald',l:'Emerald',c:'#00c878',bg:'#020d08'},{id:'t-galaxy',l:'Galaxy',c:'#9b59e8',bg:'#060310'},{id:'t-platinum',l:'Platinum',c:'#c8d0e0',bg:'#0a0a10'}];
-
-// ══ VERİ ══
-var sponsors=[
-  {id:1,name:'CASIBOM',bonus:'%100 Hosgeldin 1.000 TL\'ye kadar',link:'https://google.com',ef:'ef-glow',tag:'premium',img:'https://abidin11.com/uploads/sponsors/img_69d9987b9d9bf6.55381307.png',active:true,bannerActive:false,bannerImg:''},
-  {id:2,name:'MARSBAHIS',bonus:'250 TL Min. Yatirim - Kural yok',link:'https://google.com',ef:'ef-none',tag:'hot',img:'https://abidin11.com/uploads/sponsors/sponsor_20260624_044446_065a2b39.png',active:true,bannerActive:false,bannerImg:''},
-  {id:3,name:'MISTYCASINO',bonus:'1.000 TL Deneme Bonusu',link:'https://google.com',ef:'ef-purple',tag:'new',img:'https://abidin11.com/uploads/sponsors/img_69d9970b8e2518.50293830.png',active:true,bannerActive:false,bannerImg:''},
-  {id:4,name:'GRANDBET',bonus:'%300 Hosgeldin Bonusu',link:'https://google.com',ef:'ef-gradient',tag:'',img:'https://abidin11.com/uploads/sponsors/sponsor_20260615_192812_5c053f93.png',active:true,bannerActive:false,bannerImg:''},
-  {id:5,name:'SOSABET',bonus:'Kural Yok - 5dk Cekim',link:'https://google.com',ef:'ef-none',tag:'vip',img:'https://abidin11.com/uploads/sponsors/sponsor_20260624_164853_0887eea5.png',active:true,bannerActive:false,bannerImg:''},
-  {id:6,name:'21.COM',bonus:'%30 Nakit Iade - Ozel Uyelik',link:'https://google.com',ef:'ef-green',tag:'',img:'https://abidin11.com/uploads/sponsors/sponsor_20260602_120243_c7fe8c00.png',active:true,bannerActive:false,bannerImg:''}
+// DATA & STATE[cite: 2]
+var AU = "admin", AP = "slotmaster2026";
+var sponsors = [
+  {id:1,name:'CASIBOM',bonus:'%100 Hosgeldin 1.000 TL',link:'https://google.com',img:'https://abidin11.com/uploads/sponsors/img_69d9987b9d9bf6.55381307.png',active:true},
+  {id:2,name:'MARSBAHIS',bonus:'250 TL Min. Yatirim',link:'https://google.com',img:'https://abidin11.com/uploads/sponsors/sponsor_20260624_044446_065a2b39.png',active:true}
 ];
-var wins=[
-  {id:1,user:'Ke***',game:'Gates of Olympus 1000',mul:'15.000x',img:'https://www.ppreplaylink.net/game_pic/vs20olympx.jpg',link:'https://www.ppreplaylink.net/kdrbAFKIkT',sponsor:'CASIBOM',date:'28.06.2026'},
-  {id:2,user:'Ah***',game:'Sugar Rush 1000',mul:'12.717x',img:'https://www.ppreplaylink.net/game_pic/vs20sugarrushx.jpg',link:'https://www.ppreplaylink.net/AE6jQjtGQ2',sponsor:'MARSBAHIS',date:'27.06.2026'},
-  {id:3,user:'Me***',game:'Starlight Princess 1000',mul:'12.000x',img:'https://www.ppreplaylink.net/game_pic/vs20starlightx.jpg',link:'https://www.ppreplaylink.net/U2flX7Gqo4',sponsor:'MISTYCASINO',date:'26.06.2026'},
-  {id:4,user:'Bu***',game:'Sweet Bonanza 1000',mul:'5.008x',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/BTxlrNNnOK',sponsor:'',date:'25.06.2026'},
-  {id:5,user:'Ta***',game:'Wild West Gold',mul:'8.900x',img:'https://www.ppreplaylink.net/game_pic/vs40wildwest.jpg',link:'#',sponsor:'GRANDBET',date:'24.06.2026'},
-  {id:6,user:'Se***',game:'Big Bass Splash',mul:'4.200x',img:'https://www.ppreplaylink.net/game_pic/vs10bbsplashx.jpg',link:'#',sponsor:'',date:'23.06.2026'},
-  {id:7,user:'Yi***',game:'Gates of Olympus Super',mul:'5.233x',img:'https://www.ppreplaylink.net/game_pic/vs20olympgold.jpg',link:'https://www.ppreplaylink.net/1elOPD1xii',sponsor:'',date:'22.06.2026'},
-  {id:8,user:'Em***',game:'Starlight Princess 1000',mul:'15.000x',img:'https://www.ppreplaylink.net/game_pic/vs20starlightx.jpg',link:'https://www.ppreplaylink.net/O9QDeIgaD7',sponsor:'SOSABET',date:'21.06.2026'},
-  {id:9,user:'?',game:'Yukleniyor...',mul:'?',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/pW5cfkxX7h',sponsor:'',date:'29.06.2026',pf:true},
-  {id:10,user:'?',game:'Yukleniyor...',mul:'?',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/2n9c1OQKgr',sponsor:'',date:'29.06.2026',pf:true},
-  {id:11,user:'?',game:'Yukleniyor...',mul:'?',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/awHuFE3587',sponsor:'',date:'29.06.2026',pf:true},
-  {id:12,user:'?',game:'Yukleniyor...',mul:'?',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/UPIQ7HhMqX',sponsor:'',date:'29.06.2026',pf:true},
-  {id:13,user:'?',game:'Yukleniyor...',mul:'?',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/OMd2QT3q81',sponsor:'',date:'29.06.2026',pf:true}
-];
-var pending=[],users=[];
-var socChannels=[
-  {id:201,name:'Instagram',url:'https://instagram.com',icon:'IG',active:true},
-  {id:202,name:'Telegram',url:'https://t.me',icon:'TG',active:true}
-];
-var nextId=300,currentUser=null,admMsg='';
-var selEf='ef-none',selTag='',selEfE='ef-none',selTagE='';
-var popCfg={active:false,title:'',sub:'',spIds:[]};
-var popSlide=0,popTimer=null,dragIdx=null,fetchTimer=null;
+var isLogoImgMode = false;
+var systemBannerActive = true;
+var systemBannerUrl = "";
 
-// ══ YARDIMCILAR ══
 function G(id){return document.getElementById(id);}
 function toast(m){var t=G('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
 
-// ══ OVERLAY (MODAL) SİSTEMİ ══
-// Tüm modaller .ov class'ı taşır, .open ile gösterilir
-// onclick/href inline yok — event delegation kullanıyoruz
-function openOv(id){var el=G('ov-'+id);if(el)el.classList.add('open');}
-function closeOv(id){
-  var el=G('ov-'+id);if(!el)return;
-  el.classList.remove('open');
-  // reset
-  if(id==='support'){
-    G('support-form').style.display='block';G('support-ok').style.display='none';
-    var sm=G('sup-msg');if(sm)sm.value='';
+// ROUTING MANTIĞI (/admin Kontrolü)[cite: 2]
+function checkRouting() {
+  if (window.location.hash === '#admin' || window.location.pathname.indexOf('/admin') !== -1) {
+    if (sessionStorage.getItem('sm_admin_authed') === '1') {
+      showAdminPanel();
+    } else {
+      openOv('admin-login');
+    }
+  } else {
+    hideAdminPanel();
   }
-  if(id==='submit'){
-    G('sub-form').style.display='block';G('sub-ok').style.display='none';
-    G('sub-err').style.display='none';G('sub-prev').style.display='none';
-    G('sub-st').innerHTML='';var u=G('sub-url');if(u)u.value='';
-  }
-  if(id==='register'){G('reg-form').style.display='block';G('reg-ok').style.display='none';var e=G('reg-err');if(e)e.style.display='none';}
-  if(id==='forgot'){G('forg-form').style.display='block';G('forg-ok').style.display='none';var e=G('forg-err');if(e)e.style.display='none';}
 }
-function switchOv(from,to){closeOv(from);setTimeout(function(){openOv(to);},150);}
 
-// Event delegation — overlay backdrop click
-document.addEventListener('click',function(e){
-  // Overlay tıklama (backdrop)
-  if(e.target.classList.contains('ov')){
-    var id=e.target.id.replace('ov-','');
-    closeOv(id);return;
+window.addEventListener('hashchange', checkRouting);
+window.addEventListener('load', function() {
+  checkRouting();
+  renderSponsors();
+});
+
+// MODAL CONTROLS[cite: 2]
+function openOv(id){var el=G('ov-'+id);if(el)el.classList.add('open');}
+function closeOv(id){var el=G('ov-'+id);if(el)el.classList.remove('open');}
+
+// INTERACTION HANDLERS[cite: 2]
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('ov')) {
+    e.target.classList.remove('open');
   }
-  // [data-close] butonları
-  if(e.target.hasAttribute('data-close')){closeOv(e.target.getAttribute('data-close'));return;}
-  // [data-sw] butonları
-  if(e.target.hasAttribute('data-sw')){
-    var p=e.target.getAttribute('data-sw').split(':');
-    switchOv(p[0],p[1]);return;
+  if (e.target.hasAttribute('data-close')) {
+    closeOv(e.target.getAttribute('data-close'));
   }
-  // Hamburger
-  if(e.target.closest('#hbg-btn')){
+  var tab = e.target.closest('[data-p]');
+  if (tab && (tab.classList.contains('stab') || tab.classList.contains('mtab'))) {
+    switchTab(tab.getAttribute('data-p'));
+  }
+  if (e.target.id === 'hbg-btn') {
     G('ndrop').classList.toggle('open');
-    e.stopPropagation();return;
-  }
-  // Dropdown dışı tıklama
-  if(!e.target.closest('#ndrop')&&!e.target.closest('#hbg-btn')){
-    G('ndrop').classList.remove('open');
-  }
-  // Admin sidebar/mtab
-  var tab=e.target.closest('[data-p]');
-  if(tab&&(tab.classList.contains('stab')||tab.classList.contains('mtab'))){
-    switchTab(tab.getAttribute('data-p'));return;
-  }
-  // Sütun butonu
-  if(e.target.hasAttribute('data-col')){
-    var n=e.target.getAttribute('data-col');
-    G('sp-grid').style.gridTemplateColumns='repeat('+n+',1fr)';
-    toast(n+' sutun');return;
   }
 });
 
-// ══ NAV ══
-function goHome(){
-  G('home-page').style.display='block';
-  G('wins-page').style.display='none';
-  window.scrollTo(0,0);
-  try{history.pushState({page:'home'},'','/');}catch(e){}
-}
-function goWins(){
-  G('home-page').style.display='none';
-  G('wins-page').style.display='block';
-  renderWinsPage();
-  window.scrollTo(0,0);
-  try{history.pushState({page:'wins'},'','/wins');}catch(e){}
+function switchTab(panelId) {
+  document.querySelectorAll('.stab, .mtab').forEach(function(t){t.classList.remove('on');});
+  document.querySelectorAll('.apnl').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('[data-p="'+panelId+'"]').forEach(function(t){t.classList.add('on');});
+  var pEl = G(panelId); if(pEl) pEl.classList.add('on');
 }
 
-function gotoAdmin(){
-  G('adm-view').style.display='block';
-  document.body.style.overflow='auto';
-  try{sessionStorage.setItem('sm_admin','1');}catch(e){}
-  try{history.pushState({page:'admin'},'','/admin');}catch(e){}
-  G('fbwrap').style.display='none';
-  renderAdmSp();renderPending();renderWinsAdm();renderUsers();
-  try{renderMsgs();}catch(e){console.warn('msgs:',e);}
-  renderThemes();renderSocList();renderSpDrop();
-  renderEfPick('ef-pick',selEf,function(v){selEf=v;});
-  renderTgPick('tg-pick',selTag,function(v){selTag=v;});
-  renderPopPicks();updateJpCurr();
-}
-function gotoSite(){
-  G('adm-view').style.display='none';
-  document.body.style.overflow='';
-  try{sessionStorage.removeItem('sm_admin');}catch(e){}
-  var sv=G('site-view');if(sv)sv.style.display='block';
-  G('fbwrap').style.display='block';
-  try{history.pushState({page:'home'},'','/');}catch(e){}
+// ADMIN CORE FUNCTIONS[cite: 2]
+function showAdminPanel() {
+  G('site-view').style.display = 'none';
+  G('fbwrap').style.display = 'none';
+  G('adm-view').style.display = 'block';
+  closeOv('admin-login');
+  renderAdminSponsors();
+  
+  // Setup config views[cite: 2]
+  G('gif-tog').checked = systemBannerActive;
+  G('gif-url').value = systemBannerUrl;
 }
 
-// ══ ADMIN TABS ══
-var PANEL_URLS={
-  'p-sp':'/admin/sponsorlar',
-  'p-pend':'/admin/bekleyenler',
-  'p-wins':'/admin/kazanclar',
-  'p-users':'/admin/uyeler',
-  'p-soc':'/admin/sosyal',
-  'p-banner':'/admin/banner',
-  'p-set':'/admin/ayarlar',
-  'p-msgs':'/admin/mesajlar'
+function hideAdminPanel() {
+  G('adm-view').style.display = 'none';
+  G('site-view').style.display = 'block';
+  G('fbwrap').style.display = 'flex';
+}
+
+// LOGO FILE TO BASE64 CONVERTERS[cite: 2]
+function bindFileToInput(fileInputId, inputUrlId, imgPreviewId) {
+  var fileEl = G(fileInputId);
+  if (!fileEl) return;
+  fileEl.onchange = function(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(evt) {
+      G(inputUrlId).value = evt.target.result;
+      if (imgPreviewId) {
+        G(imgPreviewId).src = evt.target.result;
+        G(imgPreviewId).style.display = 'block';
+      }
+      toast('Resim basariyla yuklendi!');
+    };
+    reader.readAsDataURL(file);
+  };
+}
+
+bindFileToInput('logo-file', 'logo-url-inp', 'logo-prev-img');
+bindFileToInput('nsp-file', 'nsp-img', 'nsp-prev');
+bindFileToInput('esp-file', 'esp-img', 'esp-prev');
+
+G('btn-logo-file-trigger').onclick = function(){ G('logo-file').click(); };
+G('btn-nsp-file-trigger').onclick = function(){ G('nsp-file').click(); };
+G('btn-esp-file-trigger').onclick = function(){ G('esp-file').click(); };
+
+// LOGO MODAL MODE BUTTONS[cite: 2]
+G('btn-logo-mode-txt').onclick = function() { isLogoImgMode = false; toast('Yazi modu secildi.'); };
+G('btn-logo-mode-img').onclick = function() { isLogoImgMode = true; toast('Gorsel modu secildi.'); };
+
+// ADMIN LOGIN SUBMISSION[cite: 2]
+G('btn-admin-login-submit').onclick = function() {
+  var u = G('admin-login-u').value;
+  var p = G('admin-login-p').value;
+  if (u === AU && p === AP) {
+    sessionStorage.setItem('sm_admin_authed', '1');
+    showAdminPanel();
+  } else {
+    G('admin-login-err').textContent = "Yetkisiz Giriş Detayları!";
+    G('admin-login-err').style.display = 'block';
+  }
 };
 
-function switchTab(panel){
-  document.querySelectorAll('.stab,.mtab').forEach(function(t){t.classList.remove('on');});
-  document.querySelectorAll('.apnl').forEach(function(p){p.classList.remove('on');});
-  document.querySelectorAll('[data-p="'+panel+'"]').forEach(function(t){t.classList.add('on');});
-  var pEl=G(panel);if(pEl)pEl.classList.add('on');
-  if(panel==='p-set'){updateJpCurr();renderPopPicks();}
-  if(panel==='p-msgs'){try{renderMsgs();}catch(e){}}
-  if(panel==='p-sp'){
-    renderEfPick('ef-pick',selEf,function(v){selEf=v;});
-    renderTgPick('tg-pick',selTag,function(v){selTag=v;});
-  }
-  try{
-    var url=PANEL_URLS[panel]||'/admin';
-    history.pushState({page:'admin',panel:panel},'',url);
-  }catch(e){}
-}
+G('btn-adm-back').onclick = function() {
+  window.location.hash = '';
+  hideAdminPanel();
+};
 
-// ══ AUTH ══
-function doLogin(){
-  var u=G('login-u').value.trim(),p=G('login-p').value;
-  var e=G('login-err');
-  if(!u||!p){e.textContent='Kullanici adi ve sifre zorunlu.';e.style.display='block';return;}
-  var f=null;for(var i=0;i<users.length;i++){if(users[i].u===u&&users[i].p===p){f=users[i];break;}}
-  if(!f){e.textContent='Hatali kullanici adi veya sifre.';e.style.display='block';return;}
-  e.style.display='none';currentUser={id:f.id,u:f.u};
-  try{localStorage.setItem('sm_cu',JSON.stringify(currentUser));}catch(e2){}
-  closeOv('login');toast('Hos geldin '+u);updateNavUser();
-}
-function doAdminLogin(){
-  var u=G('admin-login-u').value.trim(),p=G('admin-login-p').value;
-  var e=G('admin-login-err');
-  if(!u||!p){e.textContent='Kullanici adi ve sifre zorunlu.';e.style.display='block';return;}
-  if(u===AU&&p===AP){
-    e.style.display='none';
-    try{sessionStorage.setItem('sm_admin','1');}catch(e2){}
-    closeOv('admin-login');
-    setTimeout(function(){gotoAdmin();},150);
-    toast('Admin girisi basarili');return;
-  }
-  e.textContent='Hatali admin bilgileri.';e.style.display='block';
-}
-function doRegister(){
-  var u=G('reg-u').value.trim(),ph=G('reg-ph').value.trim(),p=G('reg-p').value,p2=G('reg-p2').value;
-  var e=G('reg-err');
-  if(!u||!ph||!p){e.textContent='Tum alanlari doldurun.';e.style.display='block';return;}
-  if(p.length<6){e.textContent='Sifre en az 6 karakter.';e.style.display='block';return;}
-  if(p!==p2){e.textContent='Sifreler eslesmiyor.';e.style.display='block';return;}
-  for(var i=0;i<users.length;i++){if(users[i].u===u){e.textContent='Bu kullanici adi alinmis.';e.style.display='block';return;}}
-  users.push({id:nextId++,u:u,ph:ph,p:p,date:new Date().toLocaleDateString('tr-TR'),clicks:{}});
-  e.style.display='none';G('reg-form').style.display='none';G('reg-ok').style.display='block';
-  toast('Kayit basarili: '+u);
-  try{renderUsers();}catch(ex){}
-}
-function doForgot(){
-  var u=G('forg-u').value.trim(),ph=G('forg-ph').value.trim();
-  var e=G('forg-err');
-  if(!u||!ph){e.textContent='Tum alanlari doldurun.';e.style.display='block';return;}
-  var f=false;for(var i=0;i<users.length;i++){if(users[i].u===u&&users[i].ph===ph){f=true;break;}}
-  if(!f){e.textContent='Bu bilgilerle kayitli hesap bulunamadi.';e.style.display='block';return;}
-  e.style.display='none';G('forg-form').style.display='none';G('forg-ok').style.display='block';
-}
-
-// ══ SUBMIT WIN ══
-function openSubmit(){
-  closeOv('submit');
-  var u=G('sub-user');if(u&&currentUser)u.value=currentUser.u;else if(u)u.value='';
-  var msg=G('sub-amsg');if(msg){if(admMsg){msg.textContent=admMsg;msg.style.display='block';}else{msg.style.display='none';}}
-  fillSubSpDrop();
-  openOv('submit');
-}
-function fillSubSpDrop(){
-  var s=G('sub-sp');if(!s)return;
-  s.innerHTML='<option value="">-- Sponsor --</option>';
-  for(var i=0;i<sponsors.length;i++){
-    if(sponsors[i].active!==false){var o=document.createElement('option');o.value=sponsors[i].name;o.textContent=sponsors[i].name;s.appendChild(o);}
-  }
-}
-var _ft=null;
-function onSubUrl(){
-  var val=G('sub-url').value.trim();
-  var st=G('sub-st');
-  if(!val||!val.includes('ppreplaylink')){G('sub-prev').style.display='none';if(st)st.innerHTML='';return;}
-  if(st)st.innerHTML='<span class="spin"></span> Analiz ediliyor...';
-  if(_ft)clearTimeout(_ft);
-  _ft=setTimeout(function(){doFetch(val);},700);
-}
-function doFetch(url){
-  var st=G('sub-st');
-  fetch('/api/replay/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:url})})
-    .then(function(r){return r.json();})
-    .then(function(d){
-      if(d.ok&&d.game){
-        if(G('sub-prev-game'))G('sub-prev-game').textContent=d.game;
-        if(G('sub-prev-mul'))G('sub-prev-mul').textContent=d.multiplier||'';
-        if(G('sub-prev-img')&&d.imageUrl)G('sub-prev-img').src=d.imageUrl;
-        G('sub-prev').style.display='block';
-        if(st)st.innerHTML='<span style="color:#22c55e;">&#10003; Bilgiler alindi</span>';
-      } else {if(st)st.innerHTML='<span style="color:#f0b429;">Bilgi alinamadi - Manuel girin</span>';}
-    })
-    .catch(function(){if(st)st.innerHTML='<span style="color:#f0b429;">Manuel girin</span>';});
-}
-function submitWin(){
-  var url=G('sub-url'),err=G('sub-err');
-  if(!url||!url.value.trim()){if(err){err.textContent='Replay linki zorunlu.';err.style.display='block';}return;}
-  pending.push({
-    id:nextId++,
-    user:(currentUser?currentUser.u:(G('sub-user')?G('sub-user').value.trim():'Anonim'))||'Anonim',
-    game:(G('sub-prev-game')&&G('sub-prev-game').textContent)||'Bilinmiyor',
-    mul:(G('sub-prev-mul')&&G('sub-prev-mul').textContent)||'--',
-    img:(G('sub-prev-img')&&G('sub-prev-img').src&&G('sub-prev-img').src.length>10?G('sub-prev-img').src:''),
-    link:url.value.trim(),
-    sponsor:(G('sub-sp')?G('sub-sp').value:'')||'',
-    date:new Date().toLocaleDateString('tr-TR'),loggedIn:!!currentUser
-  });
-  G('sub-form').style.display='none';G('sub-ok').style.display='block';
-  if(err)err.style.display='none';
-  updatePendBadge();
-}
-
-// ══ SITE RENDER ══
-function spTagLabel(t){return{premium:'PREMIUM',new:'YENI',hot:'HOT',vip:'VIP'}[t]||'';}
-
-function renderSponsors(){
-  // Banner
-  var ba=G('sp-banner'),bimg=G('sp-banner-img');
-  var bsp=null;for(var i=0;i<sponsors.length;i++){if(sponsors[i].bannerActive&&sponsors[i].active!==false){bsp=sponsors[i];break;}}
-  if(ba&&bimg){
-    if(bsp){ba.style.display='block';bimg.src=bsp.bannerImg||bsp.img;bimg.onclick=function(){if(bsp.link&&bsp.link!=='#'&&bsp.link!=='')window.open(bsp.link,'_blank');};}
-    else{ba.style.display='none';}
-  }
-  var grid=G('sp-grid');if(!grid)return;
-  grid.innerHTML='';
-  var active=[];for(var i=0;i<sponsors.length;i++){if(sponsors[i].active!==false)active.push(sponsors[i]);}
-  for(var i=0;i<active.length;i++){
-    var s=active[i];
-    var card=document.createElement('div');
-    card.className='spc '+s.ef+(s.tag?' has-'+s.tag:'');
-    var rib=s.tag?'<div class="spc-ribbon rb-'+s.tag+'"><span>'+spTagLabel(s.tag)+'</span></div>':'';
-    var bon=s.bonus?'<div class="spc-bonus">'+s.bonus+'</div>':'';
-    card.innerHTML='<div class="spc-topbar"></div>'+
-      '<div class="spc-logo"><img class="spc-img" src="'+(s.img||'')+'" alt="'+s.name+'"><div class="spc-sweep"></div>'+rib+'</div>'+
-      '<div class="spc-body">'+bon+'<button class="spc-btn">Siteye Git</button></div>';
-    (function(sid,slk){
-      card.addEventListener('click',function(){if(slk&&slk!=='#'&&slk!=='')window.open(slk,'_blank');});
-      card.querySelector('.spc-btn').addEventListener('click',function(e){e.stopPropagation();if(slk&&slk!=='#'&&slk!=='')window.open(slk,'_blank');else toast('Bu sponsor icin link henuz eklenmemis');});
-    })(s.id,s.link);
+// RENDER FRONTEND SPONSORS[cite: 2]
+function renderSponsors() {
+  var grid = G('sp-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  sponsors.forEach(function(sp) {
+    if (!sp.active) return;
+    var card = document.createElement('div');
+    card.className = 'spcef-glow spc';
+    card.innerHTML = '<div class="spc-topbar"></div>' +
+                     '<div class="spc-logo"><img class="spc-img" src="'+sp.img+'"></div>' +
+                     '<div class="spc-body">' +
+                       '<div class="spc-bonus">'+sp.bonus+'</div>' +
+                       '<button class="spc-btn" onclick="window.open(\''+sp.link+'\', \'_blank\')">GIT</button>' +
+                     '</div>';
     grid.appendChild(card);
-  }
-}
-
-function renderWinsHome(){
-  var g=G('wins-grid');if(!g)return;g.innerHTML='';
-  var sl=wins.slice(0,8);
-  for(var i=0;i<sl.length;i++){
-    var w=sl[i];var c=document.createElement('div');c.className='wc';
-    c.innerHTML='<div class="wc-iw"><img class="wc-img" src="'+w.img+'" alt=""><div class="wc-badge">'+w.mul+'</div></div>'+
-      '<div class="wc-body"><div class="wc-game">'+w.game+'</div><div class="wc-mul">'+w.mul+'</div><div class="wc-user">'+w.user+'</div><div class="wc-play">&#9654; Replay Izle</div></div>';
-    (function(wid){c.addEventListener('click',function(){openRep(wid);});})(w.id);
-    g.appendChild(c);
-  }
-}
-
-function renderWinsPage(){
-  var cnt=G('wp-cnt');if(cnt)cnt.textContent=wins.length+' kazanc';
-  var g=G('wp-grid');if(!g)return;g.innerHTML='';
-  for(var i=0;i<wins.length;i++){
-    var w=wins[i];var slk=w.customLink||'#';
-    if(!w.customLink){for(var j=0;j<sponsors.length;j++){if(sponsors[j].name===w.sponsor){slk=sponsors[j].link;break;}}}
-    var c=document.createElement('div');c.className='wpc';
-    c.innerHTML='<div class="wpc-iw"><img class="wpc-img" src="'+w.img+'" alt=""><div class="wpc-badge">'+w.mul+'</div>'+(w.sponsor?'<div class="wpc-sp">'+w.sponsor+'</div>':'')+
-      '</div><div class="wpc-body"><div class="wpc-game">'+w.game+'</div><div class="wpc-meta">'+w.user+(w.date?' \u00b7 '+w.date:'')+'</div><div class="wpc-mul">'+w.mul+'</div>'+
-      '<div class="wpc-btns"><button class="wpc-replay">&#9654; Replay</button><button class="wpc-now">Simdi Oyna</button></div></div>';
-    (function(wid,lk){
-      c.querySelector('.wpc-replay').addEventListener('click',function(){openRep(wid);});
-      c.querySelector('.wpc-now').addEventListener('click',function(){if(lk&&lk!=='#'&&lk!=='')window.open(lk,'_blank');else toast('Bu kazanc icin sponsor linki henuz eklenmemis');});
-    })(w.id,slk);
-    g.appendChild(c);
-  }
-}
-
-function buildTicker(){
-  var t=G('tk-track');if(!t)return;
-  t.classList.remove('go');t.innerHTML='';
-  var html='';
-  for(var i=0;i<wins.length;i++){
-    var w=wins[i];
-    html+='<div class="tki" data-id="'+w.id+'">'+
-      '<div class="tki-in"><div class="tki-iw"><img class="tki-img" src="'+w.img+'" alt=""><div class="tki-b">'+w.mul+'</div></div>'+
-      '<div><div class="tki-game">'+w.game+'</div><div class="tki-user">'+w.user+'</div></div>'+
-      '<div class="tki-mul">'+w.mul+'</div></div></div>';
-  }
-  t.innerHTML=html+html+html+html+html+html+html+html;
-  var items=t.querySelectorAll('.tki');
-  for(var i=0;i<items.length;i++){
-    (function(el){el.addEventListener('click',function(){openRep(parseInt(el.getAttribute('data-id')));});})(items[i]);
-  }
-  void t.offsetWidth;t.classList.add('go');
-}
-
-function renderFooter(){
-  var fl=G('flinks');if(!fl)return;fl.innerHTML='';
-  for(var i=0;i<socChannels.length;i++){
-    if(socChannels[i].active!==false){
-      var a=document.createElement('a');a.href=socChannels[i].url;a.target='_blank';
-      var _icon=socChannels[i].icon||'';
-      var _isCode=(_icon.length<=3&&_icon===_icon.toUpperCase()&&_icon!=='');
-      a.textContent=_isCode?socChannels[i].name:(_icon?_icon+' '+socChannels[i].name:socChannels[i].name);fl.appendChild(a);
-    }
-  }
-  // Nav sosyal ikonlar
-  var ns=G('nav-socials');if(!ns)return;ns.innerHTML='';
-  var shown=socChannels.filter(function(ch){return ch.active!==false;}).slice(0,3);
-  for(var i=0;i<shown.length;i++){
-    var ch=shown[i];
-    var a=document.createElement('a');
-    a.href=ch.url;a.target='_blank';a.className='nav-soc-btn';
-    a.title=ch.name; // sadece isim
-    var icon=ch.icon||'?';
-    // SVG ikonlar
-    if(icon==='IG'||ch.name.toLowerCase().includes('instagram')){
-      a.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#E1306C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".5" fill="#E1306C"/></svg>';
-    } else if(icon==='TG'||ch.name.toLowerCase().includes('telegram')){
-      a.innerHTML='<svg viewBox="0 0 24 24" fill="none"><path d="M21.2 4.3L2.8 11.4c-.7.3-.7.7 0 .9l4.6 1.4 1.8 5.5c.2.6.8.7 1.2.3l2.5-2.1 4.8 3.6c.6.4 1.1.1 1.3-.6l2.9-14.6c.2-.7-.2-1.1-.7-.9z" fill="#229ED9"/></svg>';
-    } else if(icon==='YT'||ch.name.toLowerCase().includes('youtube')){
-      a.innerHTML='<svg viewBox="0 0 24 24" fill="#FF0000"><path d="M19.6 7s-.2-1.4-.8-2a2.8 2.8 0 00-2-.8C14.4 4 12 4 12 4s-2.4 0-4.8.2c-.8.1-1.5.3-2 .8-.6.6-.8 2-.8 2S4 8.6 4 10.2v1.5c0 1.6.4 3.2.4 3.2s.2 1.4.8 2c.5.5 1.3.7 2.2.8C8.8 17.8 12 18 12 18s2.4 0 4.8-.3c.8-.1 1.5-.3 2-.8.6-.6.8-2 .8-2s.4-1.6.4-3.2v-1.5C20 8.6 19.6 7 19.6 7zm-9.6 6.5V9.2l4.5 2.2-4.5 2.1z"/></svg>';
-    } else if(icon==='TT'||ch.name.toLowerCase().includes('tiktok')){
-      a.innerHTML='<svg viewBox="0 0 24 24" fill="white"><path d="M19.6 8.6a5.4 5.4 0 01-5.4-5.4h-2.7v11.2a2.7 2.7 0 11-2.7-2.7c.2 0 .5 0 .7.1V9.1a5.4 5.4 0 00-.7 0 5.4 5.4 0 000 10.8 5.4 5.4 0 005.4-5.4V9.8a8 8 0 004.7 1.5V8.6z"/></svg>';
-    } else if(icon==='DC'||ch.name.toLowerCase().includes('discord')){
-      a.innerHTML='<svg viewBox="0 0 24 24" fill="#5865F2"><path d="M20 4.4A19 19 0 0015.3 3c-.2.4-.4.9-.6 1.3a17.7 17.7 0 00-5.4 0C9.1 3.9 8.9 3.4 8.7 3A19 19 0 004 4.4 20.2 20.2 0 001 17.6a19.2 19.2 0 005.8 2.9c.5-.6.9-1.3 1.2-2a12.4 12.4 0 01-2-.9l.5-.4a13.7 13.7 0 0011.8 0c.2.1.3.3.5.4-.6.4-1.3.7-2 1 .3.7.7 1.3 1.2 2a19.1 19.1 0 005.8-3 20.2 20.2 0 00-3-13.2zM8.7 15.2c-1.2 0-2.1-1-2.1-2.3s1-2.3 2.1-2.3c1.2 0 2.2 1 2.1 2.3 0 1.3-1 2.3-2.1 2.3zm6.6 0c-1.1 0-2.1-1-2.1-2.3s1-2.3 2.1-2.3c1.2 0 2.2 1 2.1 2.3 0 1.3-.9 2.3-2.1 2.3z"/></svg>';
-    } else if(icon==='WA'||ch.name.toLowerCase().includes('whatsapp')){
-      a.innerHTML='<svg viewBox="0 0 24 24" fill="#25D366"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.07-1.35C8.44 21.52 10.19 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.07 14.07c-.21.59-1.24 1.15-1.7 1.19-.46.04-.47.35-2.96-.62-2.49-.97-3.98-3.41-4.1-3.57-.12-.16-.97-1.29-.97-2.46s.61-1.74.83-1.98c.22-.24.48-.3.64-.3h.46c.15 0 .35-.06.55.42l.7 1.87c.06.15.03.33-.06.47l-.27.38c-.1.14-.21.29-.09.57.12.28.55 1.01 1.18 1.64.81.8 1.49 1.05 1.77 1.17.28.12.44.1.6-.06l.43-.51c.16-.19.32-.15.54-.09l1.7.8c.2.09.33.14.38.22.04.08.04.45-.17 1.04z"/></svg>';
-    } else {
-      a.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>';
-    }
-    ns.appendChild(a);
-  }
-}
-
-// ══ REPLAY ══
-function openRep(id){
-  var w=null;for(var i=0;i<wins.length;i++){if(wins[i].id===id){w=wins[i];break;}}
-  if(!w)return;
-  var ov=G('rep-ov');if(!ov)return;
-  if(G('rep-title'))G('rep-title').textContent=w.game;
-  if(G('rep-mul'))G('rep-mul').textContent=w.mul;
-  if(G('rep-info'))G('rep-info').textContent=w.user+' \u00b7 '+w.mul;
-  var ld=G('rep-load');if(ld){ld.style.display='block';ld.innerHTML='<div class="spin" style="width:20px;height:20px;margin:0 auto 6px;display:block;"></div>Yukleniyor...';}
-  var fr=G('rep-fr');
-  if(fr){
-    fr.src='';
-    if(w.link&&w.link.includes('ppreplaylink')){
-      fr.src=w.link;
-      fr.onload=function(){if(ld)ld.style.display='none';};
-    } else {
-      if(ld){ld.style.display='block';ld.textContent='Replay linki mevcut degil.';}
-    }
-  }
-  ov.style.display='flex';
-  document.body.style.overflow='hidden';
-}
-function closeRep(){
-  var ov=G('rep-ov');
-  if(ov)ov.style.display='none';
-  var fr=G('rep-fr');if(fr)fr.src='';
-  document.body.style.overflow='';
-}
-
-// ══ ADMIN RENDER ══
-function renderAdmSp(){
-  var b=G('sp-badge');if(b)b.textContent=sponsors.length+' sponsor';
-  var l=G('sp-adm-list');if(!l)return;
-  l.innerHTML='';
-  sponsors.forEach(function(s,idx){
-    var efOpts='';
-    EFS.forEach(function(e){
-      efOpts+='<option value="'+e.id+'"'+(s.ef===e.id?' selected':'')+'>'+e.l+'</option>';
-    });
-    var row=document.createElement('div');
-    row.className='sp-row';
-    row.draggable=true;
-    row.dataset.idx=idx;
-    row.innerHTML=
-      '<div class="sp-drag">&#8943;</div>'+
-      '<div class="sp-rk">#'+(idx+1)+'</div>'+
-      '<img class="sp-ai" src="'+(s.img||'')+'" alt="">'+
-      '<div class="sp-inf">'+
-        '<div class="sp-nm">'+s.name+'</div>'+
-        '<div class="sp-bn">'+(s.bonus||'')+'</div>'+
-      '</div>'+
-      '<div style="display:flex;gap:6px;align-items:center;flex-shrink:0;flex-wrap:wrap;">'+
-        '<label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:11px;color:#a0a0c0;">'+
-          '<input type="checkbox" style="accent-color:var(--g);width:16px;height:16px;"'+(s.active!==false?' checked':'')+'>Aktif'+
-        '</label>'+
-        '<select class="efsel" style="max-width:75px;">'+efOpts+'</select>'+
-        '<button class="bi">&#9999;</button>'+
-        '<button class="bi">&#8593;</button>'+
-        '<button class="bi">&#8595;</button>'+
-        '<button class="bd">Sil</button>'+
-      '</div>';
-
-    var actCb=row.querySelector('input[type=checkbox]');
-    var efSel=row.querySelector('select');
-    var btns=row.querySelectorAll('button');
-    var editBtn=btns[0],upBtn=btns[1],dnBtn=btns[2],delBtn=btns[3];
-
-    actCb.addEventListener('change',function(){
-      s.active=this.checked;
-      renderSponsors();
-      toast(s.name+(s.active?' aktif':' pasif'));
-    });
-    efSel.addEventListener('change',function(){
-      s.ef=this.value;
-      renderSponsors();
-    });
-    editBtn.addEventListener('click',function(){openEditSp(s.id);});
-    upBtn.addEventListener('click',function(){
-      var ci=sponsors.indexOf(s);
-      if(ci>0){sponsors.splice(ci,1);sponsors.splice(ci-1,0,s);renderSponsors();renderAdmSp();}
-    });
-    dnBtn.addEventListener('click',function(){
-      var ci=sponsors.indexOf(s);
-      if(ci<sponsors.length-1){sponsors.splice(ci,1);sponsors.splice(ci+1,0,s);renderSponsors();renderAdmSp();}
-    });
-    delBtn.addEventListener('click',function(){
-      if(!confirm(s.name+' silinsin mi?'))return;
-      var ci=sponsors.indexOf(s);
-      if(ci>-1){sponsors.splice(ci,1);renderSponsors();renderAdmSp();renderSpDrop();toast('Silindi');}
-    });
-
-    row.addEventListener('dragstart',function(){dragIdx=idx;row.classList.add('dragging');});
-    row.addEventListener('dragover',function(e){
-      e.preventDefault();
-      document.querySelectorAll('.sp-row').forEach(function(r){r.classList.remove('dragover');});
-      row.classList.add('dragover');
-    });
-    row.addEventListener('drop',function(e){
-      e.preventDefault();
-      if(dragIdx!==null&&dragIdx!==idx){
-        var mv=sponsors.splice(dragIdx,1)[0];
-        sponsors.splice(idx,0,mv);
-        renderSponsors();renderAdmSp();
-      }
-      dragIdx=null;
-    });
-    row.addEventListener('dragend',function(){
-      document.querySelectorAll('.sp-row').forEach(function(r){r.classList.remove('dragging','dragover');});
-      dragIdx=null;
-    });
-    l.appendChild(row);
-  });
-}
-function findSp(id){for(var i=0;i<sponsors.length;i++){if(sponsors[i].id===id)return sponsors[i];}return null;}
-function toggleSpActive(id,v){var s=findSp(id);if(s){s.active=v;renderSponsors();renderAdmSp();toast(s.name+(v?' aktif':' pasif'));}}
-function toggleSpBanner(id,v){for(var i=0;i<sponsors.length;i++){sponsors[i].bannerActive=false;}if(v){var s=findSp(id);if(s){s.bannerActive=true;if(!s.bannerImg)s.bannerImg=s.img;}}renderSponsors();renderAdmSp();toast(v?'Banner aktif':'Banner kaldirildi');}
-function moveSp(i,d){var j=i+d;if(j<0||j>=sponsors.length)return;var t=sponsors[i];sponsors[i]=sponsors[j];sponsors[j]=t;renderSponsors();renderAdmSp();}
-function delSp(id){sponsors=sponsors.filter(function(s){return s.id!==id;});renderSponsors();renderAdmSp();renderSpDrop();toast('Silindi');}
-
-function renderPending(){
-  updatePendBadge();
-  var b=G('pend-badge');if(b)b.textContent=pending.length+' bekliyor';
-  var l=G('pend-list');if(!l)return;
-  if(!pending.length){l.innerHTML='<div class="empty">Bekleyen kazanc yok</div>';return;}
-  l.innerHTML='';
-  pending.forEach(function(p){
-    var spOpts='<option value="">-- Sponsor Sec --</option>';
-    sponsors.forEach(function(sp){
-      spOpts+='<option value="'+sp.name+'"'+(p.sponsor===sp.name?' selected':'')+'>'+sp.name+'</option>';
-    });
-    var row=document.createElement('div');
-    row.className='prow';
-    row.innerHTML=
-      '<div class="prow-top">'+
-        '<img class="prow-img" src="'+(p.img||'')+'" alt="">'+
-        '<div>'+
-          '<div class="prow-gm">'+(p.game||'Bilinmiyor')+'</div>'+
-          '<div class="prow-ml">'+(p.mul||'--')+'</div>'+
-        '</div>'+
-      '</div>'+
-      '<div class="prow-det">'+
-        '<div><span class="prow-k">Kullanici</span><span class="prow-v">'+(p.user||'Anonim')+'</span></div>'+
-        '<div><span class="prow-k">Tarih</span><span class="prow-v">'+p.date+'</span></div>'+
-        '<div style="grid-column:1/-1;">'+
-          '<span class="prow-k">Replay</span>'+
-          '<span class="prow-v"><a href="'+p.link+'" target="_blank" style="color:var(--g);font-size:10px;">'+p.link+'</a></span>'+
-        '</div>'+
-        '<div style="grid-column:1/-1;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:4px;">'+
-          '<span style="font-size:10px;color:#7070a0;">Sponsor:</span>'+
-          '<select class="efsel" style="max-width:140px;">'+spOpts+'</select>'+
-          '<input type="text" class="efsel" placeholder="Ozel link" style="max-width:160px;font-size:10px;padding:4px 6px;" value="'+(p.customLink||'')+'">'+
-        '</div>'+
-      '</div>'+
-      '<div class="prow-acts">'+
-        '<button class="bappr">&#10003; Onayla</button>'+
-        '<button class="brej">&#10005; Reddet</button>'+
-      '</div>';
-
-    var spSel=row.querySelector('select');
-    var lnInp=row.querySelector('input[type=text]');
-    spSel.addEventListener('change',function(){p.sponsor=this.value;});
-    if(lnInp)lnInp.addEventListener('input',function(){p.customLink=this.value;});
-    row.querySelector('.bappr').addEventListener('click',function(){approvePend(p.id);});
-    row.querySelector('.brej').addEventListener('click',function(){rejectPend(p.id);});
-    l.appendChild(row);
-  });
-}
-function updatePendBadge(){var c=pending.length;var m=G('pb-m');var s=G('pb-s');if(m)m.textContent=c;if(s)s.textContent=c;}
-
-function renderWinsAdm(){
-  var b=G('wins-badge');if(b)b.textContent=wins.length;
-  var l=G('wadm-list');if(!l)return;
-  l.innerHTML='';
-  if(!wins.length){l.innerHTML='<div class="empty">Hic kazanc yok</div>';return;}
-  wins.forEach(function(w,wi){
-    var spOpts='<option value="">-- Sponsor Sec --</option>';
-    sponsors.forEach(function(sp){
-      spOpts+='<option value="'+sp.name+'"'+(w.sponsor===sp.name?' selected':'')+'>'+sp.name+'</option>';
-    });
-    var row=document.createElement('div');
-    row.className='wadm-row';
-    row.innerHTML=
-      '<img class="wadm-img" src="'+(w.img||'')+'" alt="">'+
-      '<div style="flex:1;min-width:0;">'+
-        '<div style="font-size:12px;color:#e0e0f0;font-weight:500;">'+w.game+
-          ' <span style="font-family:Bebas Neue,sans-serif;font-size:16px;color:var(--g);">'+w.mul+'</span></div>'+
-        '<div style="font-size:10px;color:#7070a0;margin-top:2px;">'+w.user+
-          ' <a href="'+w.link+'" target="_blank" style="color:var(--g);">Replay &#8599;</a></div>'+
-        '<div style="display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap;">'+
-          '<select class="efsel" style="max-width:130px;font-size:11px;">'+spOpts+'</select>'+
-          '<input type="text" class="efsel" placeholder="Ozel link (bos=sponsor)" style="max-width:180px;font-size:10px;padding:4px 6px;" value="'+(w.customLink||'')+'">'+
-          '<button class="bi" style="font-size:10px;padding:4px 8px;">&#10003; Kaydet</button>'+
-        '</div>'+
-      '</div>'+
-      '<div style="display:flex;gap:5px;flex-shrink:0;">'+
-        '<button class="bi">&#8593;</button>'+
-        '<button class="bi">&#8595;</button>'+
-        '<button class="bd">Sil</button>'+
-      '</div>';
-
-    var spSel=row.querySelector('select');
-    var lnInp=row.querySelectorAll('input[type=text]')[0];
-    var savBtn=row.querySelectorAll('.bi')[0];
-    var upBtn=row.querySelectorAll('.bi')[1];
-    var dnBtn=row.querySelectorAll('.bi')[2];
-    var delBtn=row.querySelector('.bd');
-
-    savBtn.addEventListener('click',function(){
-      w.sponsor=spSel.value;
-      w.customLink=lnInp?lnInp.value.trim():'';
-      renderWinsHome();buildTicker();toast('Guncellendi');
-    });
-    upBtn.addEventListener('click',function(){
-      var ci=wins.indexOf(w);
-      if(ci>0){wins.splice(ci,1);wins.splice(ci-1,0,w);renderWinsHome();buildTicker();renderWinsAdm();}
-    });
-    dnBtn.addEventListener('click',function(){
-      var ci=wins.indexOf(w);
-      if(ci<wins.length-1){wins.splice(ci,1);wins.splice(ci+1,0,w);renderWinsHome();buildTicker();renderWinsAdm();}
-    });
-    delBtn.addEventListener('click',function(){
-      var ci=wins.indexOf(w);
-      if(ci>-1){wins.splice(ci,1);renderWinsHome();buildTicker();renderWinsAdm();toast('Silindi');}
-    });
-    l.appendChild(row);
   });
 }
 
-function renderUsers(){
-  var q=(G('user-q')||{value:''}).value.toLowerCase();
-  var fil=q?users.filter(function(u){return u.u.toLowerCase().includes(q)||(u.ph&&u.ph.includes(q));}):users.slice();
-  var b=G('users-badge');if(b)b.textContent=users.length;
-  var l=G('users-list');if(!l)return;
-  if(!users.length){l.innerHTML='<div class="empty">Kayitli uye yok</div>';return;}
-  if(!fil.length){l.innerHTML='<div class="empty">Sonuc yok</div>';return;}
-  l.innerHTML='';
-  fil.forEach(function(u){
-    var row=document.createElement('div');
-    row.className='user-row';
-    row.innerHTML=
-      '<div class="u-av">'+u.u[0].toUpperCase()+'</div>'+
-      '<div style="flex:1;min-width:0;">'+
-        '<div style="font-size:13px;color:#e0e0f0;font-weight:600;">'+u.u+'</div>'+
-        '<div style="font-size:11px;color:#7070a0;margin-top:2px;">'+(u.ph||'-')+' \u00b7 '+u.date+'</div>'+
-      '</div>'+
-      '<button class="bd">Sil</button>';
-    row.querySelector('.bd').addEventListener('click',function(){
-      if(!confirm(u.u+' silinsin mi?'))return;
-      var ci=users.indexOf(u);
-      if(ci>-1){users.splice(ci,1);renderUsers();toast('Silindi');}
-    });
-    l.appendChild(row);
+// RENDER ADMIN SPONSOR LIST[cite: 2]
+function renderAdminSponsors() {
+  var list = G('sp-adm-list');
+  if (!list) return;
+  list.innerHTML = '';
+  sponsors.forEach(function(sp) {
+    var row = document.createElement('div');
+    row.className = 'sp-row';
+    row.innerHTML = '<img class="sp-ai" src="'+sp.img+'">' +
+                     '<div class="sp-inf"><div class="sp-nm">'+sp.name+'</div><div class="sp-bn">'+sp.bonus+'</div></div>' +
+                     '<div style="font-size:11px;color:'+(sp.active?'#22c55e':'#ef4444')+'">'+(sp.active?'Aktif':'Pasif')+'</div>' +
+                     '<button class="bs" onclick="openEditSponsor('+sp.id+')">Duzenle</button>';
+    list.appendChild(row);
   });
 }
 
-function renderSocList(){
-  var l=G('soc-list');if(!l)return;
-  if(!socChannels.length){l.innerHTML='<div class="empty">Kanal eklenmemis</div>';renderFooter();return;}
-  l.innerHTML='';
-  for(var i=0;i<socChannels.length;i++){
-    var ch=socChannels[i];var r=document.createElement('div');r.className='soc-row';
-    r.innerHTML='<div style="font-size:18px;font-weight:700;width:36px;text-align:center;">'+(ch.icon||'?')+'</div>'+
-      '<div style="flex:1;min-width:0;"><div style="font-size:12px;color:#e0e0f0;font-weight:600;">'+ch.name+'</div><div style="font-size:10px;color:#7070a0;">'+ch.url+'</div></div>'+
-      '<label class="tgl"><input type="checkbox" class="sc-act"'+(ch.active!==false?' checked':'')+' style=""><span class="tsl"></span></label>'+
-      '<button class="bd sc-dl" style="margin-left:8px;">Sil</button>';
-    (function(cid){
-      r.querySelector('.sc-act').addEventListener('change',function(e){var c=null;for(var j=0;j<socChannels.length;j++){if(socChannels[j].id===cid){c=socChannels[j];break;}}if(c){c.active=e.target.checked;renderFooter();}});
-      r.querySelector('.sc-dl').addEventListener('click',function(){socChannels=socChannels.filter(function(x){return x.id!==cid;});renderSocList();renderFooter();toast('Silindi');});
-    })(ch.id);
-    l.appendChild(r);
-  }
-  renderFooter();
-}
+// SPONSOR SAVE & ACTIONS[cite: 2]
+G('btn-sp-add').onclick = function() { openOv('sp-add'); };
 
-function renderEfPick(elId,cur,cb){
-  var el=G(elId);if(!el)return;el.innerHTML='';
-  for(var i=0;i<EFS.length;i++){
-    var e=EFS[i];var d=document.createElement('div');
-    d.className='efopt'+(cur===e.id?' on':'');
-    d.innerHTML='<div class="efbar" style="background:'+e.bg+'"></div>'+e.l;
-    (function(eid,dcb){d.addEventListener('click',function(){cur=eid;if(dcb)dcb(eid);renderEfPick(elId,cur,cb);});})(e.id,cb);
-    el.appendChild(d);
-  }
-}
-function renderTgPick(elId,cur,cb){
-  var el=G(elId);if(!el)return;el.innerHTML='';
-  for(var i=0;i<TAGS.length;i++){
-    var t=TAGS[i];var btn=document.createElement('button');
-    btn.className='tgbtn'+(cur===t.id?' on':'');btn.textContent=t.l;
-    (function(tid,bcb){btn.addEventListener('click',function(){cur=tid;if(bcb)bcb(tid);renderTgPick(elId,cur,cb);});})(t.id,cb);
-    el.appendChild(btn);
-  }
-}
-function renderThemes(){
-  var g=G('th-grid');if(!g)return;g.innerHTML='';
-  for(var i=0;i<THEMES.length;i++){
-    var t=THEMES[i];var c=document.createElement('div');
-    c.className='th-card'+(document.body.classList.contains(t.id)?' on':'');
-    c.innerHTML='<div class="th-prev" style="background:linear-gradient(135deg,'+t.bg+','+t.c+')"></div><span style="font-size:12px;color:#c0c0e0;">'+t.l+'</span>';
-    (function(tid){c.addEventListener('click',function(){applyTheme(tid);});})(t.id);
-    g.appendChild(c);
-  }
-}
-function renderPopPicks(){
-  var el=G('pop-picks');if(!el)return;
-  var tog=G('pop-active');if(tog)tog.checked=popCfg.active;
-  var tit=G('pop-title');if(tit)tit.value=popCfg.title||'';
-  var sub=G('pop-sub');if(sub)sub.value=popCfg.sub||'';
-  el.innerHTML='';
-  for(var i=0;i<sponsors.length;i++){
-    var s=sponsors[i];var checked=popCfg.spIds&&popCfg.spIds.indexOf(s.id)>=0;
-    var r=document.createElement('div');r.style.cssText='display:flex;align-items:center;gap:8px;background:#1a1a28;border-radius:7px;padding:8px 10px;margin-bottom:6px;';
-    r.innerHTML='<img src="'+(s.img||'')+'" style="width:32px;height:32px;border-radius:5px;object-fit:cover;background:#2a2a40;" alt="">'+
-      '<span style="font-size:12px;color:#d0d0e8;flex:1;">'+s.name+'</span>'+
-      '<input type="checkbox" class="psp-cb" data-sid="'+s.id+'"'+(checked?' checked':'')+' style="accent-color:var(--g);width:16px;height:16px;">';
-    el.appendChild(r);
-  }
-}
-function renderSpDrop(){
-  var s=G('mw-sp');if(!s)return;
-  s.innerHTML='<option value="">-- Sec --</option>';
-  for(var i=0;i<sponsors.length;i++){var o=document.createElement('option');o.value=sponsors[i].name;o.textContent=sponsors[i].name;s.appendChild(o);}
-}
-
-// ══ SPONSOR ADD/EDIT ══
-function addSponsor(){
-  var name=(G('nsp-name')||{value:''}).value.trim();
-  var link=(G('nsp-link')||{value:''}).value.trim()||'#';
-  var bonus=(G('nsp-bonus')||{value:''}).value.trim();
-  var img=(G('nsp-img')||{value:''}).value.trim();
-  if(!name){toast('Site adi zorunlu');return;}
-  sponsors.push({id:nextId++,name:name,link:link,bonus:bonus,img:img,ef:selEf,tag:selTag,active:true,bannerActive:false,bannerImg:''});
-  ['nsp-name','nsp-link','nsp-bonus','nsp-img'].forEach(function(id){var el=G(id);if(el)el.value='';});
-  renderSponsors();renderAdmSp();renderSpDrop();closeOv('sp-add');toast('Eklendi');
-}
-function openEditSp(id){
-  var s=null;
-  for(var i=0;i<sponsors.length;i++){if(sponsors[i].id===id){s=sponsors[i];break;}}
-  if(!s)return;
-  var ei=G('esp-id');if(ei)ei.value=id;
-  var en=G('esp-name');if(en)en.value=s.name;
-  var el=G('esp-link');if(el)el.value=s.link;
-  var eb=G('esp-bonus');if(eb)eb.value=s.bonus||'';
-  var eimg=G('esp-img');if(eimg)eimg.value=s.img||'';
-  var ebn=G('esp-banner');if(ebn)ebn.value=s.bannerImg||'';
-  var ep=G('esp-prev');if(ep&&s.img)ep.src=s.img;
-  selEfE=s.ef||'ef-none';
-  selTagE=s.tag||'';
-  renderEfPick('ef-pick-e',selEfE,function(v){selEfE=v;});
-  renderTgPick('tg-pick-e',selTagE,function(v){selTagE=v;});
-  openOv('sp-edit');
-}
-
-function approvePend(id){
-  var pn=null;
-  for(var i=0;i<pending.length;i++){if(pending[i].id===id){pn=pending[i];break;}}
-  if(!pn)return;
-  var spLk=pn.customLink||'';
-  if(!spLk&&pn.sponsor){
-    for(var j=0;j<sponsors.length;j++){
-      if(sponsors[j].name===pn.sponsor){spLk=sponsors[j].link;break;}
-    }
-  }
-  wins.unshift({
-    id:nextId++,user:pn.user,game:pn.game,mul:pn.mul,
-    img:pn.img,link:pn.link,sponsor:pn.sponsor||'',
-    customLink:spLk,date:pn.date
-  });
-  pending=pending.filter(function(x){return x.id!==id;});
-  renderWinsHome();buildTicker();renderPending();renderWinsAdm();
-  toast('Onaylandi');
-}
-
-function rejectPend(id){
-  pending=pending.filter(function(x){return x.id!==id;});
-  renderPending();
-  toast('Reddedildi');
-}
-
-function saveEditSp(){
-  var id=parseInt(G('esp-id').value);var s=findSp(id);if(!s)return;
-  s.name=G('esp-name').value.trim()||s.name;s.link=G('esp-link').value.trim()||s.link;
-  s.bonus=G('esp-bonus').value.trim();s.img=G('esp-img').value.trim();
-  s.bannerImg=G('esp-banner').value.trim();s.ef=selEfE;s.tag=selTagE;
-  renderSponsors();renderAdmSp();renderSpDrop();closeOv('sp-edit');toast('Guncellendi');
-}
-function handleSpFile(inp,pfx){
-  var f=inp.files[0];if(!f)return;
-  var r=new FileReader();
-  r.onload=function(e){
-    var url=e.target.result;
-    var inp2=G(pfx+'-img');if(inp2){inp2.value=url;}
-    var pr=G(pfx+'-prev');if(pr){pr.src=url;pr.style.display='block';}
-    var ph=G(pfx+'-ph');if(ph)ph.style.display='none';
-    toast('Gorsel yuklendi');
-  };r.readAsDataURL(f);
-}
-function addWinManual(){
-  var u=G('mw-u').value.trim(),m=G('mw-m').value.trim(),gm=G('mw-g').value.trim(),img=G('mw-i').value.trim(),lk=G('mw-l').value.trim()||'#',sp=G('mw-sp').value;
-  if(!gm){toast('Oyun adi zorunlu');return;}
-  // Sponsor linki bul
-  var spLk='';for(var si=0;si<sponsors.length;si++){if(sponsors[si].name===sp){spLk=sponsors[si].link;break;}}
-  wins.unshift({id:nextId++,user:u||'Admin',game:gm,mul:m||'--',img:img,link:lk||'#',sponsor:sp,customLink:spLk,date:new Date().toLocaleDateString('tr-TR')});
-  renderWinsHome();buildTicker();renderWinsAdm();toast('Eklendi');
-  ['mw-u','mw-m','mw-g','mw-i','mw-l'].forEach(function(id){var el=G(id);if(el)el.value='';});
-}
-function addSocChannel(){
-  var name=G('soc-name').value.trim(),url=G('soc-url').value.trim(),icon=G('soc-icon').value||'?';
-  if(!name||!url){toast('Ad ve link zorunlu');return;}
-  socChannels.push({id:nextId++,name:name,url:url,icon:icon,active:true});
-  closeOv('soc-add');renderSocList();toast('Eklendi');
-  ['soc-name','soc-url','soc-icon'].forEach(function(id){var el=G(id);if(el)el.value='';});
-}
-
-function previewNavLogo(url){
-  var ni=G('nlogo-img'),nt=G('nlogo-txt');
-  if(url){
-    if(ni){ni.src=url;ni.style.display='block';}
-    if(nt)nt.style.display='none';
-  } else {
-    if(ni)ni.style.display='none';
-    if(nt)nt.style.display='';
-  }
-}
-// ══ SETTINGS ══
-function applyTheme(name,silent){THEMES.forEach(function(t){document.body.classList.remove(t.id);});document.body.classList.add(name);try{localStorage.setItem('sm_th',name);}catch(e){}renderThemes();if(!silent)toast('Tema degistirildi');}
-function setLogoMode(mode){
-  var ta=G('logo-txt-a'),ia=G('logo-img-a');
-  if(ta)ta.style.display=mode==='txt'?'block':'none';
-  if(ia)ia.style.display=mode==='img'?'block':'none';
-  if(mode==='txt'){
-    var ni=G('nlogo-img'),nt=G('nlogo-txt');
-    if(ni)ni.style.display='none';
-    if(nt)nt.style.display='';
-  }
-}
-function applySettings(){
-  var n=(G('set-name')||{value:''}).value.trim();
-  if(n){
-    var t=G('nlogo-txt');if(t)t.textContent=n;
-    var ml=G('ml-logo');if(ml)ml.textContent=n;
-    var mr=G('mr-logo');if(mr)mr.textContent=n;
-  }
-  var tl=(G('set-title')||{value:''}).value.trim();
-  if(tl)document.title=tl;
-  var lg=(G('set-legal')||{value:''}).value.trim();
-  if(lg){var l=G('flegal');if(l)l.textContent=lg;}
-}
-function toggleGif(){var on=G('gif-tog').checked;G('gif-banner').style.display=on?'block':'none';}
-function updateGifUrl(){var u=G('gif-url').value.trim();if(u){var i=G('gif-img');if(i)i.src=u;}}
-function clearCache(){if(!confirm('Jackpot haric localStorage sifirlanacak. Devam?'))return;var jp=null;try{jp=localStorage.getItem('sm_jp');}catch(e){}try{localStorage.clear();}catch(e){}if(jp)try{localStorage.setItem('sm_jp',jp);}catch(e){}toast('Temizlendi');setTimeout(function(){location.reload();},800);}
-function saveAll(){
-  try{
-    localStorage.setItem('sm_save',JSON.stringify({
-      sponsors:JSON.parse(JSON.stringify(sponsors)),
-      wins:JSON.parse(JSON.stringify(wins)),
-      socChannels:JSON.parse(JSON.stringify(socChannels)),
-      supportMsgs:JSON.parse(JSON.stringify(supportMsgs)),
-      popCfg:popCfg,admMsg:admMsg,nextId:nextId,
-      theme:document.body.className.match(/t-\w+/)?document.body.className.match(/t-\w+/)[0]:''
-    }));
-    var ok=G('save-ok');if(ok){ok.style.display='block';setTimeout(function(){ok.style.display='none';},2500);}
-    toast('Kaydedildi');
-  }catch(e){toast('Kaydetme basarisiz: '+e.message);}
-}
-function loadSaved(){
-  try{var raw=localStorage.getItem('sm_save');if(!raw)return;var d=JSON.parse(raw);if(d.sponsors&&d.sponsors.length)sponsors=d.sponsors;if(d.wins&&d.wins.length)wins=d.wins;if(d.socChannels)socChannels=d.socChannels;if(d.popCfg)popCfg=d.popCfg;if(d.admMsg)admMsg=d.admMsg;
-    if(d.supportMsgs)supportMsgs=d.supportMsgs;if(d.theme)applyTheme(d.theme,true);
-    if(d.nextId&&d.nextId>nextId)nextId=d.nextId;
-  }catch(e){}
-}
-function savePopup(){
-  var tog=G('pop-active'),tit=G('pop-title'),sub=G('pop-sub');
-  popCfg.active=tog?tog.checked:false;
-  popCfg.title=tit?tit.value:'';
-  popCfg.sub=sub?sub.value:'';
-  popCfg.spIds=[];
-  var cbs=document.querySelectorAll('.psp-cb:checked');
-  for(var i=0;i<cbs.length&&popCfg.spIds.length<3;i++){
-    popCfg.spIds.push(parseInt(cbs[i].getAttribute('data-sid')));
-  }
-  try{localStorage.setItem('sm_popup',JSON.stringify(popCfg));}catch(e){}
-  toast('Popup kaydedildi');
-}
-function saveAdmMsg(){admMsg=(G('adm-msg')||{value:''}).value.trim();toast('Mesaj kaydedildi');}
-function adminResetJp(){var v=parseInt((G('jp-start')||{value:'100000'}).value)||100000;if(window._jpR)window._jpR(v);}
-function updateJpCurr(){try{var d=JSON.parse(localStorage.getItem('sm_jp')||'{}');var el=G('jp-curr');if(el&&d.v)el.textContent='\u20ba'+Math.floor(d.v).toLocaleString('tr-TR');}catch(e){}}
-
-// ══ POPUP ══
-function buildPopup(){
-  var sl=[];
-  if(popCfg.spIds&&popCfg.spIds.length){for(var i=0;i<popCfg.spIds.length;i++){var s=findSp(popCfg.spIds[i]);if(s)sl.push(s);}}
-  if(!sl.length)sl=sponsors.slice(0,3);
-  var slides=G('pop-slides'),dots=G('pop-dots');if(!slides||!dots)return;
-  slides.innerHTML='';dots.innerHTML='';
-  for(var i=0;i<sl.length;i++){
-    var s=sl[i];var slide=document.createElement('div');slide.className='pop-slide'+(i===0?' active':'');
-    slide.innerHTML='<div style="font-family:Bebas Neue,sans-serif;font-size:22px;color:#ffe066;letter-spacing:1px;margin-bottom:5px;">'+(popCfg.title||'OZEL FIRSAT')+'</div>'+
-      (popCfg.sub?'<div style="font-size:12px;color:#c0b080;margin-bottom:14px;">'+popCfg.sub+'</div>':'')+
-      '<div style="background:#0a0a12;border:1px solid #f0b42930;border-radius:12px;overflow:hidden;margin-bottom:14px;">'+
-        '<img src="'+(s.img||'')+'" style="width:100%;height:150px;object-fit:cover;display:block;" alt="'+s.name+'">'+
-        '<div style="padding:12px 14px;"><div style="font-family:Bebas Neue,sans-serif;font-size:22px;color:#fff;margin-bottom:4px;">'+s.name+'</div>'+
-        '<div style="font-size:12px;color:#c8c8d8;margin-bottom:12px;">'+(s.bonus||'')+'</div>'+
-        '<button class="pp-go" style="width:100%;background:var(--g);color:#000;border:none;border-radius:10px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;">Siteye Git &#8594;</button></div></div>';
-    (function(lk){slide.querySelector('.pp-go').addEventListener('click',function(){if(lk&&lk!=='#'&&lk!=='')window.open(lk,'_blank');closePopup();});})(s.link);
-    slides.appendChild(slide);
-    var dot=document.createElement('button');dot.className='pop-dot'+(i===0?' active':'');
-    (function(idx){dot.addEventListener('click',function(){goPopSlide(idx);});})(i);
-    dots.appendChild(dot);
-  }
-  if(sl.length>1){if(popTimer)clearInterval(popTimer);var len=sl.length;popTimer=setInterval(function(){goPopSlide((popSlide+1)%len);},3500);}
-}
-function goPopSlide(n){
-  var sls=document.querySelectorAll('#pop-slides .pop-slide'),dts=document.querySelectorAll('.pop-dot');
-  for(var i=0;i<sls.length;i++)sls[i].classList.remove('active');
-  for(var i=0;i<dts.length;i++)dts[i].classList.remove('active');
-  if(sls[n])sls[n].classList.add('active');if(dts[n])dts[n].classList.add('active');
-  popSlide=n;
-}
-function showPopup(){
-  if(!popCfg.active)return;try{if(sessionStorage.getItem('pp_shown'))return;}catch(e){}
-  buildPopup();G('pop-ov').style.display='flex';
-}
-function closePopup(){
-  G('pop-ov').style.display='none';if(popTimer){clearInterval(popTimer);popTimer=null;}
-  try{sessionStorage.setItem('pp_shown','1');}catch(e){}
-}
-function previewPopup(){savePopup();try{sessionStorage.removeItem('pp_shown');}catch(e){}buildPopup();G('pop-ov').style.display='flex';}
-
-// ══ JACKPOT ══
-(function(){
-  var K='sm_jp';
-  function jLd(){try{var d=JSON.parse(localStorage.getItem(K)||'{}');return d.v>0?d.v:jIn();}catch(e){return jIn();}}
-  function jIn(){return Math.floor(800000+new Date().getDay()*180000+Math.random()*200000);}
-  function jSv(v){try{localStorage.setItem(K,JSON.stringify({v:v}));}catch(e){}}
-  var jp=jLd(),kr=Math.floor(Math.random()*100),disp=jp,af=null;
-  window._jpR=function(v){jp=v||100000;kr=0;disp=jp;jSv(jp);jRn();toast('Sifirlandı');};
-  function jFm(n,k){return '\u20ba'+Math.floor(n).toLocaleString('tr-TR')+','+(k<10?'0':'')+k;}
-  function jRn(){var el=G('jp-v');if(el)el.innerHTML=jFm(disp,kr);}
-  function jAn(nv){if(af)cancelAnimationFrame(af);function st(){if(disp<nv){disp+=Math.max(1,Math.floor((nv-disp)*0.12));if(disp>nv)disp=nv;jRn();af=requestAnimationFrame(st);}else af=null;}af=requestAnimationFrame(st);}
-  jRn();
-  function jTk(){var h=new Date().getHours();var m=h<3?.25:h<8?.5:h<12?.85:h<18?1.45:h<22?1.2:.65;jp+=Math.max(20,Math.floor((250000/288)*m*(0.65+Math.random()*0.7)));jSv(jp);jAn(jp);}
-  setTimeout(function(){jTk();setInterval(jTk,5*60*1000);},8000);
-  function krTk(){kr=Math.floor(Math.random()*100);jRn();setTimeout(krTk,1800+Math.random()*2200);}
-  setTimeout(krTk,1200);
-})();
-
-// ══ AUTO FETCH ══
-function initFetches(){
-  var tf=wins.filter(function(w){return w.pf;});
-  for(var i=0;i<tf.length;i++){
-    (function(w,delay){setTimeout(function(){
-      fetch('/api/replay/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:w.link})})
-        .then(function(r){return r.json();})
-        .then(function(d){if(d.ok&&d.game){w.game=d.game;w.mul=d.multiplier||w.mul;w.img=d.imageUrl||w.img;w.pf=false;renderWinsHome();buildTicker();}})
-        .catch(function(){w.pf=false;});
-    },delay);})(tf[i],(i+1)*1400);
-  }
-}
-
-// ══ BUTON BAĞLANTILARI ══
-function bindButtons(){
-  // Hamburger
-  // (event delegation ile zaten yapıldı)
+G('btn-sp-add-save').onclick = function() {
+  var name = G('nsp-name').value;
+  var link = G('nsp-link').value;
+  var bonus = G('nsp-bonus').value;
+  var img = G('nsp-img').value;
+  if(!name || !link) { toast('Isim ve Link zorunludur'); return; }
   
-  // Dropdown
-  var ddl=G('dd-login');if(ddl)ddl.addEventListener('click',function(){G('ndrop').classList.remove('open');openOv('login');});
-  var ddr=G('dd-register');if(ddr)ddr.addEventListener('click',function(){G('ndrop').classList.remove('open');openOv('register');});
-  var dds=G('dd-submit');if(dds)dds.addEventListener('click',function(){G('ndrop').classList.remove('open');openSubmit();});
-  
-  // Float btn
-  var fb=G('btn-sub-float');if(fb)fb.addEventListener('click',openSubmit);
-  
-  // Nav logo
-  var nl=document.querySelector('.nav-logo');if(nl)nl.addEventListener('click',goHome);
-  
-  // See all
-  var sa=G('btn-see-all');if(sa)sa.addEventListener('click',goWins);
-  
-  // Wins page back
-  var wb=G('btn-wp-back');if(wb)wb.addEventListener('click',goHome);
-  
-  // Login
-  var bl=G('btn-login');if(bl)bl.addEventListener('click',doLogin);
-  var bal=G('btn-admin-login');if(bal)bal.addEventListener('click',doAdminLogin);
-  var alp=G('admin-login-p');if(alp)alp.addEventListener('keydown',function(e){if(e.key==='Enter')doAdminLogin();});
-  G('login-p').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
-  
-  // Register
-  var br=G('btn-register');if(br)br.addEventListener('click',doRegister);
-  
-  // Forgot
-  var bf=G('btn-forgot');if(bf)bf.addEventListener('click',doForgot);
-  
-  // Submit
-  var su=G('sub-url');if(su)su.addEventListener('input',function(){onSubUrl();});
-  var ss=G('btn-sub-send');if(ss)ss.addEventListener('click',submitWin);
-  
-  // Admin back
-  var ab=G('btn-adm-back');if(ab)ab.addEventListener('click',gotoSite);
-  
-  // Sponsor add open
-  var spa=G('btn-sp-add');if(spa)spa.addEventListener('click',function(){openOv('sp-add');renderEfPick('ef-pick',selEf,function(v){selEf=v;});renderTgPick('tg-pick',selTag,function(v){selTag=v;});});
-  
-  // Sponsor add save
-  var sps=G('btn-sp-save');if(sps)sps.addEventListener('click',addSponsor);
-  
-  // Sponsor file
-  var nf=G('btn-nsp-file');if(nf)nf.addEventListener('click',function(){G('nsp-file').click();});
-  G('nsp-file').addEventListener('change',function(){handleSpFile(this,'nsp');});
-  G('nsp-img').addEventListener('input',function(){var pr=G('nsp-prev');if(pr){pr.src=this.value;pr.style.display='block';}var ph=G('nsp-ph');if(ph)ph.style.display='none';});
-  
-  // Edit sponsor
-  var ef=G('btn-esp-file');if(ef)ef.addEventListener('click',function(){G('esp-file').click();});
-  G('esp-file').addEventListener('change',function(){handleSpFile(this,'esp');});
-  G('esp-img').addEventListener('input',function(){var pr=G('esp-prev');if(pr)pr.src=this.value;});
-  var es=G('btn-esp-save');if(es)es.addEventListener('click',saveEditSp);
-  
-  // Win manual
-  var wm=G('btn-mw-add');if(wm)wm.addEventListener('click',addWinManual);
-  
-  // User search
-  var uq=G('user-q');if(uq)uq.addEventListener('input',renderUsers);
-  
-  // Soc add
-  var soa=G('btn-soc-add');if(soa)soa.addEventListener('click',function(){openOv('soc-add');});
-  var sos=G('btn-soc-save');if(sos)sos.addEventListener('click',addSocChannel);
-  
-  // Soc icon btns
-  document.querySelectorAll('.soc-icon-btn').forEach(function(btn){
-    btn.addEventListener('click',function(){var ic=this.getAttribute('data-icon');var inp=G('soc-icon');if(inp)inp.value=ic;});
-  });
-  
-  // GIF file
-  var bgf=G('btn-gif-file');if(bgf)bgf.addEventListener('click',function(){G('gif-file').click();});
-  G('gif-file').addEventListener('change',function(){
-    var f=this.files[0];if(!f)return;
-    var r=new FileReader();r.onload=function(e){
-      var url=e.target.result;
-      var inp=G('gif-url');if(inp)inp.value=url;
-      var pw=G('gif-prev-wrap');var pi=G('gif-prev-img');
-      if(pw)pw.style.display='block';if(pi)pi.src=url;
-      var gi=G('gif-img');if(gi)gi.src=url;
-    };r.readAsDataURL(f);
-  });
-  // Logo file
-  var blf=G('btn-logo-file');if(blf)blf.addEventListener('click',function(){G('logo-file').click();});
-  G('logo-file').addEventListener('change',function(){
-    var f=this.files[0];if(!f)return;
-    var rd=new FileReader();
-    rd.onload=function(e){
-      var url=e.target.result;
-      var inp=G('logo-url-inp');if(inp)inp.value=url;
-      // Önizleme
-      var pw=G('logo-prev-wrap'),pi=G('logo-prev-img');
-      if(pw)pw.style.display='block';
-      if(pi)pi.src=url;
-      toast('Dosya yuklendi - Logoyu Uygula butonuna basin');
-    };
-    rd.readAsDataURL(f);
-  });
-  var bluf=G('btn-logo-use-file');if(bluf)bluf.addEventListener('click',function(){
-    var url=(G('logo-url-inp')||{value:''}).value.trim();
-    if(!url){toast('Once URL girin veya dosya yukleyin');return;}
-    previewNavLogo(url);
-    toast('Logo guncellendi');
-  });
-  // Logo url inp - only one binding
-  var liu3=G('logo-url-inp');if(liu3)liu3.addEventListener('input',function(){
-    var pw=G('logo-prev-wrap');var pi=G('logo-prev-img');
-    if(this.value){if(pw)pw.style.display='block';if(pi)pi.src=this.value;}else{if(pw)pw.style.display='none';}
-    previewNavLogo(this.value);
-  });
-  var blut=G('btn-logo-use-txt');if(blut)blut.addEventListener('click',function(){
-    var i=G('nlogo-img');var t=G('nlogo-txt');
-    if(i)i.style.display='none';if(t)t.style.display='';
-    toast('Yazi moduna donuldu');
-  });
-  // GIF toggle + banner save
-  var gt=G('gif-tog');if(gt)gt.addEventListener('change',toggleGif);
-  var gu=G('gif-url');if(gu)gu.addEventListener('input',updateGifUrl);
-  var bbs=G('btn-banner-save');if(bbs)bbs.addEventListener('click',function(){
-    var gifU=G('gif-url');var giftog=G('gif-tog');
-    var logoU=G('logo-url-inp');
-    try{
-      localStorage.setItem('sm_banner',JSON.stringify({
-        gifUrl:gifU?gifU.value:'',
-        gifOn:giftog?giftog.checked:false,
-        logoUrl:logoU?logoU.value:''
-      }));
-    }catch(e){}
-    var ok=G('banner-save-ok');if(ok){ok.style.display='block';setTimeout(function(){ok.style.display='none';},2500);}
-    toast('Banner & Logo kaydedildi');
-  });
-  // Settings
-  var sn=G('set-name');if(sn)sn.addEventListener('input',applySettings);
-  var stl=G('set-title');if(stl)stl.addEventListener('input',applySettings);
-  var sl=G('set-legal');if(sl)sl.addEventListener('input',applySettings);
-  var blt=G('btn-logo-txt');if(blt)blt.addEventListener('click',function(){setLogoMode('txt');applySettings();});
-  var bli=G('btn-logo-img');if(bli)bli.addEventListener('click',function(){setLogoMode('img');});
-  G('set-logo').addEventListener('input',function(){var i=G('nlogo-img'),t=G('nlogo-txt');if(this.value){if(i){i.src=this.value;i.style.display='block';}if(t)t.style.display='none';}});
-  
-  // JP reset
-  var jr=G('btn-jp-reset');if(jr)jr.addEventListener('click',adminResetJp);
-  
-  // Popup
-  var pps=G('btn-pop-save');if(pps)pps.addEventListener('click',savePopup);
-  var ppv=G('btn-pop-prev');if(ppv)ppv.addEventListener('click',previewPopup);
-  
-  // Adm msg
-  var ms=G('btn-msg-save');if(ms)ms.addEventListener('click',saveAdmMsg);
-  
-  // Save all
-  var sv=G('btn-save');if(sv)sv.addEventListener('click',saveAll);
-  
-  // User btn
-  var ub=G('nav-user-btn');
-  if(ub)ub.addEventListener('click',function(e){
-    e.stopPropagation();
-    var ud=G('user-drop');if(ud)ud.classList.toggle('open');
-  });
-  document.addEventListener('click',function(e){
-    if(!e.target.closest('#user-drop')&&!e.target.closest('#nav-user-btn')){
-      var ud=G('user-drop');if(ud)ud.classList.remove('open');
-    }
-  },{capture:true});
-  var udl=G('ud-logout');if(udl)udl.addEventListener('click',logoutUser);
-  var bpws=G('btn-pw-save');if(bpws)bpws.addEventListener('click',changePw);
-  var bsups=G('btn-sup-send');if(bsups)bsups.addEventListener('click',submitSupport);
-  var uds=G('ud-support');if(uds)uds.addEventListener('click',function(){openOv('support');});
-  var udp=G('ud-pw');if(udp)udp.addEventListener('click',function(){openOv('pw-change');});
-  // Float kapat
-  var fbc=G('btn-fb-close');if(fbc)fbc.addEventListener('click',function(){toggleFb();this.style.display='none';G('btn-sub-float').style.display='block';});
-  var fbm=G('btn-sub-float');if(fbm){
-    // Sağ tık veya uzun basma ile kapat
-  }
-  // Cache
-  var cc=G('btn-cache');if(cc)cc.addEventListener('click',clearCache);
-  
-  // Replay close
-  var rc=G('rep-cls');if(rc)rc.addEventListener('click',closeRep);
-  G('rep-ov').addEventListener('click',function(e){if(e.target===this)closeRep();});
-  
-  // Popup close
-  var pc=G('pop-cls');if(pc)pc.addEventListener('click',closePopup);
-  G('pop-ov').addEventListener('click',function(e){if(e.target===this)closePopup();});
-}
-
-// ══ INIT ══
-(function(){
-  try{var t=localStorage.getItem('sm_th');if(t)applyTheme(t,true);}catch(e){}
-  try{var cu=localStorage.getItem('sm_cu');if(cu){currentUser=JSON.parse(cu);}}catch(e){}
-  try{
-    var bannerData=localStorage.getItem('sm_banner');
-    if(bannerData){
-      var bd=JSON.parse(bannerData);
-      if(bd.gifUrl){var gi=G('gif-img');if(gi)gi.src=bd.gifUrl;var giu=G('gif-url');if(giu)giu.value=bd.gifUrl;}
-      if(bd.gifOn){G('gif-banner').style.display='block';var gt2=G('gif-tog');if(gt2)gt2.checked=true;}
-      if(bd.logoUrl){previewNavLogo(bd.logoUrl);var liu2=G('logo-url-inp');if(liu2)liu2.value=bd.logoUrl;}
-    }
-  }catch(e){}
-  loadSaved();
+  var newSp = {
+    id: sponsors.length + 1,
+    name: name,
+    link: link,
+    bonus: bonus || "%100 Firsat",
+    img: img || "https://abidin11.com/uploads/sponsors/img_69d9987b9d9bf6.55381307.png",
+    active: true
+  };
+  sponsors.push(newSp);
+  closeOv('sp-add');
+  renderAdminSponsors();
   renderSponsors();
-  renderWinsHome();
-  buildTicker();
-  renderFooter();
-  bindButtons();
-  updateNavUser();
-  initFetches();
-  // URL'e göre doğru sayfayı göster
-  (function(){
-    try{
-      var path=window.location.pathname;
-      var hash=window.location.hash;
-      if(sessionStorage.getItem('sm_admin')==='1'||(path==='/admin'||path==='/admin/')){
-        if(sessionStorage.getItem('sm_admin')==='1'){
-          gotoAdmin();
-        } else {
-          // Admin login iste
-          var ov=document.getElementById('ov-admin-login');
-          if(ov)ov.classList.add('open');
-        }
-      } else if(path==='/wins'){
-        goWins();
-      } else {
-        // Ana sayfa
-        G('home-page').style.display='block';
-        G('wins-page').style.display='none';
-      }
-      // Admin panelde doğru sekmeyi aç
-      if(sessionStorage.getItem('sm_admin')==='1'&&path.startsWith('/admin')){
-        var foundPanel=null;
-        Object.keys(PANEL_URLS).forEach(function(k){if(PANEL_URLS[k]===path)foundPanel=k;});
-        if(foundPanel)setTimeout(function(){switchTab(foundPanel);},100);
-      }
-    }catch(e){console.error('Route err:',e);}
-  })();
+  toast('Yeni sponsor eklendi');
+};
 
-  // Geri/ileri butonu desteği
-  window.addEventListener('popstate',function(e){
-    var path=window.location.pathname;
-    var isAdmin=path.startsWith('/admin');
-    if(isAdmin){
-      if(sessionStorage.getItem('sm_admin')==='1'){
-        G('adm-view').style.display='block';
-        // Panel URL'den bul
-        var found=null;
-        Object.keys(PANEL_URLS).forEach(function(k){if(PANEL_URLS[k]===path)found=k;});
-        if(found)switchTab(found);
-      } else {
-        var ov=G('ov-admin-login');if(ov)ov.classList.add('open');
-      }
-    } else if(path==='/wins'){
-      G('adm-view').style.display='none';
-      G('home-page').style.display='none';
-      G('wins-page').style.display='block';
-      renderWinsPage();
-    } else {
-      G('adm-view').style.display='none';
-      G('home-page').style.display='block';
-      G('wins-page').style.display='none';
-    }
-  });
-  setTimeout(function(){showPopup();},2000);
-})();
+window.openEditSponsor = function(id) {
+  var sp = sponsors.find(function(item){ return item.id === id; });
+  if(!sp) return;
+  G('esp-id').value = sp.id;
+  G('esp-name').value = sp.name;
+  G('esp-link').value = sp.link;
+  G('esp-bonus').value = sp.bonus;
+  G('esp-img').value = sp.img;
+  G('esp-prev').src = sp.img;
+  G('esp-active-tog').checked = sp.active;
+  openOv('sp-edit');
+};
+
+G('btn-esp-save-submit').onclick = function() {
+  var id = parseInt(G('esp-id').value);
+  var sp = sponsors.find(function(item){ return item.id === id; });
+  if(!sp) return;
+  
+  sp.name = G('esp-name').value;
+  sp.link = G('esp-link').value;
+  sp.bonus = G('esp-bonus').value;
+  sp.img = G('esp-img').value;
+  sp.active = G('esp-active-tog').checked; // Açık kapalı state onarımı[cite: 2]
+  
+  closeOv('sp-edit');
+  renderAdminSponsors();
+  renderSponsors();
+  toast('Sponsor guncellendi');
+};
+
+// GLOBAL BANNER & LOGO FINALIZE SAVE[cite: 2]
+G('btn-banner-save').onclick = function() {
+  systemBannerActive = G('gif-tog').checked;
+  systemBannerUrl = G('gif-url').value;
+  
+  var logoImg = G('nlogo-img');
+  var logoTxt = G('nlogo-txt');
+  var logoInpVal = G('logo-url-inp').value;
+  
+  if (isLogoImgMode && logoInpVal) {
+    logoImg.src = logoInpVal;
+    logoImg.style.display = 'block';
+    logoTxt.style.display = 'none';
+  } else {
+    logoImg.style.display = 'none';
+    logoTxt.style.display = 'block';
+  }
+  
+  var bannerDiv = G('gif-banner');
+  if (systemBannerActive && systemBannerUrl) {
+    G('gif-img').src = systemBannerUrl;
+    bannerDiv.style.display = 'block';
+  } else {
+    bannerDiv.style.display = 'none';
+  }
+  
+  toast('Ayarlar ve Logo Durumlari Basariyla Kaydedildi!');
+};
 </script>
 </body>
 </html>
