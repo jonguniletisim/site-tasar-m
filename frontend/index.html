@@ -15,8 +15,8 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 #nav{background:rgba(8,8,14,.97);border-bottom:1px solid #ffffff10;position:sticky;top:0;z-index:200;backdrop-filter:blur(16px);}
 .nav-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 14px;height:62px;gap:8px;}
 .nav-jp{display:flex;flex-direction:column;justify-content:center;padding:2px 8px;cursor:default;}
-.nav-jp-lbl{font-family:'Courier New',monospace;font-size:7px;color:#f0c050;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:2px;white-space:nowrap;}
-.nav-jp-val{font-family:'Courier New',monospace;font-weight:700;font-size:clamp(12px,3vw,17px);color:#ffe066;text-shadow:0 0 12px #f0b429cc;white-space:nowrap;}
+.nav-jp-lbl{font-family:'Courier New',monospace;font-size:9px;color:#f0c050;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:2px;white-space:nowrap;}
+.nav-jp-val{font-family:'Courier New',monospace;font-weight:700;font-size:clamp(15px,3.5vw,22px);color:#ffe066;text-shadow:0 0 12px #f0b429cc;white-space:nowrap;}
 .nav-logo{display:flex;align-items:center;justify-content:center;cursor:pointer;}
 #nlogo-txt{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,5vw,28px);color:var(--g);letter-spacing:2px;}
 #nlogo-img{height:40px;max-width:160px;object-fit:contain;display:none;}
@@ -536,19 +536,35 @@ body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880
 </div>
 
 <!-- MODALS -->
+<!-- ÜYE GİRİŞ -->
 <div class="ov" id="ov-login"><div class="mbox">
   <div class="mhdl"></div><button class="mcls" data-close="login">&#10005;</button>
   <div class="mlogo" id="ml-logo">SLOTMASTER</div>
-  <!-- Login tip seçici -->
-  <div style="display:flex;gap:8px;margin-bottom:18px;">
-    <button class="login-tab active" id="lt-user" onclick="setLoginTab('user')">&#128100; Üye Girişi</button>
-    <button class="login-tab" id="lt-admin" onclick="setLoginTab('admin')">&#128274; Admin Girişi</button>
+  <div style="text-align:center;margin-bottom:16px;">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;">ÜYE GİRİŞİ</div>
+    <div style="font-size:11px;color:#7070a0;margin-top:3px;">Hesabına hoş geldin</div>
   </div>
   <div class="merr" id="login-err"></div>
   <div class="mfg"><label>KULLANICI ADI</label><input type="text" class="minp" id="login-u" placeholder="kullaniciadı" autocomplete="username"></div>
   <div class="mfg"><label>SIFRE</label><input type="password" class="minp" id="login-p" placeholder="••••••••" autocomplete="current-password"></div>
-  <button class="mbtn" id="btn-login">Giris Yap</button>
-  <div class="mfoot" id="login-foot"><button class="mlink" data-sw="login:forgot">Sifremi Unuttum</button> &nbsp;&#183;&nbsp; <button class="mlink" data-sw="login:register">Kayit Ol</button></div>
+  <button class="mbtn" id="btn-login">Giriş Yap</button>
+  <div class="mfoot"><button class="mlink" data-sw="login:forgot">Şifremi Unuttum</button> &nbsp;&#183;&nbsp; <button class="mlink" data-sw="login:register">Kayıt Ol</button></div>
+</div></div>
+
+<!-- ADMİN GİRİŞ - ayrı modal -->
+<div class="ov" id="ov-admin-login"><div class="mbox" style="border-color:#f0b42940;">
+  <div class="mhdl"></div><button class="mcls" data-close="admin-login">&#10005;</button>
+  <div style="text-align:center;margin-bottom:4px;">
+    <div style="font-size:32px;margin-bottom:8px;">&#128274;</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--g);letter-spacing:2px;">ADMİN PANELİ</div>
+    <div style="font-size:11px;color:#7070a0;margin-top:3px;">Yetkili giriş gerektirir</div>
+  </div>
+  <div style="height:1px;background:#f0b42920;margin:16px 0;"></div>
+  <div class="merr" id="admin-login-err"></div>
+  <div class="mfg"><label>ADMİN KULLANICI ADI</label><input type="text" class="minp" id="admin-login-u" placeholder="admin" autocomplete="off"></div>
+  <div class="mfg"><label>ADMİN ŞİFRESİ</label><input type="password" class="minp" id="admin-login-p" placeholder="••••••••" autocomplete="off"></div>
+  <button class="mbtn" id="btn-admin-login" style="background:linear-gradient(135deg,var(--g),#c8960f);">&#128274; Admin Girişi Yap</button>
+  <div style="text-align:center;margin-top:12px;font-size:11px;color:#505070;">Bu alan sadece site yöneticisi içindir</div>
 </div></div>
 
 <div class="ov" id="ov-register"><div class="mbox">
@@ -814,7 +830,7 @@ function toggleFb(){
 }
 
 
-var _loginTab='user';
+// login tab removed - separate modals used
 function setLoginTab(tab){
   _loginTab=tab;
   var lu=G('lt-user'),la=G('lt-admin'),lf=G('login-foot');
@@ -970,14 +986,24 @@ function doLogin(){
   var u=G('login-u').value.trim(),p=G('login-p').value;
   var e=G('login-err');
   if(!u||!p){e.textContent='Kullanici adi ve sifre zorunlu.';e.style.display='block';return;}
+  var f=null;for(var i=0;i<users.length;i++){if(users[i].u===u&&users[i].p===p){f=users[i];break;}}
+  if(!f){e.textContent='Hatali kullanici adi veya sifre.';e.style.display='block';return;}
+  e.style.display='none';currentUser={id:f.id,u:f.u};
+  try{localStorage.setItem('sm_cu',JSON.stringify(currentUser));}catch(e2){}
+  closeOv('login');toast('Hos geldin '+u);updateNavUser();
+}
+function doAdminLogin(){
+  var u=G('admin-login-u').value.trim(),p=G('admin-login-p').value;
+  var e=G('admin-login-err');
+  if(!u||!p){e.textContent='Kullanici adi ve sifre zorunlu.';e.style.display='block';return;}
   if(u===AU&&p===AP){
-    e.style.display='none';closeOv('login');
+    e.style.display='none';
+    try{sessionStorage.setItem('sm_admin','1');}catch(e2){}
+    closeOv('admin-login');
     setTimeout(function(){gotoAdmin();},150);
     toast('Admin girisi basarili');return;
   }
-  var f=null;for(var i=0;i<users.length;i++){if(users[i].u===u&&users[i].p===p){f=users[i];break;}}
-  if(!f){e.textContent='Hatali kullanici adi veya sifre.';e.style.display='block';return;}
-  e.style.display='none';currentUser={id:f.id,u:f.u};try{localStorage.setItem('sm_cu',JSON.stringify(currentUser));}catch(e2){}closeOv('login');toast('Hos geldin '+u);updateNavUser();
+  e.textContent='Hatali admin bilgileri.';e.style.display='block';
 }
 function doRegister(){
   var u=G('reg-u').value.trim(),ph=G('reg-ph').value.trim(),p=G('reg-p').value,p2=G('reg-p2').value;
@@ -1550,6 +1576,8 @@ function bindButtons(){
   
   // Login
   var bl=G('btn-login');if(bl)bl.addEventListener('click',doLogin);
+  var bal=G('btn-admin-login');if(bal)bal.addEventListener('click',doAdminLogin);
+  var alp=G('admin-login-p');if(alp)alp.addEventListener('keydown',function(e){if(e.key==='Enter')doAdminLogin();});
   G('login-p').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
   
   // Register
@@ -1706,10 +1734,9 @@ function bindButtons(){
     var _path=window.location.pathname;
     if(sessionStorage.getItem('sm_admin')==='1'){
       gotoAdmin();
-    } else if(_hash==='#admin'||_hash==='#ADMIN'||_path==='/admin'){
-      history.replaceState(null,'',window.location.pathname.replace('/admin','/'));
-      // Login modal'ı direkt DOM ile aç - openOv'a gerek yok
-      var _ov=document.getElementById('ov-login');
+    } else if(_hash==='#admin'||_hash==='#ADMIN'||_path==='/admin'||_path==='/admin/'){
+      history.replaceState(null,'/','/');
+      var _ov=document.getElementById('ov-admin-login');
       if(_ov){_ov.classList.add('open');}
     }
   }catch(e){console.error('Admin route err:',e);}
