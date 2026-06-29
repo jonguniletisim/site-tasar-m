@@ -1020,7 +1020,8 @@ function doRegister(){
   for(var i=0;i<users.length;i++){if(users[i].u===u){e.textContent='Bu kullanici adi alinmis.';e.style.display='block';return;}}
   users.push({id:nextId++,u:u,ph:ph,p:p,date:new Date().toLocaleDateString('tr-TR'),clicks:{}});
   e.style.display='none';G('reg-form').style.display='none';G('reg-ok').style.display='block';
-  renderUsers();
+  toast('Kayit basarili: '+u);
+  try{renderUsers();}catch(ex){}
 }
 function doForgot(){
   var u=G('forg-u').value.trim(),ph=G('forg-ph').value.trim();
@@ -1237,90 +1238,86 @@ function closeRep(){
 // ══ ADMIN RENDER ══
 function renderAdmSp(){
   var b=G('sp-badge');if(b)b.textContent=sponsors.length+' sponsor';
-  var l=G('sp-adm-list');if(!l)return;l.innerHTML='';
-  for(var i=0;i<sponsors.length;i++){
-    (function(s,idx){
-      var eopts='';
-      for(var j=0;j<EFS.length;j++){
-        eopts+='<option value="'+EFS[j].id+'"'+(s.ef===EFS[j].id?' selected':'')+'>'+EFS[j].l+'</option>';
-      }
-      var r=document.createElement('div');
-      r.className='sp-row';r.draggable=true;r.setAttribute('data-i',idx);
-      r.innerHTML=
-        '<div class="sp-drag">&#8943;</div>'+
-        '<div class="sp-rk">#'+(idx+1)+'</div>'+
-        '<img class="sp-ai" src="'+(s.img||'')+'" alt="">'+
-        '<div class="sp-inf">'+
-          '<div class="sp-nm">'+s.name+'</div>'+
-          '<div class="sp-bn">'+(s.bonus||'')+'</div>'+
-        '</div>'+
-        '<div style="display:flex;gap:6px;align-items:center;flex-shrink:0;flex-wrap:wrap;">'+
-          '<label style="display:flex;align-items:center;gap:5px;cursor:pointer;">'+
-            '<input type="checkbox" class="sp-act"'+(s.active!==false?' checked':'')+' style="accent-color:var(--g);width:16px;height:16px;">'+
-            '<span style="font-size:11px;color:#a0a0c0;">Aktif</span>'+
-          '</label>'+
-          '<label style="display:flex;align-items:center;gap:5px;cursor:pointer;">'+
-            '<input type="checkbox" class="sp-bnr"'+(s.bannerActive?' checked':'')+' style="accent-color:#e8333a;width:16px;height:16px;">'+
-            '<span style="font-size:11px;color:#a0a0c0;">Banner</span>'+
-          '</label>'+
-          '<select class="efsel sp-ef">'+eopts+'</select>'+
-          '<button class="bi sp-ed" title="Duzenle">&#9999;</button>'+
-          '<button class="bi sp-up" title="Yukari">&#8593;</button>'+
-          '<button class="bi sp-dn" title="Asagi">&#8595;</button>'+
-          '<button class="bd sp-dl">Sil</button>'+
-        '</div>';
+  var l=G('sp-adm-list');if(!l)return;
+  l.innerHTML='';
+  sponsors.forEach(function(s,idx){
+    var efOpts='';
+    EFS.forEach(function(e){
+      efOpts+='<option value="'+e.id+'"'+(s.ef===e.id?' selected':'')+'>'+e.l+'</option>';
+    });
+    var row=document.createElement('div');
+    row.className='sp-row';
+    row.draggable=true;
+    row.dataset.idx=idx;
+    row.innerHTML=
+      '<div class="sp-drag">&#8943;</div>'+
+      '<div class="sp-rk">#'+(idx+1)+'</div>'+
+      '<img class="sp-ai" src="'+(s.img||'')+'" alt="">'+
+      '<div class="sp-inf">'+
+        '<div class="sp-nm">'+s.name+'</div>'+
+        '<div class="sp-bn">'+(s.bonus||'')+'</div>'+
+      '</div>'+
+      '<div style="display:flex;gap:6px;align-items:center;flex-shrink:0;flex-wrap:wrap;">'+
+        '<label style="display:flex;align-items:center;gap:5px;cursor:pointer;font-size:11px;color:#a0a0c0;">'+
+          '<input type="checkbox" style="accent-color:var(--g);width:16px;height:16px;"'+(s.active!==false?' checked':'')+'>Aktif'+
+        '</label>'+
+        '<select class="efsel" style="max-width:75px;">'+efOpts+'</select>'+
+        '<button class="bi">&#9999;</button>'+
+        '<button class="bi">&#8593;</button>'+
+        '<button class="bi">&#8595;</button>'+
+        '<button class="bd">Sil</button>'+
+      '</div>';
 
-      r.querySelector('.sp-act').addEventListener('change',function(e){
-        s.active=e.target.checked;
-        renderSponsors();
-        toast(s.name+(s.active?' aktif':' pasif')+' edildi');
-      });
-      r.querySelector('.sp-bnr').addEventListener('change',function(e){
-        sponsors.forEach(function(x){x.bannerActive=false;});
-        s.bannerActive=e.target.checked;
-        if(s.bannerActive&&!s.bannerImg)s.bannerImg=s.img;
-        renderSponsors();
-        toast(s.bannerActive?'Banner aktif':'Banner kaldirildi');
-      });
-      r.querySelector('.sp-ef').addEventListener('change',function(e){
-        s.ef=e.target.value;renderSponsors();
-      });
-      r.querySelector('.sp-ed').addEventListener('click',function(){openEditSp(s.id);});
-      r.querySelector('.sp-up').addEventListener('click',function(){
-        if(idx>0){var t=sponsors[idx];sponsors[idx]=sponsors[idx-1];sponsors[idx-1]=t;renderSponsors();renderAdmSp();}
-      });
-      r.querySelector('.sp-dn').addEventListener('click',function(){
-        if(idx<sponsors.length-1){var t=sponsors[idx];sponsors[idx]=sponsors[idx+1];sponsors[idx+1]=t;renderSponsors();renderAdmSp();}
-      });
-      r.querySelector('.sp-dl').addEventListener('click',function(){
-        if(!confirm(s.name+' silinsin mi?'))return;
-        sponsors=sponsors.filter(function(x){return x.id!==s.id;});
-        renderSponsors();renderAdmSp();renderSpDrop();toast('Silindi');
-      });
-      r.addEventListener('dragstart',function(e){dragIdx=idx;e.currentTarget.classList.add('dragging');});
-      r.addEventListener('dragover',function(e){
-        e.preventDefault();
-        if(idx!==dragIdx){
-          document.querySelectorAll('.sp-row').forEach(function(x){x.classList.remove('dragover');});
-          e.currentTarget.classList.add('dragover');
-        }
-      });
-      r.addEventListener('drop',function(e){
-        e.preventDefault();
-        if(dragIdx!==null&&dragIdx!==idx){
-          var mv=sponsors.splice(dragIdx,1)[0];
-          sponsors.splice(idx,0,mv);
-          renderSponsors();renderAdmSp();
-        }
-        dragIdx=null;
-      });
-      r.addEventListener('dragend',function(){
-        document.querySelectorAll('.sp-row').forEach(function(x){x.classList.remove('dragging','dragover');});
-        dragIdx=null;
-      });
-      l.appendChild(r);
-    })(sponsors[i],i);
-  }
+    var actCb=row.querySelector('input[type=checkbox]');
+    var efSel=row.querySelector('select');
+    var btns=row.querySelectorAll('button');
+    var editBtn=btns[0],upBtn=btns[1],dnBtn=btns[2],delBtn=btns[3];
+
+    actCb.addEventListener('change',function(){
+      s.active=this.checked;
+      renderSponsors();
+      toast(s.name+(s.active?' aktif':' pasif'));
+    });
+    efSel.addEventListener('change',function(){
+      s.ef=this.value;
+      renderSponsors();
+    });
+    editBtn.addEventListener('click',function(){openEditSp(s.id);});
+    upBtn.addEventListener('click',function(){
+      var ci=sponsors.indexOf(s);
+      if(ci>0){sponsors.splice(ci,1);sponsors.splice(ci-1,0,s);renderSponsors();renderAdmSp();}
+    });
+    dnBtn.addEventListener('click',function(){
+      var ci=sponsors.indexOf(s);
+      if(ci<sponsors.length-1){sponsors.splice(ci,1);sponsors.splice(ci+1,0,s);renderSponsors();renderAdmSp();}
+    });
+    delBtn.addEventListener('click',function(){
+      if(!confirm(s.name+' silinsin mi?'))return;
+      var ci=sponsors.indexOf(s);
+      if(ci>-1){sponsors.splice(ci,1);renderSponsors();renderAdmSp();renderSpDrop();toast('Silindi');}
+    });
+
+    row.addEventListener('dragstart',function(){dragIdx=idx;row.classList.add('dragging');});
+    row.addEventListener('dragover',function(e){
+      e.preventDefault();
+      document.querySelectorAll('.sp-row').forEach(function(r){r.classList.remove('dragover');});
+      row.classList.add('dragover');
+    });
+    row.addEventListener('drop',function(e){
+      e.preventDefault();
+      if(dragIdx!==null&&dragIdx!==idx){
+        var mv=sponsors.splice(dragIdx,1)[0];
+        sponsors.splice(idx,0,mv);
+        renderSponsors();renderAdmSp();
+      }
+      dragIdx=null;
+    });
+    row.addEventListener('dragend',function(){
+      document.querySelectorAll('.sp-row').forEach(function(r){r.classList.remove('dragging','dragover');});
+      dragIdx=null;
+    });
+    l.appendChild(row);
+  });
 }
 function findSp(id){for(var i=0;i<sponsors.length;i++){if(sponsors[i].id===id)return sponsors[i];}return null;}
 function toggleSpActive(id,v){var s=findSp(id);if(s){s.active=v;renderSponsors();renderAdmSp();toast(s.name+(v?' aktif':' pasif'));}}
@@ -1334,40 +1331,47 @@ function renderPending(){
   var l=G('pend-list');if(!l)return;
   if(!pending.length){l.innerHTML='<div class="empty">Bekleyen kazanc yok</div>';return;}
   l.innerHTML='';
-  for(var i=0;i<pending.length;i++){
-    (function(p){
-      var spOpts='<option value="">-- Sponsor Sec --</option>';
-      for(var j=0;j<sponsors.length;j++){spOpts+='<option value="'+sponsors[j].name+'"'+(p.sponsor===sponsors[j].name?' selected':'')+'>'+sponsors[j].name+'</option>';}
-      var r=document.createElement('div');r.className='prow';
-      r.innerHTML=
-        '<div class="prow-top">'+
-          '<img class="prow-img" src="'+(p.img||'')+'" alt="">'+
-          '<div>'+
-            '<div class="prow-gm">'+(p.game||'Bilinmiyor')+'</div>'+
-            '<div class="prow-ml">'+(p.mul||'--')+'</div>'+
-          '</div>'+
+  pending.forEach(function(p){
+    var spOpts='<option value="">-- Sponsor Sec --</option>';
+    sponsors.forEach(function(sp){
+      spOpts+='<option value="'+sp.name+'"'+(p.sponsor===sp.name?' selected':'')+'>'+sp.name+'</option>';
+    });
+    var row=document.createElement('div');
+    row.className='prow';
+    row.innerHTML=
+      '<div class="prow-top">'+
+        '<img class="prow-img" src="'+(p.img||'')+'" alt="">'+
+        '<div>'+
+          '<div class="prow-gm">'+(p.game||'Bilinmiyor')+'</div>'+
+          '<div class="prow-ml">'+(p.mul||'--')+'</div>'+
         '</div>'+
-        '<div class="prow-det">'+
-          '<div><span class="prow-k">Kullanici</span><span class="prow-v">'+(p.user||'Anonim')+(p.loggedIn?' <span style="color:var(--g);font-size:9px;">(Uye)</span>':' <span style="color:#7070a0;font-size:9px;">(Anonim)</span>')+'</span></div>'+
-          '<div><span class="prow-k">Tarih</span><span class="prow-v">'+p.date+'</span></div>'+
-          '<div style="grid-column:1/-1;"><span class="prow-k">Replay</span><span class="prow-v"><a href="'+p.link+'" target="_blank" style="color:var(--g);font-size:10px;word-break:break-all;">'+p.link+'</a></span></div>'+
-          '<div style="grid-column:1/-1;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">'+
-            '<span style="font-size:10px;color:#7070a0;">Sponsor:</span>'+
-            '<select class="efsel pend-sp" style="max-width:140px;font-size:11px;">'+spOpts+'</select>'+
-            '<input class="efsel pend-link" type="text" placeholder="Ozel link (bos=sponsor)" style="max-width:180px;font-size:10px;padding:4px 6px;" value="'+(p.customLink||'')+'">'+
-          '</div>'+
+      '</div>'+
+      '<div class="prow-det">'+
+        '<div><span class="prow-k">Kullanici</span><span class="prow-v">'+(p.user||'Anonim')+'</span></div>'+
+        '<div><span class="prow-k">Tarih</span><span class="prow-v">'+p.date+'</span></div>'+
+        '<div style="grid-column:1/-1;">'+
+          '<span class="prow-k">Replay</span>'+
+          '<span class="prow-v"><a href="'+p.link+'" target="_blank" style="color:var(--g);font-size:10px;">'+p.link+'</a></span>'+
         '</div>'+
-        '<div class="prow-acts">'+
-          '<button class="bappr pa-ok">&#10003; Onayla</button>'+
-          '<button class="brej pa-no">&#10005; Reddet</button>'+
-        '</div>';
-      r.querySelector('.pend-sp').addEventListener('change',function(){p.sponsor=this.value;});
-      r.querySelector('.pend-link').addEventListener('input',function(){p.customLink=this.value;});
-      r.querySelector('.pa-ok').addEventListener('click',function(){approvePend(p.id);});
-      r.querySelector('.pa-no').addEventListener('click',function(){rejectPend(p.id);});
-      l.appendChild(r);
-    })(pending[i]);
-  }
+        '<div style="grid-column:1/-1;display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:4px;">'+
+          '<span style="font-size:10px;color:#7070a0;">Sponsor:</span>'+
+          '<select class="efsel" style="max-width:140px;">'+spOpts+'</select>'+
+          '<input type="text" class="efsel" placeholder="Ozel link" style="max-width:160px;font-size:10px;padding:4px 6px;" value="'+(p.customLink||'')+'">'+
+        '</div>'+
+      '</div>'+
+      '<div class="prow-acts">'+
+        '<button class="bappr">&#10003; Onayla</button>'+
+        '<button class="brej">&#10005; Reddet</button>'+
+      '</div>';
+
+    var spSel=row.querySelector('select');
+    var lnInp=row.querySelector('input[type=text]');
+    spSel.addEventListener('change',function(){p.sponsor=this.value;});
+    if(lnInp)lnInp.addEventListener('input',function(){p.customLink=this.value;});
+    row.querySelector('.bappr').addEventListener('click',function(){approvePend(p.id);});
+    row.querySelector('.brej').addEventListener('click',function(){rejectPend(p.id);});
+    l.appendChild(row);
+  });
 }
 function approvePend(id){
   var pn=null;for(var i=0;i<pending.length;i++){if(pending[i].id===id){pn=pending[i];break;}}
@@ -1381,78 +1385,88 @@ function updatePendBadge(){var c=pending.length;var m=G('pb-m');var s=G('pb-s');
 
 function renderWinsAdm(){
   var b=G('wins-badge');if(b)b.textContent=wins.length;
-  var l=G('wadm-list');if(!l)return;l.innerHTML='';
-  for(var i=0;i<wins.length;i++){
-    (function(w,wi){
-      var r=document.createElement('div');r.className='wadm-row';
-      var spOpts='<option value="">-- Sponsor --</option>';
-      for(var j=0;j<sponsors.length;j++){spOpts+='<option value="'+sponsors[j].name+'"'+(w.sponsor===sponsors[j].name?' selected':'')+'>'+sponsors[j].name+'</option>';}
-      r.innerHTML=
-        '<img class="wadm-img" src="'+w.img+'" alt="">'+
-        '<div style="flex:1;min-width:0;">'+
-          '<div style="font-size:12px;color:#e0e0f0;font-weight:500;">'+w.game+
-            ' <span style="font-family:Bebas Neue,sans-serif;font-size:16px;color:var(--g);">'+w.mul+'</span></div>'+
-          '<div style="font-size:10px;color:#7070a0;margin-top:2px;">'+w.user+
-            ' <a href="'+w.link+'" target="_blank" style="color:var(--g);">Replay &#8599;</a></div>'+
-          '<div style="display:flex;align-items:center;gap:6px;margin-top:4px;">'+
-            '<span style="font-size:10px;color:#7070a0;">Sponsor:</span>'+
-            '<select class="efsel wa-sp" style="max-width:130px;font-size:11px;">'+spOpts+'</select>'+
-            '<input class="efsel wa-link" type="text" placeholder="Ozel link (bos=sponsor linki)" style="max-width:180px;font-size:10px;padding:4px 6px;" value="'+(w.customLink||'')+'">'+
-            '<button class="bi wa-sp-save" style="font-size:10px;padding:4px 8px;">&#10003;</button>'+
-          '</div>'+
+  var l=G('wadm-list');if(!l)return;
+  l.innerHTML='';
+  if(!wins.length){l.innerHTML='<div class="empty">Hic kazanc yok</div>';return;}
+  wins.forEach(function(w,wi){
+    var spOpts='<option value="">-- Sponsor Sec --</option>';
+    sponsors.forEach(function(sp){
+      spOpts+='<option value="'+sp.name+'"'+(w.sponsor===sp.name?' selected':'')+'>'+sp.name+'</option>';
+    });
+    var row=document.createElement('div');
+    row.className='wadm-row';
+    row.innerHTML=
+      '<img class="wadm-img" src="'+(w.img||'')+'" alt="">'+
+      '<div style="flex:1;min-width:0;">'+
+        '<div style="font-size:12px;color:#e0e0f0;font-weight:500;">'+w.game+
+          ' <span style="font-family:Bebas Neue,sans-serif;font-size:16px;color:var(--g);">'+w.mul+'</span></div>'+
+        '<div style="font-size:10px;color:#7070a0;margin-top:2px;">'+w.user+
+          ' <a href="'+w.link+'" target="_blank" style="color:var(--g);">Replay &#8599;</a></div>'+
+        '<div style="display:flex;align-items:center;gap:6px;margin-top:5px;flex-wrap:wrap;">'+
+          '<select class="efsel" style="max-width:130px;font-size:11px;">'+spOpts+'</select>'+
+          '<input type="text" class="efsel" placeholder="Ozel link (bos=sponsor)" style="max-width:180px;font-size:10px;padding:4px 6px;" value="'+(w.customLink||'')+'">'+
+          '<button class="bi" style="font-size:10px;padding:4px 8px;">&#10003; Kaydet</button>'+
         '</div>'+
-        '<div style="display:flex;gap:5px;flex-shrink:0;">'+
-          '<button class="bi wa-up">&#8593;</button>'+
-          '<button class="bi wa-dn">&#8595;</button>'+
-          '<button class="bd wa-dl">Sil</button>'+
-        '</div>';
-      r.querySelector('.wa-sp-save').addEventListener('click',function(){
-        w.sponsor=r.querySelector('.wa-sp').value;
-        w.customLink=r.querySelector('.wa-link').value.trim();
-        toast('Sponsor guncellendi');
-        renderWinsHome();buildTicker();
-      });
-      r.querySelector('.wa-up').addEventListener('click',function(){
-        if(wi>0){var t=wins[wi];wins[wi]=wins[wi-1];wins[wi-1]=t;renderWinsHome();buildTicker();renderWinsAdm();}
-      });
-      r.querySelector('.wa-dn').addEventListener('click',function(){
-        if(wi<wins.length-1){var t=wins[wi];wins[wi]=wins[wi+1];wins[wi+1]=t;renderWinsHome();buildTicker();renderWinsAdm();}
-      });
-      r.querySelector('.wa-dl').addEventListener('click',function(){
-        wins=wins.filter(function(x){return x.id!==w.id;});
-        renderWinsHome();buildTicker();renderWinsAdm();toast('Silindi');
-      });
-      l.appendChild(r);
-    })(wins[i],i);
-  }
+      '</div>'+
+      '<div style="display:flex;gap:5px;flex-shrink:0;">'+
+        '<button class="bi">&#8593;</button>'+
+        '<button class="bi">&#8595;</button>'+
+        '<button class="bd">Sil</button>'+
+      '</div>';
+
+    var spSel=row.querySelector('select');
+    var lnInp=row.querySelectorAll('input[type=text]')[0];
+    var savBtn=row.querySelectorAll('.bi')[0];
+    var upBtn=row.querySelectorAll('.bi')[1];
+    var dnBtn=row.querySelectorAll('.bi')[2];
+    var delBtn=row.querySelector('.bd');
+
+    savBtn.addEventListener('click',function(){
+      w.sponsor=spSel.value;
+      w.customLink=lnInp?lnInp.value.trim():'';
+      renderWinsHome();buildTicker();toast('Guncellendi');
+    });
+    upBtn.addEventListener('click',function(){
+      var ci=wins.indexOf(w);
+      if(ci>0){wins.splice(ci,1);wins.splice(ci-1,0,w);renderWinsHome();buildTicker();renderWinsAdm();}
+    });
+    dnBtn.addEventListener('click',function(){
+      var ci=wins.indexOf(w);
+      if(ci<wins.length-1){wins.splice(ci,1);wins.splice(ci+1,0,w);renderWinsHome();buildTicker();renderWinsAdm();}
+    });
+    delBtn.addEventListener('click',function(){
+      var ci=wins.indexOf(w);
+      if(ci>-1){wins.splice(ci,1);renderWinsHome();buildTicker();renderWinsAdm();toast('Silindi');}
+    });
+    l.appendChild(row);
+  });
 }
 
 function renderUsers(){
   var q=(G('user-q')||{value:''}).value.toLowerCase();
-  var fil=q?users.filter(function(u){return u.u.toLowerCase().includes(q)||u.ph.includes(q);}):users;
+  var fil=q?users.filter(function(u){return u.u.toLowerCase().includes(q)||(u.ph&&u.ph.includes(q));}):users.slice();
   var b=G('users-badge');if(b)b.textContent=users.length;
   var l=G('users-list');if(!l)return;
   if(!users.length){l.innerHTML='<div class="empty">Kayitli uye yok</div>';return;}
   if(!fil.length){l.innerHTML='<div class="empty">Sonuc yok</div>';return;}
   l.innerHTML='';
-  for(var i=0;i<fil.length;i++){
-    (function(u){
-      var r=document.createElement('div');r.className='user-row';
-      r.innerHTML=
-        '<div class="u-av">'+u.u[0].toUpperCase()+'</div>'+
-        '<div style="flex:1;min-width:0;">'+
-          '<div style="font-size:13px;color:#e0e0f0;font-weight:600;">'+u.u+'</div>'+
-          '<div style="font-size:11px;color:#7070a0;margin-top:2px;">'+u.ph+' · Kayit: '+u.date+'</div>'+
-        '</div>'+
-        '<button class="bd u-dl">Sil</button>';
-      r.querySelector('.u-dl').addEventListener('click',function(){
-        if(!confirm(u.u+' silinsin mi?'))return;
-        users=users.filter(function(x){return x.id!==u.id;});
-        renderUsers();toast('Uye silindi');
-      });
-      l.appendChild(r);
-    })(fil[i]);
-  }
+  fil.forEach(function(u){
+    var row=document.createElement('div');
+    row.className='user-row';
+    row.innerHTML=
+      '<div class="u-av">'+u.u[0].toUpperCase()+'</div>'+
+      '<div style="flex:1;min-width:0;">'+
+        '<div style="font-size:13px;color:#e0e0f0;font-weight:600;">'+u.u+'</div>'+
+        '<div style="font-size:11px;color:#7070a0;margin-top:2px;">'+(u.ph||'-')+' \u00b7 '+u.date+'</div>'+
+      '</div>'+
+      '<button class="bd">Sil</button>';
+    row.querySelector('.bd').addEventListener('click',function(){
+      if(!confirm(u.u+' silinsin mi?'))return;
+      var ci=users.indexOf(u);
+      if(ci>-1){users.splice(ci,1);renderUsers();toast('Silindi');}
+    });
+    l.appendChild(row);
+  });
 }
 
 function renderSocList(){
@@ -1545,6 +1559,51 @@ function openEditSp(id){
   renderTgPick('tg-pick-e',selTagE,function(v){selTagE=v;});
   openOv('sp-edit');
 }
+
+function openEditSp(id){
+  var s=null;
+  for(var i=0;i<sponsors.length;i++){if(sponsors[i].id===id){s=sponsors[i];break;}}
+  if(!s)return;
+  var ei=G('esp-id');if(ei)ei.value=id;
+  var en=G('esp-name');if(en)en.value=s.name;
+  var el=G('esp-link');if(el)el.value=s.link;
+  var eb=G('esp-bonus');if(eb)eb.value=s.bonus||'';
+  var eimg=G('esp-img');if(eimg)eimg.value=s.img||'';
+  var ebn=G('esp-banner');if(ebn)ebn.value=s.bannerImg||'';
+  var ep=G('esp-prev');if(ep&&s.img)ep.src=s.img;
+  selEfE=s.ef||'ef-none';
+  selTagE=s.tag||'';
+  renderEfPick('ef-pick-e',selEfE,function(v){selEfE=v;});
+  renderTgPick('tg-pick-e',selTagE,function(v){selTagE=v;});
+  openOv('sp-edit');
+}
+
+function approvePend(id){
+  var pn=null;
+  for(var i=0;i<pending.length;i++){if(pending[i].id===id){pn=pending[i];break;}}
+  if(!pn)return;
+  var spLk=pn.customLink||'';
+  if(!spLk&&pn.sponsor){
+    for(var j=0;j<sponsors.length;j++){
+      if(sponsors[j].name===pn.sponsor){spLk=sponsors[j].link;break;}
+    }
+  }
+  wins.unshift({
+    id:nextId++,user:pn.user,game:pn.game,mul:pn.mul,
+    img:pn.img,link:pn.link,sponsor:pn.sponsor||'',
+    customLink:spLk,date:pn.date
+  });
+  pending=pending.filter(function(x){return x.id!==id;});
+  renderWinsHome();buildTicker();renderPending();renderWinsAdm();
+  toast('Onaylandi');
+}
+
+function rejectPend(id){
+  pending=pending.filter(function(x){return x.id!==id;});
+  renderPending();
+  toast('Reddedildi');
+}
+
 function saveEditSp(){
   var id=parseInt(G('esp-id').value);var s=findSp(id);if(!s)return;
   s.name=G('esp-name').value.trim()||s.name;s.link=G('esp-link').value.trim()||s.link;
