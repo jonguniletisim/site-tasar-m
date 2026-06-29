@@ -1,20 +1,5 @@
-/* SlotMaster - Ana JavaScript */
-/* API anahtari backend/.env'de - bu dosyada YOK */
 "use strict";
-
-const API = {
-  async get(p){const r=await fetch(p,{credentials:'include'});return r.json();},
-  async post(p,d){const r=await fetch(p,{method:'POST',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});return r.json();},
-  async put(p,d){const r=await fetch(p,{method:'PUT',credentials:'include',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});return r.json();},
-  async del(p){const r=await fetch(p,{method:'DELETE',credentials:'include'});return r.json();},
-};
-
-async function checkSession(){
-  try{
-    const res=await API.get('/api/auth/me');
-    if(res.loggedIn){window._currentUser=res;}
-  }catch(e){}
-}
+const API={get:async function(p){return(await fetch(p,{credentials:"include"})).json();},post:async function(p,d){return(await fetch(p,{method:"POST",credentials:"include",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)})).json();}};
 
 
 // ════ DATA ════
@@ -39,12 +24,12 @@ const ADMIN_USER='admin';
 const ADMIN_PASS='slotmaster2026';
 
 let sponsors=[
-  {id:1,name:'CASİBOM',bonus:'%100 Hoşgeldin · 1.000₺\'ye kadar',link:'#',ef:'ef-glow',tag:'premium',img:'https://abidin11.com/uploads/sponsors/img_69d9987b9d9bf6.55381307.png'},
-  {id:2,name:'MARSBAHİS',bonus:'250₺ Min. Yatırım · Kural yok',link:'#',ef:'ef-none',tag:'hot',img:'https://abidin11.com/uploads/sponsors/sponsor_20260624_044446_065a2b39.png'},
-  {id:3,name:'MİSTYCASİNO',bonus:'1.000₺ Deneme Bonusu',link:'#',ef:'ef-purple',tag:'new',img:'https://abidin11.com/uploads/sponsors/img_69d9970b8e2518.50293830.png'},
-  {id:4,name:'GRANDBET',bonus:'%300 Hoşgeldin Bonusu',link:'#',ef:'ef-gradient',tag:'',img:'https://abidin11.com/uploads/sponsors/sponsor_20260615_192812_5c053f93.png'},
-  {id:5,name:'SOSABET',bonus:'Kural Yok · 5dk Çekim',link:'#',ef:'ef-none',tag:'vip',img:'https://abidin11.com/uploads/sponsors/sponsor_20260624_164853_0887eea5.png'},
-  {id:6,name:'21.COM',bonus:'%30 Nakit İade · Özel Üyelik',link:'#',ef:'ef-green',tag:'',img:'https://abidin11.com/uploads/sponsors/sponsor_20260602_120243_c7fe8c00.png'},
+  {id:1,active:true,bannerActive:false,bannerImg:"",name:'CASİBOM',bonus:'%100 Hoşgeldin · 1.000₺\'ye kadar',link:'#',ef:'ef-glow',tag:'premium',img:'https://abidin11.com/uploads/sponsors/img_69d9987b9d9bf6.55381307.png'},
+  {id:2,active:true,bannerActive:false,bannerImg:"",name:'MARSBAHİS',bonus:'250₺ Min. Yatırım · Kural yok',link:'#',ef:'ef-none',tag:'hot',img:'https://abidin11.com/uploads/sponsors/sponsor_20260624_044446_065a2b39.png'},
+  {id:3,active:true,bannerActive:false,bannerImg:"",name:'MİSTYCASİNO',bonus:'1.000₺ Deneme Bonusu',link:'#',ef:'ef-purple',tag:'new',img:'https://abidin11.com/uploads/sponsors/img_69d9970b8e2518.50293830.png'},
+  {id:4,active:true,bannerActive:false,bannerImg:"",name:'GRANDBET',bonus:'%300 Hoşgeldin Bonusu',link:'#',ef:'ef-gradient',tag:'',img:'https://abidin11.com/uploads/sponsors/sponsor_20260615_192812_5c053f93.png'},
+  {id:5,active:true,bannerActive:false,bannerImg:"",name:'SOSABET',bonus:'Kural Yok · 5dk Çekim',link:'#',ef:'ef-none',tag:'vip',img:'https://abidin11.com/uploads/sponsors/sponsor_20260624_164853_0887eea5.png'},
+  {id:6,active:true,bannerActive:false,bannerImg:"",name:'21.COM',bonus:'%30 Nakit İade · Özel Üyelik',link:'#',ef:'ef-green',tag:'',img:'https://abidin11.com/uploads/sponsors/sponsor_20260602_120243_c7fe8c00.png'},
 ];
 let wins=[
   {id:1,user:'Ke***',game:'Gates of Olympus 1000',mul:'15.000x',img:'https://www.ppreplaylink.net/game_pic/vs20olympx.jpg',link:'https://www.ppreplaylink.net/kdrbAFKIkT',sponsor:'CASİBOM',date:'28.06.2026'},
@@ -73,75 +58,106 @@ function spTag(tag){
   return m[tag]||'';
 }
 function renderSponsors(){
-  const g=document.getElementById('sp-grid');
-  g.innerHTML=sponsors.map((s,i)=>`
-    <div class="spc ${s.ef} ${s.tag?'has-'+s.tag:''}" onclick="window.open('${s.link}','_blank')">
-      <div class="spc-topbar"></div>
-      <div class="spc-logo">
-        <img class="spc-img" src="${s.img||''}" onerror="this.parentElement.style.background='#1a1a28'" alt="${s.name}">
-        <div class="spc-sweep"></div>
-        ${s.tag?`<div class="sp-ribbon rb-${s.tag}"><span>${spTag(s.tag)}</span></div>`:''}
-      </div>
-      <div class="spc-body">
-        ${s.bonus?`<div class="spc-bonus">${s.bonus}</div>`:''}
-        <button class="spc-btn" onclick="event.stopPropagation();window.open('${s.link}','_blank')">Siteye Git</button>
-      </div>
-    </div>`).join('');
+  var active=sponsors.filter(function(s){return s.active!==false;});
+  // Banner
+  var ba=document.getElementById('sponsor-banner-area');
+  var bannerSp=sponsors.find(function(s){return s.bannerActive&&(s.bannerImg||s.img);});
+  if(ba){
+    if(bannerSp){
+      var bimg=bannerSp.bannerImg||bannerSp.img;
+      ba.style.display='block';
+      ba.innerHTML='<a href="'+bannerSp.link+'" target="_blank" onclick="spClick('+bannerSp.id+',\''+bannerSp.link+'\')"><img src="'+bimg+'" style="width:100%;height:auto;max-height:200px;object-fit:cover;display:block;border-radius:8px;cursor:pointer;" alt="'+bannerSp.name+'"></a>';
+    } else {
+      ba.style.display='none';ba.innerHTML='';
+    }
+  }
+  document.getElementById('sp-grid').innerHTML=active.map(function(s,i){
+    var ribbon=s.tag?'<div class="spc-ribbon rb-'+s.tag+'"><span>'+spTag(s.tag)+'</span></div>':'';
+    var bonus=s.bonus?'<div class="spc-bonus">'+s.bonus+'</div>':'';
+    return '<div class="spc '+s.ef+(s.tag?' has-'+s.tag:'')+'" onclick="spClick('+s.id+',\''+s.link+'\')" >'+
+      '<div class="spc-topbar"></div>'+
+      '<div class="spc-logo">'+
+        '<img class="spc-img" src="'+(s.img||'')+'" onerror="this.parentElement.style.background=\'#1a1a28\'" alt="'+s.name+'">'+
+        '<div class="spc-sweep"></div>'+
+        ribbon+
+      '</div>'+
+      '<div class="spc-body">'+
+        bonus+
+        '<button class="spc-btn" onclick="event.stopPropagation();spClick('+s.id+',\''+s.link+'\')">Siteye Git</button>'+
+      '</div>'+
+    '</div>';
+  }).join('');
 }
 
 function renderWinsHome(){
-  document.getElementById('wins-grid').innerHTML=wins.slice(0,8).map(w=>`
-    <div class="wc" onclick="openRep(${w.id})">
-      <div class="wc-iw">
-        <img class="wc-img" src="${w.img}" onerror="this.style.opacity='.1'" alt="">
-        <div class="wc-sweep"></div>
-        <div class="wc-badge">${w.mul}</div>
-      </div>
-      <div class="wc-body">
-        <div class="wc-game">${w.game}</div>
-        <div class="wc-mul">${w.mul}</div>
-        <div class="wc-user">${w.user}</div>
-        <div class="wc-play">▶ Replay İzle</div>
-      </div>
-    </div>`).join('');
+  var grid=document.getElementById('wins-grid');
+  if(!grid)return;
+  grid.innerHTML=wins.slice(0,8).map(function(w){
+    return '<div class="wc" onclick="openRep('+w.id+')">'+
+      '<div class="wc-iw">'+
+        '<img class="wc-img" src="'+w.img+'" onerror="this.style.opacity=\'.1\'" alt="">'+
+        '<div class="wc-sweep"></div>'+
+        '<div class="wc-badge">'+w.mul+'</div>'+
+      '</div>'+
+      '<div class="wc-body">'+
+        '<div class="wc-game">'+w.game+'</div>'+
+        '<div class="wc-mul">'+w.mul+'</div>'+
+        '<div class="wc-user">'+w.user+'</div>'+
+        '<div class="wc-play">&#9654; Replay İzle</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
 }
 
 function renderWinsPage(){
   document.getElementById('wp-cnt').textContent=wins.length+' kazanç';
-  document.getElementById('wp-grid').innerHTML=wins.map(w=>`
-    <div class="wpc">
-      <div class="wpc-iw">
-        <img class="wpc-img" src="${w.img}" onerror="this.style.opacity='.1'" alt="">
-        <div class="wpc-sweep"></div>
-        <div class="wpc-badge">${w.mul}</div>
-        ${w.sponsor?`<div class="wpc-sp">${w.sponsor}</div>`:''}
-      </div>
-      <div class="wpc-body">
-        <div class="wpc-game">${w.game}</div>
-        <div class="wpc-meta">${w.user}${w.date?' · '+w.date:''}</div>
-        <div class="wpc-mul">${w.mul}</div>
-        <div class="wpc-btns">
-          <button class="wpc-replay" onclick="openRep(${w.id})">▶ Replay</button>
-          <button class="wpc-play" onclick="window.open('${w.sponsor?getSponsorLink(w.sponsor):sponsors[0]?.link||'#'}','_blank')">Şimdi Oyna</button>
-        </div>
-      </div>
-    </div>`).join('');
+  document.getElementById('wp-grid').innerHTML=wins.map(function(w){
+    var spBadge=w.sponsor?'<div class="wpc-sp">'+w.sponsor+'</div>':'';
+    var spBtn=w.sponsor?
+      '<button class="wpc-now" onclick="window.open(\''+getSponsorLink(w.sponsor)+'\',\'_blank\')">Şimdi Oyna</button>':
+      '<button class="wpc-now" onclick="window.open(\''+(sponsors[0]?sponsors[0].link:'#')+'\',\'_blank\')">Şimdi Oyna</button>';
+    return '<div class="wpc">'+
+      '<div class="wpc-iw">'+
+        '<img class="wpc-img" src="'+w.img+'" onerror="this.style.opacity=\'.1\'" alt="">'+
+        '<div class="wpc-sweep"></div>'+
+        '<div class="wpc-badge">'+w.mul+'</div>'+
+        spBadge+
+      '</div>'+
+      '<div class="wpc-body">'+
+        '<div class="wpc-game">'+w.game+'</div>'+
+        '<div class="wpc-meta">'+w.user+(w.date?' · '+w.date:'')+'</div>'+
+        '<div class="wpc-mul">'+w.mul+'</div>'+
+        '<div class="wpc-btns">'+
+          '<button class="wpc-replay" onclick="openRep('+w.id+')">&#9654; Replay</button>'+
+          spBtn+
+        '</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
 }
 
 function buildTicker(){
-  const t=document.getElementById('tk-track');
-  t.classList.remove('go');
-  const b=wins.map(w=>`
-    <div class="tki" onclick="openRep(${w.id})">
-      <div class="tki-in">
-        <div class="tki-iw"><img class="tki-img" src="${w.img}" onerror="this.style.opacity='.1'" alt=""><div class="tki-badge">${w.mul}</div></div>
-        <div class="tki-info"><div class="tki-game">${w.game}</div><div class="tki-user">${w.user}</div></div>
-        <div class="tki-mul">${w.mul}</div>
-      </div>
-    </div>`).join('');
-  t.innerHTML=b+b+b+b;
-  void t.offsetWidth;
-  t.classList.add('go');
+  var tkEl=document.getElementById('tk-track');
+  if(!tkEl)return;
+  tkEl.classList.remove('go');
+  var base=wins.map(function(w){
+    return '<div class="tki" onclick="openRep('+w.id+')">'+
+      '<div class="tki-in">'+
+        '<div class="tki-iw">'+
+          '<img class="tki-img" src="'+w.img+'" onerror="this.style.opacity=\'.1\'" alt="">'+
+          '<div class="tki-badge">'+w.mul+'</div>'+
+        '</div>'+
+        '<div class="tki-info">'+
+          '<div class="tki-game">'+w.game+'</div>'+
+          '<div class="tki-user">'+w.user+'</div>'+
+        '</div>'+
+        '<div class="tki-mul">'+w.mul+'</div>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+  tkEl.innerHTML=base+base+base+base;
+  void tkEl.offsetWidth;
+  tkEl.classList.add('go');
 }
 
 function getSponsorLink(name){const s=sponsors.find(x=>x.name===name);return s?s.link:'#';}
@@ -172,8 +188,11 @@ function renderSocialBtns(){
 }
 
 function renderFooter(){
-  const fl=document.getElementById('flinks');
-  fl.innerHTML=socChannels.filter(c=>c.active).map(c=>`<a href="${c.url}" target="_blank" style="color:var(--g);font-size:11px;">${c.icon} ${c.name}</a>`).join('');
+  var fl=document.getElementById('flinks');
+  if(!fl)return;
+  fl.innerHTML=socChannels.filter(function(ch){return ch.active!==false;}).map(function(ch){
+    return '<a href="'+ch.url+'" target="_blank" style="color:var(--g);font-size:11px;">'+(ch.icon||'')+'&nbsp;'+ch.name+'</a>';
+  }).join('');
 }
 
 // ════ NAVIGATION ════
@@ -291,17 +310,51 @@ function closeRep(){document.getElementById('rep-wrap').classList.remove('open')
 
 // ════ SUBMIT WIN ════
 async function fetchReplay(){
-  const url=document.getElementById('m-url').value.trim();
+  var url=document.getElementById('m-url').value.trim();
   if(!url||!url.includes('ppreplaylink')){showSubErr('Geçerli bir ppreplaylink.net linki gir.');return;}
-  setLoad(true);document.getElementById('sub-err').style.display='none';document.getElementById('mprev').style.display='none';
+  setFetchLoad(true);
+  document.getElementById('sub-err').style.display='none';
+  document.getElementById('mprev').style.display='none';
   try{
-    const r=await fetch('/api/replay/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:300,messages:[{role:'user',content:`ppreplaylink URL: ${url}\nFormat: "OYUN_ADI ÇARPANx Win"\nSadece JSON: {"game":"oyun adı","multiplier":"5008x","imageUrl":"https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg"}`}]})});
-    const d=await r.json();
-    const p=JSON.parse(d.content.map(i=>i.text||'').join('').replace(/```json|```/g,'').trim());
-    fillSub(p.game||'',p.multiplier||'',p.imageUrl||'');
-  }catch(e){fillSub('','','');showSubErr('Analiz yapılamadı — manuel girebilirsin.');}
-  finally{setLoad(false);}
+    // Önce backend proxy ile dene (API gerektirmez)
+    var r=await fetch('/api/replay/analyze',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({url:url})
+    });
+    var d=await r.json();
+    if(d.ok&&d.game){
+      fillSub(d.game,d.multiplier||'',d.imageUrl||'');
+    } else {
+      // Backend yoksa (lokal test) - sadece URL'den slug çek
+      var slug=url.split('/').pop();
+      fillSub('Oyun bilgisi yüklenemedi','',
+        'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg');
+      showSubErr('Bilgiler yüklenemedi — manuel girebilirsiniz.');
+    }
+  }catch(e){
+    // Lokal test modunda doğrudan Anthropic'e bağlan
+    try{
+      var r2=await fetch('/api/replay/analyze',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:200,
+          messages:[{role:'user',content:'ppreplaylink URL: '+url+'\nSadece JSON: {"game":"oyun adı","multiplier":"5008x","imageUrl":"https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg"}'}]})
+      });
+      var d2=await r2.json();
+      var txt=d2.content.map(function(i){return i.text||'';}).join('').replace(/```json|```/g,'').trim();
+      var p=JSON.parse(txt);
+      fillSub(p.game||'',p.multiplier||'',p.imageUrl||'');
+    }catch(e2){
+      fillSub('','','');
+      showSubErr('Analiz yapılamadı — oyun adını manuel girebilirsiniz.');
+    }
+  }finally{
+    setFetchLoad(false);
+  }
 }
+
+
 function fillSub(g,m,img){
   const ge=document.getElementById('m-game'),me=document.getElementById('m-mul');
   ge.value=g;me.value=m;
@@ -322,6 +375,10 @@ function submitWin(){
   updatePendBadge();
 }
 function setLoad(v){document.getElementById('mload').style.display=v?'block':'none';document.getElementById('fetch-btn').disabled=v;}
+function setFetchLoad(v){
+  var statusEl=document.getElementById('fetch-status');
+  if(statusEl)statusEl.innerHTML=v?'<span class="spin"></span>Analiz ediliyor...':'';
+}
 function showSubErr(m){const e=document.getElementById('sub-err');e.textContent=m;e.style.display='block';}
 
 // ════ AUTO FETCH WINS ════
@@ -341,28 +398,40 @@ function initFetches(){wins.filter(w=>w.pf).forEach((w,i)=>setTimeout(()=>fetchW
 // ════ ADMIN RENDERS ════
 let dragSrcIdx=null;
 function rAdmSponsors(){
-  document.getElementById('sp-badge').textContent=sponsors.length+' aktif';
-  document.getElementById('sp-adm-list').innerHTML=sponsors.map((s,i)=>`
-    <div class="sp-adm-row" draggable="true" data-idx="${i}"
-      ondragstart="dsDragStart(event,${i})"
-      ondragover="dsDragOver(event,${i})"
-      ondrop="dsDrop(event,${i})"
-      ondragend="dsDragEnd(event)">
-      <div class="sp-adm-drag" title="Sürükle">⠿</div>
-      <div class="sp-rank-num">${i+1}</div>
-      <img class="sp-adm-img" src="${s.img||''}" onerror="this.style.opacity='.2'" alt="">
-      <div class="sp-adm-info">
-        <div class="sp-adm-name">${s.name}</div>
-        <div class="sp-adm-bonus">${s.bonus||'—'}</div>
-      </div>
-      <div class="sp-adm-acts">
-        <select class="efsel" onchange="chSpEf(${s.id},this.value)">${EFFECTS.map(e=>`<option value="${e.id}"${s.ef===e.id?' selected':''}>${e.l}</option>`).join('')}</select>
-        <button class="bico" onclick="openEditSp(${s.id})" title="Düzenle">✏️</button>
-        <button class="bico" onclick="moveSp(${i},-1)" title="Yukarı">↑</button>
-        <button class="bico" onclick="moveSp(${i},1)" title="Aşağı">↓</button>
-        <button class="bdang" onclick="delSp(${s.id})">Sil</button>
-      </div>
-    </div>`).join('');
+  document.getElementById('sp-badge').textContent=sponsors.length+' sponsor';
+  document.getElementById('sp-adm-list').innerHTML=sponsors.map(function(s,i){
+    var efOpts=EFFECTS.map(function(e){return '<option value="'+e.id+'"'+(s.ef===e.id?' selected':'')+'>'+e.l+'</option>';}).join('');
+    var activeChk=s.active!==false?'checked':'';
+    var bannerChk=s.bannerActive?'checked':'';
+    return '<div class="sp-adm-row" draggable="true" data-idx="'+i+'"'+
+      ' ondragstart="dsDragStart(event,'+i+')"'+
+      ' ondragover="dsDragOver(event,'+i+')"'+
+      ' ondrop="dsDrop(event,'+i+')"'+
+      ' ondragend="dsDragEnd(event)">'+
+      '<div class="sp-drag">&#8943;</div>'+
+      '<div class="sp-rank">#'+(i+1)+'</div>'+
+      '<img class="sp-adm-img" src="'+(s.img||'')+'" onerror="this.style.opacity=\'.2\'" alt="">'+
+      '<div class="sp-adm-info">'+
+        '<div class="sp-adm-name">'+s.name+'</div>'+
+        '<div class="sp-adm-bonus">'+(s.bonus||'')+'</div>'+
+      '</div>'+
+      '<div class="sp-adm-acts">'+
+        '<label title="Aktif/Pasif" style="display:flex;align-items:center;gap:4px;cursor:pointer;">'+
+          '<input type="checkbox" '+activeChk+' onchange="toggleSpActive('+s.id+',this.checked)" style="accent-color:var(--g);width:14px;height:14px;">'+
+          '<span style="font-size:9px;color:var(--mu);">Aktif</span>'+
+        '</label>'+
+        '<label title="Banner" style="display:flex;align-items:center;gap:4px;cursor:pointer;">'+
+          '<input type="checkbox" '+bannerChk+' onchange="toggleSpBanner('+s.id+',this.checked)" style="accent-color:#e8333a;width:14px;height:14px;">'+
+          '<span style="font-size:9px;color:var(--mu);">Banner</span>'+
+        '</label>'+
+        '<select class="efsel" onchange="chSpEf('+s.id+',this.value)">'+efOpts+'</select>'+
+        '<button class="bico" onclick="openEditSp('+s.id+')" title="Duzenle">&#9999;&#65039;</button>'+
+        '<button class="bico" onclick="moveSp('+i+',-1)">&#8593;</button>'+
+        '<button class="bico" onclick="moveSp('+i+',1)">&#8595;</button>'+
+        '<button class="bdang" onclick="delSp('+s.id+')">Sil</button>'+
+      '</div>'+
+    '</div>';
+  }).join('');
 }
 
 // Drag & drop
@@ -454,77 +523,80 @@ function handleNavLogoFile(inp){
 }
 
 function rPending(){
-  const c=pending.length;
+  var cnt=pending.length;
   updatePendBadge();
-  document.getElementById('pend-badge').textContent=c+' bekliyor';
-  const l=document.getElementById('pend-list');
-  if(!c){l.innerHTML='<div class="empty">✓ Bekleyen kazanç yok</div>';return;}
-  l.innerHTML=pending.map(p=>`
-    <div class="prow" id="pr-${p.id}">
-      <div class="prow-top">
-        <img class="prow-img" src="${p.img}" onerror="this.style.opacity='.2'" alt="">
-        <div><div class="prow-game">${p.game}</div><div class="prow-mul">${p.mul}</div></div>
-      </div>
-      <div class="prow-det">
-        <div class="prow-det-item"><span>Kullanıcı Adı</span><span>${p.user}</span></div>
-        <div class="prow-det-item"><span>Telegram</span><span style="color:var(--g)">${p.tg}</span></div>
-        <div class="prow-det-item"><span>Gönderim Tarihi</span><span>${p.date}</span></div>
-        <div class="prow-det-item"><span>Bu Sitede Oynandı</span><span>${p.siteV||'Belirtilmedi'}</span></div>
-        <div class="prow-det-item" style="grid-column:1/-1;"><span>Replay Linki</span><span><a href="${p.link}" target="_blank" style="color:var(--g);font-size:10px;word-break:break-all;">${p.link}</a></span></div>
-        ${p.siteV?`<div style="grid-column:1/-1;background:#22c55e12;border:1px solid #22c55e30;border-radius:6px;padding:6px 10px;color:#4ade80;font-size:11px;">✓ ${p.siteV} üzerinde oynandığı doğrulandı</div>`:''}
-        ${p.prizeEl?`<div style="grid-column:1/-1;background:#f0b42912;border:1px solid #f0b42930;border-radius:6px;padding:6px 10px;color:var(--g);font-size:11px;">🏆 Ödüle hak kazanıyor (${p.mul})</div>`:''}
-      </div>
-      <div class="prow-acts">
-        <button class="bappr" onclick="approvePend(${p.id})">✓ Onayla</button>
-        <button class="brej" onclick="rejectPend(${p.id})">✕ Reddet</button>
-        <select class="ainp" style="max-width:140px;font-size:12px;" onchange="setPendSp(${p.id},this.value)">
-          <option value="">— Sponsor —</option>
-          ${sponsors.map(s=>`<option value="${s.name}"${p.sponsor===s.name?' selected':''}>${s.name}</option>`).join('')}
-        </select>
-        <button class="bsec" onclick="markVerif(${p.id})" style="font-size:11px;padding:7px 10px;">✓ Doğrula</button>
-        <button class="bsec" onclick="markPrize(${p.id})" style="font-size:11px;padding:7px 10px;">🏆 Ödül</button>
-      </div>
-    </div>`).join('');
+  var el=document.getElementById('pend-list');
+  if(!el)return;
+  document.getElementById('pend-badge').textContent=cnt+' bekliyor';
+  if(!cnt){el.innerHTML='<div class="empty">Bekleyen kazanc yok</div>';return;}
+  var spOpts=sponsors.map(function(s){return '<option value="'+s.name+'">'+s.name+'</option>';}).join('');
+  el.innerHTML=pending.map(function(p){
+    var vBadge=p.siteV?'<div style="grid-column:1/-1;background:#22c55e12;border:1px solid #22c55e30;border-radius:6px;padding:6px 10px;color:#4ade80;font-size:11px;">&#10003; '+p.siteV+' uzerinde oynandigi dogrulandi</div>':'';
+    var pBadge=p.prizeEl?'<div style="grid-column:1/-1;background:#f0b42912;border:1px solid #f0b42930;border-radius:6px;padding:6px 10px;color:var(--g);font-size:11px;">&#127942; Odule hak kazaniyor ('+p.mul+')</div>':'';
+    return '<div class="prow" id="pr-'+p.id+'">'+
+      '<div class="prow-top">'+
+        '<img class="prow-img" src="'+(p.img||'')+'" onerror="this.style.opacity=\'.2\'" alt="">'+
+        '<div><div class="prow-game">'+p.game+'</div><div class="prow-mul">'+p.mul+'</div></div>'+
+      '</div>'+
+      '<div class="prow-det">'+
+        '<div class="prow-det-item"><span class="prow-det-k">Kullanici</span><span class="prow-det-v">'+p.user+'</span></div>'+
+        '<div class="prow-det-item"><span class="prow-det-k">Tarih</span><span class="prow-det-v">'+p.date+'</span></div>'+
+        '<div class="prow-det-item" style="grid-column:1/-1;"><span class="prow-det-k">Replay</span><span class="prow-det-v"><a href="'+p.link+'" target="_blank" style="color:var(--g);word-break:break-all;font-size:10px;">'+p.link+'</a></span></div>'+
+        vBadge+pBadge+
+      '</div>'+
+      '<div class="prow-acts">'+
+        '<button class="bappr" onclick="approvePend('+p.id+')">&#10003; Onayla</button>'+
+        '<button class="brej" onclick="rejectPend('+p.id+')">&#10005; Reddet</button>'+
+        '<select class="ainp" style="max-width:130px;font-size:12px;" onchange="setPendSp('+p.id+',this.value)"><option value="">— Sponsor —</option>'+spOpts+'</select>'+
+        '<button class="bsec" onclick="markVerif('+p.id+')" style="font-size:11px;padding:7px 10px;">&#10003; Dogru</button>'+
+        '<button class="bsec" onclick="markPrize('+p.id+')" style="font-size:11px;padding:7px 10px;">&#127942; Odul</button>'+
+      '</div>'+
+    '</div>';
+  }).join('');
 }
 
 function rWinsAdm(){
-  document.getElementById('wins-badge').textContent=wins.length+' kazanç';
-  document.getElementById('wadm-list').innerHTML=wins.map((w,i)=>`
-    <div class="wadm-row">
-      <img class="wadm-img" src="${w.img}" onerror="this.style.opacity='.1'" alt="">
-      <div class="wadm-info">
-        <div class="wadm-game">${w.game} <span class="wadm-mul">${w.mul}</span></div>
-        <div class="wadm-meta">${w.user}${w.sponsor?' · <span style="color:var(--g)">'+w.sponsor+'</span>':''} · <a href="${w.link}" target="_blank" style="color:var(--g);font-size:10px;">Replay ↗</a></div>
-      </div>
-      <div style="display:flex;gap:6px;flex-shrink:0;">
-        <button class="bico" onclick="mvWin(${i},-1)">↑</button>
-        <button class="bico" onclick="mvWin(${i},1)">↓</button>
-        <button class="bdang" onclick="delWin(${w.id})">Sil</button>
-      </div>
-    </div>`).join('');
+  var el=document.getElementById('wadm-list');
+  if(!el)return;
+  document.getElementById('wins-badge').textContent=wins.length+' kazanc';
+  el.innerHTML=wins.map(function(w,i){
+    var sp=w.sponsor?'<span style="color:var(--g);">'+w.sponsor+'</span>':'';
+    return '<div class="wadm-row">'+
+      '<img class="wadm-img" src="'+w.img+'" onerror="this.style.opacity=\'.1\'" alt="">'+
+      '<div style="flex:1;min-width:0;">'+
+        '<div class="wadm-game">'+w.game+' <span class="wadm-mul">'+w.mul+'</span></div>'+
+        '<div class="wadm-meta">'+w.user+(w.sponsor?' · '+w.sponsor:'')+' · <a href="'+w.link+'" target="_blank" style="color:var(--g);font-size:10px;">Replay &#8599;</a></div>'+
+      '</div>'+
+      '<div style="display:flex;gap:5px;flex-shrink:0;">'+
+        '<button class="bico" onclick="mvWin('+i+',-1)">&#8593;</button>'+
+        '<button class="bico" onclick="mvWin('+i+',1)">&#8595;</button>'+
+        '<button class="bdang" onclick="delWin('+w.id+')">Sil</button>'+
+      '</div>'+
+    '</div>';
+  }).join('');
 }
 
 function rUsers(){
-  const q=(document.getElementById('user-search')?.value||'').toLowerCase();
-  const fil=q?users.filter(u=>u.u.toLowerCase().includes(q)||u.ph.includes(q)):users;
-  const el=document.getElementById('user-search-cnt');
-  if(el)el.textContent=fil.length+'/'+users.length;
-  document.getElementById('users-badge').textContent=users.length+' üye';
-  const l=document.getElementById('users-adm-list');
-  if(!l)return;
-  if(!users.length){l.innerHTML='<div class="empty">Henüz kayıtlı üye yok</div>';return;}
-  if(!fil.length){l.innerHTML='<div class="empty">Arama sonucu bulunamadı</div>';return;}
-  l.innerHTML=fil.map(u=>`
-    <div class="user-row">
-      <div class="user-av">${u.u[0].toUpperCase()}</div>
-      <div class="user-info">
-        <div class="user-name">${u.u}</div>
-        <div class="user-meta">${u.ph} · Kayıt: ${u.date}</div>
-        <div class="user-clicks">En çok tıklanan: ${getMostClicked(u)}</div>
-      </div>
-      <button class="bdang" onclick="delUser(${u.id})">Sil</button>
-    </div>`).join('');
+  var q=(document.getElementById('user-search')?document.getElementById('user-search').value:'').toLowerCase();
+  var fil=q?users.filter(function(u){return u.u.toLowerCase().includes(q)||u.ph.includes(q);}):users;
+  var el=document.getElementById('users-adm-list');
+  if(el)document.getElementById('users-badge').textContent=users.length+' uye';
+  if(!el)return;
+  if(!users.length){el.innerHTML='<div class="empty">Henuz kayitli uye yok</div>';return;}
+  el.innerHTML=fil.map(function(u){
+    var clicks=u.clicks?Object.entries(u.clicks).sort(function(a,b){return b[1]-a[1];}).slice(0,3).map(function(e){return e[0]+' ('+e[1]+'x)';}).join(', '):'—';
+    return '<div class="user-row">'+
+      '<div class="user-av">'+u.u[0].toUpperCase()+'</div>'+
+      '<div style="flex:1;min-width:0;">'+
+        '<div class="user-name">'+u.u+'</div>'+
+        '<div class="user-meta">'+u.ph+' · Kayit: '+u.date+'</div>'+
+        '<div style="font-size:10px;color:var(--g);margin-top:2px;">Tiklamalar: '+clicks+'</div>'+
+      '</div>'+
+      '<button class="bdang" onclick="delUser('+u.id+')">Sil</button>'+
+    '</div>';
+  }).join('');
 }
+function renderUsersAdm(){rUsers();}
 function renderUsersAdmin(){rUsers();}
 function getMostClicked(u){
   if(!u.clicks||!Object.keys(u.clicks).length)return'—';
@@ -540,18 +612,22 @@ function rThemes(){
 }
 
 function rSocGrid(){
-  document.getElementById('soc-grid').innerHTML=socChannels.map((c,i)=>`
-    <div class="soc-item">
-      <div class="soc-icon" style="background:${c.color||'#2a2a40'}">${c.icon}</div>
-      <div class="soc-info">
-        <div class="soc-name">${c.name}</div>
-        <div class="soc-url">${c.url}</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:4px;">
-        <label class="tgl" title="Aktif"><input type="checkbox"${c.active?' checked':''} onchange="toggleSoc(${c.id},this.checked)"><span class="tsl"></span></label>
-        <button class="bdang" onclick="delSoc(${c.id})" style="padding:3px 7px;font-size:10px;">Sil</button>
-      </div>
-    </div>`).join('');
+  var el=document.getElementById('soc-grid');
+  if(!el)return;
+  if(!socChannels.length){el.innerHTML='<div class="empty">Henüz kanal eklenmedi</div>';renderFooter();return;}
+  el.innerHTML=socChannels.map(function(ch,i){
+    return '<div class="soc-item">'+
+      '<div class="soc-icon-el">'+(ch.icon||'🌐')+'</div>'+
+      '<div class="soc-info">'+
+        '<div class="soc-name">'+ch.name+'</div>'+
+        '<div class="soc-url">'+ch.url+'</div>'+
+      '</div>'+
+      '<div style="display:flex;flex-direction:column;gap:6px;align-items:center;">'+
+        '<label class="tgl"><input type="checkbox"'+(ch.active?' checked':'')+' onchange="toggleSoc('+ch.id+',this.checked)"><span class="tsl"></span></label>'+
+        '<button class="bdang" onclick="delSoc('+ch.id+')" style="padding:4px 8px;font-size:10px;">Sil</button>'+
+      '</div>'+
+    '</div>';
+  }).join('');
   renderFooter();
 }
 
@@ -572,6 +648,21 @@ function renderSponsorDropdown(){
 }
 
 // ════ ADMIN ACTIONS ════
+
+function toggleSpActive(id,val){
+  var s=sponsors.find(function(x){return x.id===id;});
+  if(s){s.active=val;renderSponsors();rAdmSponsors();toast(s.name+' '+(val?'aktif':'pasif')+' edildi');}
+}
+function toggleSpBanner(id,val){
+  sponsors.forEach(function(s){s.bannerActive=false;});
+  if(val){
+    var s=sponsors.find(function(x){return x.id===id;});
+    if(s){s.bannerActive=true;if(!s.bannerImg)s.bannerImg=s.img;}
+  }
+  renderSponsors();rAdmSponsors();
+  toast(val?'Banner aktif edildi':'Banner kaldırıldı');
+}
+
 function chSpEf(id,ef){const s=sponsors.find(x=>x.id===id);if(s){s.ef=ef;renderSponsors();}}
 function moveSp(i,d){const j=i+d;if(j<0||j>=sponsors.length)return;[sponsors[i],sponsors[j]]=[sponsors[j],sponsors[i]];renderSponsors();rAdmSponsors();}
 function delSp(id){sponsors=sponsors.filter(s=>s.id!==id);renderSponsors();rAdmSponsors();renderSponsorDropdown();toast('Sponsor silindi');}
@@ -921,16 +1012,17 @@ function submitWin(){
   updatePendBadge();
 }
 
-// Update switchTab to handle settings panel
-const _origSwitchTab=window.switchTab;
+// Admin tab switch - TEK TANIM
 function switchTab(el){
-  const panel=el.dataset.p||el.dataset.panel;
-  document.querySelectorAll('.stab,.mtab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.apanel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll(`[data-p="${panel}"],[data-panel="${panel}"]`).forEach(t=>t.classList.add('active'));
-  const pEl=document.getElementById(panel);if(pEl)pEl.classList.add('active');
-  if(panel==='p-settings'||panel==='panel-settings'){updateJpCurr();onOpenSettings();}
-  if(panel==='p-sponsors'||panel==='panel-sponsors'){renderEfPicker();renderTagPicker();}
+  var panel=el.getAttribute('data-p')||el.getAttribute('data-panel')||'';
+  if(!panel)return;
+  document.querySelectorAll('.stab,.mtab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.apanel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('[data-p="'+panel+'"],[data-panel="'+panel+'"]').forEach(function(t){t.classList.add('active');});
+  var pEl=document.getElementById(panel);
+  if(pEl)pEl.classList.add('active');
+  if(panel==='p-settings'){try{updateJpCurr();}catch(e){}try{onOpenSettings();}catch(e){}}
+  if(panel==='p-sp'||panel==='p-sponsors'){try{renderEfPicker();}catch(e){}try{renderTagPicker();}catch(e){}}
 }
 
 function toast(msg,type){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.style.background=type==='err'?'#ef4444':'#22c55e';t.style.color=type==='err'?'#fff':'#000';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
