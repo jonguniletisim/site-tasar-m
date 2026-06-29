@@ -93,8 +93,9 @@ app.use((err, req, res, next) => {
 });
 
 // ─── BAŞLAT ────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`✅ SlotMaster sunucu çalışıyor: http://localhost:${PORT}`);
+// 0.0.0.0 zorunlu — Railway dışarıdan bağlanamaz aksi halde
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`✅ SlotMaster sunucu çalışıyor: http://0.0.0.0:${PORT}`);
   console.log(`   Ortam: ${process.env.NODE_ENV || 'development'}`);
   console.log(`   Admin panel: http://localhost:${PORT}/#admin`);
 });
