@@ -21,117 +21,118 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 #nlogo-txt{font-family:'Bebas Neue',sans-serif;font-size:clamp(20px,5vw,28px);color:var(--g);letter-spacing:2px;}
 #nlogo-img{height:40px;max-width:160px;object-fit:contain;display:none;}
 .nav-right{display:flex;justify-content:flex-end;align-items:center;gap:8px;}
-.nav-socials{display:flex;gap:6px;align-items:center;}
-.nav-soc-btn{width:32px;height:32px;border-radius:8px;border:1px solid #ffffff15;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;text-decoration:none;padding:0;}
-.nav-soc-btn:hover{border-color:var(--g);background:#f0b42915;transform:translateY(-1px);}
-.nav-soc-btn svg{width:16px;height:16px;display:block;}
-.hbg{background:linear-gradient(135deg,rgba(240,180,41,.08),rgba(240,180,41,.03));border:1px solid rgba(240,180,41,.25);border-radius:10px;width:42px;height:42px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;transition:all .2s;box-shadow:0 2px 12px rgba(240,180,41,.1);}
-.hbg:hover{background:linear-gradient(135deg,rgba(240,180,41,.18),rgba(240,180,41,.08));border-color:rgba(240,180,41,.6);box-shadow:0 4px 18px rgba(240,180,41,.25);}
-.hbg span{display:block;width:16px;height:1.5px;background:var(--g);border-radius:2px;transition:all .2s;}
-.hbg:hover span{width:14px;}
-.hbg:hover span:nth-child(2){width:18px;}
+.hbg{background:linear-gradient(135deg,rgba(240,180,41,.08),rgba(240,180,41,.03));border:1px solid rgba(240,180,41,.25);border-radius:10px;width:42px;height:42px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;transition:all .2s;}
+.hbg span{display:block;width:16px;height:1.5px;background:var(--g);border-radius:2px;}
 
 /* DROPDOWN */
-.ndrop{position:fixed;top:70px;right:12px;background:linear-gradient(145deg,#0f0f1e,#161626);border:1px solid rgba(240,180,41,.2);border-radius:14px;padding:8px;min-width:200px;box-shadow:0 16px 48px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04),inset 0 1px 0 rgba(255,255,255,.06);z-index:300;display:none;backdrop-filter:blur(20px);}
-.ndrop.open{display:block;animation:dropIn .18s cubic-bezier(.2,.8,.3,1) forwards;}
-@keyframes dropIn{from{opacity:0;transform:translateY(-6px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
-.ddi{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;border:none;color:#9090b0;font-size:13px;font-weight:500;padding:12px 14px;border-radius:10px;cursor:pointer;white-space:nowrap;transition:all .15s;}
+.ndrop{position:fixed;top:70px;right:12px;background:linear-gradient(145deg,#0f0f1e,#161626);border:1px solid rgba(240,180,41,.2);border-radius:14px;padding:8px;min-width:200px;box-shadow:0 16px 48px rgba(0,0,0,.7);z-index:300;display:none;backdrop-filter:blur(20px);}
+.ndrop.open{display:block;}
+.ddi{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:transparent;border:none;color:#9090b0;font-size:13px;font-weight:500;padding:12px 14px;border-radius:10px;cursor:pointer;}
 .ddi:hover{background:rgba(255,255,255,.06);color:var(--tx);}
 .ddi.gold{color:var(--g);font-weight:600;}
-.ddi.gold:hover{background:rgba(240,180,41,.1);}
 .ddsep{height:1px;background:rgba(255,255,255,.06);margin:4px 8px;}
 
 /* TICKER */
 #ticker{border-top:1px solid #ffffff08;border-bottom:1px solid #ffffff08;background:#0a0a14;overflow:hidden;position:relative;height:46px;}
 .tk-lbl{position:absolute;left:0;top:0;bottom:0;background:#0a0a14;display:flex;align-items:center;padding:0 14px;font-size:12px;color:var(--g);letter-spacing:2px;text-transform:uppercase;border-right:1px solid #ffffff08;z-index:2;white-space:nowrap;font-weight:700;}
+#tk-track{display:flex;position:absolute;top:0;bottom:0;align-items:center;padding-left:140px;will-change:transform;}
+#tk-track.go{animation:tkanim 25s linear infinite;}
+@keyframes tkanim{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tki{display:flex;align-items:center;flex-shrink:0;border-right:1px solid #ffffff06;}
+.tki-in{display:flex;align-items:center;gap:8px;padding:6px 14px;}
+.tki-img{width:32px;height:32px;border-radius:5px;object-fit:cover;background:#1a1a28;}
+.tki-game{font-size:11px;color:var(--tx);}
+.tki-mul{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--g);margin-left:4px;}
 
 /* GIF BANNER */
 #gif-banner{display:none;width:100%;overflow:hidden;background:#0d0d18;border-bottom:1px solid #ffffff08;}
 #gif-banner img{width:100%;height:80px;object-fit:cover;display:block;}
-@media(min-width:768px){#gif-banner img{height:150px;}}
 
 /* MAIN */
 #site-main{max-width:1400px;margin:0 auto;padding:14px;}
-.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;margin-top:14px;}
 .eyebrow{font-size:13px;color:var(--g);letter-spacing:3px;text-transform:uppercase;font-weight:700;}
+.see-all-btn{background:var(--g);color:#000;border:none;border-radius:20px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;}
 
 /* SPONSOR GRID */
 #sp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 @media(min-width:600px){#sp-grid{grid-template-columns:repeat(4,1fr);}}
 @media(min-width:1000px){#sp-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr));}}
 
-/* SPONSOR CARD */
-.spc{background:linear-gradient(145deg,#161622,#1d1d2e);border:1px solid #38384e;border-radius:12px;cursor:pointer;overflow:hidden;display:flex;flex-direction:column;transition:transform .28s cubic-bezier(.2,.8,.3,1.2),border-color .2s,box-shadow .28s;box-shadow:0 6px 24px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);}
-.spc:hover{transform:translateY(-8px) scale(1.03);border-color:var(--g);box-shadow:0 20px 50px rgba(0,0,0,.8),0 0 30px rgba(240,180,41,.2),inset 0 1px 0 rgba(255,255,255,.1);}
+.spc{background:linear-gradient(145deg,#161622,#1d1d2e);border:1px solid #38384e;border-radius:12px;cursor:pointer;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 6px 24px rgba(0,0,0,.6);}
 .spc-topbar{height:3px;width:100%;background:linear-gradient(90deg,transparent,var(--g),transparent);}
-.spc-logo{width:100%;aspect-ratio:1/1;overflow:hidden;position:relative;background:#0d0d1a;display:flex;align-items:center;justify-content:center;padding:10px;}
-.spc-img{max-width:100%;max-height:100%;object-fit:contain;display:block;}
-.spc-body{padding:9px 10px 11px;display:flex;flex-direction:column;gap:6px;background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(0,0,0,.15));}
-.spc-bonus{font-size:11px;line-height:1.4;color:#c0c0d8;text-align:center;min-height:2.8em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.spc-logo{width:100%;aspect-ratio:1/1;overflow:hidden;background:#0d0d1a;display:flex;align-items:center;justify-content:center;padding:10px;}
+.spc-img{max-width:100%;max-height:100%;object-fit:contain;}
+.spc-body{padding:9px 10px 11px;display:flex;flex-direction:column;gap:6px;}
+.spc-bonus{font-size:11px;line-height:1.4;color:#c0c0d8;text-align:center;min-height:2.8em;}
 .spc-btn{width:100%;background:var(--g);color:#000;font-size:11px;font-weight:700;padding:9px 0;border-radius:7px;border:none;cursor:pointer;}
 
-/* FLOAT */
-.fbwrap{position:fixed;bottom:16px;right:14px;z-index:150;display:flex;gap:8px;align-items:center;}
+/* WINS GRID (REPLAYS) */
+#wins-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px;}
+@media(min-width:600px){#wins-grid{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:1000px){#wins-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}}
+.wc{background:linear-gradient(145deg,#161622,#1a1a2a);border:1px solid #35354a;border-radius:10px;overflow:hidden;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.4);}
+.wc-iw{position:relative;overflow:hidden;width:100%;padding-top:56.25%;background:#000;}
+.wc-img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;}
+.wc-badge{position:absolute;top:5px;right:5px;background:#fff;color:#111;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;}
+.wc-body{padding:9px 11px;}
+.wc-game{font-size:10px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.wc-mul{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--g);line-height:1.1;}
+.wc-user{font-size:10px;color:var(--mu);margin-top:2px;}
+
+/* FLOAT & OVERLAY */
+.fbwrap{position:fixed;bottom:16px;right:14px;z-index:150;display:flex;gap:8px;}
 .fbtn{background:var(--g);color:#000;border:none;padding:12px 20px;border-radius:24px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(240,180,41,.4);}
-
-/* OVERLAY LAYER */
-.ov{display:none;position:fixed;inset:0;z-index:400;background:rgba(8,6,20,.88);backdrop-filter:blur(8px);align-items:flex-end;justify-content:center;}
+.ov{display:none;position:fixed;inset:0;z-index:400;background:rgba(8,6,20,.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:12px;}
 .ov.open{display:flex;}
-@media(min-width:560px){.ov{align-items:center;}}
-
-/* MODAL BOX */
-.mbox{background:linear-gradient(145deg,#17172a,#1e1b32);border:1px solid #3a3a55;border-radius:16px 16px 0 0;width:100%;max-width:500px;padding:18px 16px 28px;max-height:90vh;overflow-y:auto;position:relative;}
-@media(min-width:560px){.mbox{border-radius:16px;}}
-.mcls{position:absolute;top:12px;right:14px;background:transparent;border:none;color:#7070a0;font-size:20px;cursor:pointer;width:32px;height:32px;display:flex;align-items:center;justify-content:center;}
-.mhdl{width:34px;height:3px;background:#ffffff18;border-radius:2px;margin:0 auto 14px;}
+.mbox{background:linear-gradient(145deg,#17172a,#1e1b32);border:1px solid #3a3a55;border-radius:16px;width:100%;max-width:500px;padding:18px 16px 28px;position:relative;}
+.mcls{position:absolute;top:12px;right:14px;background:transparent;border:none;color:#7070a0;font-size:20px;cursor:pointer;}
 .mfg{margin-bottom:12px;}
-.mfg label{display:block;font-size:10px;color:#8080a0;margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase;}
+.mfg label{display:block;font-size:10px;color:#8080a0;margin-bottom:5px;text-transform:uppercase;}
 .minp{width:100%;background:#1a1a28;border:1px solid #2a2a40;border-radius:8px;padding:12px;color:var(--tx);font-size:14px;outline:none;}
-.minp:focus{border-color:var(--g);}
-.mbtn{width:100%;background:var(--g);border:none;color:#000;padding:14px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;}
+.mbtn{width:100%;background:var(--g);border:none;color:#000;padding:14px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;}
 .merr{display:none;background:#ef444415;border:1px solid #ef444330;border-radius:8px;padding:10px 12px;font-size:12px;color:#f87171;margin-bottom:10px;}
 
-/* ADMIN VIEW */
+/* REPLAY PLAYER OVERLAY */
+#rep-ov{display:none;position:fixed;inset:0;z-index:800;background:rgba(4,2,12,.85);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:12px;}
+#rep-ov.open{display:flex;}
+.rep-box{background:#0d0d18;border:1px solid #f0b42928;border-radius:14px;width:100%;max-width:720px;overflow:hidden;position:relative;}
+.rep-fw{position:relative;width:100%;padding-top:56.25%;background:#000;}
+.rep-fw iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+
+/* ADMIN PANELS */
 #adm-view{display:none;position:fixed;inset:0;background:#111120;z-index:500;overflow-y:auto;}
-#adm-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#181828;border-bottom:1px solid #f0b42930;position:sticky;top:0;z-index:200;}
-.adm-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--g);}
-.btn-back{background:#f0b42918;border:1px solid #f0b42940;color:var(--g);padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;}
-.adm-body{display:flex;min-height:calc(100vh - 55px);}
-.adm-side{width:210px;flex-shrink:0;background:#161626;border-right:1px solid #2a2a40;position:sticky;top:55px;height:calc(100vh - 55px);overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;gap:2px;}
+#adm-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#181828;border-bottom:1px solid #f0b42930;}
+.btn-back{background:#f0b42918;border:1px solid #f0b42940;color:var(--g);padding:8px 16px;border-radius:8px;font-size:12px;cursor:pointer;}
+.adm-body{display:flex;}
+.adm-side{width:210px;background:#161626;border-right:1px solid #2a2a40;padding:14px 10px;display:flex;flex-direction:column;gap:2px;}
 .adm-cont{flex:1;padding:22px;}
-.stab{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:9px;font-size:13px;color:#8080a0;cursor:pointer;border:1px solid transparent;background:transparent;width:100%;text-align:left;font-weight:500;}
-.stab.on{background:#f0b42915;border-color:#f0b42935;color:var(--g);font-weight:600;}
-.s-sec{font-size:9px;color:#404060;letter-spacing:2px;text-transform:uppercase;padding:10px 13px 5px;font-weight:600;}
+.stab{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:9px;font-size:13px;color:#8080a0;cursor:pointer;background:transparent;border:none;width:100%;text-align:left;}
+.stab.on{background:#f0b42915;color:var(--g);font-weight:600;}
 .apnl{display:none;}
 .apnl.on{display:block;}
 .ac{background:#1a1a2e;border:1px solid #2e2e48;border-radius:12px;padding:20px;margin-bottom:14px;}
-.ac-t{font-size:11px;color:var(--g);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px;font-weight:700;}
+.ac-t{font-size:11px;color:var(--g);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
 .ai{width:100%;background:#1e1e30;border:1px solid #30304a;border-radius:8px;padding:10px 12px;color:#e0e0f0;font-size:13px;outline:none;}
-.al{font-size:11px;color:#8080a0;margin-bottom:5px;display:block;font-weight:500;}
+.al{font-size:11px;color:#8080a0;margin-bottom:5px;display:block;}
 .af{margin-bottom:12px;}
 .trow{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:9px;background:#1a1a28;border:1px solid #2a2a40;margin-bottom:8px;}
 
 /* TOGGLE DESIGN */
-.tgl{position:relative;width:40px;height:22px;flex-shrink:0;display:inline-block;}
+.tgl{position:relative;width:40px;height:22px;display:inline-block;}
 .tgl input{opacity:0;width:0;height:0;}
-.tsl{position:absolute;inset:0;background:#2a2a40;border-radius:11px;transition:.22s;cursor:pointer;border:1px solid #3a3a55;}
+.tsl{position:absolute;inset:0;background:#2a2a40;border-radius:11px;cursor:pointer;border:1px solid #3a3a55;}
 .tsl::before{content:'';position:absolute;width:16px;height:16px;left:2px;top:2px;background:#606080;border-radius:50%;transition:.22s;}
 .tgl input:checked+.tsl{background:var(--g);border-color:var(--g);}
 .tgl input:checked+.tsl::before{transform:translateX(18px);background:#000;}
 
 .bp{background:var(--g);border:none;color:#000;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;}
-.bs{background:transparent;border:1px solid #3a3a55;color:#b0b0d0;padding:9px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;margin-top:4px;}
+.bs{background:transparent;border:1px solid #3a3a55;color:#b0b0d0;padding:9px 14px;border-radius:8px;font-size:12px;cursor:pointer;margin-top:4px;}
 .sp-row{background:#1e1e30;border:1px solid #30304a;border-radius:9px;padding:10px 13px;display:flex;align-items:center;gap:10px;margin-bottom:8px;}
-.sp-ai{width:50px;height:50px;border-radius:7px;object-fit:contain;background:#2a2a40;flex-shrink:0;}
+.sp-ai{width:50px;height:50px;border-radius:7px;object-fit:contain;background:#2a2a40;}
 .sp-inf{flex:1;min-width:0;}
 .sp-nm{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;}
-.sp-bn{font-size:11px;color:#7070a0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-
-.adm-mtabs{display:none;background:#0a0a12;border-bottom:1px solid #1a1a28;overflow-x:auto;position:sticky;top:55px;z-index:190;}
-.mtab{padding:11px 14px;font-size:12px;color:#7070a0;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;}
-.mtab.on{color:var(--g);border-bottom-color:var(--g);}
-@media(max-width:767px){.adm-side{display:none;}.adm-mtabs{display:flex;}.adm-cont{padding:12px;}.adm-body{flex-direction:column;}}
-#toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(14px);background:#22c55e;color:#000;padding:10px 22px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;z-index:900;pointer-events:none;}
+#toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(14px);background:#22c55e;color:#000;padding:10px 22px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;transition:all .3s;z-index:900;}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
@@ -153,14 +154,25 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
     <button class="ddi gold" id="dd-submit">&#9650; Kazanc Gonder</button>
   </div>
 
+  <!-- TICKER SYSTEM -->
+  <div id="ticker">
+    <div class="tk-lbl">Canli Akis</div>
+    <div id="tk-track" class="go"></div>
+  </div>
+
   <div id="gif-banner"><img id="gif-img" src="" alt=""></div>
   
   <div id="site-main">
     <div id="home-page">
-      <div style="padding:14px 0 10px;">
-        <div class="sec-hdr"><div class="eyebrow">Sponsor Siteler</div></div>
-        <div id="sp-grid"></div>
+      <!-- SPONSORS -->
+      <div class="sec-hdr"><div class="eyebrow">Sponsor Siteler</div></div>
+      <div id="sp-grid"></div>
+
+      <!-- REPLAYS / WINS -->
+      <div class="sec-hdr">
+        <div class="eyebrow">En Yuksek Replay Kazanclari</div>
       </div>
+      <div id="wins-grid"></div>
     </div>
   </div>
 </div>
@@ -169,62 +181,51 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
   <button class="fbtn" id="btn-sub-float">&#9650; Kazanc Gonder</button>
 </div>
 
-<!-- ADMIN VIEW -->
-<div id="adm-view">
-  <div id="adm-nav"><span class="adm-logo">ADMIN <span>Paneli</span></span><button class="btn-back" id="btn-adm-back">&#8592; Siteye Don</button></div>
-  <div class="adm-mtabs">
-    <div class="mtab on" data-p="p-sp">&#128230; Sponsorlar</div>
-    <div class="mtab" data-p="p-banner">&#128444; Banner & Logo</div>
+<!-- REPLAY MODAL POPUP -->
+<div id="rep-ov" onclick="closeReplay()">
+  <div class="rep-box" onclick="event.stopPropagation()">
+    <button class="mcls" style="color:#fff; top:5px; right:10px; z-index:900;" onclick="closeReplay()">&#10005;</button>
+    <div class="rep-fw">
+      <iframe id="rep-iframe" src="" allowfullscreen></div>
+    </div>
   </div>
+</div>
+
+<!-- ADMIN GATEWAY -->
+<div id="adm-view">
+  <div id="adm-nav"><span style="font-family:'Bebas Neue'; font-size:24px; color:var(--g);">ADMIN PANELİ</span><button class="btn-back" id="btn-adm-back">&#8592; Siteye Don</button></div>
   <div class="adm-body">
     <div class="adm-side">
-      <div class="s-sec">YONET</div>
       <button class="stab on" data-p="p-sp">&#128230; Sponsorlar</button>
       <button class="stab" data-p="p-banner">&#128444; Banner & Logo</button>
     </div>
     <div class="adm-cont">
-      <!-- SPONSORS PANEL -->
       <div class="apnl on" id="p-sp">
         <div class="ac">
-          <div class="ac-t">Sponsorlar <button class="bp" style="margin-left:auto;font-size:12px;padding:8px 16px;" id="btn-sp-add">+ Yeni Sponsor</button></div>
+          <div class="ac-t">Sponsor Siteler <button class="bp" style="margin-left:auto;" id="btn-sp-add">+ Yeni Sponsor</button></div>
           <div id="sp-adm-list"></div>
         </div>
       </div>
-      
-      <!-- BANNER & LOGO PANEL -->
       <div class="apnl" id="p-banner">
         <div class="ac">
-          <div class="ac-t">Ust Banner / GIF</div>
+          <div class="ac-t">GIF Banner Ayarlari</div>
           <div class="trow">
-            <div><div style="font-size:13px;color:#d0d0e8;font-weight:500;">Banner aktif</div></div>
+            <div>GIF Görünürlüğü</div>
             <label class="tgl"><input type="checkbox" id="gif-tog"><span class="tsl"></span></label>
           </div>
-          <div class="af">
-            <label class="al">Gorsel / GIF URL</label>
-            <input class="ai" id="gif-url" placeholder="https://...gif veya .jpg">
-          </div>
+          <div class="af"><label class="al">Banner URL</label><input class="ai" id="gif-url"></div>
         </div>
-        
         <div class="ac">
-          <div class="ac-t">Site Logosu (Nav)</div>
-          <div class="af">
-            <label class="al">Logo Tipi / Secimi</label>
-            <div style="display:flex;gap:8px;margin-bottom:8px;">
-              <button class="bs" id="btn-logo-mode-txt">Yazi Modu</button>
-              <button class="bs" id="btn-logo-mode-img">Gorsel Modu</button>
-            </div>
-            <input class="ai" id="logo-url-inp" placeholder="https://.../logo.png" style="margin-bottom:8px;">
-            <input type="file" id="logo-file" accept="image/*" style="display:none;">
-            <button class="bs" id="btn-logo-file-trigger">&#128193; Bilgisayardan Logo Yukle</button>
-            <div id="logo-prev-wrap" style="margin-top:10px; background:#0a0a14; padding:10px; text-align:center; display:none;">
-              <img id="logo-prev-img" src="" style="height:40px;max-width:160px;object-fit:contain;">
-            </div>
+          <div class="ac-t">Navigasyon Logosu</div>
+          <div style="display:flex; gap:8px; margin-bottom:12px;">
+            <button class="bs" id="btn-logo-mode-txt">Metin Modu</button>
+            <button class="bs" id="btn-logo-mode-img">Görsel Modu</button>
           </div>
+          <input class="ai" id="logo-url-inp" placeholder="Logo Resim Linki / Base64"><br>
+          <input type="file" id="logo-file" accept="image/*" style="display:none;">
+          <button class="bs" id="btn-logo-file-trigger">&#128193; Dosyadan Logo Yükle</button>
         </div>
-        
-        <div class="ac">
-          <button class="bp" id="btn-banner-save" style="width:100%;">&#128190; Ayarlari Sisteme Kaydet</button>
-        </div>
+        <button class="bp" id="btn-banner-save" style="width:100%;">Sistemi Kaydet</button>
       </div>
     </div>
   </div>
@@ -232,59 +233,55 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 
 <!-- ADMIN LOGIN -->
 <div class="ov" id="ov-admin-login">
-  <div class="mbox" style="border-color:#f0b42940;">
-    <div class="mhdl"></div>
-    <div style="text-align:center;margin-bottom:4px;">
-      <div style="font-size:32px;margin-bottom:8px;">&#128274;</div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--g);letter-spacing:2px;">ADMİN PANELİ</div>
-    </div>
+  <div class="mbox">
+    <div style="text-align:center; margin-bottom:12px; font-family:'Bebas Neue'; font-size:24px; color:var(--g);">Yönetici Girişi</div>
     <div class="merr" id="admin-login-err"></div>
-    <div class="mfg"><label>ADMIN KULLANICI ADI</label><input type="text" class="minp" id="admin-login-u" value="admin"></div>
-    <div class="mfg"><label>ADMIN SIFRESI</label><input type="password" class="minp" id="admin-login-p" value="slotmaster2026"></div>
-    <button class="mbtn" id="btn-admin-login-submit">Giris Yap</button>
+    <div class="mfg"><label>Kullanıcı Adı</label><input type="text" class="minp" id="admin-login-u" value="admin"></div>
+    <div class="mfg"><label>Şifre</label><input type="password" class="minp" id="admin-login-p" value="slotmaster2026"></div>
+    <button class="mbtn" id="btn-admin-login-submit">Giriş</button>
   </div>
 </div>
 
-<!-- NEW SPONSOR MODAL -->
+<!-- ADD MODAL -->
 <div class="ov" id="ov-sp-add">
   <div class="mbox">
-    <div class="mhdl"></div><button class="mcls" data-close="sp-add">&#10005;</button>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:16px;">YENI SPONSOR EKLE</div>
-    <div class="mfg"><label>SITE ADI</label><input type="text" class="minp" id="nsp-name" placeholder="CASIBOM"></div>
-    <div class="mfg"><label>LINK</label><input type="text" class="minp" id="nsp-link" placeholder="https://..."></div>
-    <div class="mfg"><label>BONUS</label><input type="text" class="minp" id="nsp-bonus" placeholder="%100 Bonus"></div>
+    <button class="mcls" data-close="sp-add">&#10005;</button>
+    <div style="font-family:'Bebas Neue'; font-size:20px; margin-bottom:12px;">YENİ SPONSOR SİTE</div>
+    <div class="mfg"><label>Site Adı</label><input type="text" class="minp" id="nsp-name"></div>
+    <div class="mfg"><label>Yönlendirme Linki</label><input type="text" class="minp" id="nsp-link"></div>
+    <div class="mfg"><label>Bonus Metni</label><input type="text" class="minp" id="nsp-bonus"></div>
     <div class="mfg">
-      <label>LOGO URL</label>
-      <input type="text" class="minp" id="nsp-img" placeholder="https://..." style="margin-bottom:6px;">
+      <label>Logo (URL veya Yükle)</label>
+      <input type="text" class="minp" id="nsp-img" style="margin-bottom:6px;">
       <input type="file" id="nsp-file" accept="image/*" style="display:none;">
-      <button class="bs" id="btn-nsp-file-trigger" type="button">&#128193; Dosya Sec</button>
-      <div style="margin-top:6px;text-align:center;"><img id="nsp-prev" src="" style="width:80px;height:80px;object-fit:contain;display:none;background:#1a1a28;padding:5px;border-radius:6px;margin:0 auto;"></div>
+      <button class="bs" id="btn-nsp-file-trigger" type="button">Dosya Seç</button>
+      <img id="nsp-prev" src="" style="width:60px; height:60px; object-fit:contain; display:none; margin-top:6px;">
     </div>
-    <button class="mbtn" id="btn-sp-add-save">Sisteme Ekle</button>
+    <button class="mbtn" id="btn-sp-add-save">Kaydet</button>
   </div>
 </div>
 
-<!-- EDIT SPONSOR MODAL -->
+<!-- EDIT MODAL -->
 <div class="ov" id="ov-sp-edit">
   <div class="mbox">
-    <div class="mhdl"></div><button class="mcls" data-close="sp-edit">&#10005;</button>
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:16px;">SPONSORU DUZENLE</div>
+    <button class="mcls" data-close="sp-edit">&#10005;</button>
+    <div style="font-family:'Bebas Neue'; font-size:20px; margin-bottom:12px;">SPONSORU DÜZENLE</div>
     <input type="hidden" id="esp-id">
-    <div class="mfg"><label>SITE ADI</label><input type="text" class="minp" id="esp-name"></div>
-    <div class="mfg"><label>LINK</label><input type="text" class="minp" id="esp-link"></div>
-    <div class="mfg"><label>BONUS</label><input type="text" class="minp" id="esp-bonus"></div>
+    <div class="mfg"><label>Site Adı</label><input type="text" class="minp" id="esp-name"></div>
+    <div class="mfg"><label>Linki</label><input type="text" class="minp" id="esp-link"></div>
+    <div class="mfg"><label>Bonus Açıklaması</label><input type="text" class="minp" id="esp-bonus"></div>
     <div class="mfg">
-      <label>LOGO URL</label>
+      <label>Logo Resim</label>
       <input type="text" class="minp" id="esp-img" style="margin-bottom:6px;">
       <input type="file" id="esp-file" accept="image/*" style="display:none;">
-      <button class="bs" id="btn-esp-file-trigger" type="button">&#128193; Yeni Dosya Sec</button>
-      <div style="margin-top:6px;text-align:center;"><img id="esp-prev" src="" style="width:80px;height:80px;object-fit:contain;background:#1a1a28;padding:5px;border-radius:6px;margin:0 auto;"></div>
+      <button class="bs" id="btn-esp-file-trigger" type="button">Yeni Dosya Seç</button>
+      <img id="esp-prev" src="" style="width:60px; height:60px; object-fit:contain; display:block; margin-top:6px;">
     </div>
     <div class="mfg">
-      <label>DURUM (AKTIF / PASIF)</label>
+      <label>Sitede Göster (Açık / Kapalı)</label>
       <label class="tgl"><input type="checkbox" id="esp-active-tog"><span class="tsl"></span></label>
     </div>
-    <button class="mbtn" id="btn-esp-save-submit">Degisiklikleri Kaydet</button>
+    <button class="mbtn" id="btn-esp-save-submit">Değişiklikleri Uygula</button>
   </div>
 </div>
 
@@ -294,18 +291,27 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 "use strict";
 
 var AU = "admin", AP = "slotmaster2026";
-var sponsors = [
-  {id:1,name:'CASIBOM',bonus:'%100 Hosgeldin 1.000 TL',link:'https://google.com',img:'https://abidin11.com/uploads/sponsors/img_69d9987b9d9bf6.55381307.png',active:true},
-  {id:2,name:'MARSBAHIS',bonus:'250 TL Min. Yatirim',link:'https://google.com',img:'https://abidin11.com/uploads/sponsors/sponsor_20260624_044446_065a2b39.png',active:true}
-];
 var isLogoImgMode = false;
 var systemBannerActive = false;
 var systemBannerUrl = "";
 
+// SABİT SPONSOR VERİLERİ
+var sponsors = [
+  {id:1,name:'CASIBOM',bonus:'%100 Hosgeldin 1.000 TL',link:'https://google.com',img:'https://abidin11.com/uploads/sponsors/img_69d9987b9d9bf6.55381307.png',active:true},
+  {id:2,name:'MARSBAHIS',bonus:'250 TL Min. Yatirim',link:'https://google.com',img:'https://abidin11.com/uploads/sponsors/sponsor_20260624_044446_065a2b39.png',active:true}
+];
+
+// SABİT REPLAY VE TICKER VERİLERİ (Geri Getirilen Alanlar)
+var replays = [
+  {id:101,user:'Ahmet_Slot',game:'Sweet Bonanza',mul:'12,500x',img:'https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg',video:'https://www.youtube.com/embed/dQw4w9WgXcQ'},
+  {id:102,user:'Serkan_Vip',game:'Gates of Olympus',mul:'5,000x',img:'https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg',video:'https://www.youtube.com/embed/dQw4w9WgXcQ'},
+  {id:103,user:'Cokobey_Fan',game:'Sugar Rush',mul:'8,400x',img:'https://img.youtube.com/vi/dQw4w9WgXcQ/0.jpg',video:'https://www.youtube.com/embed/dQw4w9WgXcQ'}
+];
+
 function G(id){return document.getElementById(id);}
 function toast(m){var t=G('toast');if(!t)return;t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2500);}
 
-// ROUTING / NAVIGATION CONTROLS
+// ROUTING CONTROLS
 function checkRouting() {
   if (window.location.hash === '#admin' || window.location.pathname.indexOf('/admin') !== -1) {
     if (sessionStorage.getItem('sm_admin_authed') === '1') {
@@ -322,31 +328,27 @@ window.addEventListener('hashchange', checkRouting);
 window.addEventListener('load', function() {
   checkRouting();
   renderSponsors();
+  renderReplays();
+  renderTicker();
 });
 
 function openOv(id){var el=G('ov-'+id);if(el)el.classList.add('open');}
 function closeOv(id){var el=G('ov-'+id);if(el)el.classList.remove('open');}
 
 document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('ov')) {
-    e.target.classList.remove('open');
-  }
-  if (e.target.hasAttribute('data-close')) {
-    closeOv(e.target.getAttribute('data-close'));
-  }
+  if (e.target.classList.contains('ov')) e.target.classList.remove('open');
+  if (e.target.hasAttribute('data-close')) closeOv(e.target.getAttribute('data-close'));
   var tab = e.target.closest('[data-p]');
   if (tab && (tab.classList.contains('stab') || tab.classList.contains('mtab'))) {
     switchTab(tab.getAttribute('data-p'));
   }
-  if (e.target.id === 'hbg-btn') {
-    G('ndrop').classList.toggle('open');
-  }
+  if (e.target.id === 'hbg-btn') G('ndrop').classList.toggle('open');
 });
 
 function switchTab(panelId) {
   document.querySelectorAll('.stab, .mtab').forEach(function(t){t.classList.remove('on');});
   document.querySelectorAll('.apnl').forEach(function(p){p.classList.remove('on');});
-  document.querySelectorAll('[data-p="'+panelId+'"]').forEach(function(t){t.add ? t.add('on') : t.classList.add('on');});
+  document.querySelectorAll('[data-p="'+panelId+'"]').forEach(function(t){t.classList.add('on');});
   var pEl = G(panelId); if(pEl) pEl.classList.add('on');
 }
 
@@ -366,60 +368,9 @@ function hideAdminPanel() {
   G('fbwrap').style.display = 'flex';
 }
 
-// BASE64 IMAGE FILE LOADERS
-function bindFileToInput(fileInputId, inputUrlId, imgPreviewId) {
-  var fileEl = G(fileInputId);
-  if (!fileEl) return;
-  fileEl.onchange = function(e) {
-    var file = e.target.files[0];
-    if (!file) return;
-    var reader = new FileReader();
-    reader.onload = function(evt) {
-      G(inputUrlId).value = evt.target.result;
-      if (imgPreviewId) {
-        var prv = G(imgPreviewId);
-        prv.src = evt.target.result;
-        prv.style.display = 'block';
-      }
-      toast('Gorsel basariyla hafizaya alindi!');
-    };
-    reader.readAsDataURL(file);
-  };
-}
-
-bindFileToInput('logo-file', 'logo-url-inp', 'logo-prev-img');
-bindFileToInput('nsp-file', 'nsp-img', 'nsp-prev');
-bindFileToInput('esp-file', 'esp-img', 'esp-prev');
-
-G('btn-logo-file-trigger').onclick = function(){ G('logo-file').click(); };
-G('btn-nsp-file-trigger').onclick = function(){ G('nsp-file').click(); };
-G('btn-esp-file-trigger').onclick = function(){ G('esp-file').click(); };
-
-G('btn-logo-mode-txt').onclick = function() { isLogoImgMode = false; toast('Yazi modu secildi.'); };
-G('btn-logo-mode-img').onclick = function() { isLogoImgMode = true; toast('Gorsel modu secildi.'); };
-
-// ADMIN LOGIN CORE
-G('btn-admin-login-submit').onclick = function() {
-  var u = G('admin-login-u').value;
-  var p = G('admin-login-p').value;
-  if (u === AU && p === AP) {
-    sessionStorage.setItem('sm_admin_authed', '1');
-    showAdminPanel();
-  } else {
-    G('admin-login-err').textContent = "Yeniden deneyiniz!";
-    G('admin-login-err').style.display = 'block';
-  }
-};
-
-G('btn-adm-back').onclick = function() {
-  window.location.hash = '';
-  hideAdminPanel();
-};
-
-// FRONTEND RENDER
+// FRONTEND RENDERS
 function renderSponsors() {
-  var grid = G('sp-grid');
-  if (!grid) return;
+  var grid = G('sp-grid'); if (!grid) return;
   grid.innerHTML = '';
   sponsors.forEach(function(sp) {
     if (!sp.active) return;
@@ -435,28 +386,104 @@ function renderSponsors() {
   });
 }
 
-// ADMIN LIST RENDER
+function renderReplays() {
+  var grid = G('wins-grid'); if (!grid) return;
+  grid.innerHTML = '';
+  replays.forEach(function(rp) {
+    var card = document.createElement('div');
+    card.className = 'wc';
+    card.onclick = function() { openReplay(rp.video); };
+    card.innerHTML = '<div class="wc-iw"><img class="wc-img" src="'+rp.img+'"><div class="wc-badge">IZLE</div></div>' +
+                     '<div class="wc-body">' +
+                       '<div class="wc-game">'+rp.game+'</div>' +
+                       '<div class="wc-mul">'+rp.mul+'</div>' +
+                       '<div class="wc-user">'+rp.user+'</div>' +
+                     '</div>';
+    grid.appendChild(card);
+  });
+}
+
+function renderTicker() {
+  var track = G('tk-track'); if (!track) return;
+  track.innerHTML = '';
+  var itemsHTML = '';
+  replays.forEach(function(rp) {
+    itemsHTML += '<div class="tki"><div class="tki-in">' +
+                 '<img class="tki-img" src="'+rp.img+'">' +
+                 '<div><div class="tki-game">'+rp.game+'</div><div style="font-size:9px;color:var(--mu)">'+rp.user+'</div></div>' +
+                 '<div class="tki-mul">'+rp.mul+'</div>' +
+                 '</div></div>';
+  });
+  track.innerHTML = itemsHTML + itemsHTML; // Sonsuz döngü hissi için çift ekleme
+}
+
+// VIDEO PLAYER CONTROLS
+window.openReplay = function(url) {
+  G('rep-iframe').src = url;
+  G('rep-ov').classList.add('open');
+};
+window.closeReplay = function() {
+  G('rep-ov').classList.remove('open');
+  G('rep-iframe').src = '';
+};
+
+// FILE & BASE64 SYSTEM
+function bindFileToInput(fileInputId, inputUrlId, imgPreviewId) {
+  var fileEl = G(fileInputId); if (!fileEl) return;
+  fileEl.onchange = function(e) {
+    var file = e.target.files[0]; if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(evt) {
+      G(inputUrlId).value = evt.target.result;
+      if (imgPreviewId) {
+        G(imgPreviewId).src = evt.target.result;
+        G(imgPreviewId).style.display = 'block';
+      }
+      toast('Görsel başarıyla yüklendi!');
+    };
+    reader.readAsDataURL(file);
+  };
+}
+bindFileToInput('logo-file', 'logo-url-inp', 'logo-prev-img');
+bindFileToInput('nsp-file', 'nsp-img', 'nsp-prev');
+bindFileToInput('esp-file', 'esp-img', 'esp-prev');
+
+G('btn-logo-file-trigger').onclick = function(){ G('logo-file').click(); };
+G('btn-nsp-file-trigger').onclick = function(){ G('nsp-file').click(); };
+G('btn-esp-file-trigger').onclick = function(){ G('esp-file').click(); };
+
+G('btn-logo-mode-txt').onclick = function() { isLogoImgMode = false; toast('Metin logosu seçildi.'); };
+G('btn-logo-mode-img').onclick = function() { isLogoImgMode = true; toast('Resim logosu seçildi.'); };
+
+// ADMIN LOGIN SUBMIT
+G('btn-admin-login-submit').onclick = function() {
+  if (G('admin-login-u').value === AU && G('admin-login-p').value === AP) {
+    sessionStorage.setItem('sm_admin_authed', '1');
+    showAdminPanel();
+  } else {
+    G('admin-login-err').textContent = "Hatalı Giriş Bilgileri!";
+    G('admin-login-err').style.display = 'block';
+  }
+};
+G('btn-adm-back').onclick = function() { window.location.hash = ''; hideAdminPanel(); };
+
+// ADMIN SPONSOR ACTIONS
 function renderAdminSponsors() {
-  var list = G('sp-adm-list');
-  if (!list) return;
+  var list = G('sp-adm-list'); if (!list) return;
   list.innerHTML = '';
   sponsors.forEach(function(sp) {
     var row = document.createElement('div');
     row.className = 'sp-row';
     row.innerHTML = '<img class="sp-ai" src="'+sp.img+'">' +
                      '<div class="sp-inf"><div class="sp-nm">'+sp.name+'</div><div class="sp-bn">'+sp.bonus+'</div></div>' +
-                     '<div style="font-size:11px;font-weight:bold;margin-right:10px;color:'+(sp.active?'#22c55e':'#ef4444')+'">'+(sp.active?'Aktif':'Pasif')+'</div>' +
-                     '<button class="bs" style="margin-top:0;" onclick="window.openEditSponsor('+sp.id+')">Duzenle</button>';
+                     '<div style="font-size:11px; font-weight:bold; margin-right:10px; color:'+(sp.active?'#22c55e':'#ef4444')+'">'+(sp.active?'Aktif':'Pasif')+'</div>' +
+                     '<button class="bs" style="margin-top:0;" onclick="window.openEditSponsor('+sp.id+')">Düzenle</button>';
     list.appendChild(row);
   });
 }
 
-// ADD NEW SPONSOR SYSTEM
 G('btn-sp-add').onclick = function() {
-  G('nsp-name').value = '';
-  G('nsp-link').value = '';
-  G('nsp-bonus').value = '';
-  G('nsp-img').value = '';
+  G('nsp-name').value = ''; G('nsp-link').value = ''; G('nsp-bonus').value = ''; G('nsp-img').value = '';
   G('nsp-prev').style.display = 'none';
   openOv('sp-add');
 };
@@ -464,58 +491,43 @@ G('btn-sp-add').onclick = function() {
 G('btn-sp-add-save').onclick = function() {
   var name = G('nsp-name').value;
   var link = G('nsp-link').value;
-  var bonus = G('nsp-bonus').value;
   var img = G('nsp-img').value;
-  if(!name || !link) { toast('Site adi ve Link bos kalamaz!'); return; }
-  
-  var newSp = {
+  if(!name || !link) { toast('Ad ve Link zorunludur!'); return; }
+  sponsors.push({
     id: Date.now(),
     name: name,
     link: link,
-    bonus: bonus || "%100 Firsat",
+    bonus: G('nsp-bonus').value || "%100 Bonus",
     img: img || "https://abidin11.com/uploads/sponsors/img_69d9987b9d9bf6.55381307.png",
     active: true
-  };
-  sponsors.push(newSp);
-  closeOv('sp-add');
-  renderAdminSponsors();
-  renderSponsors();
-  toast('Sponsor basariyla eklendi!');
+  });
+  closeOv('sp-add'); renderAdminSponsors(); renderSponsors(); toast('Eklendi!');
 };
 
-// EDIT & TOGGLE STATUS
 window.openEditSponsor = function(id) {
-  var sp = sponsors.find(function(item){ return item.id === id; });
-  if(!sp) return;
+  var sp = sponsors.find(function(item){ return item.id === id; }); if(!sp) return;
   G('esp-id').value = sp.id;
   G('esp-name').value = sp.name;
   G('esp-link').value = sp.link;
   G('esp-bonus').value = sp.bonus;
   G('esp-img').value = sp.img;
   G('esp-prev').src = sp.img;
-  G('esp-prev').style.display = 'block';
-  G('esp-active-tog').checked = sp.active ? true : false;
+  G('esp-active-tog').checked = sp.active;
   openOv('sp-edit');
 };
 
 G('btn-esp-save-submit').onclick = function() {
-  var id = parseInt(G('esp-id').value);
-  var sp = sponsors.find(function(item){ return item.id === id; });
+  var sp = sponsors.find(function(item){ return item.id === parseInt(G('esp-id').value); });
   if(!sp) return;
-  
   sp.name = G('esp-name').value;
   sp.link = G('esp-link').value;
   sp.bonus = G('esp-bonus').value;
   sp.img = G('esp-img').value;
   sp.active = G('esp-active-tog').checked;
-  
-  closeOv('sp-edit');
-  renderAdminSponsors();
-  renderSponsors();
-  toast('Degisiklikler uygulandi.');
+  closeOv('sp-edit'); renderAdminSponsors(); renderSponsors(); toast('Güncellendi!');
 };
 
-// MAIN CONFIG SAVE (BANNER & NAV LOGO TOGGLE)
+// BANNER & LOGO MANAGE
 G('btn-banner-save').onclick = function() {
   systemBannerActive = G('gif-tog').checked;
   systemBannerUrl = G('gif-url').value;
@@ -525,23 +537,18 @@ G('btn-banner-save').onclick = function() {
   var logoInpVal = G('logo-url-inp').value;
   
   if (isLogoImgMode && logoInpVal) {
-    logoImg.src = logoInpVal;
-    logoImg.style.display = 'block';
-    logoTxt.style.display = 'none';
+    logoImg.src = logoInpVal; logoImg.style.display = 'block'; logoTxt.style.display = 'none';
   } else {
-    logoImg.style.display = 'none';
-    logoTxt.style.display = 'block';
+    logoImg.style.display = 'none'; logoTxt.style.display = 'block';
   }
   
   var bannerDiv = G('gif-banner');
   if (systemBannerActive && systemBannerUrl) {
-    G('gif-img').src = systemBannerUrl;
-    bannerDiv.style.display = 'block';
+    G('gif-img').src = systemBannerUrl; bannerDiv.style.display = 'block';
   } else {
     bannerDiv.style.display = 'none';
   }
-  
-  toast('Sistem gorselleri ve toggle durumlari kaydedildi!');
+  toast('Tüm sistem ayarları kaydedildi!');
 };
 </script>
 </body>
