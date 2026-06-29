@@ -1719,7 +1719,6 @@ function saveAll(){
     toast('Kaydedildi');
   }catch(e){toast('Kaydetme basarisiz: '+e.message);}
 }
-}
 function loadSaved(){
   try{var raw=localStorage.getItem('sm_save');if(!raw)return;var d=JSON.parse(raw);if(d.sponsors&&d.sponsors.length)sponsors=d.sponsors;if(d.wins&&d.wins.length)wins=d.wins;if(d.socChannels)socChannels=d.socChannels;if(d.popCfg)popCfg=d.popCfg;if(d.admMsg)admMsg=d.admMsg;
     if(d.supportMsgs)supportMsgs=d.supportMsgs;if(d.theme)applyTheme(d.theme,true);
