@@ -1,0 +1,1987 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title id="ptag">SlotMaster</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{
+  --g:#f0b429;--g2:#c8960f;--dk:#08080e;--dk2:#0f0f18;
+  --tx:#e8e8f0;--mu:#55556a;--gr:#22c55e;--pu:#7c3aed;--re:#ef4444;
+  --rad:10px;--zoom:1;
+}
+html{font-size:calc(14px*var(--zoom));}
+body{background:var(--dk);color:var(--tx);font-family:'Inter',sans-serif;overflow-x:hidden;}
+input,select,button,textarea{font-family:'Inter',sans-serif;}
+a{text-decoration:none;}
+
+/* ─ NAV ─ */
+#snav{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:0 14px;height:52px;background:rgba(8,8,14,.97);
+  border-bottom:1px solid #ffffff0a;position:sticky;top:0;z-index:300;
+  backdrop-filter:blur(16px);gap:8px;
+}
+.njp{
+  display:flex;flex-direction:column;justify-content:center;
+  background:#000;border:1px solid #c8960f70;border-radius:6px;
+  padding:4px 9px;overflow:hidden;position:relative;
+  max-width:min(175px,39vw);flex-shrink:0;cursor:default;
+}
+.njp::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.1) 3px,rgba(0,0,0,.1) 4px);pointer-events:none;}
+.njp::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,#f0b429b0,transparent);}
+.njp-lbl{font-family:'Courier New',monospace;font-size:7px;color:#f0c050;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:700;}
+.njp-val{font-family:'Courier New',monospace;font-weight:700;font-size:clamp(10px,2.6vw,15px);color:#ffe066;text-shadow:0 0 12px #f0b429cc,0 0 4px #f0b429aa;letter-spacing:.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.nctr{display:flex;align-items:center;justify-content:center;gap:7px;min-width:0;overflow:hidden;}
+.nlogo{display:flex;align-items:center;justify-content:center;cursor:pointer;white-space:nowrap;}
+.nlogo-txt{font-family:'Bebas Neue',sans-serif;font-size:clamp(16px,4vw,22px);color:var(--g);letter-spacing:2px;}
+.nlogo-img{height:36px;max-width:140px;object-fit:contain;display:none;}
+.nsocbtn{width:28px;height:28px;border-radius:50%;border:1px solid #ffffff18;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--mu);transition:all .15s;flex-shrink:0;}
+.nsocbtn:hover{border-color:var(--g);color:var(--g);}
+.nsocbtn.tg{border-color:#229ED940;color:#229ED9;}
+.nsocbtn.ig{border-color:#E1306C40;color:#E1306C;}
+.nright{display:flex;justify-content:flex-end;align-items:center;}
+.hbg{background:transparent;border:1px solid #ffffff15;border-radius:7px;color:var(--tx);width:36px;height:36px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;transition:border-color .15s;flex-shrink:0;}
+.hbg:hover{border-color:var(--g);}
+.hbg span{display:block;width:15px;height:1.5px;background:currentColor;border-radius:2px;}
+.ndrop{position:fixed;top:54px;right:12px;background:#0d0d1a;border:1px solid #ffffff12;border-radius:12px;padding:5px;min-width:160px;box-shadow:0 10px 40px #00000090;z-index:301;opacity:0;transform:translateY(-8px) scale(.97);pointer-events:none;transition:opacity .18s,transform .18s;}
+.ndrop.open{opacity:1;transform:translateY(0) scale(1);pointer-events:all;}
+.ddi{display:flex;align-items:center;gap:9px;width:100%;text-align:left;background:transparent;border:none;color:var(--mu);font-size:13px;font-weight:500;padding:11px 14px;border-radius:8px;cursor:pointer;transition:all .12s;white-space:nowrap;}
+.ddi:hover{background:#ffffff08;color:var(--tx);}
+.ddi.gold{color:var(--g);}
+.ddi.gold:hover{background:#f0b42910;}
+.ddsep{height:1px;background:#ffffff08;margin:4px 8px;}
+
+/* ─ GIF BANNER ─ */
+#gif-banner{width:100%;overflow:hidden;background:#0d0d18;border-bottom:1px solid #ffffff08;display:none;}
+#gif-banner img{width:100%;height:80px;object-fit:cover;display:block;}
+@media(min-width:768px){#gif-banner img{height:140px;}}
+@media(min-width:1200px){#gif-banner img{height:180px;}}
+
+/* ─ SITE WRAPPER PC ─ */
+#site-view{width:100%;}
+#site-main{max-width:1400px;margin:0 auto;padding:0 16px;}
+
+/* ─ SPONSOR ─ */
+#sp-section{padding:14px 0 10px;}
+.shdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.eyebrow{font-size:9px;color:var(--g);letter-spacing:3px;text-transform:uppercase;}
+#sp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;perspective:1200px;}
+@media(min-width:900px){#sp-grid{grid-template-columns:repeat(auto-fill,minmax(175px,1fr));}}
+@media(min-width:1200px){#sp-grid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));}}
+
+.spc{background:#0f0f18;border:1px solid #ffffff0d;border-radius:var(--rad);cursor:pointer;transition:transform .25s cubic-bezier(.2,.8,.3,1.2),border-color .22s,box-shadow .25s;position:relative;overflow:hidden;display:flex;flex-direction:column;transform-style:preserve-3d;will-change:transform;}
+.spc:hover{
+  transform:translateY(-6px) rotateX(2deg) scale(1.01);
+  border-color:var(--g);
+  box-shadow:0 20px 50px #00000090,0 0 0 1px var(--g),0 0 30px var(--g)20;
+}
+.spc-topbar{position:absolute;top:0;left:0;right:0;height:2px;z-index:3;}
+.spc-logo{width:100%;aspect-ratio:1/1;overflow:hidden;position:relative;background:#000;flex-shrink:0;}
+.spc-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 7s ease;transform:scale(1.01);}
+.spc:hover .spc-img{transform:scale(1.07);}
+.spc-sweep{position:absolute;inset:0;background:linear-gradient(115deg,transparent 25%,rgba(255,255,255,.09) 50%,transparent 75%);transform:translateX(-120%);pointer-events:none;}
+.spc:hover .spc-sweep{transform:translateX(130%);transition:transform .6s ease;}
+/* Ribbon köşe */
+.sp-ribbon{position:absolute;top:0;right:0;z-index:5;width:56px;height:56px;overflow:hidden;pointer-events:none;}
+.sp-ribbon span{position:absolute;top:14px;right:-15px;width:64px;text-align:center;font-size:8px;font-weight:800;letter-spacing:.5px;transform:rotate(45deg);padding:3px 0;}
+.rb-premium span{background:linear-gradient(90deg,#c8960f,#f0b429,#c8960f);color:#000;}
+.rb-hot span{background:#ef4444;color:#fff;}
+.rb-new span{background:#22c55e;color:#fff;}
+.rb-vip span{background:linear-gradient(90deg,#7c3aed,#a78bfa);color:#fff;}
+/* Tag efektleri karta */
+.has-premium{animation:shpremium 3s ease-in-out infinite;border-color:#f0b42950!important;}
+@keyframes shpremium{0%,100%{box-shadow:0 0 10px #f0b42930;}50%{box-shadow:0 0 24px #f0b42970,0 0 6px #fff2;}}
+.has-hot{animation:shhot 2s ease-in-out infinite;border-color:#ef444450!important;}
+@keyframes shhot{0%,100%{box-shadow:0 0 8px #ef444428;}50%{box-shadow:0 0 24px #ef444468,inset 0 0 8px #ef44440a;}}
+.has-new{animation:shnew 2.5s ease-in-out infinite;border-color:#22c55e40!important;}
+@keyframes shnew{0%,100%{box-shadow:0 0 6px #22c55e20;}50%{box-shadow:0 0 18px #22c55e50;}}
+.has-vip{animation:shvip 3s ease-in-out infinite;border-color:#7c3aed45!important;}
+@keyframes shvip{0%,100%{box-shadow:0 0 8px #7c3aed25;}50%{box-shadow:0 0 22px #7c3aed60;}}
+/* Kart alt kısım */
+.spc-body{padding:10px 11px 11px;display:flex;flex-direction:column;gap:6px;}
+.spc-bonus{font-size:11px;line-height:1.4;color:#c8c8d8;text-align:center;font-weight:500;min-height:2.8em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.spc-btn{display:block;width:100%;text-align:center;background:var(--g);color:#000;font-size:11px;font-weight:700;padding:9px 0;border-radius:8px;border:none;cursor:pointer;transition:opacity .15s;letter-spacing:.3px;margin-top:auto;}
+.spc-btn:hover{opacity:.82;}
+/* Efektler */
+.ef-glow .spc-topbar{background:linear-gradient(90deg,transparent,var(--g),transparent);box-shadow:0 0 8px #f0b42960;}
+.ef-glow{border-color:#f0b42930!important;}
+.ef-purple .spc-topbar{background:linear-gradient(90deg,transparent,var(--pu),transparent);}
+.ef-purple{border-color:#7c3aed30!important;}
+.ef-green .spc-topbar{background:linear-gradient(90deg,transparent,var(--gr),transparent);}
+.ef-green{border-color:#22c55e28!important;}
+.ef-gradient .spc-topbar{background:linear-gradient(90deg,var(--g),#f87171,var(--pu),var(--g));background-size:200%;animation:gmv 3s linear infinite;}
+@keyframes gmv{0%{background-position:0%}100%{background-position:200%}}
+.ef-none .spc-topbar{display:none;}
+
+/* ─ TICKER ─ */
+#ticker{border-top:1px solid #ffffff08;border-bottom:1px solid #ffffff08;background:#0b0b14;overflow:hidden;position:relative;}
+.tk-lbl{position:absolute;left:0;top:0;bottom:0;background:#0b0b14;display:flex;align-items:center;padding:0 11px;font-size:9px;color:var(--g);letter-spacing:2px;text-transform:uppercase;border-right:1px solid #ffffff08;z-index:2;white-space:nowrap;}
+#tk-track{display:flex;padding-left:122px;will-change:transform;}
+#tk-track.go{animation:tkanim 32s linear infinite;}
+#tk-track.go:hover{animation-play-state:paused;}
+@keyframes tkanim{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tki{display:flex;align-items:center;flex-shrink:0;cursor:pointer;border-right:1px solid #ffffff06;}
+.tki:hover .tki-in{background:#161625;}
+.tki-in{display:flex;align-items:center;gap:8px;padding:8px 13px;}
+.tki-iw{position:relative;flex-shrink:0;}
+.tki-img{width:34px;height:34px;border-radius:5px;object-fit:cover;background:#1a1a28;display:block;}
+.tki-badge{position:absolute;bottom:-3px;right:-5px;background:#fff;color:#111;font-size:8px;font-weight:700;padding:1px 4px;border-radius:3px;animation:blink 1.2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.tki-info{display:flex;flex-direction:column;gap:1px;}
+.tki-game{font-size:11px;color:var(--tx);white-space:nowrap;}
+.tki-user{font-size:9px;color:var(--mu);}
+.tki-mul{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--g);white-space:nowrap;}
+
+/* ─ HOME WINS GRID ─ */
+#wins-section{padding:10px 0 16px;}
+.whdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+.wallbtn{background:var(--g);color:#000;border:none;border-radius:20px;padding:7px 16px;font-size:11px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:5px;transition:opacity .15s;}
+.wallbtn:hover{opacity:.85;}
+#wins-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+@media(min-width:900px){#wins-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));}}
+.wc{background:var(--dk2);border:1px solid #ffffff08;border-radius:10px;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s;}
+.wc:hover{border-color:#f0b42940;transform:translateY(-2px);}
+.wc-iw{position:relative;overflow:hidden;}
+.wc-img{width:100%;height:130px;object-fit:cover;background:#0a0a14;display:block;transition:transform 5s ease;transform:scale(1.02);}
+@media(min-width:900px){.wc-img{height:150px;}}
+.wc:hover .wc-img{transform:scale(1.07);}
+.wc-sweep{position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.07) 50%,transparent 70%);transform:translateX(-100%);pointer-events:none;}
+.wc:hover .wc-sweep{transform:translateX(120%);transition:transform .5s ease;}
+.wc-badge{position:absolute;top:6px;right:6px;background:#fff;color:#111;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;animation:blink 1.2s ease-in-out infinite;z-index:2;}
+.wc-body{padding:10px 12px;}
+.wc-game{font-size:11px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.wc-mul{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--g);line-height:1;}
+.wc-user{font-size:10px;color:var(--mu);margin-top:3px;}
+.wc-play{display:inline-flex;align-items:center;gap:3px;background:#ffffff08;border-radius:4px;padding:4px 8px;font-size:10px;color:var(--tx);margin-top:6px;}
+
+/* ─ WINS PAGE ─ */
+#wins-page{display:none;}
+.wp-hdr{display:flex;align-items:center;gap:10px;padding:12px 0 10px;position:sticky;top:52px;z-index:50;background:rgba(8,8,14,.96);border-bottom:1px solid #ffffff08;backdrop-filter:blur(10px);margin:0 -16px;padding-left:16px;padding-right:16px;}
+.wp-back{background:#ffffff12;border:1px solid #ffffff20;color:var(--tx);font-size:12px;font-weight:600;cursor:pointer;padding:7px 14px;border-radius:8px;display:flex;align-items:center;gap:5px;transition:all .15s;}
+.wp-back:hover{background:var(--g);color:#000;border-color:var(--g);}
+#wp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;padding:14px 0;}
+@media(min-width:768px){#wp-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));}}
+@media(min-width:1200px){#wp-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));}}
+.wpc{background:var(--dk2);border:1px solid #ffffff0a;border-radius:12px;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;display:flex;flex-direction:column;}
+.wpc:hover{transform:translateY(-3px);border-color:#f0b42940;box-shadow:0 8px 24px #00000060;}
+.wpc-iw{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;}
+.wpc-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 5s ease;transform:scale(1.02);}
+.wpc:hover .wpc-img{transform:scale(1.07);}
+.wpc-sweep{position:absolute;inset:0;background:linear-gradient(115deg,transparent 25%,rgba(255,255,255,.08) 50%,transparent 75%);transform:translateX(-120%);pointer-events:none;}
+.wpc:hover .wpc-sweep{transform:translateX(130%);transition:transform .55s ease;}
+.wpc-badge{position:absolute;top:7px;right:7px;z-index:3;background:#fff;color:#111;font-family:'Bebas Neue',sans-serif;font-size:12px;padding:2px 7px;border-radius:5px;animation:blink 1.2s ease-in-out infinite;box-shadow:0 2px 8px #00000060;}
+.wpc-sp{position:absolute;top:7px;left:7px;z-index:3;background:rgba(0,0,0,.72);border:1px solid #f0b42940;color:var(--g);font-size:8px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;}
+.wpc-body{padding:9px 11px 11px;display:flex;flex-direction:column;gap:6px;}
+.wpc-game{font-size:11px;color:var(--tx);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.wpc-meta{font-size:9px;color:var(--mu);}
+.wpc-mul{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--g);line-height:1;margin-bottom:5px;}
+.wpc-btns{display:flex;gap:6px;}
+.wpc-replay{flex:1;background:#ffffff10;border:1px solid #ffffff18;color:var(--tx);border-radius:7px;padding:7px 0;font-size:10px;font-weight:600;cursor:pointer;transition:all .15s;text-align:center;}
+.wpc-replay:hover{background:#ffffff1a;}
+.wpc-play{flex:1;background:var(--g);color:#000;border:none;border-radius:7px;padding:7px 0;font-size:10px;font-weight:700;cursor:pointer;transition:opacity .15s;text-align:center;}
+.wpc-play:hover{opacity:.85;}
+
+/* ─ DIVIDER ─ */
+.div{height:1px;background:#ffffff08;margin:0;}
+
+/* ─ FOOTER ─ */
+#sfoot{padding:16px 0;text-align:center;border-top:1px solid #ffffff08;margin-top:8px;}
+.flinks{display:flex;justify-content:center;gap:14px;margin-bottom:8px;flex-wrap:wrap;}
+.flinks a{color:var(--g);font-size:11px;}
+.flegal{font-size:10px;color:var(--mu);line-height:1.6;}
+
+/* ─ FLOAT BTNS ─ */
+.fbwrap{position:fixed;bottom:16px;right:14px;display:flex;flex-direction:column;gap:7px;z-index:150;align-items:flex-end;}
+.fbtn{background:var(--g);color:#000;border:none;padding:10px 16px;border-radius:24px;font-size:12px;font-weight:700;cursor:pointer;box-shadow:0 4px 18px #f0b42940;white-space:nowrap;transition:opacity .15s;display:flex;align-items:center;gap:6px;}
+.fbtn:hover{opacity:.85;}
+.fbtn-row{display:flex;gap:6px;}
+.fsocbtn{width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.fsocbtn.ig{background:#E1306C;color:#fff;}
+.fsocbtn.yt{background:#FF0000;color:#fff;}
+.fsocbtn.tw{background:#1DA1F2;color:#fff;}
+
+/* ─ MODAL BASE ─ */
+.mwrap{display:none;position:fixed;inset:0;background:#00000096;z-index:400;align-items:flex-end;justify-content:center;}
+.mwrap.open{display:flex;}
+.mbox{background:#0f0f1a;border:1px solid #ffffff12;border-radius:16px 16px 0 0;width:100%;max-width:500px;padding:18px 16px 28px;max-height:90vh;overflow-y:auto;position:relative;}
+@media(min-width:560px){.mwrap{align-items:center;}.mbox{border-radius:16px;max-height:86vh;}}
+.mcls{position:absolute;top:12px;right:14px;background:transparent;border:none;color:var(--mu);font-size:17px;cursor:pointer;}
+.mhdl{width:34px;height:3px;background:#ffffff18;border-radius:2px;margin:0 auto 14px;}
+.mlogo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--g);letter-spacing:2px;text-align:center;margin-bottom:4px;}
+.mttl{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:2px;}
+.mttl span{color:var(--g);}
+.msub{font-size:11px;color:var(--mu);margin-bottom:14px;}
+.mfg{margin-bottom:10px;}
+.mfg label{display:block;font-size:10px;color:var(--mu);margin-bottom:4px;letter-spacing:.3px;}
+.minp{width:100%;background:#ffffff08;border:1px solid #ffffff10;border-radius:7px;padding:10px 11px;color:var(--tx);font-size:13px;outline:none;transition:border-color .15s;}
+.minp:focus{border-color:var(--g);}
+.minp::placeholder{color:#ffffff18;}
+.mselect{appearance:none;-webkit-appearance:none;background:#ffffff08;border:1px solid #ffffff10;border-radius:7px;padding:10px 11px;color:var(--tx);font-size:13px;outline:none;cursor:pointer;width:100%;}
+.mselect:focus{border-color:var(--g);}
+.mbtn{width:100%;background:var(--g);border:none;color:#000;padding:12px;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .15s;margin-top:6px;}
+.mbtn:hover{opacity:.85;}
+.mlink{font-size:11px;color:var(--g);cursor:pointer;text-decoration:underline;background:none;border:none;padding:0;}
+.mfoot{text-align:center;margin-top:14px;font-size:11px;color:var(--mu);}
+.merr{display:none;background:#ef444415;border:1px solid #ef444330;border-radius:7px;padding:8px 11px;font-size:11px;color:#f87171;margin-bottom:8px;}
+.msuc{display:none;text-align:center;padding:10px 0;}
+.msuc-icon{font-size:32px;margin-bottom:8px;}
+.msuc-ttl{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--gr);}
+.msuc-sub{font-size:11px;color:var(--mu);margin-top:4px;line-height:1.6;}
+
+/* Submit modal extras */
+.lr{display:flex;gap:7px;margin-bottom:10px;}
+.linp{flex:1;background:#ffffff08;border:1px solid #ffffff10;border-radius:7px;padding:9px 11px;color:var(--tx);font-size:12px;outline:none;}
+.linp:focus{border-color:var(--g);}
+.linp::placeholder{color:#ffffff18;}
+.bfetch{background:var(--g);border:none;color:#000;padding:9px 12px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;}
+.bfetch:disabled{opacity:.4;}
+.mprev{background:#0a0a12;border:1px solid #f0b42928;border-radius:8px;padding:10px;margin-bottom:10px;display:none;}
+.mprev-in{display:flex;gap:10px;align-items:center;}
+.mprev-img{width:42px;height:42px;border-radius:6px;object-fit:cover;background:#1a1a28;flex-shrink:0;}
+.mprev-t{font-family:'Bebas Neue',sans-serif;font-size:15px;color:#fff;line-height:1.1;}
+.mprev-m{display:inline-block;background:#f0b42915;color:var(--g);font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;margin-top:3px;}
+.mf2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.mf2 .mfg label{font-size:10px;color:var(--mu);}
+.mf2 input{width:100%;background:#ffffff08;border:1px solid #ffffff10;border-radius:6px;padding:8px 9px;color:var(--tx);font-size:12px;outline:none;}
+.mf2 input:focus{border-color:var(--g);}
+.mf2 input.af{border-color:#f0b42940;background:#f0b42907;}
+.mf2 input::placeholder{color:#ffffff15;}
+.mload{display:none;text-align:center;padding:6px;font-size:11px;color:var(--mu);}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid #ffffff12;border-top-color:var(--g);border-radius:50%;animation:spin .6s linear infinite;margin-right:5px;vertical-align:middle;}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ─ REPLAY POPUP ─ */
+#rep-wrap{display:none;position:fixed;inset:0;background:#000000b0;z-index:500;align-items:center;justify-content:center;padding:12px;}
+#rep-wrap.open{display:flex;}
+.rep-box{background:#0d0d18;border:1px solid #f0b42928;border-radius:14px;width:100%;max-width:720px;position:relative;overflow:hidden;}
+.rep-hd{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid #ffffff0a;}
+.rep-title{font-family:'Bebas Neue',sans-serif;font-size:17px;color:#fff;letter-spacing:.5px;}
+.rep-mul{font-family:'Bebas Neue',sans-serif;font-size:19px;color:var(--g);}
+.rep-cls{background:transparent;border:none;color:var(--mu);font-size:18px;cursor:pointer;line-height:1;padding:3px 6px;}
+.rep-fw{position:relative;width:100%;background:#000;padding-top:56.25%;}
+.rep-fw iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+.rep-load{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;color:var(--mu);font-size:12px;}
+.rep-ft{padding:9px 14px;display:flex;align-items:center;justify-content:space-between;}
+.rep-user{font-size:11px;color:var(--mu);}
+.rep-ext{font-size:11px;color:var(--g);}
+
+/* ─ ADMIN ─ */
+#admin-view{display:none;min-height:100vh;background:#0d0d14;}
+#admin-nav{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#0a0a12;border-bottom:1px solid #f0b42925;position:sticky;top:0;z-index:200;gap:10px;}
+.adm-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--g);letter-spacing:1px;}
+.adm-logo span{color:#8888a8;font-size:11px;font-family:'Inter',sans-serif;margin-left:6px;letter-spacing:0;}
+.btn-back{background:#f0b42918;border:1px solid #f0b42940;color:var(--g);padding:7px 14px;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.btn-back:hover{background:#f0b42930;}
+/* PC: 3 sütun layout */
+.adm-body{display:flex;min-height:calc(100vh - 53px);}
+.adm-sidebar{width:210px;flex-shrink:0;background:#0a0a12;border-right:1px solid #1e1e30;position:sticky;top:53px;height:calc(100vh - 53px);overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;gap:2px;}
+.adm-content{flex:1;overflow-y:auto;}
+.adm-inner{max-width:1100px;padding:20px 24px;}
+/* Sidebar item */
+.stab{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:13px;color:#9090b0;cursor:pointer;transition:all .15s;white-space:nowrap;border:1px solid transparent;background:transparent;width:100%;text-align:left;font-weight:500;}
+.stab:hover{background:#ffffff08;color:#e0e0f0;}
+.stab.active{background:#f0b42915;border-color:#f0b42935;color:var(--g);font-weight:600;}
+.stab-badge{background:#f0b429;color:#000;border-radius:10px;padding:1px 7px;font-size:9px;font-weight:700;margin-left:auto;}
+.stab-sec{font-size:9px;color:#404060;letter-spacing:2px;text-transform:uppercase;padding:10px 12px 5px;font-weight:600;}
+/* Panels */
+.apanel{display:none;}
+.apanel.active{display:block;}
+/* Admin Card */
+.ac{background:#141420;border:1px solid #2a2a40;border-radius:12px;padding:20px;margin-bottom:16px;}
+.ac:hover{border-color:#3a3a55;}
+.ac-ttl{font-size:11px;color:var(--g);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:700;}
+.abadge{background:#f0b42920;border:1px solid #f0b42940;border-radius:8px;padding:2px 9px;font-size:10px;color:var(--g);font-weight:600;}
+.abadge-gr{background:#22c55e15;border:1px solid #22c55e35;color:#4ade80;}
+.abadge-re{background:#ef444415;border:1px solid #ef444435;color:#f87171;}
+/* Form elements */
+.ainp{width:100%;background:#1a1a28;border:1px solid #3a3a55;border-radius:8px;padding:10px 12px;color:#e0e0f0;font-size:13px;outline:none;transition:border-color .15s;}
+.ainp:focus{border-color:var(--g);background:#1e1e30;}
+.ainp::placeholder{color:#50507a;}
+select.ainp{cursor:pointer;appearance:none;-webkit-appearance:none;}
+.albl{font-size:11px;color:#9090b0;margin-bottom:5px;display:block;letter-spacing:.3px;font-weight:500;}
+.afld{margin-bottom:12px;}
+.ag2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.ag3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.ag4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+@media(max-width:767px){.ag2{grid-template-columns:1fr;}.ag3{grid-template-columns:1fr 1fr;}.ag4{grid-template-columns:1fr 1fr;}}
+/* Toggle */
+.trow{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:9px;background:#1a1a28;border:1px solid #2a2a40;margin-bottom:8px;}
+.trow-info{flex:1;}
+.tlbl{font-size:13px;color:#d0d0e8;font-weight:500;}
+.tsub{font-size:11px;color:#7070a0;margin-top:2px;}
+.tgl{position:relative;width:40px;height:22px;flex-shrink:0;}
+.tgl input{opacity:0;width:0;height:0;}
+.tsl{position:absolute;inset:0;background:#2a2a40;border-radius:11px;transition:.22s;cursor:pointer;border:1px solid #3a3a55;}
+.tsl::before{content:'';position:absolute;width:16px;height:16px;left:2px;top:2px;background:#606080;border-radius:50%;transition:.22s;}
+.tgl input:checked+.tsl{background:var(--g);border-color:var(--g);}
+.tgl input:checked+.tsl::before{transform:translateX(18px);background:#000;}
+/* Buttons */
+.bprim{background:var(--g);border:none;color:#000;padding:10px 18px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:opacity .15s;}
+.bprim:hover{opacity:.85;}
+.bdang{background:#ef444415;border:1px solid #ef444440;color:#f87171;padding:6px 12px;border-radius:7px;font-size:11px;cursor:pointer;font-weight:500;transition:background .15s;}
+.bdang:hover{background:#ef444428;}
+.bico{background:#1a1a28;border:1px solid #3a3a55;color:#c0c0e0;border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer;transition:all .15s;}
+.bico:hover{border-color:var(--g);color:var(--g);}
+.bsec{background:transparent;border:1px solid #3a3a55;color:#b0b0d0;padding:9px 14px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.bsec:hover{border-color:var(--g);color:var(--g);}
+/* Sp admin list */
+.sp-adm-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.sp-adm-row{background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:10px 13px;display:flex;align-items:center;gap:10px;transition:border-color .15s;}
+.sp-adm-row:hover{border-color:#3a3a55;}
+.sp-adm-drag{color:#606080;cursor:grab;font-size:18px;flex-shrink:0;user-select:none;padding:0 4px;}
+.sp-adm-drag:active{cursor:grabbing;color:var(--g);}
+.sp-adm-img{width:52px;height:52px;border-radius:7px;object-fit:cover;background:#2a2a40;flex-shrink:0;border:1px solid #3a3a55;}
+.sp-rank-num{background:#f0b42918;color:var(--g);border:1px solid #f0b42930;border-radius:6px;padding:3px 9px;font-size:13px;font-weight:700;flex-shrink:0;min-width:30px;text-align:center;}
+.sp-adm-row.dragging{opacity:.35;border-color:var(--g)!important;background:#f0b42908!important;}
+.sp-adm-row.drag-over{border-color:var(--g)!important;background:#f0b42912!important;transform:scale(1.01);}
+.sp-adm-info{flex:1;min-width:0;}
+.sp-adm-name{font-family:'Bebas Neue',sans-serif;font-size:16px;color:#fff;letter-spacing:.5px;}
+.sp-adm-bonus{font-size:11px;color:#9090b0;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sp-adm-acts{display:flex;gap:6px;align-items:center;flex-shrink:0;}
+.efsel{background:#1a1a28;border:1px solid #3a3a55;border-radius:6px;padding:5px 8px;color:#d0d0e8;font-size:11px;outline:none;cursor:pointer;max-width:90px;}
+/* Ef picker */
+.efgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:6px;}
+.efopt{background:#1a1a28;border:1px solid #2a2a40;border-radius:7px;padding:7px 4px;text-align:center;cursor:pointer;font-size:10px;color:#8080a8;transition:all .15s;}
+.efopt:hover{border-color:var(--g);}
+.efopt.sel{border-color:var(--g);background:#f0b42915;color:var(--g);font-weight:600;}
+.efbar{height:4px;border-radius:2px;margin-bottom:5px;}
+/* Tag picker */
+.tgpick{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px;}
+.tgbtn{background:#1a1a28;border:1px solid #2a2a40;border-radius:8px;padding:5px 12px;font-size:11px;cursor:pointer;font-weight:600;color:#8080a8;transition:all .15s;}
+.tgbtn:hover{border-color:#3a3a55;color:#c0c0e0;}
+.tgbtn[data-t="premium"].sel{background:#f0b42918;border-color:#f0b42950;color:var(--g);}
+.tgbtn[data-t="new"].sel{background:#22c55e12;border-color:#22c55e40;color:#4ade80;}
+.tgbtn[data-t="hot"].sel{background:#ef444415;border-color:#ef444450;color:#f87171;}
+.tgbtn[data-t="vip"].sel{background:#7c3aed15;border-color:#7c3aed45;color:#c4b5fd;}
+.tgbtn[data-t=""].sel{background:#2a2a40;border-color:#4a4a65;color:#d0d0e8;}
+/* Pending */
+.pend-list{display:flex;flex-direction:column;gap:10px;}
+.prow{background:#1a1a28;border:1px solid #2a2a40;border-radius:10px;padding:14px;}
+.prow-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
+.prow-img{width:52px;height:52px;border-radius:8px;object-fit:cover;background:#2a2a40;flex-shrink:0;}
+.prow-game{font-size:13px;color:#e0e0f0;font-weight:600;}
+.prow-mul{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--g);line-height:1;}
+.prow-det{background:#0f0f1e;border-radius:8px;padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;font-size:11px;margin-bottom:10px;}
+.prow-det-item span:first-child{color:#7070a0;display:block;font-size:10px;margin-bottom:2px;}
+.prow-det-item span:last-child{color:#d0d0e8;font-weight:500;}
+.prow-acts{display:flex;gap:7px;flex-wrap:wrap;align-items:center;}
+.bappr{background:#22c55e20;border:1px solid #22c55e45;color:#4ade80;border-radius:7px;padding:7px 14px;font-size:12px;font-weight:600;cursor:pointer;transition:background .15s;}
+.bappr:hover{background:#22c55e30;}
+.brej{background:#ef444415;border:1px solid #ef444440;color:#f87171;border-radius:7px;padding:7px 14px;font-size:12px;cursor:pointer;transition:background .15s;}
+.brej:hover{background:#ef444428;}
+/* Win admin */
+.wadm-list{display:flex;flex-direction:column;gap:8px;}
+.wadm-row{background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:10px 13px;display:flex;align-items:center;gap:10px;}
+.wadm-img{width:42px;height:42px;border-radius:6px;object-fit:cover;background:#2a2a40;flex-shrink:0;}
+.wadm-info{flex:1;min-width:0;}
+.wadm-game{font-size:12px;color:#e0e0f0;font-weight:500;}
+.wadm-meta{font-size:10px;color:#7070a0;margin-top:2px;}
+.wadm-mul{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--g);}
+/* Users */
+.users-list{display:flex;flex-direction:column;gap:8px;}
+.user-row{background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:12px 14px;display:flex;align-items:center;gap:12px;}
+.user-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--g),#c8960f);color:#000;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.user-info{flex:1;min-width:0;}
+.user-name{font-size:13px;color:#e0e0f0;font-weight:600;}
+.user-meta{font-size:11px;color:#7070a0;margin-top:3px;}
+.user-clicks{font-size:10px;color:var(--g);margin-top:2px;}
+/* Social links admin */
+.soc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
+.soc-item{background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:12px 14px;display:flex;align-items:center;gap:10px;}
+.soc-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;}
+.soc-info{flex:1;min-width:0;}
+.soc-name{font-size:12px;color:#e0e0f0;font-weight:600;}
+.soc-url{font-size:10px;color:#7070a0;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+/* Theme picker */
+.theme-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;}
+.theme-card{background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:10px 12px;cursor:pointer;transition:all .15s;display:flex;align-items:center;gap:8px;text-align:left;}
+.theme-card:hover{border-color:#3a3a55;}
+.theme-card.active{border-color:var(--g);background:#f0b42912;}
+.theme-preview{width:28px;height:28px;border-radius:6px;flex-shrink:0;}
+.theme-name{font-size:12px;color:#c0c0e0;font-weight:500;}
+/* Zoom */
+.zoom-row{display:flex;align-items:center;gap:12px;}
+.zoom-slider{flex:1;accent-color:var(--g);cursor:pointer;height:4px;}
+.zoom-val{font-size:14px;color:var(--g);font-weight:700;min-width:42px;text-align:right;}
+/* Empty */
+.empty{text-align:center;padding:30px;color:#6060a0;font-size:12px;}
+
+/* Mobile admin */
+.adm-mtabs{display:none;background:#0a0a12;border-bottom:1px solid #1e1e30;overflow-x:auto;scrollbar-width:none;position:sticky;top:53px;z-index:190;}
+.adm-mtabs::-webkit-scrollbar{display:none;}
+.mtab{padding:10px 14px;font-size:12px;color:#7070a0;cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:6px;}
+.mtab.active{color:var(--g);border-bottom-color:var(--g);}
+.mtab-badge{background:#f0b429;color:#000;border-radius:8px;padding:1px 6px;font-size:9px;font-weight:700;}
+@media(max-width:767px){
+  .adm-sidebar{display:none;}
+  .adm-mtabs{display:flex;}
+  .adm-inner{padding:12px;}
+  #wins-grid{grid-template-columns:repeat(2,1fr);}
+  #sp-grid{grid-template-columns:repeat(2,1fr)!important;}
+  .mf2{grid-template-columns:1fr;}
+}
+
+/* Toast */
+#toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%) translateY(14px);background:#22c55e;color:#000;padding:8px 18px;border-radius:20px;font-size:12px;font-weight:600;opacity:0;transition:all .3s;z-index:600;pointer-events:none;white-space:nowrap;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ─ TEMALAR ─ */
+body.theme-night{--g:#f0b429;--g2:#c8960f;--dk:#08080e;--dk2:#0f0f18;--tx:#e8e8f0;--mu:#55556a;}
+body.theme-royal{--g:#e8333a;--g2:#b8222a;--dk:#0a0005;--dk2:#130008;--tx:#f0e0e0;--mu:#885558;}
+body.theme-emerald{--g:#00c878;--g2:#009858;--dk:#020d08;--dk2:#041510;--tx:#d8f0e8;--mu:#3a6858;}
+body.theme-galaxy{--g:#9b59e8;--g2:#7a38c8;--dk:#060310;--dk2:#0d0820;--tx:#e0d8f8;--mu:#6055a8;}
+body.theme-platinum{--g:#c8d0e0;--g2:#9098a8;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880;}
+.theme-card{color:#c0c0e0;}
+.theme-card.active .theme-name{color:var(--g);}
+</style>
+</head>
+<body class="theme-night">
+
+<!-- ═══ SITE VIEW ═══ -->
+<div id="site-view">
+
+<nav id="snav">
+  <div class="njp">
+    <div class="njp-lbl">Üye Kazançları</div>
+    <div class="njp-val" id="jp-nav">₺0,00</div>
+  </div>
+  <div class="nctr">
+    <button class="nsocbtn tg" id="nav-tg" onclick="openSoc('tg')" style="display:none" title="Telegram">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.36 13.553l-2.96-.924c-.64-.203-.657-.64.136-.954l11.57-4.46c.537-.194 1.006.131.788.006z"/></svg>
+    </button>
+      <div class="nlogo" id="nlogo" onclick="goHome()">
+        <span class="nlogo-txt" id="nlogo-txt">SLOTMASTER</span>
+        <img class="nlogo-img" id="nlogo-img" src="" alt="logo">
+      </div>
+    <button class="nsocbtn ig" id="nav-ig" onclick="openSoc('ig')" style="display:none" title="Instagram">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162S8.597 18.163 12 18.163s6.162-2.759 6.162-6.162S15.403 5.838 12 5.838zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </button>
+  </div>
+  <div class="nright">
+    <button class="hbg" id="hbg-btn" onclick="toggleMenu()" aria-label="Menü"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="ndrop" id="ndrop">
+  <button class="ddi" onclick="openM('login');closeMenu()">🔑 Giriş Yap</button>
+  <button class="ddi" onclick="openM('register');closeMenu()">👤 Kayıt Ol</button>
+</div>
+
+<div id="gif-banner"><img id="gif-img" src="" alt="banner"></div>
+
+<div id="site-main">
+  <!-- HOME -->
+  <div id="home-page">
+    <div id="sp-section">
+      <div class="shdr">
+        <div class="eyebrow">Sponsor Siteler</div>
+      </div>
+      <div id="sp-grid"></div>
+    </div>
+    <div id="ticker" style="margin:0 -16px;">
+      <div class="tk-lbl">CANLI KAZANÇLAR</div>
+      <div id="tk-track"></div>
+    </div>
+    <div class="div" style="margin:0 -16px;"></div>
+    <div id="wins-section">
+      <div class="whdr">
+        <div class="eyebrow">Sizden Gelenler</div>
+        <button class="wallbtn" onclick="goWins()">Tümünü Gör →</button>
+      </div>
+      <div id="wins-grid"></div>
+    </div>
+    <div id="sfoot">
+      <div class="flinks" id="flinks"></div>
+      <div class="flegal" id="flegal">🔞 18 yaş ve üzeri. Eğlence amaçlıdır. © 2026 SlotMaster</div>
+    </div>
+  </div>
+
+  <!-- WINS PAGE -->
+  <div id="wins-page">
+    <div class="wp-hdr">
+      <button class="wp-back" onclick="goHome()">← Geri</button>
+      <div class="eyebrow" style="margin:0;">Tüm Kazançlar</div>
+      <div style="margin-left:auto;font-size:10px;color:var(--mu);" id="wp-cnt"></div>
+    </div>
+    <div id="wp-grid"></div>
+  </div>
+
+  <!-- USERS PAGE -->
+  <div id="users-page" style="display:none;">
+    <div class="wp-hdr">
+      <button class="wp-back" onclick="goHome()">← Geri</button>
+      <div class="eyebrow" style="margin:0;">Üyeler</div>
+    </div>
+    <div id="users-page-list" style="padding:14px 0;display:flex;flex-direction:column;gap:8px;"></div>
+  </div>
+</div>
+</div><!-- /site-view -->
+
+<!-- FLOAT -->
+<div class="fbwrap" id="fbwrap">
+  <button class="fbtn" onclick="openSubmit()">▲ Kazanç Gönder</button>
+  <div class="fbtn-row" id="fbtn-row"></div>
+</div>
+
+<!-- ═══ ADMIN VIEW ═══ -->
+<div id="admin-view">
+  <div id="admin-nav">
+    <div><span class="adm-logo">ADMIN <span>Paneli</span></span></div>
+    <button class="btn-back" onclick="gotoSite()">← Siteye Dön</button>
+  </div>
+
+  <!-- Mobile tabs -->
+  <div class="adm-mtabs" id="adm-mtabs">
+    <div class="mtab active" data-p="p-sponsors" onclick="switchTab(this)">📦 Sponsorlar</div>
+    <div class="mtab" data-p="p-pending" onclick="switchTab(this)">⏳ Bekleyenler <span class="mtab-badge" id="pb-m">0</span></div>
+    <div class="mtab" data-p="p-wins" onclick="switchTab(this)">🏆 Kazançlar</div>
+    <div class="mtab" data-p="p-users" onclick="switchTab(this)">👥 Üyeler</div>
+    <div class="mtab" data-p="p-social" onclick="switchTab(this)">🔗 Sosyal</div>
+    <div class="mtab" data-p="p-banner" onclick="switchTab(this)">🖼 Banner</div>
+    <div class="mtab" data-p="p-settings" onclick="switchTab(this)">⚙️ Ayarlar</div>
+  </div>
+
+  <div class="adm-body">
+    <!-- Sidebar -->
+    <div class="adm-sidebar">
+      <div class="stab-sec">YÖNET</div>
+      <button class="stab active" data-p="p-sponsors" onclick="switchTab(this)">📦 Sponsorlar</button>
+      <button class="stab" data-p="p-pending" onclick="switchTab(this)">⏳ Bekleyenler <span class="stab-badge" id="pb-s">0</span></button>
+      <button class="stab" data-p="p-wins" onclick="switchTab(this)">🏆 Kazançlar</button>
+      <button class="stab" data-p="p-users" onclick="switchTab(this)">👥 Üyeler</button>
+      <div style="height:1px;background:#1e1e30;margin:8px 4px;"></div>
+      <div class="stab-sec">SİTE</div>
+      <button class="stab" data-p="p-social" onclick="switchTab(this)">🔗 Sosyal Medya</button>
+      <button class="stab" data-p="p-banner" onclick="switchTab(this)">🖼 Banner</button>
+      <button class="stab" data-p="p-settings" onclick="switchTab(this)">⚙️ Ayarlar</button>
+    </div>
+
+    <!-- Content -->
+    <div class="adm-content">
+    <div class="adm-inner">
+
+      <!-- SPONSORS -->
+      <div class="apanel active" id="p-sponsors">
+        <div class="ac">
+          <div class="ac-ttl">
+            Aktif Sponsorlar <span class="abadge" id="sp-badge"></span>
+            <button class="bprim" style="margin-left:auto;font-size:12px;padding:8px 16px;" onclick="openM('sp-add')">+ Yeni Sponsor</button>
+          </div>
+          <div style="font-size:11px;color:#7070a0;margin-bottom:10px;">Sürükle-bırak ile sıra değiştir · Düzenle ile bilgi güncelle</div>
+          <div class="sp-adm-list" id="sp-adm-list"></div>
+        </div>
+      </div>
+
+      <!-- PENDING -->
+      <div class="apanel" id="p-pending">
+        <div class="ac">
+          <div class="ac-ttl">Onay Bekleyen Kazançlar <span class="abadge abadge-re" id="pend-badge"></span></div>
+          <div class="pend-list" id="pend-list"></div>
+        </div>
+      </div>
+
+      <!-- WINS -->
+      <div class="apanel" id="p-wins">
+        <div class="ac">
+          <div class="ac-ttl">Yayındaki Kazançlar <span class="abadge abadge-gr" id="wins-badge"></span></div>
+          <div class="wadm-list" id="wadm-list"></div>
+        </div>
+        <div class="ac">
+          <div class="ac-ttl">Manuel Kazanç Ekle</div>
+          <div class="ag2" style="margin-bottom:12px;">
+            <div class="afld"><label class="albl">Kullanıcı Adı</label><input class="ainp" id="mw-user" placeholder="Ke***"></div>
+            <div class="afld"><label class="albl">Çarpan</label><input class="ainp" id="mw-mul" placeholder="15.000x"></div>
+          </div>
+          <div class="ag2" style="margin-bottom:12px;">
+            <div class="afld"><label class="albl">Oyun Adı</label><input class="ainp" id="mw-game" placeholder="Gates of Olympus 1000"></div>
+            <div class="afld"><label class="albl">Görsel URL</label><input class="ainp" id="mw-img" placeholder="https://www.ppreplaylink.net/game_pic/..."></div>
+          </div>
+          <div class="ag2" style="margin-bottom:12px;">
+            <div class="afld"><label class="albl">Replay Linki</label><input class="ainp" id="mw-link" placeholder="https://www.ppreplaylink.net/..."></div>
+            <div class="afld"><label class="albl">Bu Sitede Oynandı (Sponsor)</label>
+              <select class="ainp" id="mw-sponsor"><option value="">— Seçiniz —</option></select>
+            </div>
+          </div>
+          <button class="bprim" onclick="addWinManual()">Kazanç Ekle</button>
+        </div>
+      </div>
+
+      <!-- USERS -->
+      <div class="apanel" id="p-users">
+        <div class="ac">
+          <div class="ac-ttl">Kayıtlı Üyeler <span class="abadge" id="users-badge"></span></div>
+          <div style="margin-bottom:12px;display:flex;gap:8px;align-items:center;">
+            <input class="ainp" id="user-search" placeholder="Kullanıcı ara..." oninput="renderUsersAdmin()" style="max-width:260px;">
+            <span style="font-size:11px;color:#7070a0;">Arama sonucu: <span id="user-search-cnt"></span></span>
+          </div>
+          <div class="users-list" id="users-adm-list"></div>
+        </div>
+      </div>
+
+      <!-- SOCIAL -->
+      <div class="apanel" id="p-social">
+        <div class="ac">
+          <div class="ac-ttl">Sosyal Medya & Butonlar</div>
+          <div style="font-size:12px;color:#9090b0;margin-bottom:16px;">İstediğin kadar sosyal kanal ekle. Logo URL gir veya emoji seç. Aktif edilenler nav'da ve sağ altta görünür.</div>
+          <div class="soc-grid" id="soc-grid"></div>
+          <button class="bsec" style="margin-top:12px;" onclick="openSocModal()">+ Yeni Kanal Ekle</button>
+        </div>
+        <div class="ac">
+          <div class="ac-ttl">Footer Linkleri</div>
+          <div style="font-size:12px;color:#9090b0;margin-bottom:12px;">Aktif sosyal kanallar otomatik footer'a eklenir.</div>
+          <div id="footer-preview" style="display:flex;gap:14px;flex-wrap:wrap;"></div>
+        </div>
+      </div>
+
+      <!-- BANNER -->
+      <div class="apanel" id="p-banner">
+        <div class="ac">
+          <div class="ac-ttl">Üst Banner / GIF</div>
+          <div class="trow">
+            <div class="trow-info"><div class="tlbl">Banner aktif</div><div class="tsub">Sitenin en üstünde göster</div></div>
+            <label class="tgl"><input type="checkbox" id="gif-toggle" onchange="toggleGif()"><span class="tsl"></span></label>
+          </div>
+          <div class="afld"><label class="albl">Görsel / GIF URL</label><input class="ainp" id="gif-url-inp" placeholder="https://...gif veya .jpg" oninput="updateGifUrl()"></div>
+          <div style="font-size:11px;color:#7070a0;">GIF ve statik görsel desteklenir. Maks görüntü yüksekliği 160px.</div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="apanel" id="p-settings">
+        <div class="ag2" style="align-items:start;">
+          <div>
+            <div class="ac">
+              <div class="ac-ttl">Site Kimliği</div>
+              <!-- NAV LOGO — görsel veya yazı -->
+              <div class="afld">
+                <label class="albl">Nav Logosu</label>
+                <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap;">
+                  <!-- Önizleme -->
+                  <div style="flex-shrink:0;">
+                    <div style="background:#000;border:1px solid #f0b42940;border-radius:8px;padding:8px 16px;display:flex;align-items:center;justify-content:center;min-width:140px;height:44px;overflow:hidden;">
+                      <span id="prev-logo-txt" style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--g);letter-spacing:2px;white-space:nowrap;">SLOTMASTER</span>
+                      <img id="prev-logo-img" src="" style="display:none;max-height:36px;max-width:140px;object-fit:contain;" alt="">
+                    </div>
+                    <div style="font-size:10px;color:#5050a0;margin-top:4px;text-align:center;">Nav önizleme</div>
+                  </div>
+                  <div style="flex:1;min-width:180px;">
+                    <div style="font-size:11px;color:#9090b0;margin-bottom:8px;">Yazı logo veya görsel logo seçebilirsin:</div>
+                    <div style="display:flex;gap:6px;margin-bottom:10px;">
+                      <button class="bsec" id="logo-mode-txt" onclick="setLogoMode('txt')" style="font-size:11px;padding:6px 10px;">✏️ Yazı</button>
+                      <button class="bsec" id="logo-mode-img" onclick="setLogoMode('img')" style="font-size:11px;padding:6px 10px;">🖼 Görsel</button>
+                    </div>
+                    <!-- Yazı modu -->
+                    <div id="logo-txt-mode">
+                      <input class="ainp" id="set-name" placeholder="SLOTMASTER" oninput="applySettings()" style="margin-bottom:0;">
+                    </div>
+                    <!-- Görsel modu -->
+                    <div id="logo-img-mode" style="display:none;">
+                      <div style="display:flex;gap:7px;margin-bottom:6px;">
+                        <input class="ainp" id="set-logo-url" placeholder="https://.../logo.png" oninput="previewNavLogo(this.value)" style="flex:1;">
+                        <button class="bsec" onclick="document.getElementById('logo-file-nav').click()" style="white-space:nowrap;font-size:11px;padding:6px 10px;">📁 Yükle</button>
+                      </div>
+                      <input type="file" id="logo-file-nav" accept="image/*" style="display:none;" onchange="handleNavLogoFile(this)">
+                      <div style="font-size:10px;color:#5050a0;">Önerilen: PNG şeffaf arka plan, boyut: ~140×36px veya kare</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- ÖRNEK: KAFADAR -->
+                <div style="margin-top:14px;background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:12px 14px;">
+                  <div style="font-size:10px;color:#7070a0;margin-bottom:8px;">📐 Örnek — Nav logosu boyutu (140×36px önerilir):</div>
+                  <div style="background:#000;border:1px solid #3a3a55;border-radius:6px;padding:6px 14px;display:inline-flex;align-items:center;height:44px;">
+                    <span style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#f0b429;letter-spacing:2px;">KAFADAR</span>
+                  </div>
+                  <div style="font-size:10px;color:#5050a0;margin-top:6px;">Siyah zemin üzerinde yazı logosu — bu boyutta görünür</div>
+                </div>
+              </div>
+              <div class="afld"><label class="albl">Sayfa Başlığı (Tab)</label><input class="ainp" id="set-title" placeholder="SlotMaster" oninput="applySettings()"></div>
+              <div class="afld"><label class="albl">Footer Yasal Metin</label><input class="ainp" id="set-legal" oninput="applySettings()"></div>
+            </div>
+            <div class="ac">
+              <div class="ac-ttl">Mobil Yakınlaştırma</div>
+              <div class="zoom-row">
+                <span style="font-size:11px;color:#7070a0;">Küçük</span>
+                <input type="range" class="zoom-slider" id="zoom-sl" min="0.7" max="1.3" step="0.05" value="1" oninput="applyZoom(this.value)">
+                <span style="font-size:11px;color:#7070a0;">Büyük</span>
+                <span class="zoom-val" id="zoom-val">100%</span>
+              </div>
+              <button class="bsec" style="margin-top:10px;" onclick="resetZoom()">Sıfırla</button>
+            </div>
+            <div class="ac">
+              <div class="ac-ttl">Vurgu Rengi</div>
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <input type="color" id="color-g" value="#f0b429" style="width:48px;height:40px;border:1px solid #3a3a55;border-radius:8px;background:transparent;cursor:pointer;padding:2px;" oninput="applyColor(this.value)">
+                <div><div style="font-size:13px;color:#d0d0e8;">Tema rengi</div><div style="font-size:11px;color:#7070a0;">Buton, çarpan ve badge'lere yansır</div></div>
+                <button class="bsec" onclick="document.getElementById('color-g').value='#f0b429';applyColor('#f0b429')">Sıfırla</button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div class="ac">
+              <div class="ac-ttl">🎨 Tema</div>
+              <div class="theme-grid" id="theme-grid"></div>
+            </div>
+            <div class="ac">
+              <div class="ac-ttl">Üye Kazançları Sayacı</div>
+              <div style="font-size:12px;color:#9090b0;margin-bottom:12px;">Günde 100.000–600.000₺ otomatik artar. Admin sıfırlayana kadar sürekli artar.</div>
+              <div class="afld"><label class="albl">Sıfırlama Başlangıç Değeri (₺)</label><input class="ainp" id="jp-start" placeholder="500000" type="number" min="0"></div>
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <button class="bprim" onclick="adminResetJp()">Sayacı Sıfırla</button>
+                <span style="font-size:12px;color:#7070a0;">Mevcut: <span id="jp-curr" style="color:var(--g)">—</span></span>
+              </div>
+            </div>
+            <div class="ac">
+              <div class="ac-ttl">Sponsor Sütun Sayısı (PC)</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+                <button class="bsec" onclick="setSpCols(2)">2</button>
+                <button class="bsec" onclick="setSpCols(3)">3</button>
+                <button class="bsec" onclick="setSpCols(4)">4</button>
+                <button class="bsec" onclick="setSpCols(5)">5</button>
+                <button class="bsec" onclick="setSpCols(6)">6</button>
+              </div>
+              <div style="font-size:11px;color:#7070a0;">Mobilde daima 2 sütun · PC'de seçilen geçerli</div>
+            </div>
+            <div class="ac">
+              <div class="ac-ttl">🗑 Cache Temizle</div>
+              <div style="font-size:12px;color:#9090b0;margin-bottom:10px;">Jackpot hariç tüm localStorage verisini siler.</div>
+              <button class="bdang" onclick="clearCache()">Cache Temizle ve Yenile</button>
+            </div>
+            <div class="ac" style="border-color:#f0b42940;background:#141420;">
+              <div class="ac-ttl" style="color:#ffe066;font-size:13px;">💾 Tüm Değişiklikleri Kaydet</div>
+              <div style="font-size:12px;color:#9090b0;margin-bottom:12px;">Admin ayarlarını localStorage'a kalıcı kaydet.</div>
+              <button class="bprim" style="font-size:14px;padding:12px 24px;width:100%;" onclick="saveAll()">💾 Kaydet</button>
+              <div id="save-status" style="font-size:11px;color:#4ade80;margin-top:8px;display:none;text-align:center;">✓ Başarıyla kaydedildi!</div>
+            </div>
+          </div>
+          <div>
+            <div class="ac">
+              <div class="ac-ttl">🎨 Tema</div>
+              <div class="theme-grid" id="theme-grid"></div>
+            </div>
+            <div class="ac">
+              <div class="ac-ttl">Üye Kazançları Sayacı</div>
+              <div style="font-size:12px;color:#9090b0;margin-bottom:12px;">Günde 100.000–600.000₺ otomatik artar.</div>
+              <div class="afld"><label class="albl">Başlangıç Değeri (₺)</label><input class="ainp" id="jp-start" placeholder="500000" type="number" min="0"></div>
+              <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+                <button class="bprim" onclick="adminResetJp()">Sayacı Sıfırla</button>
+                <span style="font-size:12px;color:#7070a0;">Mevcut: <span id="jp-curr" style="color:var(--g)">—</span></span>
+              </div>
+            </div>
+            <div class="ac">
+              <div class="ac-ttl">🎯 Giriş Popup</div>
+              <div style="font-size:12px;color:#9090b0;margin-bottom:10px;">Site açılışında 1 kez gösterilir. Kapatılınca tekrar çıkmaz.</div>
+              <div class="trow" style="margin-bottom:10px;">
+                <div class="trow-info"><div class="tlbl">Popup aktif</div><div class="tsub">Ziyaretçilere göster</div></div>
+                <label class="tgl"><input type="checkbox" id="popup-active-toggle"><span class="tsl"></span></label>
+              </div>
+              <div class="afld"><label class="albl">Başlık</label><input class="ainp" id="popup-title" placeholder="🔥 ÖZEL FIRSAT — Sadece Bugün"></div>
+              <div class="afld"><label class="albl">Alt Metin</label><input class="ainp" id="popup-sub" placeholder="En iyi bonus sitelerini kaçırma!"></div>
+              <div class="afld"><label class="albl">Logo URL (isteğe bağlı)</label><input class="ainp" id="popup-logo" placeholder="https://.../logo.png"></div>
+              <div style="font-size:11px;color:#7070a0;margin-bottom:8px;">Popup sponsorları (max 3, karusel):</div>
+              <div id="popup-sp-picks" style="display:flex;flex-direction:column;gap:6px;margin-bottom:12px;"></div>
+              <div style="display:flex;gap:8px;">
+                <button class="bprim" onclick="savePopupSettings()">Kaydet</button>
+                <button class="bsec" onclick="previewPopup()">Önizle</button>
+              </div>
+            </div>
+            <div class="ac">
+              <div class="ac-ttl">💬 Kazanç Gönder Mesajı</div>
+              <div style="font-size:12px;color:#9090b0;margin-bottom:10px;">Kullanıcı formu açtığında altın kutuda gösterilir.</div>
+              <textarea class="ainp" id="admin-submit-text" rows="3" placeholder="Örn: Onaylanan replaylar sonrası 100₺ ödül gönderilecektir." style="resize:vertical;line-height:1.5;"></textarea>
+              <button class="bprim" style="margin-top:8px;" onclick="saveAdminMsg()">Mesajı Kaydet</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /adm-inner -->
+    </div><!-- /adm-content -->
+  </div><!-- /adm-body -->
+</div><!-- /admin-view -->
+
+<!-- ═══ MODALS ═══ -->
+
+<!-- Login -->
+<div class="mwrap" id="m-login" onclick="if(event.target===this)closeM('login')">
+  <div class="mbox">
+    <div class="mhdl"></div><button class="mcls" onclick="closeM('login')">✕</button>
+    <div class="mlogo" id="ml-logo">SLOTMASTER</div>
+    <div style="text-align:center;margin-bottom:16px;"><div style="font-family:Bebas Neue,sans-serif;font-size:20px;color:#fff;">GİRİŞ YAP</div><div style="font-size:11px;color:var(--mu);margin-top:2px;">Hesabına hoş geldin</div></div>
+    <div class="merr" id="login-err"></div>
+    <div class="mfg"><label>KULLANICI ADI</label><input type="text" class="minp" id="login-u" placeholder="kullanıcıadı"></div>
+    <div class="mfg"><label>ŞİFRE</label><input type="password" class="minp" id="login-p" placeholder="••••••••"></div>
+    <button class="mbtn" onclick="doLogin()">Giriş Yap</button>
+    <div class="mfoot"><button class="mlink" onclick="switchM('login','forgot')">Şifremi Unuttum</button> · <button class="mlink" onclick="switchM('login','register')">Kayıt Ol</button></div>
+  </div>
+</div>
+
+<!-- Register -->
+<div class="mwrap" id="m-register" onclick="if(event.target===this)closeM('register')">
+  <div class="mbox">
+    <div class="mhdl"></div><button class="mcls" onclick="closeM('register')">✕</button>
+    <div class="mlogo" id="mr-logo">SLOTMASTER</div>
+    <div style="text-align:center;margin-bottom:16px;"><div style="font-family:Bebas Neue,sans-serif;font-size:20px;color:#fff;">KAYIT OL</div></div>
+    <div class="merr" id="reg-err"></div>
+    <div id="reg-form">
+      <div class="mfg"><label>KULLANICI ADI</label><input type="text" class="minp" id="reg-u" placeholder="kullanıcıadı"></div>
+      <div class="mfg"><label>TELEFON</label><input type="tel" class="minp" id="reg-ph" placeholder="05XX XXX XX XX"></div>
+      <div class="mfg"><label>ŞİFRE</label><input type="password" class="minp" id="reg-p" placeholder="En az 6 karakter"></div>
+      <div class="mfg"><label>ŞİFRE TEKRAR</label><input type="password" class="minp" id="reg-p2" placeholder="Şifreyi tekrar gir"></div>
+      <button class="mbtn" onclick="doRegister()">Kayıt Ol</button>
+    </div>
+    <div class="msuc" id="reg-suc"><div class="msuc-icon">🎉</div><div class="msuc-ttl">KAYIT BAŞARILI!</div><div class="msuc-sub">Hesabın oluşturuldu.</div><button class="mbtn" style="margin-top:12px;" onclick="switchM('register','login')">Giriş Yap</button></div>
+    <div class="mfoot">Hesabın var mı? <button class="mlink" onclick="switchM('register','login')">Giriş Yap</button></div>
+  </div>
+</div>
+
+<!-- Forgot -->
+<div class="mwrap" id="m-forgot" onclick="if(event.target===this)closeM('forgot')">
+  <div class="mbox">
+    <div class="mhdl"></div><button class="mcls" onclick="closeM('forgot')">✕</button>
+    <div class="mlogo">SLOTMASTER</div>
+    <div style="text-align:center;margin-bottom:16px;"><div style="font-family:Bebas Neue,sans-serif;font-size:20px;color:#fff;">ŞİFREMİ UNUTTUM</div></div>
+    <div class="merr" id="forgot-err"></div>
+    <div id="forgot-form">
+      <div class="mfg"><label>KULLANICI ADI</label><input type="text" class="minp" id="forg-u" placeholder="kullanıcıadı"></div>
+      <div class="mfg"><label>TELEFON (Kayıtlı)</label><input type="tel" class="minp" id="forg-ph" placeholder="05XX XXX XX XX"></div>
+      <button class="mbtn" onclick="doForgot()">Sıfırlama Talebi Gönder</button>
+    </div>
+    <div class="msuc" id="forgot-suc"><div class="msuc-icon">📱</div><div class="msuc-ttl">TALEP GÖNDERİLDİ</div><div class="msuc-sub">Admin tarafından yeni şifren iletilecektir.</div><button class="mbtn" style="margin-top:12px;" onclick="switchM('forgot','login')">Giriş Yap</button></div>
+    <div class="mfoot"><button class="mlink" onclick="switchM('forgot','login')">← Geri</button></div>
+  </div>
+</div>
+
+<!-- Submit Win -->
+<div class="mwrap" id="m-submit" onclick="if(event.target===this)closeM('submit')">
+  <div class="mbox">
+    <div class="mhdl"></div><button class="mcls" onclick="closeM('submit')">✕</button>
+    <div class="mttl">KAZANCINI <span>GÖNDER</span></div>
+    <p class="msub">Replay linkini yapıştır — bilgiler otomatik gelir.</p>
+    <div id="submit-form">
+      <!-- Admin mesajı -->
+      <div id="admin-submit-msg" style="display:none;background:#f0b42912;border:1px solid #f0b42930;border-radius:8px;padding:10px 13px;font-size:12px;color:#e0d0a0;margin-bottom:12px;line-height:1.6;"></div>
+      <div class="mfg"><label>REPLAY LİNKİ</label>
+        <input type="text" id="m-url" class="minp" placeholder="https://www.ppreplaylink.net/..." oninput="autoFetchOnPaste(this.value)">
+        <div class="mload" id="mload" style="text-align:left;margin-top:6px;"><span class="spin"></span>Link analiz ediliyor...</div>
+        <div class="merr" id="sub-err" style="margin-top:6px;"></div>
+      </div>
+      <!-- Bilgiler otomatik geldiğinde göster -->
+      <div id="mprev-block" style="display:none;">
+        <div class="mprev" id="mprev" style="display:block;margin-bottom:10px;">
+          <div class="mprev-in">
+            <img id="mprev-img" src="" class="mprev-img" alt="">
+            <div><div class="mprev-t" id="mprev-t"></div><div class="mprev-m" id="mprev-m"></div></div>
+            <div style="color:var(--gr);margin-left:auto;font-size:16px;">✓</div>
+          </div>
+        </div>
+      </div>
+      <div class="mfg"><label>KULLANICI ADI</label><input type="text" class="minp" id="m-user" placeholder="SlotKral99" value=""></div>
+      <div class="mfg"><label>SPONSOR (Hangi sitede oynadın?)</label>
+        <select class="mselect" id="m-sponsor-sel">
+          <option value="">— Sponsor seç (isteğe bağlı) —</option>
+        </select>
+      </div>
+      <button class="mbtn" onclick="submitWin()">Gönder</button>
+    </div>
+    <div class="msuc" id="submit-suc">
+      <div class="msuc-icon">✓</div>
+      <div class="msuc-ttl" style="color:var(--gr);">GÖNDERİLDİ!</div>
+      <div class="msuc-sub">Admin onayından sonra kayan bantta yayınlanacak.</div>
+      <div style="display:inline-flex;align-items:center;gap:6px;background:#22c55e0d;border:1px solid #22c55e22;border-radius:16px;padding:6px 14px;font-size:10px;color:var(--gr);margin-top:10px;"><span style="width:5px;height:5px;border-radius:50%;background:var(--gr);animation:blink 1.5s infinite;display:inline-block;"></span> Admin incelemesinde</div>
+      <button class="mbtn" style="margin-top:14px;" onclick="closeM('submit')">Kapat</button>
+    </div>
+  </div>
+</div>
+
+<!-- LOGO UPLOAD MODAL -->
+<div class="mwrap" id="m-logo" onclick="if(event.target===this)closeM('logo')">
+  <div class="mbox" style="max-width:600px;">
+    <div class="mhdl"></div><button class="mcls" onclick="closeM('logo')">✕</button>
+    <div style="font-family:Bebas Neue,sans-serif;font-size:20px;color:#fff;margin-bottom:4px;">Logo Ekle / Seç</div>
+    <p style="font-size:11px;color:var(--mu);margin-bottom:16px;">URL gir veya önerilen formatı kullan. Logo marka adını içermeli, biz sadece alt metin ekleyeceğiz.</p>
+    <div class="ag2" style="margin-bottom:14px;">
+      <div>
+        <div id="logo-prev-wrap" style="width:100%;aspect-ratio:1/1;max-width:160px;background:#1a1a28;border:2px dashed #3a3a55;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden;margin-bottom:8px;" onclick="document.getElementById('logo-file-inp').click()">
+          <img id="logo-prev-img" src="" style="display:none;width:100%;height:100%;object-fit:cover;" alt="">
+          <div id="logo-prev-placeholder" style="text-align:center;color:#5050a0;font-size:12px;padding:16px;">📁<br>Tıkla &<br>Yükle</div>
+        </div>
+        <input type="file" id="logo-file-inp" accept="image/*" style="display:none;" onchange="handleLogoFile(this)">
+        <div style="font-size:10px;color:#5050a0;">Önerilen: kare, şeffaf arkaplan, min 300x300px</div>
+      </div>
+      <div>
+        <div class="afld"><label class="albl">Veya URL gir</label><input class="ainp" id="logo-url-inp" placeholder="https://.../logo.png" oninput="previewLogoUrl(this.value)"></div>
+        <div class="afld"><label class="albl">Site Adı</label><input class="ainp" id="logo-name-inp" placeholder="CASİBOM"></div>
+        <div class="afld"><label class="albl">Statü</label>
+          <div class="trow" style="margin-bottom:0;">
+            <div class="trow-info"><div class="tlbl">Aktif</div><div class="tsub">Sitede görünür olsun</div></div>
+            <label class="tgl"><input type="checkbox" id="logo-active" checked><span class="tsl"></span></label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;">
+      <button class="bprim" onclick="confirmLogo()">Logoyu Kullan</button>
+      <button class="bsec" onclick="closeM('logo')">İptal</button>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL ADD MODAL -->
+<div class="mwrap" id="m-soc" onclick="if(event.target===this)closeM('soc')">
+  <div class="mbox" style="max-width:480px;">
+    <div class="mhdl"></div><button class="mcls" onclick="closeM('soc')">✕</button>
+    <div style="font-family:Bebas Neue,sans-serif;font-size:20px;color:#fff;margin-bottom:4px;">Sosyal Kanal Ekle</div>
+    <p style="font-size:11px;color:var(--mu);margin-bottom:16px;">İstediğin platformu ekle — Telegram, Instagram, YouTube, Twitter, Discord, TikTok veya özel.</p>
+    <div class="afld"><label class="albl">Platform Adı</label><input class="ainp" id="soc-name-inp" placeholder="Telegram, Instagram, YouTube..."></div>
+    <div class="afld"><label class="albl">Link</label><input class="ainp" id="soc-url-inp" placeholder="https://t.me/..."></div>
+    <div class="afld"><label class="albl">İkon (emoji veya SVG URL)</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;" id="soc-emoji-pick">
+        <button onclick="setSocEmoji(this,'📱')" style="background:#1a1a28;border:1px solid #3a3a55;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:16px;">📱</button>
+        <button onclick="setSocEmoji(this,'✈️')" style="background:#1a1a28;border:1px solid #3a3a55;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:16px;">✈️</button>
+        <button onclick="setSocEmoji(this,'📸')" style="background:#1a1a28;border:1px solid #3a3a55;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:16px;">📸</button>
+        <button onclick="setSocEmoji(this,'▶️')" style="background:#1a1a28;border:1px solid #3a3a55;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:16px;">▶️</button>
+        <button onclick="setSocEmoji(this,'🎵')" style="background:#1a1a28;border:1px solid #3a3a55;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:16px;">🎵</button>
+        <button onclick="setSocEmoji(this,'💬')" style="background:#1a1a28;border:1px solid #3a3a55;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:16px;">💬</button>
+        <button onclick="setSocEmoji(this,'🎮')" style="background:#1a1a28;border:1px solid #3a3a55;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:16px;">🎮</button>
+        <button onclick="setSocEmoji(this,'🌐')" style="background:#1a1a28;border:1px solid #3a3a55;border-radius:6px;padding:6px 10px;cursor:pointer;font-size:16px;">🌐</button>
+      </div>
+      <input class="ainp" id="soc-icon-inp" placeholder="Seçilen veya özel emoji/URL" style="margin-top:8px;">
+    </div>
+    <div class="trow">
+      <div class="trow-info"><div class="tlbl">Nav'da göster</div><div class="tsub">Logo yanında küçük ikon</div></div>
+      <label class="tgl"><input type="checkbox" id="soc-innav" checked><span class="tsl"></span></label>
+    </div>
+    <div class="trow">
+      <div class="trow-info"><div class="tlbl">Sağ altta göster</div><div class="tsub">Sabit yüzen buton</div></div>
+      <label class="tgl"><input type="checkbox" id="soc-infloat" checked><span class="tsl"></span></label>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px;">
+      <button class="bprim" onclick="addSocChannel()">Kanal Ekle</button>
+      <button class="bsec" onclick="closeM('soc')">İptal</button>
+    </div>
+  </div>
+</div>
+
+<!-- Replay -->
+<div id="rep-wrap" onclick="if(event.target===this)closeRep()">
+  <div class="rep-box">
+    <div class="rep-hd">
+      <div><div class="rep-title" id="rep-title"></div><div style="font-size:10px;color:var(--mu);margin-top:1px;" id="rep-user-hd"></div></div>
+      <div style="display:flex;align-items:center;gap:12px;"><div class="rep-mul" id="rep-mul-hd"></div><button class="rep-cls" onclick="closeRep()">✕</button></div>
+    </div>
+    <div class="rep-fw"><div class="rep-load" id="rep-load"><div class="spin" style="width:20px;height:20px;margin:0 auto 6px;display:block;"></div>Yükleniyor...</div><iframe id="rep-iframe" src="" allowfullscreen></iframe></div>
+    <div class="rep-ft"><div class="rep-user" id="rep-user-ft"></div><a class="rep-ext" id="rep-ext" href="#" target="_blank">Yeni sekmede aç ↗</a></div>
+  </div>
+</div>
+
+<!-- SPONSOR ADD MODAL -->
+<div class="mwrap" id="m-sp-add" onclick="if(event.target===this)closeM('sp-add')">
+  <div class="mbox" style="max-width:580px;">
+    <div class="mhdl"></div><button class="mcls" onclick="closeM('sp-add')">✕</button>
+    <div style="font-family:Bebas Neue,sans-serif;font-size:22px;color:#fff;margin-bottom:14px;">Yeni Sponsor Ekle</div>
+    <div class="ag2" style="margin-bottom:10px;">
+      <div class="mfg"><label>Site Adı</label><input type="text" class="minp" id="nsp-name" placeholder="CASİBOM"></div>
+      <div class="mfg"><label>Affiliate Linki</label><input type="text" class="minp" id="nsp-link" placeholder="https://..."></div>
+    </div>
+    <div class="mfg"><label>Bonus / Açıklama Metni</label><input type="text" class="minp" id="nsp-bonus" placeholder="%100 Hoşgeldin · 1.000₺'ye kadar"></div>
+    <div class="mfg">
+      <label>Logo Görseli</label>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <input type="text" class="minp" id="nsp-img" placeholder="URL: https://.../logo.jpg" oninput="previewSpLogo(this.value,'nsp')" style="flex:1;">
+        <button class="bsec" onclick="document.getElementById('nsp-file').click()" style="white-space:nowrap;font-size:11px;padding:8px 12px;">📁 Yükle</button>
+      </div>
+      <input type="file" id="nsp-file" accept="image/*" style="display:none;" onchange="handleSpFile(this,'nsp')">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:80px;height:80px;border-radius:8px;background:#1a1a28;border:2px dashed #3a3a55;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+          <img id="nsp-prev" src="" style="width:100%;height:100%;object-fit:cover;display:none;" alt="">
+          <span id="nsp-prev-ph" style="font-size:20px;color:#404060;">🖼</span>
+        </div>
+        <div style="font-size:11px;color:#7070a0;line-height:1.6;">Kare görsel önerilir (1:1)<br>Tüm kartlar aynı ölçüde görünecek<br>PNG/JPG/WebP desteklenir</div>
+      </div>
+    </div>
+    <div class="mfg"><label>Görsel Efekti</label><div class="efgrid" id="ef-picker"></div></div>
+    <div class="mfg"><label>Etiket</label><div class="tgpick" id="tag-picker"></div></div>
+    <div style="display:flex;gap:8px;margin-top:14px;">
+      <button class="mbtn" onclick="addSponsor()">Sponsor Ekle</button>
+      <button class="bsec" onclick="closeM('sp-add')" style="padding:12px 18px;">İptal</button>
+    </div>
+  </div>
+</div>
+
+<!-- SPONSOR EDIT MODAL -->
+<div class="mwrap" id="m-sp-edit" onclick="if(event.target===this)closeM('sp-edit')">
+  <div class="mbox" style="max-width:580px;">
+    <div class="mhdl"></div><button class="mcls" onclick="closeM('sp-edit')">✕</button>
+    <div style="font-family:Bebas Neue,sans-serif;font-size:22px;color:#fff;margin-bottom:14px;">Sponsoru Düzenle</div>
+    <input type="hidden" id="edit-sp-id">
+    <div class="ag2" style="margin-bottom:10px;">
+      <div class="mfg"><label>Site Adı</label><input type="text" class="minp" id="esp-name" placeholder="CASİBOM"></div>
+      <div class="mfg"><label>Affiliate Linki</label><input type="text" class="minp" id="esp-link" placeholder="https://..."></div>
+    </div>
+    <div class="mfg"><label>Bonus / Açıklama Metni</label><input type="text" class="minp" id="esp-bonus" placeholder="%100 Hoşgeldin · 1.000₺'ye kadar"></div>
+    <div class="mfg">
+      <label>Logo Görseli</label>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <input type="text" class="minp" id="esp-img" placeholder="URL: https://.../logo.jpg" oninput="previewSpLogo(this.value,'esp')" style="flex:1;">
+        <button class="bsec" onclick="document.getElementById('esp-file').click()" style="white-space:nowrap;font-size:11px;padding:8px 12px;">📁 Yükle</button>
+      </div>
+      <input type="file" id="esp-file" accept="image/*" style="display:none;" onchange="handleSpFile(this,'esp')">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div style="width:80px;height:80px;border-radius:8px;background:#1a1a28;border:2px dashed #3a3a55;display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;">
+          <img id="esp-prev" src="" style="width:100%;height:100%;object-fit:cover;" alt="">
+        </div>
+        <div style="font-size:11px;color:#7070a0;">Kare görsel (1:1) · Tüm kartlar eşit boyutta görünür</div>
+      </div>
+    </div>
+    <div class="mfg"><label>Görsel Efekti</label><div class="efgrid" id="ef-picker-edit"></div></div>
+    <div class="mfg"><label>Etiket</label><div class="tgpick" id="tag-picker-edit"></div></div>
+    <div style="display:flex;gap:8px;margin-top:14px;">
+      <button class="mbtn" onclick="saveEditSponsor()">Kaydet</button>
+      <button class="bsec" onclick="closeM('sp-edit')" style="padding:12px 18px;">İptal</button>
+    </div>
+  </div>
+</div>
+
+<!-- POPUP MODAL — giriş popu, sponsor karusel -->
+<div id="popup-overlay" style="display:none;position:fixed;inset:0;z-index:600;backdrop-filter:blur(8px);background:rgba(0,0,0,.7);align-items:center;justify-content:center;padding:16px;">
+  <div id="popup-box" style="background:#0d0d18;border:1px solid #f0b42950;border-radius:18px;width:100%;max-width:480px;position:relative;overflow:hidden;box-shadow:0 0 60px #f0b42930,0 30px 80px #00000090;">
+    <!-- Premium glow top -->
+    <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g),#fff8,var(--g));z-index:2;"></div>
+    <!-- Sponsor slider -->
+    <div id="popup-slides" style="display:flex;overflow:hidden;"></div>
+    <!-- Dots -->
+    <div id="popup-dots" style="display:flex;justify-content:center;gap:6px;padding:10px 0 6px;"></div>
+    <!-- Close -->
+    <button onclick="closePopup()" style="position:absolute;top:10px;right:12px;background:rgba(0,0,0,.6);border:1px solid #ffffff20;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;z-index:10;">✕</button>
+  </div>
+</div>
+
+<!-- ADMIN POPUP SETTINGS PANEL — injected into p-settings -->
+
+<div id="toast"></div>
+
+<script>
+// ════ DATA ════
+const EFFECTS=[
+  {id:'ef-none',l:'Yok',bg:'#ffffff18'},
+  {id:'ef-glow',l:'Altın',bg:'#f0b429'},
+  {id:'ef-purple',l:'Mor',bg:'#7c3aed'},
+  {id:'ef-green',l:'Yeşil',bg:'#22c55e'},
+  {id:'ef-gradient',l:'Gradyan',bg:'linear-gradient(90deg,#f0b429,#f87171,#7c3aed)'},
+];
+const TAGS=[{id:'premium',l:'PREMIUM'},{id:'new',l:'YENİ'},{id:'hot',l:'HOT'},{id:'vip',l:'VIP'},{id:'',l:'Yok'}];
+const THEMES=[
+  {id:'night',l:'🌙 Gece',c:'#f0b429',bg:'#08080e'},
+  {id:'royal',l:'👑 Royal',c:'#e8333a',bg:'#0a0005'},
+  {id:'emerald',l:'💚 Emerald',c:'#00c878',bg:'#020d08'},
+  {id:'galaxy',l:'🌌 Galaxy',c:'#9b59e8',bg:'#060310'},
+  {id:'platinum',l:'💎 Platinum',c:'#c8d0e0',bg:'#0a0a10'},
+];
+
+let sponsors=[
+  {id:1,name:'CASİBOM',bonus:'%100 Hoşgeldin · 1.000₺\'ye kadar',link:'#',ef:'ef-glow',tag:'premium',img:'https://abidin11.com/uploads/sponsors/img_69d9987b9d9bf6.55381307.png'},
+  {id:2,name:'MARSBAHİS',bonus:'250₺ Min. Yatırım · Kural yok',link:'#',ef:'ef-none',tag:'hot',img:'https://abidin11.com/uploads/sponsors/sponsor_20260624_044446_065a2b39.png'},
+  {id:3,name:'MİSTYCASİNO',bonus:'1.000₺ Deneme Bonusu',link:'#',ef:'ef-purple',tag:'new',img:'https://abidin11.com/uploads/sponsors/img_69d9970b8e2518.50293830.png'},
+  {id:4,name:'GRANDBET',bonus:'%300 Hoşgeldin Bonusu',link:'#',ef:'ef-gradient',tag:'',img:'https://abidin11.com/uploads/sponsors/sponsor_20260615_192812_5c053f93.png'},
+  {id:5,name:'SOSABET',bonus:'Kural Yok · 5dk Çekim',link:'#',ef:'ef-none',tag:'vip',img:'https://abidin11.com/uploads/sponsors/sponsor_20260624_164853_0887eea5.png'},
+  {id:6,name:'21.COM',bonus:'%30 Nakit İade · Özel Üyelik',link:'#',ef:'ef-green',tag:'',img:'https://abidin11.com/uploads/sponsors/sponsor_20260602_120243_c7fe8c00.png'},
+];
+let wins=[
+  {id:1,user:'Ke***',game:'Gates of Olympus 1000',mul:'15.000x',img:'https://www.ppreplaylink.net/game_pic/vs20olympx.jpg',link:'https://www.ppreplaylink.net/kdrbAFKIkT',sponsor:'CASİBOM',date:'28.06.2026'},
+  {id:2,user:'Ah***',game:'Sugar Rush 1000',mul:'12.717x',img:'https://www.ppreplaylink.net/game_pic/vs20sugarrushx.jpg',link:'https://www.ppreplaylink.net/AE6jQjtGQ2',sponsor:'MARSBAHİS',date:'27.06.2026'},
+  {id:3,user:'Me***',game:'Starlight Princess 1000',mul:'12.000x',img:'https://www.ppreplaylink.net/game_pic/vs20starlightx.jpg',link:'https://www.ppreplaylink.net/U2flX7Gqo4',sponsor:'MİSTYCASİNO',date:'26.06.2026'},
+  {id:4,user:'Bu***',game:'Sweet Bonanza 1000',mul:'5.008x',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/BTxlrNNnOK',sponsor:'',date:'25.06.2026'},
+  {id:5,user:'Ta***',game:'Wild West Gold',mul:'8.900x',img:'https://www.ppreplaylink.net/game_pic/vs40wildwest.jpg',link:'#',sponsor:'GRANDBET',date:'24.06.2026'},
+  {id:6,user:'Se***',game:'Big Bass Splash 1000',mul:'4.200x',img:'https://www.ppreplaylink.net/game_pic/vs10bbsplashx.jpg',link:'#',sponsor:'',date:'23.06.2026'},
+  {id:7,user:'Yi***',game:'Gates of Olympus Super',mul:'5.233x',img:'https://www.ppreplaylink.net/game_pic/vs20olympgold.jpg',link:'https://www.ppreplaylink.net/1elOPD1xii',sponsor:'',date:'22.06.2026'},
+  {id:8,user:'Em***',game:'Starlight Princess 1000',mul:'15.000x',img:'https://www.ppreplaylink.net/game_pic/vs20starlightx.jpg',link:'https://www.ppreplaylink.net/O9QDeIgaD7',sponsor:'SOSABET',date:'21.06.2026'},
+  {id:9,user:'?',game:'Yükleniyor...',mul:'?',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/pW5cfkxX7h',sponsor:'',date:'29.06.2026',pf:true},
+  {id:10,user:'?',game:'Yükleniyor...',mul:'?',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/2n9c1OQKgr',sponsor:'',date:'29.06.2026',pf:true},
+  {id:11,user:'?',game:'Yükleniyor...',mul:'?',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/awHuFE3587',sponsor:'',date:'29.06.2026',pf:true},
+  {id:12,user:'?',game:'Yükleniyor...',mul:'?',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/UPIQ7HhMqX',sponsor:'',date:'29.06.2026',pf:true},
+  {id:13,user:'?',game:'Yükleniyor...',mul:'?',img:'https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg',link:'https://www.ppreplaylink.net/OMd2QT3q81',sponsor:'',date:'29.06.2026',pf:true},
+];
+let pending=[];
+let users=[];
+let socChannels=[]; // {id,name,url,icon,inNav,inFloat}
+let nextId=300,selEf='ef-none',selTag='',selSocEmoji='📱';
+
+// ════ RENDER SITE ════
+function spTag(tag){
+  if(!tag)return'';
+  const m={premium:'PREMIUM',new:'YENİ',hot:'HOT',vip:'VIP'};
+  return m[tag]||'';
+}
+function renderSponsors(){
+  const g=document.getElementById('sp-grid');
+  g.innerHTML=sponsors.map((s,i)=>`
+    <div class="spc ${s.ef} ${s.tag?'has-'+s.tag:''}" onclick="window.open('${s.link}','_blank')">
+      <div class="spc-topbar"></div>
+      <div class="spc-logo">
+        <img class="spc-img" src="${s.img||''}" onerror="this.parentElement.style.background='#1a1a28'" alt="${s.name}">
+        <div class="spc-sweep"></div>
+        ${s.tag?`<div class="sp-ribbon rb-${s.tag}"><span>${spTag(s.tag)}</span></div>`:''}
+      </div>
+      <div class="spc-body">
+        ${s.bonus?`<div class="spc-bonus">${s.bonus}</div>`:''}
+        <button class="spc-btn" onclick="event.stopPropagation();window.open('${s.link}','_blank')">Siteye Git</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderWinsHome(){
+  document.getElementById('wins-grid').innerHTML=wins.slice(0,8).map(w=>`
+    <div class="wc" onclick="openRep(${w.id})">
+      <div class="wc-iw">
+        <img class="wc-img" src="${w.img}" onerror="this.style.opacity='.1'" alt="">
+        <div class="wc-sweep"></div>
+        <div class="wc-badge">${w.mul}</div>
+      </div>
+      <div class="wc-body">
+        <div class="wc-game">${w.game}</div>
+        <div class="wc-mul">${w.mul}</div>
+        <div class="wc-user">${w.user}</div>
+        <div class="wc-play">▶ Replay İzle</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderWinsPage(){
+  document.getElementById('wp-cnt').textContent=wins.length+' kazanç';
+  document.getElementById('wp-grid').innerHTML=wins.map(w=>`
+    <div class="wpc">
+      <div class="wpc-iw">
+        <img class="wpc-img" src="${w.img}" onerror="this.style.opacity='.1'" alt="">
+        <div class="wpc-sweep"></div>
+        <div class="wpc-badge">${w.mul}</div>
+        ${w.sponsor?`<div class="wpc-sp">${w.sponsor}</div>`:''}
+      </div>
+      <div class="wpc-body">
+        <div class="wpc-game">${w.game}</div>
+        <div class="wpc-meta">${w.user}${w.date?' · '+w.date:''}</div>
+        <div class="wpc-mul">${w.mul}</div>
+        <div class="wpc-btns">
+          <button class="wpc-replay" onclick="openRep(${w.id})">▶ Replay</button>
+          <button class="wpc-play" onclick="window.open('${w.sponsor?getSponsorLink(w.sponsor):sponsors[0]?.link||'#'}','_blank')">Şimdi Oyna</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function buildTicker(){
+  const t=document.getElementById('tk-track');
+  t.classList.remove('go');
+  const b=wins.map(w=>`
+    <div class="tki" onclick="openRep(${w.id})">
+      <div class="tki-in">
+        <div class="tki-iw"><img class="tki-img" src="${w.img}" onerror="this.style.opacity='.1'" alt=""><div class="tki-badge">${w.mul}</div></div>
+        <div class="tki-info"><div class="tki-game">${w.game}</div><div class="tki-user">${w.user}</div></div>
+        <div class="tki-mul">${w.mul}</div>
+      </div>
+    </div>`).join('');
+  t.innerHTML=b+b+b+b;
+  void t.offsetWidth;
+  t.classList.add('go');
+}
+
+function getSponsorLink(name){const s=sponsors.find(x=>x.name===name);return s?s.link:'#';}
+
+function renderSocialBtns(){
+  // Nav social btns
+  const navTg=document.getElementById('nav-tg');
+  const navIg=document.getElementById('nav-ig');
+  navTg.style.display='none';navIg.style.display='none';
+  // Float row
+  const fr=document.getElementById('fbtn-row');
+  fr.innerHTML='';
+  socChannels.filter(c=>c.active).forEach(c=>{
+    if(c.inNav){
+      // add to nav center dynamically
+    }
+    if(c.inFloat){
+      const b=document.createElement('button');
+      b.className='fsocbtn';
+      b.style.background=c.color||'#333';
+      b.style.color='#fff';
+      b.innerHTML=c.icon;
+      b.title=c.name;
+      b.onclick=()=>window.open(c.url,'_blank');
+      fr.appendChild(b);
+    }
+  });
+}
+
+function renderFooter(){
+  const fl=document.getElementById('flinks');
+  fl.innerHTML=socChannels.filter(c=>c.active).map(c=>`<a href="${c.url}" target="_blank" style="color:var(--g);font-size:11px;">${c.icon} ${c.name}</a>`).join('');
+}
+
+// ════ NAVIGATION ════
+function goHome(){
+  document.getElementById('home-page').style.display='block';
+  document.getElementById('wins-page').style.display='none';
+  document.getElementById('users-page').style.display='none';
+  scrollTo(0,0);
+}
+function goWins(){
+  document.getElementById('home-page').style.display='none';
+  document.getElementById('wins-page').style.display='block';
+  document.getElementById('users-page').style.display='none';
+  renderWinsPage();scrollTo(0,0);
+}
+function gotoAdmin(){
+  document.getElementById('site-view').style.display='none';
+  document.getElementById('admin-view').style.display='block';
+  document.getElementById('fbwrap').style.display='none';
+  rAdmSponsors();rPending();rWinsAdm();rUsers();rThemes();rSocGrid();renderSponsorDropdown();updateJpCurr();
+}
+function gotoSite(){
+  document.getElementById('admin-view').style.display='none';
+  document.getElementById('site-view').style.display='block';
+  document.getElementById('fbwrap').style.display='flex';
+}
+
+// ════ MENU ════
+function toggleMenu(){document.getElementById('ndrop').classList.toggle('open');}
+function closeMenu(){document.getElementById('ndrop').classList.remove('open');}
+document.addEventListener('click',e=>{if(!e.target.closest('#hbg-btn')&&!e.target.closest('#ndrop'))closeMenu();});
+function openSoc(type){
+  const c=socChannels.find(x=>x.type===type);
+  if(c)window.open(c.url,'_blank');
+}
+
+// ════ MODALS ════
+function openM(id){document.getElementById('m-'+id).classList.add('open');}
+function closeM(id){
+  document.getElementById('m-'+id).classList.remove('open');
+  if(id==='register'){document.getElementById('reg-form').style.display='block';document.getElementById('reg-suc').style.display='none';document.getElementById('reg-err').style.display='none';}
+  if(id==='forgot'){document.getElementById('forgot-form').style.display='block';document.getElementById('forgot-suc').style.display='none';document.getElementById('forgot-err').style.display='none';}
+  if(id==='submit'){document.getElementById('submit-form').style.display='block';document.getElementById('submit-suc').style.display='none';document.getElementById('sub-err').style.display='none';document.getElementById('mprev').style.display='none';}
+}
+function switchM(from,to){closeM(from);setTimeout(()=>openM(to),150);}
+function openSubmit(){closeM('submit');document.getElementById('m-url').value='';document.getElementById('m-game').value='';document.getElementById('m-mul').value='';openM('submit');}
+
+// ════ AUTH ════
+function doLogin(){
+  const u=document.getElementById('login-u').value.trim();
+  const p=document.getElementById('login-p').value;
+  const e=document.getElementById('login-err');
+  if(!u||!p){e.textContent='Kullanıcı adı ve şifre gerekli.';e.style.display='block';return;}
+  const f=users.find(x=>x.u===u&&x.p===p);
+  if(!f){e.textContent='Hatalı kullanıcı adı veya şifre.';e.style.display='block';return;}
+  e.style.display='none';closeM('login');toast('Hoş geldin, '+u+' ✓');
+}
+function doRegister(){
+  const u=document.getElementById('reg-u').value.trim();
+  const ph=document.getElementById('reg-ph').value.trim();
+  const p=document.getElementById('reg-p').value;
+  const p2=document.getElementById('reg-p2').value;
+  const e=document.getElementById('reg-err');
+  if(!u||!ph||!p){e.textContent='Tüm alanları doldurun.';e.style.display='block';return;}
+  if(p.length<6){e.textContent='Şifre en az 6 karakter.';e.style.display='block';return;}
+  if(p!==p2){e.textContent='Şifreler eşleşmiyor.';e.style.display='block';return;}
+  if(users.find(x=>x.u===u)){e.textContent='Bu kullanıcı adı alınmış.';e.style.display='block';return;}
+  users.push({id:nextId++,u,ph,p,date:new Date().toLocaleDateString('tr-TR'),clicks:{}});
+  e.style.display='none';
+  document.getElementById('reg-form').style.display='none';
+  document.getElementById('reg-suc').style.display='block';
+  rUsers();
+}
+function doForgot(){
+  const u=document.getElementById('forg-u').value.trim();
+  const ph=document.getElementById('forg-ph').value.trim();
+  const e=document.getElementById('forgot-err');
+  if(!u||!ph){e.textContent='Tüm alanları doldurun.';e.style.display='block';return;}
+  const f=users.find(x=>x.u===u&&x.ph===ph);
+  if(!f){e.textContent='Bu bilgilerle kayıtlı hesap bulunamadı.';e.style.display='block';return;}
+  e.style.display='none';document.getElementById('forgot-form').style.display='none';document.getElementById('forgot-suc').style.display='block';
+}
+
+// ════ REPLAY ════
+function openRep(id){
+  const w=wins.find(x=>x.id===id);if(!w)return;
+  document.getElementById('rep-title').textContent=w.game;
+  document.getElementById('rep-mul-hd').textContent=w.mul;
+  document.getElementById('rep-user-hd').textContent=w.user;
+  document.getElementById('rep-user-ft').textContent=w.user+' · '+w.mul;
+  document.getElementById('rep-ext').href=w.link;
+  document.getElementById('rep-load').style.display='block';
+  const ifr=document.getElementById('rep-iframe');
+  ifr.src='';ifr.onload=()=>{document.getElementById('rep-load').style.display='none';};
+  if(w.link&&w.link.includes('ppreplaylink'))ifr.src=w.link;
+  else document.getElementById('rep-load').textContent='Replay linki mevcut değil.';
+  document.getElementById('rep-wrap').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeRep(){document.getElementById('rep-wrap').classList.remove('open');document.getElementById('rep-iframe').src='';document.body.style.overflow='';}
+
+// ════ SUBMIT WIN ════
+async function fetchReplay(){
+  const url=document.getElementById('m-url').value.trim();
+  if(!url||!url.includes('ppreplaylink')){showSubErr('Geçerli bir ppreplaylink.net linki gir.');return;}
+  setLoad(true);document.getElementById('sub-err').style.display='none';document.getElementById('mprev').style.display='none';
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:300,messages:[{role:'user',content:`ppreplaylink URL: ${url}\nFormat: "OYUN_ADI ÇARPANx Win"\nSadece JSON: {"game":"oyun adı","multiplier":"5008x","imageUrl":"https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg"}`}]})});
+    const d=await r.json();
+    const p=JSON.parse(d.content.map(i=>i.text||'').join('').replace(/```json|```/g,'').trim());
+    fillSub(p.game||'',p.multiplier||'',p.imageUrl||'');
+  }catch(e){fillSub('','','');showSubErr('Analiz yapılamadı — manuel girebilirsin.');}
+  finally{setLoad(false);}
+}
+function fillSub(g,m,img){
+  const ge=document.getElementById('m-game'),me=document.getElementById('m-mul');
+  ge.value=g;me.value=m;
+  if(g){ge.classList.add('af');me.classList.add('af');ge.removeAttribute('readonly');me.removeAttribute('readonly');}
+  document.getElementById('mprev-t').textContent=g||'Bilinmiyor';
+  document.getElementById('mprev-m').textContent=m||'—';
+  const pi=document.getElementById('mprev-img');
+  if(img){pi.src=img;pi.style.display='block';}else{pi.style.display='none';}
+  document.getElementById('mprev').style.display='block';
+}
+function submitWin(){
+  const url=document.getElementById('m-url').value.trim();
+  const user=document.getElementById('m-user').value.trim();
+  if(!url||!user){showSubErr('Link ve kullanıcı adı zorunlu.');return;}
+  pending.push({id:nextId++,user,game:document.getElementById('m-game').value||'Bilinmiyor',mul:document.getElementById('m-mul').value||'—',img:document.getElementById('mprev-img').src||'',link:url,tg:document.getElementById('m-tg').value||'—',sponsor:'',date:new Date().toLocaleDateString('tr-TR'),siteV:'',prizeEl:false});
+  document.getElementById('submit-form').style.display='none';
+  document.getElementById('submit-suc').style.display='block';
+  updatePendBadge();
+}
+function setLoad(v){document.getElementById('mload').style.display=v?'block':'none';document.getElementById('fetch-btn').disabled=v;}
+function showSubErr(m){const e=document.getElementById('sub-err');e.textContent=m;e.style.display='block';}
+
+// ════ AUTO FETCH WINS ════
+async function fetchWinMeta(w){
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:250,messages:[{role:'user',content:`ppreplaylink URL: ${w.link}\nFormat: "OYUN_ADI ÇARPANx Win". Kullanıcı adı URL'den çıkarılamıyorsa boş bırak.\nSadece JSON: {"game":"oyun","multiplier":"5008x","imageUrl":"https://www.ppreplaylink.net/game_pic/vs20fruitswx.jpg","username":""}`}]})});
+    const d=await r.json();
+    const p=JSON.parse(d.content.map(i=>i.text||'').join('').replace(/```json|```/g,'').trim());
+    w.game=p.game||w.game;w.mul=p.multiplier||w.mul;w.img=p.imageUrl||w.img;
+    if(p.username&&p.username!=='')w.user=p.username;
+    w.pf=false;
+    renderWinsHome();buildTicker();
+  }catch(e){w.pf=false;}
+}
+function initFetches(){wins.filter(w=>w.pf).forEach((w,i)=>setTimeout(()=>fetchWinMeta(w),i*1300+1000));}
+
+// ════ ADMIN RENDERS ════
+let dragSrcIdx=null;
+function rAdmSponsors(){
+  document.getElementById('sp-badge').textContent=sponsors.length+' aktif';
+  document.getElementById('sp-adm-list').innerHTML=sponsors.map((s,i)=>`
+    <div class="sp-adm-row" draggable="true" data-idx="${i}"
+      ondragstart="dsDragStart(event,${i})"
+      ondragover="dsDragOver(event,${i})"
+      ondrop="dsDrop(event,${i})"
+      ondragend="dsDragEnd(event)">
+      <div class="sp-adm-drag" title="Sürükle">⠿</div>
+      <div class="sp-rank-num">${i+1}</div>
+      <img class="sp-adm-img" src="${s.img||''}" onerror="this.style.opacity='.2'" alt="">
+      <div class="sp-adm-info">
+        <div class="sp-adm-name">${s.name}</div>
+        <div class="sp-adm-bonus">${s.bonus||'—'}</div>
+      </div>
+      <div class="sp-adm-acts">
+        <select class="efsel" onchange="chSpEf(${s.id},this.value)">${EFFECTS.map(e=>`<option value="${e.id}"${s.ef===e.id?' selected':''}>${e.l}</option>`).join('')}</select>
+        <button class="bico" onclick="openEditSp(${s.id})" title="Düzenle">✏️</button>
+        <button class="bico" onclick="moveSp(${i},-1)" title="Yukarı">↑</button>
+        <button class="bico" onclick="moveSp(${i},1)" title="Aşağı">↓</button>
+        <button class="bdang" onclick="delSp(${s.id})">Sil</button>
+      </div>
+    </div>`).join('');
+}
+
+// Drag & drop
+function dsDragStart(e,idx){dragSrcIdx=idx;e.currentTarget.classList.add('dragging');e.dataTransfer.effectAllowed='move';}
+function dsDragOver(e,idx){e.preventDefault();e.dataTransfer.dropEffect='move';if(idx!==dragSrcIdx){document.querySelectorAll('.sp-adm-row').forEach((r,i)=>r.classList.toggle('drag-over',i===idx));}}
+function dsDrop(e,idx){e.preventDefault();if(dragSrcIdx!==null&&dragSrcIdx!==idx){const moved=sponsors.splice(dragSrcIdx,1)[0];sponsors.splice(idx,0,moved);renderSponsors();rAdmSponsors();}dragSrcIdx=null;}
+function dsDragEnd(e){e.currentTarget.classList.remove('dragging');document.querySelectorAll('.sp-adm-row').forEach(r=>r.classList.remove('drag-over'));dragSrcIdx=null;}
+
+// Sponsor logo preview
+function previewSpLogo(url,pfx){
+  const img=document.getElementById(pfx+'-prev');
+  const ph=document.getElementById(pfx+'-prev-ph');
+  if(url&&img){img.src=url;img.style.display='block';if(ph)ph.style.display='none';}
+}
+function handleSpFile(inp,pfx){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{
+    const url=e.target.result;
+    document.getElementById(pfx+'-img').value=url;
+    previewSpLogo(url,pfx);
+  };
+  r.readAsDataURL(f);
+}
+
+// Edit sponsor
+let selEfEdit='ef-none',selTagEdit='';
+function openEditSp(id){
+  const s=sponsors.find(x=>x.id===id);if(!s)return;
+  document.getElementById('edit-sp-id').value=id;
+  document.getElementById('esp-name').value=s.name;
+  document.getElementById('esp-link').value=s.link;
+  document.getElementById('esp-bonus').value=s.bonus;
+  document.getElementById('esp-img').value=s.img||'';
+  const prevImg=document.getElementById('esp-prev');
+  if(prevImg){prevImg.src=s.img||'';prevImg.style.display=s.img?'block':'none';}
+  selEfEdit=s.ef||'ef-none';selTagEdit=s.tag||'';
+  renderEfPickerEdit();renderTagPickerEdit();
+  openM('sp-edit');
+}
+function saveEditSponsor(){
+  const id=parseInt(document.getElementById('edit-sp-id').value);
+  const s=sponsors.find(x=>x.id===id);if(!s)return;
+  s.name=document.getElementById('esp-name').value.trim()||s.name;
+  s.link=document.getElementById('esp-link').value.trim()||s.link;
+  s.bonus=document.getElementById('esp-bonus').value.trim();
+  s.img=document.getElementById('esp-img').value.trim();
+  s.ef=selEfEdit;s.tag=selTagEdit;
+  renderSponsors();rAdmSponsors();renderSponsorDropdown();closeM('sp-edit');toast('Sponsor güncellendi ✓');
+}
+function renderEfPickerEdit(){
+  const el=document.getElementById('ef-picker-edit');if(!el)return;
+  el.innerHTML=EFFECTS.map(e=>`<div class="efopt${selEfEdit===e.id?' sel':''}" onclick="selEfEditFn('${e.id}')"><div class="efbar" style="background:${e.bg}"></div>${e.l}</div>`).join('');
+}
+function renderTagPickerEdit(){
+  const el=document.getElementById('tag-picker-edit');if(!el)return;
+  el.innerHTML=TAGS.map(t=>`<button class="tgbtn${selTagEdit===t.id?' sel':''}" data-t="${t.id}" onclick="selTgEdit('${t.id}')">${t.l}</button>`).join('');
+}
+function selEfEditFn(id){selEfEdit=id;renderEfPickerEdit();}
+function selTgEdit(t){selTagEdit=t;renderTagPickerEdit();}
+
+// Nav logo
+function setLogoMode(mode){
+  document.getElementById('logo-txt-mode').style.display=mode==='txt'?'block':'none';
+  document.getElementById('logo-img-mode').style.display=mode==='img'?'block':'none';
+  document.getElementById('logo-mode-txt').style.borderColor=mode==='txt'?'var(--g)':'#3a3a55';
+  document.getElementById('logo-mode-img').style.borderColor=mode==='img'?'var(--g)':'#3a3a55';
+  if(mode==='txt'){
+    document.getElementById('nlogo-img').style.display='none';
+    document.getElementById('nlogo-txt').style.display='';
+    document.getElementById('prev-logo-img').style.display='none';
+    document.getElementById('prev-logo-txt').style.display='';
+  }
+}
+function previewNavLogo(url){
+  if(!url)return;
+  const img=document.getElementById('nlogo-img');
+  const txt=document.getElementById('nlogo-txt');
+  const pImg=document.getElementById('prev-logo-img');
+  const pTxt=document.getElementById('prev-logo-txt');
+  img.src=url;img.style.display='block';txt.style.display='none';
+  pImg.src=url;pImg.style.display='block';pTxt.style.display='none';
+}
+function handleNavLogoFile(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{document.getElementById('set-logo-url').value=e.target.result;previewNavLogo(e.target.result);};
+  r.readAsDataURL(f);
+}
+
+function rPending(){
+  const c=pending.length;
+  updatePendBadge();
+  document.getElementById('pend-badge').textContent=c+' bekliyor';
+  const l=document.getElementById('pend-list');
+  if(!c){l.innerHTML='<div class="empty">✓ Bekleyen kazanç yok</div>';return;}
+  l.innerHTML=pending.map(p=>`
+    <div class="prow" id="pr-${p.id}">
+      <div class="prow-top">
+        <img class="prow-img" src="${p.img}" onerror="this.style.opacity='.2'" alt="">
+        <div><div class="prow-game">${p.game}</div><div class="prow-mul">${p.mul}</div></div>
+      </div>
+      <div class="prow-det">
+        <div class="prow-det-item"><span>Kullanıcı Adı</span><span>${p.user}</span></div>
+        <div class="prow-det-item"><span>Telegram</span><span style="color:var(--g)">${p.tg}</span></div>
+        <div class="prow-det-item"><span>Gönderim Tarihi</span><span>${p.date}</span></div>
+        <div class="prow-det-item"><span>Bu Sitede Oynandı</span><span>${p.siteV||'Belirtilmedi'}</span></div>
+        <div class="prow-det-item" style="grid-column:1/-1;"><span>Replay Linki</span><span><a href="${p.link}" target="_blank" style="color:var(--g);font-size:10px;word-break:break-all;">${p.link}</a></span></div>
+        ${p.siteV?`<div style="grid-column:1/-1;background:#22c55e12;border:1px solid #22c55e30;border-radius:6px;padding:6px 10px;color:#4ade80;font-size:11px;">✓ ${p.siteV} üzerinde oynandığı doğrulandı</div>`:''}
+        ${p.prizeEl?`<div style="grid-column:1/-1;background:#f0b42912;border:1px solid #f0b42930;border-radius:6px;padding:6px 10px;color:var(--g);font-size:11px;">🏆 Ödüle hak kazanıyor (${p.mul})</div>`:''}
+      </div>
+      <div class="prow-acts">
+        <button class="bappr" onclick="approvePend(${p.id})">✓ Onayla</button>
+        <button class="brej" onclick="rejectPend(${p.id})">✕ Reddet</button>
+        <select class="ainp" style="max-width:140px;font-size:12px;" onchange="setPendSp(${p.id},this.value)">
+          <option value="">— Sponsor —</option>
+          ${sponsors.map(s=>`<option value="${s.name}"${p.sponsor===s.name?' selected':''}>${s.name}</option>`).join('')}
+        </select>
+        <button class="bsec" onclick="markVerif(${p.id})" style="font-size:11px;padding:7px 10px;">✓ Doğrula</button>
+        <button class="bsec" onclick="markPrize(${p.id})" style="font-size:11px;padding:7px 10px;">🏆 Ödül</button>
+      </div>
+    </div>`).join('');
+}
+
+function rWinsAdm(){
+  document.getElementById('wins-badge').textContent=wins.length+' kazanç';
+  document.getElementById('wadm-list').innerHTML=wins.map((w,i)=>`
+    <div class="wadm-row">
+      <img class="wadm-img" src="${w.img}" onerror="this.style.opacity='.1'" alt="">
+      <div class="wadm-info">
+        <div class="wadm-game">${w.game} <span class="wadm-mul">${w.mul}</span></div>
+        <div class="wadm-meta">${w.user}${w.sponsor?' · <span style="color:var(--g)">'+w.sponsor+'</span>':''} · <a href="${w.link}" target="_blank" style="color:var(--g);font-size:10px;">Replay ↗</a></div>
+      </div>
+      <div style="display:flex;gap:6px;flex-shrink:0;">
+        <button class="bico" onclick="mvWin(${i},-1)">↑</button>
+        <button class="bico" onclick="mvWin(${i},1)">↓</button>
+        <button class="bdang" onclick="delWin(${w.id})">Sil</button>
+      </div>
+    </div>`).join('');
+}
+
+function rUsers(){
+  const q=(document.getElementById('user-search')?.value||'').toLowerCase();
+  const fil=q?users.filter(u=>u.u.toLowerCase().includes(q)||u.ph.includes(q)):users;
+  const el=document.getElementById('user-search-cnt');
+  if(el)el.textContent=fil.length+'/'+users.length;
+  document.getElementById('users-badge').textContent=users.length+' üye';
+  const l=document.getElementById('users-adm-list');
+  if(!l)return;
+  if(!users.length){l.innerHTML='<div class="empty">Henüz kayıtlı üye yok</div>';return;}
+  if(!fil.length){l.innerHTML='<div class="empty">Arama sonucu bulunamadı</div>';return;}
+  l.innerHTML=fil.map(u=>`
+    <div class="user-row">
+      <div class="user-av">${u.u[0].toUpperCase()}</div>
+      <div class="user-info">
+        <div class="user-name">${u.u}</div>
+        <div class="user-meta">${u.ph} · Kayıt: ${u.date}</div>
+        <div class="user-clicks">En çok tıklanan: ${getMostClicked(u)}</div>
+      </div>
+      <button class="bdang" onclick="delUser(${u.id})">Sil</button>
+    </div>`).join('');
+}
+function renderUsersAdmin(){rUsers();}
+function getMostClicked(u){
+  if(!u.clicks||!Object.keys(u.clicks).length)return'—';
+  return Object.entries(u.clicks).sort((a,b)=>b[1]-a[1]).slice(0,1).map(([k,v])=>k+' ('+v+'x)').join('');
+}
+
+function rThemes(){
+  document.getElementById('theme-grid').innerHTML=THEMES.map(t=>`
+    <button class="theme-card${document.body.className.includes('theme-'+t.id)?' active':''}" onclick="applyTheme('${t.id}')">
+      <div class="theme-preview" style="background:linear-gradient(135deg,${t.bg},${t.c})"></div>
+      <span class="theme-name">${t.l}</span>
+    </button>`).join('');
+}
+
+function rSocGrid(){
+  document.getElementById('soc-grid').innerHTML=socChannels.map((c,i)=>`
+    <div class="soc-item">
+      <div class="soc-icon" style="background:${c.color||'#2a2a40'}">${c.icon}</div>
+      <div class="soc-info">
+        <div class="soc-name">${c.name}</div>
+        <div class="soc-url">${c.url}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:4px;">
+        <label class="tgl" title="Aktif"><input type="checkbox"${c.active?' checked':''} onchange="toggleSoc(${c.id},this.checked)"><span class="tsl"></span></label>
+        <button class="bdang" onclick="delSoc(${c.id})" style="padding:3px 7px;font-size:10px;">Sil</button>
+      </div>
+    </div>`).join('');
+  renderFooter();
+}
+
+function renderEfPicker(){
+  document.getElementById('ef-picker').innerHTML=EFFECTS.map(e=>`
+    <div class="efopt${selEf===e.id?' sel':''}" onclick="selEfFn('${e.id}')">
+      <div class="efbar" style="background:${e.bg}"></div>${e.l}
+    </div>`).join('');
+}
+function renderTagPicker(){
+  document.getElementById('tag-picker').innerHTML=TAGS.map(t=>`
+    <button class="tgbtn${selTag===t.id?' sel':''}" data-t="${t.id}" onclick="selTg('${t.id}')">${t.l}</button>`).join('');
+}
+function renderSponsorDropdown(){
+  const s=document.getElementById('mw-sponsor');
+  if(!s)return;
+  s.innerHTML='<option value="">— Seçiniz —</option>'+sponsors.map(sp=>`<option value="${sp.name}">${sp.name}</option>`).join('');
+}
+
+// ════ ADMIN ACTIONS ════
+function chSpEf(id,ef){const s=sponsors.find(x=>x.id===id);if(s){s.ef=ef;renderSponsors();}}
+function moveSp(i,d){const j=i+d;if(j<0||j>=sponsors.length)return;[sponsors[i],sponsors[j]]=[sponsors[j],sponsors[i]];renderSponsors();rAdmSponsors();}
+function delSp(id){sponsors=sponsors.filter(s=>s.id!==id);renderSponsors();rAdmSponsors();renderSponsorDropdown();toast('Sponsor silindi');}
+function selEfFn(id){selEf=id;renderEfPicker();}
+function selTg(t){selTag=t;renderTagPicker();}
+
+// Logo modal
+function openLogoModal(){openM('logo');}
+function handleLogoFile(inp){
+  const f=inp.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=e=>{previewLogoUrl(e.target.result);document.getElementById('logo-url-inp').value=e.target.result;};
+  r.readAsDataURL(f);
+}
+function previewLogoUrl(url){
+  if(!url)return;
+  const img=document.getElementById('logo-prev-img');
+  const ph=document.getElementById('logo-prev-placeholder');
+  const wrap=document.getElementById('nsp-img-preview');
+  img.src=url;img.style.display='block';ph.style.display='none';
+  // also update sponsor preview
+  document.getElementById('nsp-img').value=url;
+  if(wrap){wrap.style.display='block';document.getElementById('nsp-img-prev-img').src=url;}
+}
+function confirmLogo(){
+  const url=document.getElementById('logo-url-inp').value.trim();
+  const name=document.getElementById('logo-name-inp').value.trim();
+  if(!url){toast('Görsel URL gerekli','err');return;}
+  document.getElementById('nsp-img').value=url;
+  if(name)document.getElementById('nsp-name').value=name;
+  // preview
+  const wrap=document.getElementById('nsp-img-preview');
+  if(wrap){wrap.style.display='block';document.getElementById('nsp-img-prev-img').src=url;}
+  closeM('logo');toast('Logo seçildi ✓');
+}
+
+function addSponsor(){
+  const name=document.getElementById('nsp-name').value.trim();
+  const link=document.getElementById('nsp-link').value.trim()||'#';
+  const bonus=document.getElementById('nsp-bonus').value.trim();
+  const img=document.getElementById('nsp-img').value.trim();
+  if(!name){toast('Site adı zorunlu','err');return;}
+  sponsors.push({id:nextId++,name,link,bonus,img,ef:selEf,tag:selTag});
+  ['nsp-name','nsp-link','nsp-bonus','nsp-img'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+  const prev=document.getElementById('nsp-prev');if(prev){prev.src='';prev.style.display='none';}
+  const ph=document.getElementById('nsp-prev-ph');if(ph)ph.style.display='';
+  renderSponsors();rAdmSponsors();renderSponsorDropdown();closeM('sp-add');toast('Sponsor eklendi ✓');
+}
+
+function mvWin(i,d){const j=i+d;if(j<0||j>=wins.length)return;[wins[i],wins[j]]=[wins[j],wins[i]];renderWinsHome();buildTicker();rWinsAdm();}
+function delWin(id){wins=wins.filter(w=>w.id!==id);renderWinsHome();buildTicker();rWinsAdm();toast('Kazanç silindi');}
+function addWinManual(){
+  const user=document.getElementById('mw-user').value.trim();
+  const mul=document.getElementById('mw-mul').value.trim();
+  const game=document.getElementById('mw-game').value.trim();
+  const img=document.getElementById('mw-img').value.trim();
+  const link=document.getElementById('mw-link').value.trim()||'#';
+  const sponsor=document.getElementById('mw-sponsor').value;
+  if(!user||!game){toast('Kullanıcı ve oyun adı zorunlu','err');return;}
+  wins.unshift({id:nextId++,user,mul,game,img,link,sponsor,date:new Date().toLocaleDateString('tr-TR')});
+  ['mw-user','mw-mul','mw-game','mw-img','mw-link'].forEach(id=>document.getElementById(id).value='');
+  renderWinsHome();buildTicker();rWinsAdm();toast('Kazanç eklendi ✓');
+}
+
+function approvePend(id){
+  const p=pending.find(x=>x.id===id);
+  if(p){wins.unshift({id:nextId++,user:p.user,game:p.game,mul:p.mul,img:p.img,link:p.link,sponsor:p.sponsor,date:p.date});pending=pending.filter(x=>x.id!==id);renderWinsHome();buildTicker();rPending();rWinsAdm();toast('Kazanç onaylandı ✓');}
+}
+function rejectPend(id){pending=pending.filter(x=>x.id!==id);rPending();toast('Reddedildi');}
+function setPendSp(id,v){const p=pending.find(x=>x.id===id);if(p)p.sponsor=v;}
+function markVerif(id){const p=pending.find(x=>x.id===id);if(p){p.siteV=p.sponsor||sponsors[0]?.name||'';rPending();toast('Doğrulandı ✓');}}
+function markPrize(id){const p=pending.find(x=>x.id===id);if(p){p.prizeEl=true;rPending();toast('Ödüle hak kazandırıldı 🏆');}}
+function delUser(id){users=users.filter(u=>u.id!==id);rUsers();}
+function updatePendBadge(){const c=pending.length;document.getElementById('pb-m').textContent=c;document.getElementById('pb-s').textContent=c;}
+
+// Social channels
+function openSocModal(){document.getElementById('soc-name-inp').value='';document.getElementById('soc-url-inp').value='';document.getElementById('soc-icon-inp').value='';openM('soc');}
+function setSocEmoji(btn,emoji){selSocEmoji=emoji;document.getElementById('soc-icon-inp').value=emoji;document.querySelectorAll('#soc-emoji-pick button').forEach(b=>b.style.borderColor='#3a3a55');btn.style.borderColor='var(--g)';}
+function addSocChannel(){
+  const name=document.getElementById('soc-name-inp').value.trim();
+  const url=document.getElementById('soc-url-inp').value.trim();
+  const icon=document.getElementById('soc-icon-inp').value||selSocEmoji;
+  const inNav=document.getElementById('soc-innav').checked;
+  const inFloat=document.getElementById('soc-infloat').checked;
+  if(!name||!url){toast('Ad ve link zorunlu','err');return;}
+  socChannels.push({id:nextId++,name,url,icon,inNav,inFloat,active:true,color:'#333',type:name.toLowerCase()});
+  closeM('soc');rSocGrid();renderSocialBtns();renderFooter();toast('Kanal eklendi ✓');
+}
+function toggleSoc(id,v){const c=socChannels.find(x=>x.id===id);if(c){c.active=v;renderSocialBtns();renderFooter();rSocGrid();}}
+function delSoc(id){socChannels=socChannels.filter(c=>c.id!==id);rSocGrid();renderSocialBtns();renderFooter();toast('Kanal silindi');}
+
+// ════ SETTINGS ════
+function applySettings(){
+  const v=k=>document.getElementById(k)?.value||'';
+  const name=v('set-name');
+  if(name){
+    const t=document.getElementById('nlogo-txt');
+    const pt=document.getElementById('prev-logo-txt');
+    ['ml-logo','mr-logo'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent=name;});
+    if(t)t.textContent=name;
+    if(pt)pt.textContent=name;
+    document.getElementById('ptag').textContent=name;
+  }
+  if(v('set-title'))document.getElementById('ptag').textContent=v('set-title');
+  if(v('set-legal'))document.getElementById('flegal').textContent=v('set-legal');
+}
+function applyZoom(v){document.documentElement.style.setProperty('--zoom',v);document.getElementById('zoom-val').textContent=Math.round(v*100)+'%';}
+function resetZoom(){document.getElementById('zoom-sl').value=1;applyZoom(1);}
+function applyColor(c){
+  document.documentElement.style.setProperty('--g',c);
+  const r=parseInt(c.slice(1,3),16),gr=parseInt(c.slice(3,5),16),b=parseInt(c.slice(5,7),16);
+  document.documentElement.style.setProperty('--g2',`#${Math.max(0,r-28).toString(16).padStart(2,'0')}${Math.max(0,gr-28).toString(16).padStart(2,'0')}${Math.max(0,b-28).toString(16).padStart(2,'0')}`);
+}
+function applyTheme(name){
+  ['night','royal','emerald','galaxy','platinum'].forEach(t=>document.body.classList.remove('theme-'+t));
+  document.body.classList.add('theme-'+name);
+  try{localStorage.setItem('sm_theme',name);}catch(e){}
+  rThemes();toast('Tema: '+name);
+}
+function setSpCols(n){
+  // Store col count, override desktop media query
+  const grid=document.getElementById('sp-grid');
+  if(grid){grid.setAttribute('data-cols',n);grid.style.setProperty('grid-template-columns',`repeat(${n},minmax(0,1fr))`);}
+  toast(n+' sütun ayarlandı ✓');
+}
+function toggleGif(){
+  const on=document.getElementById('gif-toggle').checked;
+  document.getElementById('gif-banner').style.display=on?'block':'none';
+}
+function updateGifUrl(){const u=document.getElementById('gif-url-inp').value.trim();if(u)document.getElementById('gif-img').src=u;}
+
+// Admin tab switching
+function switchTab(el){
+  const panel=el.dataset.p;
+  document.querySelectorAll('.stab,.mtab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.apanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll(`[data-p="${panel}"]`).forEach(t=>t.classList.add('active'));
+  document.getElementById(panel).classList.add('active');
+  if(panel==='p-settings')updateJpCurr();
+  if(panel==='p-sponsors'){renderEfPicker();renderTagPicker();}
+}
+
+// ════ JACKPOT ════
+(function(){
+  const K='sm_jp_v1';
+  function load(){try{const d=JSON.parse(localStorage.getItem(K)||'{}');return d.v>0?d.v:init();}catch(e){return init();}}
+  function init(){return Math.floor(800000+(new Date().getDay()*180000)+Math.random()*200000);}
+  function save(v){try{localStorage.setItem(K,JSON.stringify({v,ts:Date.now()}));}catch(e){}}
+  let jp=load(),kr=Math.floor(Math.random()*100),disp=jp,af=null;
+  window.resetJp=function(s){jp=s||100000;kr=0;disp=jp;save(jp);render();toast('Sayaç sıfırlandı ✓');};
+  function fmt(n,k){return'₺'+Math.floor(Math.abs(n)).toLocaleString('tr-TR')+','+(k<10?'0':'')+k;}
+  function render(){const el=document.getElementById('jp-nav');if(el)el.textContent=fmt(disp,kr);}
+  function animTo(nv){if(af)cancelAnimationFrame(af);function step(){if(disp<nv){disp+=Math.max(1,Math.floor((nv-disp)*0.12));if(disp>nv)disp=nv;render();af=requestAnimationFrame(step);}else{af=null;}}af=requestAnimationFrame(step);}
+  render();
+  function getDT(){const d=new Date();const s=d.getFullYear()*10000+d.getMonth()*100+d.getDate();return Math.floor(100000+(((s*1103515245+12345)&0x7fffffff)/0x7fffffff)*500000);}
+  function tick(){const h=new Date().getHours();const m=h<3?.25:h<8?.5:h<12?.85:h<18?1.45:h<22?1.2:.65;jp+=Math.max(20,Math.floor((getDT()/288)*m*(0.65+Math.random()*0.7)));save(jp);animTo(jp);}
+  setTimeout(()=>{tick();setInterval(tick,5*60*1000);},8000);
+  function krtick(){kr=Math.floor(Math.random()*100);render();setTimeout(krtick,1800+Math.random()*2200);}
+  setTimeout(krtick,1200);
+  function shimmer(){const el=document.getElementById('jp-nav');if(el){el.style.textShadow='0 0 24px #ffe066ff,0 0 10px #f0b429cc';setTimeout(()=>{el.style.textShadow='0 0 12px #ffe066cc,0 0 4px #f0b429aa';},350);}setTimeout(shimmer,3500+Math.random()*4500);}
+  setTimeout(shimmer,1800);
+  window.updateJpCurr=function(){try{const d=JSON.parse(localStorage.getItem(K)||'{}');const el=document.getElementById('jp-curr');if(el&&d.v)el.textContent=fmt(d.v,kr);}catch(e){}};
+})();
+function adminResetJp(){const v=parseInt(document.getElementById('jp-start').value)||100000;if(window.resetJp)window.resetJp(v);}
+function updateJpCurr(){if(window.updateJpCurr)window.updateJpCurr();}
+
+// ════ POPUP ════
+let popupSettings={active:false,title:'🔥 ÖZEL FIRSAT',sub:'En iyi bonus sitelerini kaçırma!',logo:'',sponsors:[]};
+let popSlideIdx=0,popSlideTimer=null;
+
+function renderPopupSpPicks(){
+  const el=document.getElementById('popup-sp-picks');if(!el)return;
+  el.innerHTML=sponsors.map((s,i)=>`
+    <div style="display:flex;align-items:center;gap:8px;background:#1a1a28;border-radius:7px;padding:8px 10px;">
+      <img src="${s.img||''}" style="width:32px;height:32px;border-radius:5px;object-fit:cover;background:#2a2a40;" onerror="this.style.opacity='.2'" alt="">
+      <span style="font-size:12px;color:#d0d0e8;flex:1;">${s.name}</span>
+      <label class="tgl" style="transform:scale(.8);"><input type="checkbox" class="popup-sp-cb" data-id="${s.id}" ${popupSettings.sponsors.includes(s.id)?'checked':''}><span class="tsl"></span></label>
+    </div>`).join('');
+}
+
+function savePopupSettings(){
+  popupSettings.active=document.getElementById('popup-active-toggle').checked;
+  popupSettings.title=document.getElementById('popup-title').value||'🔥 ÖZEL FIRSAT';
+  popupSettings.sub=document.getElementById('popup-sub').value||'';
+  popupSettings.logo=document.getElementById('popup-logo').value||'';
+  popupSettings.sponsors=[];
+  document.querySelectorAll('.popup-sp-cb:checked').forEach(cb=>{
+    const id=parseInt(cb.dataset.id);
+    if(popupSettings.sponsors.length<3)popupSettings.sponsors.push(id);
+  });
+  try{localStorage.setItem('sm_popup',JSON.stringify(popupSettings));}catch(e){}
+  toast('Popup kaydedildi ✓');
+}
+
+function buildPopupSlides(){
+  const spList=popupSettings.sponsors.map(id=>sponsors.find(s=>s.id===id)).filter(Boolean);
+  if(!spList.length)spList.push(...sponsors.slice(0,3));
+  const sl=document.getElementById('popup-slides');
+  const dt=document.getElementById('popup-dots');
+  if(!sl||!dt)return;
+  sl.innerHTML=spList.map(s=>`
+    <div style="min-width:100%;padding:24px 20px 16px;text-align:center;flex-shrink:0;">
+      ${popupSettings.logo?`<img src="${popupSettings.logo}" style="max-height:60px;max-width:200px;object-fit:contain;margin:0 auto 16px;display:block;" alt="" onerror="this.style.display='none'">`:''}
+      <div style="font-family:Bebas Neue,sans-serif;font-size:20px;color:#ffe066;letter-spacing:1px;margin-bottom:6px;">${popupSettings.title}</div>
+      ${popupSettings.sub?`<div style="font-size:12px;color:#c0b080;margin-bottom:18px;">${popupSettings.sub}</div>`:''}
+      <div style="background:#0a0a12;border:1px solid #f0b42930;border-radius:12px;overflow:hidden;margin-bottom:16px;">
+        <img src="${s.img||''}" style="width:100%;height:140px;object-fit:cover;display:block;" onerror="this.style.display='none'" alt="${s.name}">
+        <div style="padding:12px 14px;">
+          <div style="font-family:Bebas Neue,sans-serif;font-size:22px;color:#fff;margin-bottom:4px;">${s.name}</div>
+          <div style="font-size:12px;color:#c8c8d8;margin-bottom:12px;">${s.bonus||''}</div>
+          <button onclick="window.open('${s.link}','_blank');closePopup();" style="width:100%;background:var(--g);color:#000;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:700;cursor:pointer;">Siteye Git →</button>
+        </div>
+      </div>
+    </div>`).join('');
+  dt.innerHTML=spList.map((_,i)=>`<div class="pop-dot" data-i="${i}" onclick="goPopSlide(${i})" style="width:8px;height:8px;border-radius:50%;background:${i===0?'var(--g)':'#3a3a55'};cursor:pointer;transition:background .2s;"></div>`).join('');
+  popSlideIdx=0;
+  if(spList.length>1){
+    if(popSlideTimer)clearInterval(popSlideTimer);
+    popSlideTimer=setInterval(()=>goPopSlide((popSlideIdx+1)%spList.length),3500);
+  }
+}
+function goPopSlide(i){
+  popSlideIdx=i;
+  const sl=document.getElementById('popup-slides');
+  if(sl)sl.style.transform=`translateX(-${i*100}%)`;
+  document.querySelectorAll('.pop-dot').forEach((d,j)=>d.style.background=j===i?'var(--g)':'#3a3a55');
+}
+function showPopup(){
+  if(sessionStorage.getItem('popup_shown'))return;
+  if(!popupSettings.active)return;
+  buildPopupSlides();
+  const ov=document.getElementById('popup-overlay');
+  if(ov){ov.style.display='flex';}
+}
+function closePopup(){
+  const ov=document.getElementById('popup-overlay');
+  if(ov)ov.style.display='none';
+  if(popSlideTimer){clearInterval(popSlideTimer);popSlideTimer=null;}
+  sessionStorage.setItem('popup_shown','1');
+}
+function previewPopup(){
+  savePopupSettings();
+  sessionStorage.removeItem('popup_shown');
+  buildPopupSlides();
+  const ov=document.getElementById('popup-overlay');
+  if(ov)ov.style.display='flex';
+}
+
+// ════ CACHE & SAVE ════
+function clearCache(){
+  if(!confirm('Jackpot hariç tüm veriler silinecek. Devam?'))return;
+  const jpKey='sm_jp_v1';
+  const jpVal=localStorage.getItem(jpKey);
+  localStorage.clear();
+  if(jpVal)localStorage.setItem(jpKey,jpVal);
+  toast('Cache temizlendi');
+  setTimeout(()=>location.reload(),800);
+}
+function saveAll(){
+  // Save all admin settings to localStorage
+  const data={
+    theme:document.body.className.match(/theme-(\w+)/)?.[1]||'night',
+    siteName:document.getElementById('set-name')?.value||'',
+    siteTitle:document.getElementById('set-title')?.value||'',
+    legal:document.getElementById('set-legal')?.value||'',
+    sponsors:JSON.parse(JSON.stringify(sponsors)),
+    wins:JSON.parse(JSON.stringify(wins)),
+    socChannels:JSON.parse(JSON.stringify(socChannels)),
+    popupSettings:JSON.parse(JSON.stringify(popupSettings)),
+    adminMsg:document.getElementById('admin-submit-text')?.value||'',
+    zoom:document.getElementById('zoom-sl')?.value||'1',
+  };
+  try{localStorage.setItem('sm_admin_save',JSON.stringify(data));}catch(e){toast('Kaydetme başarısız (çok büyük)','err');return;}
+  const el=document.getElementById('save-status');
+  if(el){el.style.display='block';setTimeout(()=>el.style.display='none',3000);}
+  toast('Tüm ayarlar kaydedildi ✓');
+}
+function loadSaved(){
+  try{
+    const raw=localStorage.getItem('sm_admin_save');
+    if(!raw)return;
+    const d=JSON.parse(raw);
+    if(d.theme)applyTheme(d.theme);
+    if(d.sponsors&&d.sponsors.length)sponsors=d.sponsors;
+    if(d.wins&&d.wins.length)wins=d.wins;
+    if(d.socChannels)socChannels=d.socChannels;
+    if(d.popupSettings)popupSettings=d.popupSettings;
+    if(d.adminMsg){const el=document.getElementById('admin-submit-msg');if(el&&d.adminMsg){el.textContent=d.adminMsg;el.style.display='block';}}
+    if(d.zoom)applyZoom(d.zoom);
+    renderSponsors();renderWinsHome();buildTicker();renderSocialBtns();renderFooter();
+  }catch(e){}
+}
+
+// ════ SUBMIT FORM UPDATES ════
+function saveAdminMsg(){
+  const msg=document.getElementById('admin-submit-text').value.trim();
+  const el=document.getElementById('admin-submit-msg');
+  if(el){if(msg){el.textContent=msg;el.style.display='block';}else{el.style.display='none';}}
+  try{const d=JSON.parse(localStorage.getItem('sm_admin_save')||'{}');d.adminMsg=msg;localStorage.setItem('sm_admin_save',JSON.stringify(d));}catch(e){}
+  toast('Mesaj kaydedildi ✓');
+}
+
+// Auto fetch on paste (no button needed)
+let fetchDebounce=null;
+function autoFetchOnPaste(url){
+  if(!url||!url.includes('ppreplaylink'))return;
+  if(fetchDebounce)clearTimeout(fetchDebounce);
+  fetchDebounce=setTimeout(()=>fetchReplay(),600);
+}
+
+// Update sponsor dropdown in submit form
+function updateSubmitSponsorDrop(){
+  const el=document.getElementById('m-sponsor-sel');
+  if(!el)return;
+  el.innerHTML='<option value="">— Sponsor seç (isteğe bağlı) —</option>'+sponsors.map(s=>`<option value="${s.name}">${s.name}</option>`).join('');
+}
+
+// Popup sponsor picks render when opening settings
+function onOpenSettings(){
+  renderPopupSpPicks();
+  // Load saved admin msg
+  try{const d=JSON.parse(localStorage.getItem('sm_admin_save')||'{}');if(d.adminMsg&&document.getElementById('admin-submit-text'))document.getElementById('admin-submit-text').value=d.adminMsg;}catch(e){}
+  // Load popup settings to form
+  try{
+    const el_title=document.getElementById('popup-title');const el_sub=document.getElementById('popup-sub');const el_logo=document.getElementById('popup-logo');const el_tog=document.getElementById('popup-active-toggle');
+    if(el_title)el_title.value=popupSettings.title||'';
+    if(el_sub)el_sub.value=popupSettings.sub||'';
+    if(el_logo)el_logo.value=popupSettings.logo||'';
+    if(el_tog)el_tog.checked=popupSettings.active;
+  }catch(e){}
+}
+
+// Route
+if(window.location.hash==='#admin'||window.location.pathname.includes('/admin'))gotoAdmin();
+window.addEventListener('hashchange',()=>{if(window.location.hash==='#admin')gotoAdmin();else gotoSite();});
+
+// Update submitWin to use new simplified form
+function submitWin(){
+  const url=document.getElementById('m-url').value.trim();
+  if(!url){showSubErr('Replay linki zorunlu.');return;}
+  const sponsor=document.getElementById('m-sponsor-sel')?.value||'';
+  const nameInp=document.getElementById('m-user');
+  const loggedUser=window._currentUser||null;
+  const uname=loggedUser?loggedUser.u:(nameInp?.value.trim()||'Anonim');
+  pending.push({
+    id:nextId++,user:uname,
+    game:document.getElementById('mprev-t')?.textContent||'—',
+    mul:document.getElementById('mprev-m')?.textContent||'—',
+    img:document.getElementById('mprev-img')?.src||'',
+    link:url,tg:'—',sponsor,
+    date:new Date().toLocaleDateString('tr-TR'),
+    siteV:'',prizeEl:false,loggedIn:!!loggedUser
+  });
+  document.getElementById('submit-form').style.display='none';
+  document.getElementById('submit-suc').style.display='block';
+  updatePendBadge();
+}
+
+// Update switchTab to handle settings panel
+const _origSwitchTab=window.switchTab;
+function switchTab(el){
+  const panel=el.dataset.p||el.dataset.panel;
+  document.querySelectorAll('.stab,.mtab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.apanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll(`[data-p="${panel}"],[data-panel="${panel}"]`).forEach(t=>t.classList.add('active'));
+  const pEl=document.getElementById(panel);if(pEl)pEl.classList.add('active');
+  if(panel==='p-settings'||panel==='panel-settings'){updateJpCurr();onOpenSettings();}
+  if(panel==='p-sponsors'||panel==='panel-sponsors'){renderEfPicker();renderTagPicker();}
+}
+
+function toast(msg,type){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.style.background=type==='err'?'#ef4444':'#22c55e';t.style.color=type==='err'?'#fff':'#000';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
+
+// INIT
+(function(){
+  try{const t=localStorage.getItem('sm_theme');if(t)applyTheme(t);else applyTheme('night');}catch(e){applyTheme('night');}
+  loadSaved();
+})();
+renderSponsors();renderWinsHome();buildTicker();renderSocialBtns();renderFooter();initFetches();
+updateSubmitSponsorDrop();
+// Show popup after short delay
+setTimeout(()=>showPopup(),1800);
+</script>
+</body>
+</html>
