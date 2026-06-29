@@ -478,12 +478,18 @@ body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880
               <button class="bs" id="btn-logo-file">&#128193; Yukle</button>
             </div>
             <input type="file" id="logo-file" accept="image/*" style="display:none;">
-            <div style="font-size:11px;color:#6060a0;">Onerilen: PNG seffaf, 280x72px</div>
+            <div style="font-size:11px;color:#6060a0;margin-bottom:8px;">Onerilen: PNG seffaf, 280x72px</div>
+            <div id="logo-prev-wrap" style="display:none;margin-bottom:8px;background:#0a0a14;border-radius:8px;padding:10px;text-align:center;"><img id="logo-prev-img" src="" style="height:40px;max-width:160px;object-fit:contain;" alt=""></div>
           </div>
-          <div style="display:flex;gap:8px;margin-top:8px;">
-            <button class="bs" id="btn-logo-use-file">Gorseli Kullan</button>
+          <div style="display:flex;gap:8px;margin-top:4px;flex-wrap:wrap;">
+            <button class="bp" id="btn-logo-use-file">&#10003; Logoyu Uygula</button>
             <button class="bs" id="btn-logo-use-txt">Yazi Moduna Don</button>
           </div>
+        </div>
+        <div class="ac"><div class="ac-t">Banner Kaydet</div>
+          <div style="font-size:12px;color:#7070a0;margin-bottom:12px;">GIF/banner ve logo ayarlarini kaydetmek icin asagidaki butonu kullanin.</div>
+          <button class="bp" id="btn-banner-save" style="width:100%;">&#128190; Banner & Logo Kaydet</button>
+          <div id="banner-save-ok" style="font-size:11px;color:#4ade80;text-align:center;margin-top:8px;display:none;">&#10003; Kaydedildi!</div>
         </div>
       </div>
       <div class="apnl" id="p-set">
@@ -1103,7 +1109,7 @@ function renderSponsors(){
     var rib=s.tag?'<div class="spc-ribbon rb-'+s.tag+'"><span>'+spTagLabel(s.tag)+'</span></div>':'';
     var bon=s.bonus?'<div class="spc-bonus">'+s.bonus+'</div>':'';
     card.innerHTML='<div class="spc-topbar"></div>'+
-      '<div class="spc-logo"><img class="spc-img" src="'+(s.img||'')+'" onerror="this.src=\'\'" alt="'+s.name+'"><div class="spc-sweep"></div>'+rib+'</div>'+
+      '<div class="spc-logo"><img class="spc-img" src="'+(s.img||'')+'" alt="'+s.name+'"><div class="spc-sweep"></div>'+rib+'</div>'+
       '<div class="spc-body">'+bon+'<button class="spc-btn">Siteye Git</button></div>';
     (function(sid,slk){
       card.addEventListener('click',function(){if(slk&&slk!=='#')window.open(slk,'_blank');});
@@ -1118,7 +1124,7 @@ function renderWinsHome(){
   var sl=wins.slice(0,8);
   for(var i=0;i<sl.length;i++){
     var w=sl[i];var c=document.createElement('div');c.className='wc';
-    c.innerHTML='<div class="wc-iw"><img class="wc-img" src="'+w.img+'" onerror="this.style.opacity=\'.1\'" alt=""><div class="wc-badge">'+w.mul+'</div></div>'+
+    c.innerHTML='<div class="wc-iw"><img class="wc-img" src="'+w.img+'" alt=""><div class="wc-badge">'+w.mul+'</div></div>'+
       '<div class="wc-body"><div class="wc-game">'+w.game+'</div><div class="wc-mul">'+w.mul+'</div><div class="wc-user">'+w.user+'</div><div class="wc-play">&#9654; Replay Izle</div></div>';
     (function(wid){c.addEventListener('click',function(){openRep(wid);});})(w.id);
     g.appendChild(c);
@@ -1129,10 +1135,10 @@ function renderWinsPage(){
   var cnt=G('wp-cnt');if(cnt)cnt.textContent=wins.length+' kazanc';
   var g=G('wp-grid');if(!g)return;g.innerHTML='';
   for(var i=0;i<wins.length;i++){
-    var w=wins[i];var slk='#';
-    for(var j=0;j<sponsors.length;j++){if(sponsors[j].name===w.sponsor){slk=sponsors[j].link;break;}}
+    var w=wins[i];var slk=w.customLink||'#';
+    if(!w.customLink){for(var j=0;j<sponsors.length;j++){if(sponsors[j].name===w.sponsor){slk=sponsors[j].link;break;}}}
     var c=document.createElement('div');c.className='wpc';
-    c.innerHTML='<div class="wpc-iw"><img class="wpc-img" src="'+w.img+'" onerror="this.style.opacity=\'.1\'" alt=""><div class="wpc-badge">'+w.mul+'</div>'+(w.sponsor?'<div class="wpc-sp">'+w.sponsor+'</div>':'')+
+    c.innerHTML='<div class="wpc-iw"><img class="wpc-img" src="'+w.img+'" alt=""><div class="wpc-badge">'+w.mul+'</div>'+(w.sponsor?'<div class="wpc-sp">'+w.sponsor+'</div>':'')+
       '</div><div class="wpc-body"><div class="wpc-game">'+w.game+'</div><div class="wpc-meta">'+w.user+(w.date?' \u00b7 '+w.date:'')+'</div><div class="wpc-mul">'+w.mul+'</div>'+
       '<div class="wpc-btns"><button class="wpc-replay">&#9654; Replay</button><button class="wpc-now">Simdi Oyna</button></div></div>';
     (function(wid,lk){
@@ -1150,7 +1156,7 @@ function buildTicker(){
   for(var i=0;i<wins.length;i++){
     var w=wins[i];
     html+='<div class="tki" data-id="'+w.id+'">'+
-      '<div class="tki-in"><div class="tki-iw"><img class="tki-img" src="'+w.img+'" onerror="this.style.opacity=\'.1\'" alt=""><div class="tki-b">'+w.mul+'</div></div>'+
+      '<div class="tki-in"><div class="tki-iw"><img class="tki-img" src="'+w.img+'" alt=""><div class="tki-b">'+w.mul+'</div></div>'+
       '<div><div class="tki-game">'+w.game+'</div><div class="tki-user">'+w.user+'</div></div>'+
       '<div class="tki-mul">'+w.mul+'</div></div></div>';
   }
@@ -1233,34 +1239,87 @@ function renderAdmSp(){
   var b=G('sp-badge');if(b)b.textContent=sponsors.length+' sponsor';
   var l=G('sp-adm-list');if(!l)return;l.innerHTML='';
   for(var i=0;i<sponsors.length;i++){
-    var s=sponsors[i];
-    var eopts='';for(var j=0;j<EFS.length;j++){eopts+='<option value="'+EFS[j].id+'"'+(s.ef===EFS[j].id?' selected':'')+'>'+EFS[j].l+'</option>';}
-    var r=document.createElement('div');r.className='sp-row';r.draggable=true;r.setAttribute('data-i',i);
-    r.innerHTML='<div class="sp-drag">&#8943;</div><div class="sp-rk">#'+(i+1)+'</div>'+
-      '<img class="sp-ai" src="'+(s.img||'')+'" onerror="this.style.opacity=\'.2\'" alt="">'+
-      '<div class="sp-inf"><div class="sp-nm">'+s.name+'</div><div class="sp-bn">'+(s.bonus||'')+'</div></div>'+
-      '<div style="display:flex;gap:6px;align-items:center;flex-shrink:0;flex-wrap:wrap;">'+
-        '<label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:11px;color:#8080a0;"><input type="checkbox" class="sp-act"'+(s.active!==false?' checked':'')+' style="accent-color:var(--g);width:14px;height:14px;"> Aktif</label>'+
-        '<label style="display:flex;align-items:center;gap:4px;cursor:pointer;font-size:11px;color:#8080a0;"><input type="checkbox" class="sp-bnr"'+(s.bannerActive?' checked':'')+' style="accent-color:#e8333a;width:14px;height:14px;"> Bnr</label>'+
-        '<select class="efsel sp-ef">'+eopts+'</select>'+
-        '<button class="bi sp-ed">&#9999;</button>'+
-        '<button class="bi sp-up">&#8593;</button>'+
-        '<button class="bi sp-dn">&#8595;</button>'+
-        '<button class="bd sp-dl">Sil</button>'+
-      '</div>';
-    var sid=s.id,si=i;
-    r.querySelector('.sp-act').addEventListener('change',function(e){toggleSpActive(sid,e.target.checked);});
-    r.querySelector('.sp-bnr').addEventListener('change',function(e){toggleSpBanner(sid,e.target.checked);});
-    r.querySelector('.sp-ef').addEventListener('change',function(e){var sp=findSp(sid);if(sp){sp.ef=e.target.value;renderSponsors();}});
-    r.querySelector('.sp-ed').addEventListener('click',function(){openEditSp(sid);});
-    r.querySelector('.sp-up').addEventListener('click',function(){moveSp(si,-1);});
-    r.querySelector('.sp-dn').addEventListener('click',function(){moveSp(si,1);});
-    r.querySelector('.sp-dl').addEventListener('click',function(){delSp(sid);});
-    r.addEventListener('dragstart',function(e){dragIdx=parseInt(e.currentTarget.getAttribute('data-i'));e.currentTarget.classList.add('dragging');});
-    r.addEventListener('dragover',function(e){e.preventDefault();var ti=parseInt(e.currentTarget.getAttribute('data-i'));if(ti!==dragIdx){document.querySelectorAll('.sp-row').forEach(function(x){x.classList.remove('dragover');});e.currentTarget.classList.add('dragover');}});
-    r.addEventListener('drop',function(e){e.preventDefault();var ti=parseInt(e.currentTarget.getAttribute('data-i'));if(dragIdx!==null&&dragIdx!==ti){var mv=sponsors.splice(dragIdx,1)[0];sponsors.splice(ti,0,mv);renderSponsors();renderAdmSp();}dragIdx=null;});
-    r.addEventListener('dragend',function(){document.querySelectorAll('.sp-row').forEach(function(x){x.classList.remove('dragging','dragover');});dragIdx=null;});
-    l.appendChild(r);
+    (function(s,idx){
+      var eopts='';
+      for(var j=0;j<EFS.length;j++){
+        eopts+='<option value="'+EFS[j].id+'"'+(s.ef===EFS[j].id?' selected':'')+'>'+EFS[j].l+'</option>';
+      }
+      var r=document.createElement('div');
+      r.className='sp-row';r.draggable=true;r.setAttribute('data-i',idx);
+      r.innerHTML=
+        '<div class="sp-drag">&#8943;</div>'+
+        '<div class="sp-rk">#'+(idx+1)+'</div>'+
+        '<img class="sp-ai" src="'+(s.img||'')+'" alt="">'+
+        '<div class="sp-inf">'+
+          '<div class="sp-nm">'+s.name+'</div>'+
+          '<div class="sp-bn">'+(s.bonus||'')+'</div>'+
+        '</div>'+
+        '<div style="display:flex;gap:6px;align-items:center;flex-shrink:0;flex-wrap:wrap;">'+
+          '<label style="display:flex;align-items:center;gap:5px;cursor:pointer;">'+
+            '<input type="checkbox" class="sp-act"'+(s.active!==false?' checked':'')+' style="accent-color:var(--g);width:16px;height:16px;">'+
+            '<span style="font-size:11px;color:#a0a0c0;">Aktif</span>'+
+          '</label>'+
+          '<label style="display:flex;align-items:center;gap:5px;cursor:pointer;">'+
+            '<input type="checkbox" class="sp-bnr"'+(s.bannerActive?' checked':'')+' style="accent-color:#e8333a;width:16px;height:16px;">'+
+            '<span style="font-size:11px;color:#a0a0c0;">Banner</span>'+
+          '</label>'+
+          '<select class="efsel sp-ef">'+eopts+'</select>'+
+          '<button class="bi sp-ed" title="Duzenle">&#9999;</button>'+
+          '<button class="bi sp-up" title="Yukari">&#8593;</button>'+
+          '<button class="bi sp-dn" title="Asagi">&#8595;</button>'+
+          '<button class="bd sp-dl">Sil</button>'+
+        '</div>';
+
+      r.querySelector('.sp-act').addEventListener('change',function(e){
+        s.active=e.target.checked;
+        renderSponsors();
+        toast(s.name+(s.active?' aktif':' pasif')+' edildi');
+      });
+      r.querySelector('.sp-bnr').addEventListener('change',function(e){
+        sponsors.forEach(function(x){x.bannerActive=false;});
+        s.bannerActive=e.target.checked;
+        if(s.bannerActive&&!s.bannerImg)s.bannerImg=s.img;
+        renderSponsors();
+        toast(s.bannerActive?'Banner aktif':'Banner kaldirildi');
+      });
+      r.querySelector('.sp-ef').addEventListener('change',function(e){
+        s.ef=e.target.value;renderSponsors();
+      });
+      r.querySelector('.sp-ed').addEventListener('click',function(){openEditSp(s.id);});
+      r.querySelector('.sp-up').addEventListener('click',function(){
+        if(idx>0){var t=sponsors[idx];sponsors[idx]=sponsors[idx-1];sponsors[idx-1]=t;renderSponsors();renderAdmSp();}
+      });
+      r.querySelector('.sp-dn').addEventListener('click',function(){
+        if(idx<sponsors.length-1){var t=sponsors[idx];sponsors[idx]=sponsors[idx+1];sponsors[idx+1]=t;renderSponsors();renderAdmSp();}
+      });
+      r.querySelector('.sp-dl').addEventListener('click',function(){
+        if(!confirm(s.name+' silinsin mi?'))return;
+        sponsors=sponsors.filter(function(x){return x.id!==s.id;});
+        renderSponsors();renderAdmSp();renderSpDrop();toast('Silindi');
+      });
+      r.addEventListener('dragstart',function(e){dragIdx=idx;e.currentTarget.classList.add('dragging');});
+      r.addEventListener('dragover',function(e){
+        e.preventDefault();
+        if(idx!==dragIdx){
+          document.querySelectorAll('.sp-row').forEach(function(x){x.classList.remove('dragover');});
+          e.currentTarget.classList.add('dragover');
+        }
+      });
+      r.addEventListener('drop',function(e){
+        e.preventDefault();
+        if(dragIdx!==null&&dragIdx!==idx){
+          var mv=sponsors.splice(dragIdx,1)[0];
+          sponsors.splice(idx,0,mv);
+          renderSponsors();renderAdmSp();
+        }
+        dragIdx=null;
+      });
+      r.addEventListener('dragend',function(){
+        document.querySelectorAll('.sp-row').forEach(function(x){x.classList.remove('dragging','dragover');});
+        dragIdx=null;
+      });
+      l.appendChild(r);
+    })(sponsors[i],i);
   }
 }
 function findSp(id){for(var i=0;i<sponsors.length;i++){if(sponsors[i].id===id)return sponsors[i];}return null;}
@@ -1271,23 +1330,51 @@ function delSp(id){sponsors=sponsors.filter(function(s){return s.id!==id;});rend
 
 function renderPending(){
   updatePendBadge();
-  var b=G('pend-badge');if(b)b.textContent=pending.length;
+  var b=G('pend-badge');if(b)b.textContent=pending.length+' bekliyor';
   var l=G('pend-list');if(!l)return;
   if(!pending.length){l.innerHTML='<div class="empty">Bekleyen kazanc yok</div>';return;}
   l.innerHTML='';
   for(var i=0;i<pending.length;i++){
-    var p=pending[i];var r=document.createElement('div');r.className='prow';
-    r.innerHTML='<div class="prow-top"><img class="prow-img" src="'+(p.img||'')+'" onerror="this.style.opacity=\'.2\'" alt=""><div><div class="prow-gm">'+p.game+'</div><div class="prow-ml">'+p.mul+'</div></div></div>'+
-      '<div class="prow-det"><div><span class="prow-k">Kullanici</span><span class="prow-v">'+p.user+'</span></div><div><span class="prow-k">Tarih</span><span class="prow-v">'+p.date+'</span></div>'+
-      '<div style="grid-column:1/-1;"><span class="prow-k">Link</span><span class="prow-v"><a href="'+p.link+'" target="_blank" style="color:var(--g);">'+p.link+'</a></span></div></div>'+
-      '<div class="prow-acts"><button class="bappr pa-ok">&#10003; Onayla</button><button class="brej pa-no">&#10005; Reddet</button></div>';
-    (function(pid){r.querySelector('.pa-ok').addEventListener('click',function(){approvePend(pid);});r.querySelector('.pa-no').addEventListener('click',function(){rejectPend(pid);});})(p.id);
-    l.appendChild(r);
+    (function(p){
+      var spOpts='<option value="">-- Sponsor Sec --</option>';
+      for(var j=0;j<sponsors.length;j++){spOpts+='<option value="'+sponsors[j].name+'"'+(p.sponsor===sponsors[j].name?' selected':'')+'>'+sponsors[j].name+'</option>';}
+      var r=document.createElement('div');r.className='prow';
+      r.innerHTML=
+        '<div class="prow-top">'+
+          '<img class="prow-img" src="'+(p.img||'')+'" alt="">'+
+          '<div>'+
+            '<div class="prow-gm">'+(p.game||'Bilinmiyor')+'</div>'+
+            '<div class="prow-ml">'+(p.mul||'--')+'</div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="prow-det">'+
+          '<div><span class="prow-k">Kullanici</span><span class="prow-v">'+(p.user||'Anonim')+(p.loggedIn?' <span style="color:var(--g);font-size:9px;">(Uye)</span>':' <span style="color:#7070a0;font-size:9px;">(Anonim)</span>')+'</span></div>'+
+          '<div><span class="prow-k">Tarih</span><span class="prow-v">'+p.date+'</span></div>'+
+          '<div style="grid-column:1/-1;"><span class="prow-k">Replay</span><span class="prow-v"><a href="'+p.link+'" target="_blank" style="color:var(--g);font-size:10px;word-break:break-all;">'+p.link+'</a></span></div>'+
+          '<div style="grid-column:1/-1;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">'+
+            '<span style="font-size:10px;color:#7070a0;">Sponsor:</span>'+
+            '<select class="efsel pend-sp" style="max-width:140px;font-size:11px;">'+spOpts+'</select>'+
+            '<input class="efsel pend-link" type="text" placeholder="Ozel link (bos=sponsor)" style="max-width:180px;font-size:10px;padding:4px 6px;" value="'+(p.customLink||'')+'">'+
+          '</div>'+
+        '</div>'+
+        '<div class="prow-acts">'+
+          '<button class="bappr pa-ok">&#10003; Onayla</button>'+
+          '<button class="brej pa-no">&#10005; Reddet</button>'+
+        '</div>';
+      r.querySelector('.pend-sp').addEventListener('change',function(){p.sponsor=this.value;});
+      r.querySelector('.pend-link').addEventListener('input',function(){p.customLink=this.value;});
+      r.querySelector('.pa-ok').addEventListener('click',function(){approvePend(p.id);});
+      r.querySelector('.pa-no').addEventListener('click',function(){rejectPend(p.id);});
+      l.appendChild(r);
+    })(pending[i]);
   }
 }
 function approvePend(id){
   var pn=null;for(var i=0;i<pending.length;i++){if(pending[i].id===id){pn=pending[i];break;}}
-  if(pn){wins.unshift({id:nextId++,user:pn.user,game:pn.game,mul:pn.mul,img:pn.img,link:pn.link,sponsor:pn.sponsor||'',date:pn.date});pending=pending.filter(function(x){return x.id!==id;});renderWinsHome();buildTicker();renderPending();renderWinsAdm();toast('Onaylandi');}
+  if(pn){
+    var spLk=pn.customLink||'';
+    if(!spLk&&pn.sponsor){for(var si=0;si<sponsors.length;si++){if(sponsors[si].name===pn.sponsor){spLk=sponsors[si].link;break;}}}
+    wins.unshift({id:nextId++,user:pn.user,game:pn.game,mul:pn.mul,img:pn.img,link:pn.link,sponsor:pn.sponsor||'',customLink:spLk,date:pn.date});pending=pending.filter(function(x){return x.id!==id;});renderWinsHome();buildTicker();renderPending();renderWinsAdm();toast('Onaylandi');}
 }
 function rejectPend(id){pending=pending.filter(function(x){return x.id!==id;});renderPending();toast('Reddedildi');}
 function updatePendBadge(){var c=pending.length;var m=G('pb-m');var s=G('pb-s');if(m)m.textContent=c;if(s)s.textContent=c;}
@@ -1296,34 +1383,75 @@ function renderWinsAdm(){
   var b=G('wins-badge');if(b)b.textContent=wins.length;
   var l=G('wadm-list');if(!l)return;l.innerHTML='';
   for(var i=0;i<wins.length;i++){
-    var w=wins[i];var r=document.createElement('div');r.className='wadm-row';
-    r.innerHTML='<img class="wadm-img" src="'+w.img+'" onerror="this.style.opacity=\'.1\'" alt="">'+
-      '<div style="flex:1;min-width:0;"><div style="font-size:12px;color:#e0e0f0;font-weight:500;">'+w.game+' <span style="font-family:Bebas Neue,sans-serif;font-size:16px;color:var(--g);">'+w.mul+'</span></div>'+
-      '<div style="font-size:10px;color:#7070a0;margin-top:2px;">'+w.user+(w.sponsor?' \u00b7 '+w.sponsor:'')+' <a href="'+w.link+'" target="_blank" style="color:var(--g);">Link &#8599;</a></div></div>'+
-      '<div style="display:flex;gap:5px;"><button class="bi wa-up">&#8593;</button><button class="bi wa-dn">&#8595;</button><button class="bd wa-dl">Sil</button></div>';
-    (function(wi,wid){
-      r.querySelector('.wa-up').addEventListener('click',function(){if(wi>0){var t=wins[wi];wins[wi]=wins[wi-1];wins[wi-1]=t;renderWinsHome();buildTicker();renderWinsAdm();}});
-      r.querySelector('.wa-dn').addEventListener('click',function(){if(wi<wins.length-1){var t=wins[wi];wins[wi]=wins[wi+1];wins[wi+1]=t;renderWinsHome();buildTicker();renderWinsAdm();}});
-      r.querySelector('.wa-dl').addEventListener('click',function(){wins=wins.filter(function(x){return x.id!==wid;});renderWinsHome();buildTicker();renderWinsAdm();toast('Silindi');});
-    })(i,w.id);
-    l.appendChild(r);
+    (function(w,wi){
+      var r=document.createElement('div');r.className='wadm-row';
+      var spOpts='<option value="">-- Sponsor --</option>';
+      for(var j=0;j<sponsors.length;j++){spOpts+='<option value="'+sponsors[j].name+'"'+(w.sponsor===sponsors[j].name?' selected':'')+'>'+sponsors[j].name+'</option>';}
+      r.innerHTML=
+        '<img class="wadm-img" src="'+w.img+'" alt="">'+
+        '<div style="flex:1;min-width:0;">'+
+          '<div style="font-size:12px;color:#e0e0f0;font-weight:500;">'+w.game+
+            ' <span style="font-family:Bebas Neue,sans-serif;font-size:16px;color:var(--g);">'+w.mul+'</span></div>'+
+          '<div style="font-size:10px;color:#7070a0;margin-top:2px;">'+w.user+
+            ' <a href="'+w.link+'" target="_blank" style="color:var(--g);">Replay &#8599;</a></div>'+
+          '<div style="display:flex;align-items:center;gap:6px;margin-top:4px;">'+
+            '<span style="font-size:10px;color:#7070a0;">Sponsor:</span>'+
+            '<select class="efsel wa-sp" style="max-width:130px;font-size:11px;">'+spOpts+'</select>'+
+            '<input class="efsel wa-link" type="text" placeholder="Ozel link (bos=sponsor linki)" style="max-width:180px;font-size:10px;padding:4px 6px;" value="'+(w.customLink||'')+'">'+
+            '<button class="bi wa-sp-save" style="font-size:10px;padding:4px 8px;">&#10003;</button>'+
+          '</div>'+
+        '</div>'+
+        '<div style="display:flex;gap:5px;flex-shrink:0;">'+
+          '<button class="bi wa-up">&#8593;</button>'+
+          '<button class="bi wa-dn">&#8595;</button>'+
+          '<button class="bd wa-dl">Sil</button>'+
+        '</div>';
+      r.querySelector('.wa-sp-save').addEventListener('click',function(){
+        w.sponsor=r.querySelector('.wa-sp').value;
+        w.customLink=r.querySelector('.wa-link').value.trim();
+        toast('Sponsor guncellendi');
+        renderWinsHome();buildTicker();
+      });
+      r.querySelector('.wa-up').addEventListener('click',function(){
+        if(wi>0){var t=wins[wi];wins[wi]=wins[wi-1];wins[wi-1]=t;renderWinsHome();buildTicker();renderWinsAdm();}
+      });
+      r.querySelector('.wa-dn').addEventListener('click',function(){
+        if(wi<wins.length-1){var t=wins[wi];wins[wi]=wins[wi+1];wins[wi+1]=t;renderWinsHome();buildTicker();renderWinsAdm();}
+      });
+      r.querySelector('.wa-dl').addEventListener('click',function(){
+        wins=wins.filter(function(x){return x.id!==w.id;});
+        renderWinsHome();buildTicker();renderWinsAdm();toast('Silindi');
+      });
+      l.appendChild(r);
+    })(wins[i],i);
   }
 }
 
 function renderUsers(){
   var q=(G('user-q')||{value:''}).value.toLowerCase();
-  var f=q?users.filter(function(u){return u.u.toLowerCase().includes(q)||u.ph.includes(q);}):users;
+  var fil=q?users.filter(function(u){return u.u.toLowerCase().includes(q)||u.ph.includes(q);}):users;
   var b=G('users-badge');if(b)b.textContent=users.length;
   var l=G('users-list');if(!l)return;
   if(!users.length){l.innerHTML='<div class="empty">Kayitli uye yok</div>';return;}
+  if(!fil.length){l.innerHTML='<div class="empty">Sonuc yok</div>';return;}
   l.innerHTML='';
-  for(var i=0;i<f.length;i++){
-    var u=f[i];var r=document.createElement('div');r.className='user-row';
-    r.innerHTML='<div class="u-av">'+u.u[0].toUpperCase()+'</div>'+
-      '<div style="flex:1;min-width:0;"><div style="font-size:13px;color:#e0e0f0;font-weight:600;">'+u.u+'</div><div style="font-size:11px;color:#7070a0;margin-top:3px;">'+u.ph+' \u00b7 '+u.date+'</div></div>'+
-      '<button class="bd u-dl">Sil</button>';
-    (function(uid){r.querySelector('.u-dl').addEventListener('click',function(){users=users.filter(function(x){return x.id!==uid;});renderUsers();toast('Silindi');});})(u.id);
-    l.appendChild(r);
+  for(var i=0;i<fil.length;i++){
+    (function(u){
+      var r=document.createElement('div');r.className='user-row';
+      r.innerHTML=
+        '<div class="u-av">'+u.u[0].toUpperCase()+'</div>'+
+        '<div style="flex:1;min-width:0;">'+
+          '<div style="font-size:13px;color:#e0e0f0;font-weight:600;">'+u.u+'</div>'+
+          '<div style="font-size:11px;color:#7070a0;margin-top:2px;">'+u.ph+' · Kayit: '+u.date+'</div>'+
+        '</div>'+
+        '<button class="bd u-dl">Sil</button>';
+      r.querySelector('.u-dl').addEventListener('click',function(){
+        if(!confirm(u.u+' silinsin mi?'))return;
+        users=users.filter(function(x){return x.id!==u.id;});
+        renderUsers();toast('Uye silindi');
+      });
+      l.appendChild(r);
+    })(fil[i]);
   }
 }
 
@@ -1436,7 +1564,9 @@ function handleSpFile(inp,pfx){
 function addWinManual(){
   var u=G('mw-u').value.trim(),m=G('mw-m').value.trim(),gm=G('mw-g').value.trim(),img=G('mw-i').value.trim(),lk=G('mw-l').value.trim()||'#',sp=G('mw-sp').value;
   if(!gm){toast('Oyun adi zorunlu');return;}
-  wins.unshift({id:nextId++,user:u||'Admin',game:gm,mul:m||'--',img:img,link:lk,sponsor:sp,date:new Date().toLocaleDateString('tr-TR')});
+  // Sponsor linki bul
+  var spLk='';for(var si=0;si<sponsors.length;si++){if(sponsors[si].name===sp){spLk=sponsors[si].link;break;}}
+  wins.unshift({id:nextId++,user:u||'Admin',game:gm,mul:m||'--',img:img,link:lk||'#',sponsor:sp,customLink:spLk,date:new Date().toLocaleDateString('tr-TR')});
   renderWinsHome();buildTicker();renderWinsAdm();toast('Eklendi');
   ['mw-u','mw-m','mw-g','mw-i','mw-l'].forEach(function(id){var el=G(id);if(el)el.value='';});
 }
@@ -1652,12 +1782,35 @@ function bindButtons(){
     if(i){i.src=url;i.style.display='block';}if(t)t.style.display='none';
     toast('Logo guncellendi');
   });
+  // Logo url inp önizleme
+  var liu3=G('logo-url-inp');if(liu3)liu3.addEventListener('input',function(){
+    var pw=G('logo-prev-wrap');var pi=G('logo-prev-img');
+    if(this.value){if(pw)pw.style.display='block';if(pi)pi.src=this.value;}else{if(pw)pw.style.display='none';}
+  });
   var blut=G('btn-logo-use-txt');if(blut)blut.addEventListener('click',function(){
     var i=G('nlogo-img');var t=G('nlogo-txt');
     if(i)i.style.display='none';if(t)t.style.display='';
     toast('Yazi moduna donuldu');
   });
-  var liu=G('logo-url-inp');if(liu)liu.addEventListener('input',function(){previewNavLogo(this.value);});
+  var liu=G('logo-url-inp');if(liu)liu.addEventListener('input',function(){
+    previewNavLogo(this.value);
+    var pw=G('logo-prev-wrap');var pi=G('logo-prev-img');
+    if(pw&&this.value){pw.style.display='block';if(pi)pi.src=this.value;}
+  });
+  var bbs=G('btn-banner-save');if(bbs)bbs.addEventListener('click',function(){
+    // Banner ayarlarını kaydet
+    var gifU=G('gif-url');var giftog=G('gif-tog');
+    var logoU=G('logo-url-inp');
+    try{
+      localStorage.setItem('sm_banner',JSON.stringify({
+        gifUrl:gifU?gifU.value:'',
+        gifOn:giftog?giftog.checked:false,
+        logoUrl:logoU?logoU.value:''
+      }));
+    }catch(e){}
+    var ok=G('banner-save-ok');if(ok){ok.style.display='block';setTimeout(function(){ok.style.display='none';},2500);}
+    toast('Banner & Logo kaydedildi');
+  });
   // GIF toggle
   var gt=G('gif-tog');if(gt)gt.addEventListener('change',toggleGif);
   var gu=G('gif-url');if(gu)gu.addEventListener('input',updateGifUrl);
@@ -1720,6 +1873,15 @@ function bindButtons(){
 (function(){
   try{var t=localStorage.getItem('sm_th');if(t)applyTheme(t,true);}catch(e){}
   try{var cu=localStorage.getItem('sm_cu');if(cu){currentUser=JSON.parse(cu);}}catch(e){}
+  try{
+    var bannerData=localStorage.getItem('sm_banner');
+    if(bannerData){
+      var bd=JSON.parse(bannerData);
+      if(bd.gifUrl){var gi=G('gif-img');if(gi)gi.src=bd.gifUrl;var giu=G('gif-url');if(giu)giu.value=bd.gifUrl;}
+      if(bd.gifOn){G('gif-banner').style.display='block';var gt2=G('gif-tog');if(gt2)gt2.checked=true;}
+      if(bd.logoUrl){previewNavLogo(bd.logoUrl);var liu2=G('logo-url-inp');if(liu2)liu2.value=bd.logoUrl;}
+    }
+  }catch(e){}
   loadSaved();
   renderSponsors();
   renderWinsHome();
