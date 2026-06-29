@@ -1004,17 +1004,32 @@ function gotoSite(){
 }
 
 // ══ ADMIN TABS ══
+var PANEL_URLS={
+  'p-sp':'/admin/sponsorlar',
+  'p-pend':'/admin/bekleyenler',
+  'p-wins':'/admin/kazanclar',
+  'p-users':'/admin/uyeler',
+  'p-soc':'/admin/sosyal',
+  'p-banner':'/admin/banner',
+  'p-set':'/admin/ayarlar',
+  'p-msgs':'/admin/mesajlar'
+};
+
 function switchTab(panel){
   document.querySelectorAll('.stab,.mtab').forEach(function(t){t.classList.remove('on');});
   document.querySelectorAll('.apnl').forEach(function(p){p.classList.remove('on');});
   document.querySelectorAll('[data-p="'+panel+'"]').forEach(function(t){t.classList.add('on');});
   var pEl=G(panel);if(pEl)pEl.classList.add('on');
   if(panel==='p-set'){updateJpCurr();renderPopPicks();}
-  if(panel==='p-msgs'){try{renderMsgs();}catch(e){console.error('renderMsgs:',e);}}
+  if(panel==='p-msgs'){try{renderMsgs();}catch(e){}}
   if(panel==='p-sp'){
     renderEfPick('ef-pick',selEf,function(v){selEf=v;});
     renderTgPick('tg-pick',selTag,function(v){selTag=v;});
   }
+  try{
+    var url=PANEL_URLS[panel]||'/admin';
+    history.pushState({page:'admin',panel:panel},'',url);
+  }catch(e){}
 }
 
 // ══ AUTH ══
@@ -1204,10 +1219,9 @@ function renderFooter(){
   for(var i=0;i<socChannels.length;i++){
     if(socChannels[i].active!==false){
       var a=document.createElement('a');a.href=socChannels[i].url;a.target='_blank';
-      // Sadece isim - kısaltma yok
-var icon=socChannels[i].icon||'';
-var isCode=(icon.length<=3&&icon===icon.toUpperCase());
-a.textContent=isCode?socChannels[i].name:icon+' '+socChannels[i].name;fl.appendChild(a);
+      var _icon=socChannels[i].icon||'';
+      var _isCode=(_icon.length<=3&&_icon===_icon.toUpperCase()&&_icon!=='');
+      a.textContent=_isCode?socChannels[i].name:(_icon?_icon+' '+socChannels[i].name:socChannels[i].name);fl.appendChild(a);
     }
   }
   // Nav sosyal ikonlar
@@ -1217,7 +1231,7 @@ a.textContent=isCode?socChannels[i].name:icon+' '+socChannels[i].name;fl.appendC
     var ch=shown[i];
     var a=document.createElement('a');
     a.href=ch.url;a.target='_blank';a.className='nav-soc-btn';
-    a.title=ch.name;
+    a.title=ch.name; // sadece isim
     var icon=ch.icon||'?';
     // SVG ikonlar
     if(icon==='IG'||ch.name.toLowerCase().includes('instagram')){
