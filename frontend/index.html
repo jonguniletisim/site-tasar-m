@@ -43,9 +43,9 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 
 /* TICKER */
 #ticker{border-top:1px solid #ffffff08;border-bottom:1px solid #ffffff08;background:#0a0a14;overflow:hidden;position:relative;height:46px;}
-.tk-lbl{position:absolute;left:0;top:0;bottom:0;background:#0a0a14;display:flex;align-items:center;padding:0 12px;font-size:9px;color:var(--g);letter-spacing:2px;text-transform:uppercase;border-right:1px solid #ffffff08;z-index:2;white-space:nowrap;}
+.tk-lbl{position:absolute;left:0;top:0;bottom:0;background:#0a0a14;display:flex;align-items:center;padding:0 14px;font-size:12px;color:var(--g);letter-spacing:2px;text-transform:uppercase;border-right:1px solid #ffffff08;z-index:2;white-space:nowrap;font-weight:700;}
 #tk-track{display:flex;position:absolute;top:0;bottom:0;align-items:center;padding-left:140px;will-change:transform;}
-#tk-track.go{animation:tkanim 60s linear infinite;}
+#tk-track.go{animation:tkanim 80s linear infinite;}
 #tk-track.go:hover{animation-play-state:paused;}
 @keyframes tkanim{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .tki{display:flex;align-items:center;flex-shrink:0;cursor:pointer;border-right:1px solid #ffffff06;}
@@ -66,7 +66,7 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 /* MAIN */
 #site-main{max-width:1400px;margin:0 auto;padding:14px;}
 .sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.eyebrow{font-size:9px;color:var(--g);letter-spacing:3px;text-transform:uppercase;font-weight:700;}
+.eyebrow{font-size:13px;color:var(--g);letter-spacing:3px;text-transform:uppercase;font-weight:700;}
 .see-all-btn{background:var(--g);color:#000;border:none;border-radius:20px;padding:7px 16px;font-size:12px;font-weight:700;cursor:pointer;}
 
 /* SPONSOR GRID */
@@ -156,7 +156,11 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 #flegal{font-size:10px;color:var(--mu);}
 
 /* FLOAT */
-.fbwrap{position:fixed;bottom:16px;right:14px;z-index:150;}
+
+.fbwrap{position:fixed;bottom:16px;right:14px;z-index:150;display:flex;gap:8px;align-items:center;}
+.fbtn-close{background:rgba(30,20,50,.9);color:#9090b0;border:1px solid #3a3a55;width:38px;height:38px;border-radius:50%;font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.fbtn-close:hover{background:#ef444420;color:#f87171;border-color:#ef444450;}
+
 .fbtn{background:var(--g);color:#000;border:none;padding:12px 20px;border-radius:24px;font-size:13px;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(240,180,41,.4);}
 
 /* OVERLAY LAYER - tüm modallar için */
@@ -194,7 +198,7 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .amsgbox{background:#f0b42912;border:1px solid #f0b42930;border-radius:8px;padding:10px 13px;font-size:12px;color:#e0d0a0;margin-bottom:14px;line-height:1.6;display:none;}
 
 /* REPLAY OVERLAY */
-#rep-ov{display:none;position:fixed;inset:0;z-index:800;background:rgba(0,0,0,.9);align-items:center;justify-content:center;padding:12px;}
+#rep-ov{display:none;position:fixed;inset:0;z-index:800;background:rgba(4,2,12,.75);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:12px;}
 #rep-ov.open{display:flex;}
 .rep-box{background:#0d0d18;border:1px solid #f0b42928;border-radius:14px;width:100%;max-width:720px;overflow:hidden;}
 .rep-hd{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid #ffffff0a;}
@@ -219,27 +223,27 @@ button,input,select,textarea{font-family:'Inter',sans-serif;}
 .pop-dot.active{background:var(--g);}
 
 /* ADMIN */
-#adm-view{display:none;position:fixed;inset:0;background:#0d0d14;z-index:500;overflow-y:auto;}
-#adm-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#0a0a12;border-bottom:1px solid #f0b42920;position:sticky;top:0;z-index:200;}
+#adm-view{display:none;position:fixed;inset:0;background:#111120;z-index:500;overflow-y:auto;}
+#adm-nav{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:#181828;border-bottom:1px solid #f0b42930;position:sticky;top:0;z-index:200;}
 .adm-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--g);}
 .adm-logo span{color:#707090;font-size:11px;font-family:'Inter',sans-serif;margin-left:6px;}
 .btn-back{background:#f0b42918;border:1px solid #f0b42940;color:var(--g);padding:8px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;}
 .adm-body{display:flex;min-height:calc(100vh - 55px);}
-.adm-side{width:210px;flex-shrink:0;background:#0a0a12;border-right:1px solid #1a1a28;position:sticky;top:55px;height:calc(100vh - 55px);overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;gap:2px;}
+.adm-side{width:210px;flex-shrink:0;background:#161626;border-right:1px solid #2a2a40;position:sticky;top:55px;height:calc(100vh - 55px);overflow-y:auto;padding:14px 10px;display:flex;flex-direction:column;gap:2px;}
 .adm-cont{flex:1;padding:22px;}
 .stab{display:flex;align-items:center;gap:10px;padding:11px 13px;border-radius:9px;font-size:13px;color:#8080a0;cursor:pointer;border:1px solid transparent;background:transparent;width:100%;text-align:left;font-weight:500;}
-.stab:hover{background:#ffffff08;color:#d0d0e8;}
+.stab:hover{background:#ffffff10;color:#e0e0f8;}
 .stab.on{background:#f0b42915;border-color:#f0b42935;color:var(--g);font-weight:600;}
 .s-sec{font-size:9px;color:#404060;letter-spacing:2px;text-transform:uppercase;padding:10px 13px 5px;font-weight:600;}
 .s-badge{background:var(--g);color:#000;border-radius:10px;padding:1px 7px;font-size:9px;font-weight:700;margin-left:auto;}
 .apnl{display:none;}
 .apnl.on{display:block;}
-.ac{background:#141420;border:1px solid #222232;border-radius:12px;padding:20px;margin-bottom:14px;}
+.ac{background:#1a1a2e;border:1px solid #2e2e48;border-radius:12px;padding:20px;margin-bottom:14px;}
 .ac-t{font-size:11px;color:var(--g);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;display:flex;align-items:center;gap:8px;font-weight:700;flex-wrap:wrap;}
 .ab{background:#f0b42920;border:1px solid #f0b42940;border-radius:8px;padding:2px 9px;font-size:10px;color:var(--g);font-weight:600;}
 .ab-gr{background:#22c55e15;border:1px solid #22c55e35;color:#4ade80;}
 .ab-re{background:#ef444415;border:1px solid #ef444435;color:#f87171;}
-.ai{width:100%;background:#1a1a28;border:1px solid #2a2a40;border-radius:8px;padding:10px 12px;color:#e0e0f0;font-size:13px;outline:none;}
+.ai{width:100%;background:#1e1e30;border:1px solid #30304a;border-radius:8px;padding:10px 12px;color:#e0e0f0;font-size:13px;outline:none;}
 .ai:focus{border-color:var(--g);}
 .ai::placeholder{color:#404060;}
 select.ai{cursor:pointer;appearance:none;}
@@ -261,7 +265,7 @@ select.ai{cursor:pointer;appearance:none;}
 .bs:hover{border-color:var(--g);color:var(--g);}
 .bi{background:#1a1a28;border:1px solid #2a2a40;color:#c0c0e0;border-radius:6px;padding:6px 10px;font-size:12px;cursor:pointer;}
 .bi:hover{border-color:var(--g);color:var(--g);}
-.sp-row{background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:10px 13px;display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.sp-row{background:#1e1e30;border:1px solid #30304a;border-radius:9px;padding:10px 13px;display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .sp-row.dragging{opacity:.3;border-color:var(--g)!important;}
 .sp-row.dragover{border-color:var(--g)!important;background:#f0b42910!important;}
 .sp-drag{color:#505070;cursor:grab;font-size:18px;flex-shrink:0;user-select:none;}
@@ -278,7 +282,7 @@ select.ai{cursor:pointer;appearance:none;}
 .tgpick{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px;}
 .tgbtn{background:#1a1a28;border:1px solid #2a2a40;border-radius:8px;padding:5px 12px;font-size:11px;cursor:pointer;font-weight:600;color:#8080a0;}
 .tgbtn.on{border-color:var(--g);color:var(--g);}
-.prow{background:#1a1a28;border:1px solid #2a2a40;border-radius:10px;padding:14px;margin-bottom:10px;}
+.prow{background:#1e1e30;border:1px solid #30304a;border-radius:10px;padding:14px;margin-bottom:10px;}
 .prow-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;}
 .prow-img{width:50px;height:50px;border-radius:8px;object-fit:cover;background:#2a2a40;flex-shrink:0;}
 .prow-gm{font-size:13px;color:#e0e0f0;font-weight:600;}
@@ -289,11 +293,11 @@ select.ai{cursor:pointer;appearance:none;}
 .prow-acts{display:flex;gap:7px;flex-wrap:wrap;}
 .bappr{background:#22c55e20;border:1px solid #22c55e45;color:#4ade80;border-radius:7px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;}
 .brej{background:#ef444415;border:1px solid #ef444440;color:#f87171;border-radius:7px;padding:8px 14px;font-size:12px;cursor:pointer;}
-.wadm-row{background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:10px 13px;display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.wadm-row{background:#1e1e30;border:1px solid #30304a;border-radius:9px;padding:10px 13px;display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .wadm-img{width:40px;height:40px;border-radius:6px;object-fit:cover;background:#2a2a40;flex-shrink:0;}
-.user-row{background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;}
+.user-row{background:#1e1e30;border:1px solid #30304a;border-radius:9px;padding:12px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px;}
 .u-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--g),#c8960f);color:#000;font-size:16px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.soc-row{background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.soc-row{background:#1e1e30;border:1px solid #30304a;border-radius:9px;padding:12px 14px;display:flex;align-items:center;gap:10px;margin-bottom:8px;}
 .th-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;}
 .th-card{background:#1a1a28;border:1px solid #2a2a40;border-radius:9px;padding:10px 12px;cursor:pointer;display:flex;align-items:center;gap:9px;}
 .th-card:hover,.th-card.on{border-color:var(--g);background:#f0b42912;}
@@ -315,6 +319,17 @@ body.t-royal{--g:#e8333a;--dk:#0a0005;--dk2:#13000a;--tx:#f0e0e0;--mu:#885558;}
 body.t-emerald{--g:#00c878;--dk:#020d08;--dk2:#041510;--tx:#d8f0e8;--mu:#3a6858;}
 body.t-galaxy{--g:#9b59e8;--dk:#060310;--dk2:#0d0820;--tx:#e0d8f8;--mu:#6055a8;}
 body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880;}
+
+.login-tab{flex:1;padding:10px;border-radius:8px;border:1px solid #2a2a40;background:#1a1a28;color:#8080a0;font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;}
+.login-tab.active{background:var(--g);color:#000;border-color:var(--g);}
+
+.nav-user-btn{display:flex;align-items:center;gap:7px;background:rgba(240,180,41,.08);border:1px solid rgba(240,180,41,.25);border-radius:20px;padding:5px 12px 5px 5px;cursor:pointer;transition:all .2s;}
+.nav-user-btn:hover{background:rgba(240,180,41,.15);border-color:rgba(240,180,41,.5);}
+.nav-user-av{width:26px;height:26px;border-radius:50%;background:var(--g);color:#000;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.nav-user-nm{font-size:12px;font-weight:600;color:var(--tx);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.user-drop{position:fixed;top:64px;right:60px;background:linear-gradient(145deg,#0f0f1e,#161626);border:1px solid rgba(240,180,41,.2);border-radius:14px;padding:8px;min-width:200px;box-shadow:0 16px 48px rgba(0,0,0,.7);z-index:300;display:none;}
+.user-drop.open{display:block;animation:dropIn .18s cubic-bezier(.2,.8,.3,1) forwards;}
+.user-drop-hd{padding:10px 14px;font-size:13px;color:var(--g);font-weight:600;}
 </style>
 </head>
 <body class="t-night">
@@ -326,11 +341,24 @@ body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880
     <div class="nav-logo"><img id="nlogo-img" src="" alt=""><span id="nlogo-txt">SLOTMASTER</span></div>
     <div class="nav-right">
       <div class="nav-socials" id="nav-socials"></div>
+      <button class="nav-user-btn" id="nav-user-btn" style="display:none;">
+        <span class="nav-user-av" id="nav-user-av">?</span>
+        <span class="nav-user-nm" id="nav-user-nm"></span>
+        <span style="font-size:10px;color:var(--mu);">&#9662;</span>
+      </button>
       <button class="hbg" id="hbg-btn">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
+</div>
+<div class="user-drop" id="user-drop">
+  <div class="user-drop-hd" id="ud-hd"></div>
+  <div class="ddsep"></div>
+  <button class="ddi" id="ud-pw">&#128274; Sifre Degistir</button>
+  <button class="ddi" id="ud-support">&#128172; Destek Talebi</button>
+  <div class="ddsep"></div>
+  <button class="ddi" style="color:#f87171;" id="ud-logout">&#128275; Cikis Yap</button>
 </div>
 <div class="ndrop" id="ndrop">
   <button class="ddi" id="dd-login">&#128273; Giris Yap</button>
@@ -362,7 +390,10 @@ body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880
   </div>
 </div>
 </div>
-<div class="fbwrap" id="fbwrap"><button class="fbtn" id="btn-sub-float">&#9650; Kazanc Gonder</button></div>
+<div class="fbwrap" id="fbwrap">
+  <button class="fbtn-close" id="btn-fb-close" style="display:none;" title="Kapat">&#10005;</button>
+  <button class="fbtn" id="btn-sub-float">&#9650; Kazanc Gonder</button>
+</div>
 
 <!-- ADMIN -->
 <div id="adm-view">
@@ -375,6 +406,7 @@ body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880
     <div class="mtab" data-p="p-soc">&#128279; Sosyal</div>
     <div class="mtab" data-p="p-banner">&#128444; Banner</div>
     <div class="mtab" data-p="p-set">&#9881; Ayarlar</div>
+    <div class="mtab" data-p="p-msgs">&#128172; Mesajlar <span class="mt-badge" id="msgs-badge-m">0</span></div>
   </div>
   <div class="adm-body">
     <div class="adm-side">
@@ -388,6 +420,7 @@ body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880
       <button class="stab" data-p="p-soc">&#128279; Sosyal</button>
       <button class="stab" data-p="p-banner">&#128444; Banner</button>
       <button class="stab" data-p="p-set">&#9881; Ayarlar</button>
+      <button class="stab" data-p="p-msgs">&#128172; Mesajlar <span class="s-badge" id="msgs-badge">0</span></button>
     </div>
     <div class="adm-cont">
       <div class="apnl on" id="p-sp">
@@ -429,7 +462,28 @@ body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880
       <div class="apnl" id="p-banner">
         <div class="ac"><div class="ac-t">Ust Banner / GIF</div>
           <div class="trow"><div><div style="font-size:13px;color:#d0d0e8;font-weight:500;">Banner aktif</div></div><label class="tgl"><input type="checkbox" id="gif-tog"><span class="tsl"></span></label></div>
-          <div class="af"><label class="al">Gorsel / GIF URL</label><input class="ai" id="gif-url" placeholder="https://...gif veya .jpg"></div>
+          <div class="af"><label class="al">Gorsel / GIF URL</label>
+            <div style="display:flex;gap:8px;margin-bottom:8px;">
+              <input class="ai" id="gif-url" placeholder="https://...gif veya .jpg" style="flex:1;">
+              <button class="bs" id="btn-gif-file">&#128193; Yukle</button>
+            </div>
+            <input type="file" id="gif-file" accept="image/*,image/gif" style="display:none;">
+          </div>
+          <div id="gif-prev-wrap" style="display:none;margin-top:8px;border-radius:8px;overflow:hidden;"><img id="gif-prev-img" src="" style="width:100%;max-height:150px;object-fit:cover;" alt=""></div>
+        </div>
+        <div class="ac"><div class="ac-t">Site Logosu (Nav)</div>
+          <div class="af"><label class="al">Logo Dosyasi</label>
+            <div style="display:flex;gap:8px;margin-bottom:8px;">
+              <input class="ai" id="logo-url-inp" placeholder="https://.../logo.png" style="flex:1;">
+              <button class="bs" id="btn-logo-file">&#128193; Yukle</button>
+            </div>
+            <input type="file" id="logo-file" accept="image/*" style="display:none;">
+            <div style="font-size:11px;color:#6060a0;">Onerilen: PNG seffaf, 280x72px</div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px;">
+            <button class="bs" id="btn-logo-use-file">Gorseli Kullan</button>
+            <button class="bs" id="btn-logo-use-txt">Yazi Moduna Don</button>
+          </div>
         </div>
       </div>
       <div class="apnl" id="p-set">
@@ -485,12 +539,16 @@ body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880
 <div class="ov" id="ov-login"><div class="mbox">
   <div class="mhdl"></div><button class="mcls" data-close="login">&#10005;</button>
   <div class="mlogo" id="ml-logo">SLOTMASTER</div>
-  <div style="text-align:center;margin-bottom:18px;"><div style="font-family:'Bebas Neue',sans-serif;font-size:24px;color:#fff;">GIRIS YAP</div></div>
+  <!-- Login tip seçici -->
+  <div style="display:flex;gap:8px;margin-bottom:18px;">
+    <button class="login-tab active" id="lt-user" onclick="setLoginTab('user')">&#128100; Üye Girişi</button>
+    <button class="login-tab" id="lt-admin" onclick="setLoginTab('admin')">&#128274; Admin Girişi</button>
+  </div>
   <div class="merr" id="login-err"></div>
   <div class="mfg"><label>KULLANICI ADI</label><input type="text" class="minp" id="login-u" placeholder="kullaniciadı" autocomplete="username"></div>
   <div class="mfg"><label>SIFRE</label><input type="password" class="minp" id="login-p" placeholder="••••••••" autocomplete="current-password"></div>
   <button class="mbtn" id="btn-login">Giris Yap</button>
-  <div class="mfoot"><button class="mlink" data-sw="login:forgot">Sifremi Unuttum</button> &nbsp;&#183;&nbsp; <button class="mlink" data-sw="login:register">Kayit Ol</button></div>
+  <div class="mfoot" id="login-foot"><button class="mlink" data-sw="login:forgot">Sifremi Unuttum</button> &nbsp;&#183;&nbsp; <button class="mlink" data-sw="login:register">Kayit Ol</button></div>
 </div></div>
 
 <div class="ov" id="ov-register"><div class="mbox">
@@ -630,9 +688,143 @@ body.t-platinum{--g:#c8d0e0;--dk:#0a0a10;--dk2:#141420;--tx:#e8ecf4;--mu:#606880
   <div class="pop-dots" id="pop-dots"></div>
 </div></div>
 
+
+<!-- SIFRE DEGİSTİR -->
+<div class="ov" id="ov-pw-change"><div class="mbox" style="max-width:420px;">
+  <div class="mhdl"></div><button class="mcls" data-close="pw-change">&#10005;</button>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:16px;">SIFRE DEGISTIR</div>
+  <div class="merr" id="pw-err"></div>
+  <div class="mfg"><label>MEVCUT SIFRE</label><input type="password" class="minp" id="pw-old" placeholder="••••••••"></div>
+  <div class="mfg"><label>YENI SIFRE</label><input type="password" class="minp" id="pw-new" placeholder="En az 6 karakter"></div>
+  <div class="mfg"><label>YENI SIFRE TEKRAR</label><input type="password" class="minp" id="pw-new2" placeholder="Tekrar gir"></div>
+  <button class="mbtn" id="btn-pw-save">Sifreyi Degistir</button>
+</div></div>
+
+<!-- DESTEK -->
+<div class="ov" id="ov-support"><div class="mbox" style="max-width:460px;">
+  <div class="mhdl"></div><button class="mcls" data-close="support">&#10005;</button>
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:#fff;margin-bottom:4px;">DESTEK TALEBI</div>
+  <p class="msub">Admine mesaj gonder. En kisa surede donecektir.</p>
+  <div id="support-form">
+    <div class="mfg"><label>KONU</label>
+      <select class="mselect" id="sup-topic">
+        <option value="genel">Genel Soru</option>
+        <option value="odeme">Odeme / Bonus</option>
+        <option value="teknik">Teknik Sorun</option>
+        <option value="hesap">Hesap Sorunu</option>
+        <option value="diger">Diger</option>
+      </select>
+    </div>
+    <div class="mfg"><label>MESAJ</label><textarea class="minp" id="sup-msg" rows="4" placeholder="Sorununuzu yazin..." style="resize:vertical;line-height:1.5;"></textarea></div>
+    <button class="mbtn" id="btn-sup-send">Gonder</button>
+  </div>
+  <div class="msuc" id="support-ok"><div class="msuc-icon">&#128172;</div><div class="msuc-ttl" style="color:var(--g);">GONDERILDI!</div><div class="msuc-sub">Admin en kisa surede size donecektir.</div></div>
+</div></div>
 <div id="toast"></div>
 <script>
 "use strict";
+
+function renderMsgs(){
+  var cnt=supportMsgs.length;
+  var b=G('msgs-badge');if(b)b.textContent=cnt;
+  var b2=G('msgs-badge-m');if(b2)b2.textContent=cnt;
+  var c2=G('msgs-count');if(c2)c2.textContent=cnt;
+  var l=G('msgs-list');if(!l)return;
+  if(!cnt){l.innerHTML='<div class="empty">Henuz mesaj yok</div>';return;}
+  l.innerHTML='';
+  var topics={genel:'Genel',odeme:'Odeme',teknik:'Teknik',hesap:'Hesap',diger:'Diger'};
+  for(var i=0;i<supportMsgs.length;i++){
+    var m=supportMsgs[i];
+    var r=document.createElement('div');
+    r.style.cssText='background:#1e1e30;border:1px solid '+(m.read?'#2e2e48':'#f0b42940')+';border-radius:10px;padding:14px;margin-bottom:10px;';
+    r.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">'+
+      '<div style="display:flex;align-items:center;gap:8px;">'+
+        '<div style="width:32px;height:32px;border-radius:50%;background:var(--g);color:#000;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;">'+m.user[0].toUpperCase()+'</div>'+
+        '<div><div style="font-size:13px;color:#e0e0f0;font-weight:600;">'+m.user+'</div>'+
+        '<div style="font-size:10px;color:#7070a0;">'+m.date+' · '+(topics[m.topic]||m.topic)+'</div></div>'+
+      '</div>'+
+      (!m.read?'<div style="width:8px;height:8px;border-radius:50%;background:var(--g);"></div>':'')+
+    '</div>'+
+    '<div style="font-size:13px;color:#c0c0d8;line-height:1.6;margin-bottom:10px;">'+m.msg+'</div>'+
+    '<button class="bs msg-read" style="font-size:11px;padding:6px 12px;">'+
+      (m.read?'&#10003; Okundu':'Okundu Isaretle')+'</button>';
+    (function(mid,rr){rr.querySelector('.msg-read').addEventListener('click',function(){
+      var msg=null;for(var j=0;j<supportMsgs.length;j++){if(supportMsgs[j].id===mid){msg=supportMsgs[j];break;}}
+      if(msg){msg.read=true;renderMsgs();}
+    });})(m.id,r);
+    l.appendChild(r);
+  }
+}
+
+
+var supportMsgs=[];
+function submitSupport(){
+  var topic=G('sup-topic').value,msg=G('sup-msg').value.trim();
+  if(!msg){toast('Mesaj zorunlu');return;}
+  supportMsgs.push({id:nextId++,user:currentUser?currentUser.u:'Anonim',topic:topic,msg:msg,date:new Date().toLocaleDateString('tr-TR'),read:false});
+  G('support-form').style.display='none';G('support-ok').style.display='block';
+  toast('Destek talebi gonderildi');
+}
+function changePw(){
+  if(!currentUser){toast('Giris yapmaniz gerekiyor');return;}
+  var old=G('pw-old').value,nw=G('pw-new').value,nw2=G('pw-new2').value;
+  var e=G('pw-err');
+  if(!old||!nw){e.textContent='Tum alanlari doldurun';e.style.display='block';return;}
+  if(nw.length<6){e.textContent='Sifre en az 6 karakter';e.style.display='block';return;}
+  if(nw!==nw2){e.textContent='Sifreler eslesmiyor';e.style.display='block';return;}
+  var u=null;for(var i=0;i<users.length;i++){if(users[i].id===currentUser.id){u=users[i];break;}}
+  if(!u||u.p!==old){e.textContent='Mevcut sifre yanlis';e.style.display='block';return;}
+  u.p=nw;e.style.display='none';closeOv('pw-change');toast('Sifre degistirildi');
+}
+
+
+function updateNavUser(){
+  var btn=G('nav-user-btn'),av=G('nav-user-av'),nm=G('nav-user-nm'),hd=G('ud-hd');
+  if(!btn)return;
+  if(currentUser){
+    btn.style.display='flex';
+    if(av)av.textContent=currentUser.u[0].toUpperCase();
+    if(nm)nm.textContent=currentUser.u;
+    if(hd)hd.textContent=currentUser.u;
+    // dropdown butonlarını gizle (misafir)
+    G('dd-login').style.display='none';
+    G('dd-register').style.display='none';
+  } else {
+    btn.style.display='none';
+    G('dd-login').style.display='';
+    G('dd-register').style.display='';
+  }
+}
+function logoutUser(){
+  currentUser=null;
+  try{localStorage.removeItem('sm_cu');}catch(e){}
+  updateNavUser();
+  G('user-drop').classList.remove('open');
+  toast('Cikis yapildi');
+}
+
+
+var _fbOpen=true;
+function toggleFb(){
+  _fbOpen=!_fbOpen;
+  var btn=G('btn-sub-float'),cls=G('btn-fb-close');
+  if(btn)btn.style.display=_fbOpen?'':'none';
+  if(cls)cls.style.display=_fbOpen?'':'';
+  if(!_fbOpen&&cls)cls.style.display='block';
+}
+
+
+var _loginTab='user';
+function setLoginTab(tab){
+  _loginTab=tab;
+  var lu=G('lt-user'),la=G('lt-admin'),lf=G('login-foot');
+  if(lu)lu.classList.toggle('active',tab==='user');
+  if(la)la.classList.toggle('active',tab==='admin');
+  if(lf)lf.style.display=tab==='user'?'block':'none';
+  var ph=G('login-u');
+  if(ph)ph.placeholder=tab==='admin'?'admin':'kullaniciadı';
+}
+
 // ══ SABİTLER ══
 var AU="admin", AP="slotmaster2026";
 var EFS=[{id:'ef-none',l:'Yok',bg:'#fff3'},{id:'ef-glow',l:'Altin',bg:'#f0b429'},{id:'ef-purple',l:'Mor',bg:'#7c3aed'},{id:'ef-green',l:'Yesil',bg:'#22c55e'},{id:'ef-gradient',l:'Grad',bg:'linear-gradient(90deg,#f0b429,#f87171,#7c3aed)'}];
@@ -685,6 +877,10 @@ function closeOv(id){
   var el=G('ov-'+id);if(!el)return;
   el.classList.remove('open');
   // reset
+  if(id==='support'){
+    G('support-form').style.display='block';G('support-ok').style.display='none';
+    var sm=G('sup-msg');if(sm)sm.value='';
+  }
   if(id==='submit'){
     G('sub-form').style.display='block';G('sub-ok').style.display='none';
     G('sub-err').style.display='none';G('sub-prev').style.display='none';
@@ -738,8 +934,10 @@ function goWins(){G('home-page').style.display='none';G('wins-page').style.displ
 function gotoAdmin(){
   G('adm-view').style.display='block';
   document.body.style.overflow='auto';
+  try{sessionStorage.setItem('sm_admin','1');}catch(e){}
   G('fbwrap').style.display='none';
   renderAdmSp();renderPending();renderWinsAdm();renderUsers();
+  try{renderMsgs();}catch(e){}
   renderThemes();renderSocList();renderSpDrop();
   renderEfPick('ef-pick',selEf,function(v){selEf=v;});
   renderTgPick('tg-pick',selTag,function(v){selTag=v;});
@@ -748,6 +946,7 @@ function gotoAdmin(){
 function gotoSite(){
   G('adm-view').style.display='none';
   document.body.style.overflow='';
+  try{sessionStorage.removeItem('sm_admin');}catch(e){}
   G('site-view').style.display='block';
   G('fbwrap').style.display='block';
 }
@@ -759,6 +958,7 @@ function switchTab(panel){
   document.querySelectorAll('[data-p="'+panel+'"]').forEach(function(t){t.classList.add('on');});
   var pEl=G(panel);if(pEl)pEl.classList.add('on');
   if(panel==='p-set'){updateJpCurr();renderPopPicks();}
+  if(panel==='p-msgs'){try{renderMsgs();}catch(e){}}
   if(panel==='p-sp'){
     renderEfPick('ef-pick',selEf,function(v){selEf=v;});
     renderTgPick('tg-pick',selTag,function(v){selTag=v;});
@@ -777,7 +977,7 @@ function doLogin(){
   }
   var f=null;for(var i=0;i<users.length;i++){if(users[i].u===u&&users[i].p===p){f=users[i];break;}}
   if(!f){e.textContent='Hatali kullanici adi veya sifre.';e.style.display='block';return;}
-  e.style.display='none';currentUser={id:f.id,u:f.u};closeOv('login');toast('Hos geldin '+u);
+  e.style.display='none';currentUser={id:f.id,u:f.u};try{localStorage.setItem('sm_cu',JSON.stringify(currentUser));}catch(e2){}closeOv('login');toast('Hos geldin '+u);updateNavUser();
 }
 function doRegister(){
   var u=G('reg-u').value.trim(),ph=G('reg-ph').value.trim(),p=G('reg-p').value,p2=G('reg-p2').value;
@@ -928,7 +1128,7 @@ function buildTicker(){
       '<div><div class="tki-game">'+w.game+'</div><div class="tki-user">'+w.user+'</div></div>'+
       '<div class="tki-mul">'+w.mul+'</div></div></div>';
   }
-  t.innerHTML=html+html+html+html+html+html;
+  t.innerHTML=html+html+html+html+html+html+html+html;
   var items=t.querySelectorAll('.tki');
   for(var i=0;i<items.length;i++){
     (function(el){el.addEventListener('click',function(){openRep(parseInt(el.getAttribute('data-id')));});})(items[i]);
@@ -964,8 +1164,10 @@ function renderFooter(){
       a.innerHTML='<svg viewBox="0 0 24 24" fill="white"><path d="M19.6 8.6a5.4 5.4 0 01-5.4-5.4h-2.7v11.2a2.7 2.7 0 11-2.7-2.7c.2 0 .5 0 .7.1V9.1a5.4 5.4 0 00-.7 0 5.4 5.4 0 000 10.8 5.4 5.4 0 005.4-5.4V9.8a8 8 0 004.7 1.5V8.6z"/></svg>';
     } else if(icon==='DC'||ch.name.toLowerCase().includes('discord')){
       a.innerHTML='<svg viewBox="0 0 24 24" fill="#5865F2"><path d="M20 4.4A19 19 0 0015.3 3c-.2.4-.4.9-.6 1.3a17.7 17.7 0 00-5.4 0C9.1 3.9 8.9 3.4 8.7 3A19 19 0 004 4.4 20.2 20.2 0 001 17.6a19.2 19.2 0 005.8 2.9c.5-.6.9-1.3 1.2-2a12.4 12.4 0 01-2-.9l.5-.4a13.7 13.7 0 0011.8 0c.2.1.3.3.5.4-.6.4-1.3.7-2 1 .3.7.7 1.3 1.2 2a19.1 19.1 0 005.8-3 20.2 20.2 0 00-3-13.2zM8.7 15.2c-1.2 0-2.1-1-2.1-2.3s1-2.3 2.1-2.3c1.2 0 2.2 1 2.1 2.3 0 1.3-1 2.3-2.1 2.3zm6.6 0c-1.1 0-2.1-1-2.1-2.3s1-2.3 2.1-2.3c1.2 0 2.2 1 2.1 2.3 0 1.3-.9 2.3-2.1 2.3z"/></svg>';
+    } else if(icon==='WA'||ch.name.toLowerCase().includes('whatsapp')){
+      a.innerHTML='<svg viewBox="0 0 24 24" fill="#25D366"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.07-1.35C8.44 21.52 10.19 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm5.07 14.07c-.21.59-1.24 1.15-1.7 1.19-.46.04-.47.35-2.96-.62-2.49-.97-3.98-3.41-4.1-3.57-.12-.16-.97-1.29-.97-2.46s.61-1.74.83-1.98c.22-.24.48-.3.64-.3h.46c.15 0 .35-.06.55.42l.7 1.87c.06.15.03.33-.06.47l-.27.38c-.1.14-.21.29-.09.57.12.28.55 1.01 1.18 1.64.81.8 1.49 1.05 1.77 1.17.28.12.44.1.6-.06l.43-.51c.16-.19.32-.15.54-.09l1.7.8c.2.09.33.14.38.22.04.08.04.45-.17 1.04z"/></svg>';
     } else {
-      a.style.fontSize='11px';a.style.fontWeight='700';a.style.color='var(--g)';a.textContent=icon;
+      a.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="var(--g)" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg>';
     }
     ns.appendChild(a);
   }
@@ -1221,7 +1423,7 @@ function addSocChannel(){
 }
 
 // ══ SETTINGS ══
-function applyTheme(name){THEMES.forEach(function(t){document.body.classList.remove(t.id);});document.body.classList.add(name);try{localStorage.setItem('sm_th',name);}catch(e){}renderThemes();toast('Tema degistirildi');}
+function applyTheme(name,silent){THEMES.forEach(function(t){document.body.classList.remove(t.id);});document.body.classList.add(name);try{localStorage.setItem('sm_th',name);}catch(e){}renderThemes();if(!silent)toast('Tema degistirildi');}
 function setLogoMode(mode){G('logo-txt-a').style.display=mode==='txt'?'block':'none';G('logo-img-a').style.display=mode==='img'?'block':'none';}
 function applySettings(){
   var n=(G('set-name')||{value:''}).value;if(n){var t=G('nlogo-txt');if(t)t.textContent=n;var ml=G('ml-logo');if(ml)ml.textContent=n;var mr=G('mr-logo');if(mr)mr.textContent=n;}
@@ -1239,7 +1441,7 @@ function saveAll(){
   }catch(e){toast('Kaydetme basarisiz');}
 }
 function loadSaved(){
-  try{var raw=localStorage.getItem('sm_save');if(!raw)return;var d=JSON.parse(raw);if(d.sponsors&&d.sponsors.length)sponsors=d.sponsors;if(d.wins&&d.wins.length)wins=d.wins;if(d.socChannels)socChannels=d.socChannels;if(d.popCfg)popCfg=d.popCfg;if(d.admMsg)admMsg=d.admMsg;if(d.theme)applyTheme(d.theme);}catch(e){}
+  try{var raw=localStorage.getItem('sm_save');if(!raw)return;var d=JSON.parse(raw);if(d.sponsors&&d.sponsors.length)sponsors=d.sponsors;if(d.wins&&d.wins.length)wins=d.wins;if(d.socChannels)socChannels=d.socChannels;if(d.popCfg)popCfg=d.popCfg;if(d.admMsg)admMsg=d.admMsg;if(d.theme)applyTheme(d.theme,true);}catch(e){}
 }
 function savePopup(){
   var tog=G('pop-active'),tit=G('pop-title'),sub=G('pop-sub');
@@ -1395,6 +1597,39 @@ function bindButtons(){
     btn.addEventListener('click',function(){var ic=this.getAttribute('data-icon');var inp=G('soc-icon');if(inp)inp.value=ic;});
   });
   
+  // GIF file
+  var bgf=G('btn-gif-file');if(bgf)bgf.addEventListener('click',function(){G('gif-file').click();});
+  G('gif-file').addEventListener('change',function(){
+    var f=this.files[0];if(!f)return;
+    var r=new FileReader();r.onload=function(e){
+      var url=e.target.result;
+      var inp=G('gif-url');if(inp)inp.value=url;
+      var pw=G('gif-prev-wrap');var pi=G('gif-prev-img');
+      if(pw)pw.style.display='block';if(pi)pi.src=url;
+      var gi=G('gif-img');if(gi)gi.src=url;
+    };r.readAsDataURL(f);
+  });
+  // Logo file
+  var blf=G('btn-logo-file');if(blf)blf.addEventListener('click',function(){G('logo-file').click();});
+  G('logo-file').addEventListener('change',function(){
+    var f=this.files[0];if(!f)return;
+    var r=new FileReader();r.onload=function(e){
+      var url=e.target.result;
+      var inp=G('logo-url-inp');if(inp)inp.value=url;
+    };r.readAsDataURL(f);
+  });
+  var bluf=G('btn-logo-use-file');if(bluf)bluf.addEventListener('click',function(){
+    var url=G('logo-url-inp').value.trim();if(!url)return;
+    var i=G('nlogo-img');var t=G('nlogo-txt');
+    if(i){i.src=url;i.style.display='block';}if(t)t.style.display='none';
+    toast('Logo guncellendi');
+  });
+  var blut=G('btn-logo-use-txt');if(blut)blut.addEventListener('click',function(){
+    var i=G('nlogo-img');var t=G('nlogo-txt');
+    if(i)i.style.display='none';if(t)t.style.display='';
+    toast('Yazi moduna donuldu');
+  });
+  var liu=G('logo-url-inp');if(liu)liu.addEventListener('input',function(){previewNavLogo(this.value);});
   // GIF toggle
   var gt=G('gif-tog');if(gt)gt.addEventListener('change',toggleGif);
   var gu=G('gif-url');if(gu)gu.addEventListener('input',updateGifUrl);
@@ -1420,6 +1655,27 @@ function bindButtons(){
   // Save all
   var sv=G('btn-save');if(sv)sv.addEventListener('click',saveAll);
   
+  // User btn
+  var ub=G('nav-user-btn');
+  if(ub)ub.addEventListener('click',function(e){
+    e.stopPropagation();
+    var ud=G('user-drop');if(ud)ud.classList.toggle('open');
+  });
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('#user-drop')&&!e.target.closest('#nav-user-btn')){
+      var ud=G('user-drop');if(ud)ud.classList.remove('open');
+    }
+  },{capture:true});
+  var udl=G('ud-logout');if(udl)udl.addEventListener('click',logoutUser);
+  var bpws=G('btn-pw-save');if(bpws)bpws.addEventListener('click',changePw);
+  var bsups=G('btn-sup-send');if(bsups)bsups.addEventListener('click',submitSupport);
+  var uds=G('ud-support');if(uds)uds.addEventListener('click',function(){openOv('support');});
+  var udp=G('ud-pw');if(udp)udp.addEventListener('click',function(){openOv('pw-change');});
+  // Float kapat
+  var fbc=G('btn-fb-close');if(fbc)fbc.addEventListener('click',function(){toggleFb();this.style.display='none';G('btn-sub-float').style.display='block';});
+  var fbm=G('btn-sub-float');if(fbm){
+    // Sağ tık veya uzun basma ile kapat
+  }
   // Cache
   var cc=G('btn-cache');if(cc)cc.addEventListener('click',clearCache);
   
@@ -1434,19 +1690,29 @@ function bindButtons(){
 
 // ══ INIT ══
 (function(){
-  try{var t=localStorage.getItem('sm_th');if(t)applyTheme(t);}catch(e){}
+  try{var t=localStorage.getItem('sm_th');if(t)applyTheme(t,true);}catch(e){}
+  try{var cu=localStorage.getItem('sm_cu');if(cu){currentUser=JSON.parse(cu);}}catch(e){}
   loadSaved();
   renderSponsors();
   renderWinsHome();
   buildTicker();
   renderFooter();
   bindButtons();
+  updateNavUser();
   initFetches();
-  // #admin URL routing - login iste
-  if(window.location.hash==='#admin'||window.location.pathname==='/admin'){
-    history.replaceState(null,'','/');
-    setTimeout(function(){openOv('login');},400);
-  }
+  // Admin session - yenilemede admin'de kal
+  try{
+    var _hash=window.location.hash;
+    var _path=window.location.pathname;
+    if(sessionStorage.getItem('sm_admin')==='1'){
+      gotoAdmin();
+    } else if(_hash==='#admin'||_hash==='#ADMIN'||_path==='/admin'){
+      history.replaceState(null,'',window.location.pathname.replace('/admin','/'));
+      // Login modal'ı direkt DOM ile aç - openOv'a gerek yok
+      var _ov=document.getElementById('ov-login');
+      if(_ov){_ov.classList.add('open');}
+    }
+  }catch(e){console.error('Admin route err:',e);}
   setTimeout(function(){showPopup();},2000);
 })();
 </script>
